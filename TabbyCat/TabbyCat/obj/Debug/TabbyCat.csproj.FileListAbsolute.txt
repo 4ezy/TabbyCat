@@ -1,0 +1,18 @@
+A:\Текущие лабы\ПКС\TabbyCat\TabbyCat\bin\Debug\TabbyCat.exe.config
+A:\Текущие лабы\ПКС\TabbyCat\TabbyCat\bin\Debug\TabbyCat.exe
+A:\Текущие лабы\ПКС\TabbyCat\TabbyCat\bin\Debug\TabbyCat.pdb
+A:\Текущие лабы\ПКС\TabbyCat\TabbyCat\obj\Debug\TabbyCat.csprojResolveAssemblyReference.cache
+A:\Текущие лабы\ПКС\TabbyCat\TabbyCat\obj\Debug\TabbyCat.Form1.resources
+A:\Текущие лабы\ПКС\TabbyCat\TabbyCat\obj\Debug\TabbyCat.Properties.Resources.resources
+A:\Текущие лабы\ПКС\TabbyCat\TabbyCat\obj\Debug\TabbyCat.csproj.GenerateResource.Cache
+A:\Текущие лабы\ПКС\TabbyCat\TabbyCat\obj\Debug\TabbyCat.exe
+A:\Текущие лабы\ПКС\TabbyCat\TabbyCat\obj\Debug\TabbyCat.pdb
+A:\Текущие лабы\Курсовая АПГС\TabbyCat\TabbyCat\bin\Debug\TabbyCat.exe.config
+A:\Текущие лабы\Курсовая АПГС\TabbyCat\TabbyCat\obj\Debug\TabbyCat.exe
+A:\Текущие лабы\Курсовая АПГС\TabbyCat\TabbyCat\obj\Debug\TabbyCat.pdb
+A:\Текущие лабы\Курсовая АПГС\TabbyCat\TabbyCat\bin\Debug\TabbyCat.exe
+A:\Текущие лабы\Курсовая АПГС\TabbyCat\TabbyCat\bin\Debug\TabbyCat.pdb
+A:\Текущие лабы\Курсовая АПГС\TabbyCat\TabbyCat\obj\Debug\TabbyCat.csprojResolveAssemblyReference.cache
+A:\Текущие лабы\Курсовая АПГС\TabbyCat\TabbyCat\obj\Debug\TabbyCat.Form1.resources
+A:\Текущие лабы\Курсовая АПГС\TabbyCat\TabbyCat\obj\Debug\TabbyCat.Properties.Resources.resources
+A:\Текущие лабы\Курсовая АПГС\TabbyCat\TabbyCat\obj\Debug\TabbyCat.csproj.GenerateResource.Cache
