@@ -80,13 +80,13 @@ namespace TabbyCat
 
             Bitmap bmp = new Bitmap(renderArea.Width, renderArea.Height);
 
-            //double[] zBuffer = new double[renderArea.Width * renderArea.Height];
+            double[] zBuffer = new double[renderArea.Width * renderArea.Height];
 
-            //// initialize array with extremely far away depths
-            //for (int q = 0; q < zBuffer.Length; q++)
-            //{
-            //    zBuffer[q] = Double.NegativeInfinity;
-            //}
+            // initialize array with extremely far away depths
+            for (int q = 0; q < zBuffer.Length; q++)
+            {
+                zBuffer[q] = Double.NegativeInfinity;
+            }
 
             foreach (Triangle t in tris)
             {
@@ -117,13 +117,13 @@ namespace TabbyCat
                         if (b1 >= 0 && b1 <= 1 && b2 >= 0 && b2 <= 1 && b3 >= 0 && b3 <= 1)
                         {
                             // for each rasterized pixel:
-                            //double depth = b1 * v1.Z + b2 * v2.Z + b3 * v3.Z;
-                            //int zIndex = y * renderArea.Width + x;
-                            //if (zBuffer[zIndex] < depth)
-                            //{
-                            renderArea.SetPixel(x, y, t.Color);
-                            //    zBuffer[zIndex] = depth;
-                            //}
+                            double depth = b1 * v1.Z + b2 * v2.Z + b3 * v3.Z;
+                            int zIndex = y * renderArea.Width + x;
+                            if (zBuffer[zIndex] < depth)
+                            {
+                                renderArea.SetPixel(x, y, t.Color);
+                                zBuffer[zIndex] = depth;
+                            }
                         }
                     }
                 }
