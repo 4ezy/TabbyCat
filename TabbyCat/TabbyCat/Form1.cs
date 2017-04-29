@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -77,23 +78,58 @@ namespace TabbyCat
 
             Matrix3 transform = horizTansform.multiply(vertTransform);
 
-            g.TranslateTransform(renderArea.Width / 2, renderArea.Height / 2);
+            Bitmap bmp = new Bitmap(renderArea.Width, renderArea.Height);
+
+            //double[] zBuffer = new double[renderArea.Width * renderArea.Height];
+
+            //// initialize array with extremely far away depths
+            //for (int q = 0; q < zBuffer.Length; q++)
+            //{
+            //    zBuffer[q] = Double.NegativeInfinity;
+            //}
 
             foreach (Triangle t in tris)
             {
-                GraphicsPath path = new GraphicsPath();
-
                 Vertex v1 = transform.transform(t.V1);
                 Vertex v2 = transform.transform(t.V2);
                 Vertex v3 = transform.transform(t.V3);
 
-                path.AddLine((float)v1.X, (float)v1.Y, (float)v2.X, (float)v2.Y);
-                path.AddLine((float)v2.X, (float)v2.Y, (float)v3.X, (float)v3.Y);
-                path.AddLine((float)v3.X, (float)v3.Y, (float)v1.X, (float)v1.Y);
+                v1.X += renderArea.Width / 2;
+                v1.Y += renderArea.Height / 2;
+                v2.X += renderArea.Width / 2;
+                v2.Y += renderArea.Height / 2;
+                v3.X += renderArea.Width / 2;
+                v3.Y += renderArea.Height / 2;
 
-                g.DrawPath(new Pen(t.Color, 2), path);
-                path.Dispose();
+                int minX = (int)Math.Max(0, Math.Ceiling(Math.Min(v1.X, Math.Min(v2.X, v3.X))));
+                int maxX = (int)Math.Min(renderArea.Width - 1, Math.Floor(Math.Max(v1.X, Math.Max(v2.X, v3.X))));
+                int minY = (int)Math.Max(0, Math.Ceiling(Math.Min(v1.Y, Math.Min(v2.Y, v3.Y))));
+                int maxY = (int)Math.Min(renderArea.Height - 1, Math.Floor(Math.Max(v1.Y, Math.Max(v2.Y, v3.Y))));
+
+                double triangleArea = (v1.Y - v3.Y) * (v2.X - v3.X) + (v2.Y - v3.Y) * (v3.X - v1.X);
+                for (int y = minY; y <= maxY; y++)
+                {
+                    for (int x = minX; x <= maxX; x++)
+                    {
+                        double b1 = ((y - v3.Y) * (v2.X - v3.X) + (v2.Y - v3.Y) * (v3.X - x)) / triangleArea;
+                        double b2 = ((y - v1.Y) * (v3.X - v1.X) + (v3.Y - v1.Y) * (v1.X - x)) / triangleArea;
+                        double b3 = ((y - v2.Y) * (v1.X - v2.X) + (v1.Y - v2.Y) * (v2.X - x)) / triangleArea;
+                        if (b1 >= 0 && b1 <= 1 && b2 >= 0 && b2 <= 1 && b3 >= 0 && b3 <= 1)
+                        {
+                            // for each rasterized pixel:
+                            //double depth = b1 * v1.Z + b2 * v2.Z + b3 * v3.Z;
+                            //int zIndex = y * renderArea.Width + x;
+                            //if (zBuffer[zIndex] < depth)
+                            //{
+                            renderArea.SetPixel(x, y, t.Color);
+                            //    zBuffer[zIndex] = depth;
+                            //}
+                        }
+                    }
+                }
             }
+
+            g.DrawImage(renderArea, 0, 0);
         }
     }
 }
