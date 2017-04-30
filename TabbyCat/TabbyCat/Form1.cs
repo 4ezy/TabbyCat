@@ -15,10 +15,18 @@ namespace TabbyCat
     public partial class Form1 : Form
     {
         Bitmap renderArea;
+        List<Triangle> tris = new List<Triangle>();
+
+        int xOffsetLength = 10;
+        int yOffsetLength = 10;
+        int xOffset = 0;
+        int yOffset = 0;
 
         public Form1()
         {
             InitializeComponent();
+
+            tris = tetrahedronDrafting();
         }
 
         private double degreeToRadian(double angle)
@@ -53,18 +61,74 @@ namespace TabbyCat
             return tris;
         }
 
+        private void render(Matrix3 transform, double[] zBuffer)
+        {
+            foreach (Triangle t in tris)
+            {
+                Vertex v1 = transform.transform(t.V1);
+                Vertex v2 = transform.transform(t.V2);
+                Vertex v3 = transform.transform(t.V3);
+
+                v1.X += xOffset;
+                v2.X += xOffset;
+                v3.X += xOffset;
+
+                v1.Y += yOffset;
+                v2.Y += yOffset;
+                v3.Y += yOffset;
+
+                v1.X += renderArea.Width / 2;
+                v1.Y += renderArea.Height / 2;
+                v2.X += renderArea.Width / 2;
+                v2.Y += renderArea.Height / 2;
+                v3.X += renderArea.Width / 2;
+                v3.Y += renderArea.Height / 2;
+
+                // compute rectangular bounds for triangle
+                int minX = (int)Math.Max(0, Math.Ceiling(Math.Min(v1.X, Math.Min(v2.X, v3.X))));
+                int maxX = (int)Math.Min(renderArea.Width - 1, Math.Floor(Math.Max(v1.X, Math.Max(v2.X, v3.X))));
+                int minY = (int)Math.Max(0, Math.Ceiling(Math.Min(v1.Y, Math.Min(v2.Y, v3.Y))));
+                int maxY = (int)Math.Min(renderArea.Height - 1, Math.Floor(Math.Max(v1.Y, Math.Max(v2.Y, v3.Y))));
+
+                double triangleArea = (v1.Y - v3.Y) * (v2.X - v3.X) + (v2.Y - v3.Y) * (v3.X - v1.X);
+
+                for (int y = minY; y <= maxY; y++)
+                {
+                    for (int x = minX; x <= maxX; x++)
+                    {
+                        double b1 = ((y - v3.Y) * (v2.X - v3.X) + (v2.Y - v3.Y) * (v3.X - x)) / triangleArea;
+                        double b2 = ((y - v1.Y) * (v3.X - v1.X) + (v3.Y - v1.Y) * (v1.X - x)) / triangleArea;
+                        double b3 = ((y - v2.Y) * (v1.X - v2.X) + (v1.Y - v2.Y) * (v2.X - x)) / triangleArea;
+
+                        if (b1 >= 0 && b1 <= 1 && b2 >= 0 && b2 <= 1 && b3 >= 0 && b3 <= 1)
+                        {
+                            // for each rasterized pixel:
+                            double depth = b1 * v1.Z + b2 * v2.Z + b3 * v3.Z;
+                            int zIndex = y * renderArea.Width + x;
+
+                            if (zBuffer[zIndex] < depth)
+                            {
+                                renderArea.SetPixel(x, y, t.Color);
+                                zBuffer[zIndex] = depth;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
-            List<Triangle> tris = tetrahedronDrafting();
-
             renderArea = new Bitmap(pictureBox1.Size.Width, pictureBox1.Size.Height);
             pictureBox1.Image = renderArea;
 
             Graphics g;
             g = Graphics.FromImage(renderArea);
 
+            // рисование фона
             g.FillRectangle(Brushes.Black, new RectangleF(0, 0, renderArea.Width, renderArea.Height));
 
+            // поворот
             double horizontal = degreeToRadian(trackBar1.Value);
 
             Matrix3 horizTansform = new Matrix3(new double[] {Math.Cos(horizontal), 0, -Math.Sin(horizontal),
@@ -77,59 +141,41 @@ namespace TabbyCat
                                                    0, -Math.Sin(vertical), Math.Cos(vertical)});
 
             Matrix3 transform = horizTansform.multiply(vertTransform);
-
-            Bitmap bmp = new Bitmap(renderArea.Width, renderArea.Height);
-
+            
+            // инициализация заполнение z-буфера
             double[] zBuffer = new double[renderArea.Width * renderArea.Height];
 
-            // initialize array with extremely far away depths
             for (int q = 0; q < zBuffer.Length; q++)
             {
-                zBuffer[q] = Double.NegativeInfinity;
+                zBuffer[q] = double.NegativeInfinity;
             }
 
-            foreach (Triangle t in tris)
-            {
-                Vertex v1 = transform.transform(t.V1);
-                Vertex v2 = transform.transform(t.V2);
-                Vertex v3 = transform.transform(t.V3);
-
-                v1.X += renderArea.Width / 2;
-                v1.Y += renderArea.Height / 2;
-                v2.X += renderArea.Width / 2;
-                v2.Y += renderArea.Height / 2;
-                v3.X += renderArea.Width / 2;
-                v3.Y += renderArea.Height / 2;
-
-                int minX = (int)Math.Max(0, Math.Ceiling(Math.Min(v1.X, Math.Min(v2.X, v3.X))));
-                int maxX = (int)Math.Min(renderArea.Width - 1, Math.Floor(Math.Max(v1.X, Math.Max(v2.X, v3.X))));
-                int minY = (int)Math.Max(0, Math.Ceiling(Math.Min(v1.Y, Math.Min(v2.Y, v3.Y))));
-                int maxY = (int)Math.Min(renderArea.Height - 1, Math.Floor(Math.Max(v1.Y, Math.Max(v2.Y, v3.Y))));
-
-                double triangleArea = (v1.Y - v3.Y) * (v2.X - v3.X) + (v2.Y - v3.Y) * (v3.X - v1.X);
-                for (int y = minY; y <= maxY; y++)
-                {
-                    for (int x = minX; x <= maxX; x++)
-                    {
-                        double b1 = ((y - v3.Y) * (v2.X - v3.X) + (v2.Y - v3.Y) * (v3.X - x)) / triangleArea;
-                        double b2 = ((y - v1.Y) * (v3.X - v1.X) + (v3.Y - v1.Y) * (v1.X - x)) / triangleArea;
-                        double b3 = ((y - v2.Y) * (v1.X - v2.X) + (v1.Y - v2.Y) * (v2.X - x)) / triangleArea;
-                        if (b1 >= 0 && b1 <= 1 && b2 >= 0 && b2 <= 1 && b3 >= 0 && b3 <= 1)
-                        {
-                            // for each rasterized pixel:
-                            double depth = b1 * v1.Z + b2 * v2.Z + b3 * v3.Z;
-                            int zIndex = y * renderArea.Width + x;
-                            if (zBuffer[zIndex] < depth)
-                            {
-                                renderArea.SetPixel(x, y, t.Color);
-                                zBuffer[zIndex] = depth;
-                            }
-                        }
-                    }
-                }
-            }
-
+            render(transform, zBuffer);
+            
             g.DrawImage(renderArea, 0, 0);
+        }
+
+        private void trackBar1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.A)
+            {
+                xOffset += -xOffsetLength;
+            }
+
+            if(e.KeyCode == Keys.D)
+            {
+                xOffset += xOffsetLength;
+            }
+
+            if (e.KeyCode == Keys.W)
+            {
+                yOffset += -yOffsetLength;
+            }
+
+            if (e.KeyCode == Keys.S)
+            {
+                yOffset += yOffsetLength;
+            }
         }
     }
 }

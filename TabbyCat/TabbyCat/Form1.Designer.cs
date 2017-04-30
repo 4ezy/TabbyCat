@@ -50,13 +50,13 @@
             // 
             this.trackBar1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.trackBar1.Location = new System.Drawing.Point(0, 442);
-            this.trackBar1.Maximum = 360;
+            this.trackBar1.Maximum = 180;
             this.trackBar1.Name = "trackBar1";
             this.trackBar1.Size = new System.Drawing.Size(860, 45);
             this.trackBar1.TabIndex = 1;
             this.trackBar1.TickFrequency = 0;
             this.trackBar1.TickStyle = System.Windows.Forms.TickStyle.Both;
-            this.trackBar1.Value = 175;
+            this.trackBar1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.trackBar1_KeyDown);
             // 
             // trackBar2
             // 
@@ -69,7 +69,7 @@
             this.trackBar2.TabIndex = 2;
             this.trackBar2.TickFrequency = 0;
             this.trackBar2.TickStyle = System.Windows.Forms.TickStyle.Both;
-            this.trackBar2.Value = 175;
+            this.trackBar2.Value = 180;
             // 
             // Form1
             // 
@@ -80,6 +80,7 @@
             this.Controls.Add(this.trackBar1);
             this.Controls.Add(this.pictureBox1);
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
