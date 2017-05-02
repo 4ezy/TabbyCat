@@ -19,8 +19,12 @@ namespace TabbyCat
 
         int xOffsetLength = 10;
         int yOffsetLength = 10;
+        double scaleOffsetLength = 0.05;
+        //int zOffsetLength = 10;
         int xOffset = 0;
         int yOffset = 0;
+        int zOffset = 0;
+        double scaleOffset = 1;
 
         public Form1()
         {
@@ -38,44 +42,36 @@ namespace TabbyCat
         {
             List<Triangle> tris = new List<Triangle>();
 
-            tris.Add(new Triangle(new Vertex(100, 100, 100),
-                new Vertex(-100, -100, 100),
-                new Vertex(-100, 100, -100),
+            tris.Add(new Triangle(new Vertex(100, 100, 100, 1),
+                new Vertex(-100, -100, 100, 1),
+                new Vertex(-100, 100, -100, 1),
                 Color.White));
 
-            tris.Add(new Triangle(new Vertex(100, 100, 100),
-                new Vertex(-100, -100, 100),
-                new Vertex(100, -100, -100),
+            tris.Add(new Triangle(new Vertex(100, 100, 100, 1),
+                new Vertex(-100, -100, 100, 1),
+                new Vertex(100, -100, -100, 1),
                 Color.Red));
 
-            tris.Add(new Triangle(new Vertex(-100, 100, -100),
-                new Vertex(100, -100, -100),
-                new Vertex(100, 100, 100),
+            tris.Add(new Triangle(new Vertex(-100, 100, -100, 1),
+                new Vertex(100, -100, -100, 1),
+                new Vertex(100, 100, 100, 1),
                 Color.Green));
 
-            tris.Add(new Triangle(new Vertex(-100, 100, -100),
-                new Vertex(100, -100, -100),
-                new Vertex(-100, -100, 100),
+            tris.Add(new Triangle(new Vertex(-100, 100, -100, 1),
+                new Vertex(100, -100, -100, 1),
+                new Vertex(-100, -100, 100, 1),
                 Color.Blue));
 
             return tris;
         }
 
-        private void render(Matrix3 transform, double[] zBuffer)
+        private void render(Matrix4 transform, double[] zBuffer)
         {
             foreach (Triangle t in tris)
             {
                 Vertex v1 = transform.transform(t.V1);
                 Vertex v2 = transform.transform(t.V2);
                 Vertex v3 = transform.transform(t.V3);
-
-                v1.X += xOffset;
-                v2.X += xOffset;
-                v3.X += xOffset;
-
-                v1.Y += yOffset;
-                v2.Y += yOffset;
-                v3.Y += yOffset;
 
                 v1.X += renderArea.Width / 2;
                 v1.Y += renderArea.Height / 2;
@@ -128,20 +124,56 @@ namespace TabbyCat
             // рисование фона
             g.FillRectangle(Brushes.Black, new RectangleF(0, 0, renderArea.Width, renderArea.Height));
 
+            // перенос
+            Matrix4 movingTransform = new Matrix4(
+                new double[] {
+                    1, 0, 0, 0,
+                    0, 1, 0, 0,
+                    0, 0, 0, 1,
+                    xOffset, yOffset, zOffset, 1
+                });
+
+            // масшабирование
+            Matrix4 scaleTransform = new Matrix4(
+                new double[] {
+                    scaleOffset, 0, 0, 0,
+                    0, scaleOffset, 0, 0,
+                    0, 0, scaleOffset, 0,
+                    0, 0, 0, 1
+                });
+
             // поворот
-            double horizontal = degreeToRadian(trackBar1.Value);
+            double oyAngle = degreeToRadian(trackBar1.Value);
+            Matrix4 oyTansform = new Matrix4(
+                new double[] {
+                    Math.Cos(oyAngle), 0, -Math.Sin(oyAngle), 0,
+                    0, 1, 0, 0,
+                    Math.Sin(oyAngle), 0, Math.Cos(oyAngle), 0,
+                    0, 0, 0, 1
+                });
 
-            Matrix3 horizTansform = new Matrix3(new double[] {Math.Cos(horizontal), 0, -Math.Sin(horizontal),
-                                                     0, 1, 0,
-                                                     Math.Sin(horizontal), 0, Math.Cos(horizontal)});
+            double oxAngle = degreeToRadian(trackBar2.Value);
+            Matrix4 oxTransform = new Matrix4(
+                new double[] {
+                    1, 0, 0, 0,
+                    0, Math.Cos(oxAngle), Math.Sin(oxAngle), 0,
+                    0, -Math.Sin(oxAngle), Math.Cos(oxAngle), 0,
+                    0, 0, 0, 1
+                });
 
-            double vertical = degreeToRadian(trackBar2.Value);
-            Matrix3 vertTransform = new Matrix3(new double[] {1, 0, 0,
-                                                   0, Math.Cos(vertical), Math.Sin(vertical),
-                                                   0, -Math.Sin(vertical), Math.Cos(vertical)});
+            double ozAngle = degreeToRadian(trackBar3.Value);
+            Matrix4 ozTransform = new Matrix4(
+                new double[] {
+                    Math.Cos(ozAngle), Math.Sin(ozAngle), 0, 0,
+                    -Math.Sin(ozAngle), Math.Cos(ozAngle), 0, 0,
+                    0, 0, 1, 0,
+                    0, 0, 0, 1
+                });
+            Matrix4 transform = oxTransform.multiply(oyTansform);
+            transform = transform.multiply(ozTransform);
+            transform = transform.multiply(scaleTransform);
+            transform = transform.multiply(movingTransform);
 
-            Matrix3 transform = horizTansform.multiply(vertTransform);
-            
             // инициализация заполнение z-буфера
             double[] zBuffer = new double[renderArea.Width * renderArea.Height];
 
@@ -176,6 +208,26 @@ namespace TabbyCat
             {
                 yOffset += yOffsetLength;
             }
+
+            if (e.KeyCode == Keys.C)
+            {
+                scaleOffset += scaleOffsetLength;
+            }
+
+            if (e.KeyCode == Keys.V)
+            {
+                scaleOffset += -scaleOffsetLength;
+            }
+
+            //if (e.KeyCode == Keys.Z)
+            //{
+            //    zOffset += zOffsetLength;
+            //}
+
+            //if (e.KeyCode == Keys.X)
+            //{
+            //    zOffset += -zOffsetLength;
+            //}
         }
     }
 }

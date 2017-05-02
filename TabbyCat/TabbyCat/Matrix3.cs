@@ -47,11 +47,11 @@ namespace TabbyCat
             return new Matrix3(result);
         }
 
-        public Vertex transform(Vertex inv)
+        /*public Vertex transform(Vertex inv)
         {
             return new Vertex(inv.X * values[0] + inv.Y * values[3] + inv.Z * values[6],
                 inv.X * values[1] + inv.Y * values[4] + inv.Z * values[7],
                 inv.X * values[2] + inv.Y * values[5] + inv.Z * values[8]);
-        }
+        }*/
     }
 }
