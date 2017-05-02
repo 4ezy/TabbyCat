@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
-            this.trackBar2 = new System.Windows.Forms.TrackBar();
-            this.trackBar3 = new System.Windows.Forms.TrackBar();
+            this.oxAngleTrackbar = new System.Windows.Forms.TrackBar();
+            this.oyAngleTrackbar = new System.Windows.Forms.TrackBar();
+            this.ozAngleTrackbar = new System.Windows.Forms.TrackBar();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.oxAngleTrackbar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.oyAngleTrackbar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ozAngleTrackbar)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -48,60 +48,60 @@
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
             // 
-            // trackBar1
+            // oxAngleTrackbar
             // 
-            this.trackBar1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.trackBar1.Location = new System.Drawing.Point(0, 442);
-            this.trackBar1.Maximum = 360;
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(860, 45);
-            this.trackBar1.TabIndex = 2;
-            this.trackBar1.TickFrequency = 0;
-            this.trackBar1.TickStyle = System.Windows.Forms.TickStyle.Both;
-            this.trackBar1.Value = 180;
-            this.trackBar1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.trackBar1_KeyDown);
+            this.oxAngleTrackbar.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.oxAngleTrackbar.Location = new System.Drawing.Point(0, 442);
+            this.oxAngleTrackbar.Maximum = 360;
+            this.oxAngleTrackbar.Name = "oxAngleTrackbar";
+            this.oxAngleTrackbar.Size = new System.Drawing.Size(860, 45);
+            this.oxAngleTrackbar.TabIndex = 2;
+            this.oxAngleTrackbar.TickFrequency = 0;
+            this.oxAngleTrackbar.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.oxAngleTrackbar.Value = 180;
+            this.oxAngleTrackbar.KeyDown += new System.Windows.Forms.KeyEventHandler(this.trackBar1_KeyDown);
             // 
-            // trackBar2
+            // oyAngleTrackbar
             // 
-            this.trackBar2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.trackBar2.Location = new System.Drawing.Point(815, 0);
-            this.trackBar2.Maximum = 360;
-            this.trackBar2.Name = "trackBar2";
-            this.trackBar2.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.trackBar2.Size = new System.Drawing.Size(45, 442);
-            this.trackBar2.TabIndex = 2;
-            this.trackBar2.TickFrequency = 0;
-            this.trackBar2.TickStyle = System.Windows.Forms.TickStyle.Both;
-            this.trackBar2.Value = 180;
+            this.oyAngleTrackbar.Dock = System.Windows.Forms.DockStyle.Right;
+            this.oyAngleTrackbar.Location = new System.Drawing.Point(815, 0);
+            this.oyAngleTrackbar.Maximum = 360;
+            this.oyAngleTrackbar.Name = "oyAngleTrackbar";
+            this.oyAngleTrackbar.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.oyAngleTrackbar.Size = new System.Drawing.Size(45, 442);
+            this.oyAngleTrackbar.TabIndex = 2;
+            this.oyAngleTrackbar.TickFrequency = 0;
+            this.oyAngleTrackbar.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.oyAngleTrackbar.Value = 180;
             // 
-            // trackBar3
+            // ozAngleTrackbar
             // 
-            this.trackBar3.Dock = System.Windows.Forms.DockStyle.Left;
-            this.trackBar3.Location = new System.Drawing.Point(0, 0);
-            this.trackBar3.Maximum = 360;
-            this.trackBar3.Name = "trackBar3";
-            this.trackBar3.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.trackBar3.Size = new System.Drawing.Size(45, 442);
-            this.trackBar3.TabIndex = 3;
-            this.trackBar3.TickFrequency = 0;
-            this.trackBar3.Value = 180;
+            this.ozAngleTrackbar.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ozAngleTrackbar.Location = new System.Drawing.Point(0, 0);
+            this.ozAngleTrackbar.Maximum = 360;
+            this.ozAngleTrackbar.Name = "ozAngleTrackbar";
+            this.ozAngleTrackbar.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.ozAngleTrackbar.Size = new System.Drawing.Size(45, 442);
+            this.ozAngleTrackbar.TabIndex = 3;
+            this.ozAngleTrackbar.TickFrequency = 0;
+            this.ozAngleTrackbar.Value = 180;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(860, 487);
-            this.Controls.Add(this.trackBar3);
-            this.Controls.Add(this.trackBar2);
-            this.Controls.Add(this.trackBar1);
+            this.Controls.Add(this.ozAngleTrackbar);
+            this.Controls.Add(this.oyAngleTrackbar);
+            this.Controls.Add(this.oxAngleTrackbar);
             this.Controls.Add(this.pictureBox1);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.oxAngleTrackbar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.oyAngleTrackbar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ozAngleTrackbar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -110,9 +110,9 @@
         #endregion
 
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.TrackBar trackBar1;
-        private System.Windows.Forms.TrackBar trackBar2;
-        private System.Windows.Forms.TrackBar trackBar3;
+        private System.Windows.Forms.TrackBar oxAngleTrackbar;
+        private System.Windows.Forms.TrackBar oyAngleTrackbar;
+        private System.Windows.Forms.TrackBar ozAngleTrackbar;
     }
 }
 

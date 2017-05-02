@@ -15,22 +15,26 @@ namespace TabbyCat
     public partial class Form1 : Form
     {
         Bitmap renderArea;
-        List<Triangle> tris = new List<Triangle>();
-
-        int xOffsetLength = 10;
-        int yOffsetLength = 10;
-        double scaleOffsetLength = 0.05;
-        //int zOffsetLength = 10;
-        int xOffset = 0;
-        int yOffset = 0;
-        int zOffset = 0;
-        double scaleOffset = 1;
+        List<Triangle> tris;
+        TranslationTransformation trTransform;
+        RotationTransformation rtTransform;
+        ScaleTransformation scTransform;
 
         public Form1()
         {
             InitializeComponent();
 
             tris = tetrahedronDrafting();
+
+            trTransform = new TranslationTransformation();
+
+            rtTransform = new RotationTransformation(
+                degreeToRadian(oxAngleTrackbar.Value),
+                degreeToRadian(oyAngleTrackbar.Value),
+                degreeToRadian(ozAngleTrackbar.Value)
+            );
+
+            scTransform = new ScaleTransformation();
         }
 
         private double degreeToRadian(double angle)
@@ -124,55 +128,14 @@ namespace TabbyCat
             // рисование фона
             g.FillRectangle(Brushes.Black, new RectangleF(0, 0, renderArea.Width, renderArea.Height));
 
-            // перенос
-            Matrix4 movingTransform = new Matrix4(
-                new double[] {
-                    1, 0, 0, 0,
-                    0, 1, 0, 0,
-                    0, 0, 1, 0,
-                    xOffset, yOffset, zOffset, 1
-                });
+            rtTransform.OxAngle = degreeToRadian(oxAngleTrackbar.Value);
+            rtTransform.OyAngle = degreeToRadian(oyAngleTrackbar.Value);
+            rtTransform.OzAngle = degreeToRadian(ozAngleTrackbar.Value);
 
-            // масшабирование
-            Matrix4 scaleTransform = new Matrix4(
-                new double[] {
-                    scaleOffset, 0, 0, 0,
-                    0, scaleOffset, 0, 0,
-                    0, 0, scaleOffset, 0,
-                    0, 0, 0, 1
-                });
-
-            // поворот
-            double oyAngle = degreeToRadian(trackBar1.Value);
-            Matrix4 oyTansform = new Matrix4(
-                new double[] {
-                    Math.Cos(oyAngle), 0, -Math.Sin(oyAngle), 0,
-                    0, 1, 0, 0,
-                    Math.Sin(oyAngle), 0, Math.Cos(oyAngle), 0,
-                    0, 0, 0, 1
-                });
-
-            double oxAngle = degreeToRadian(trackBar2.Value);
-            Matrix4 oxTransform = new Matrix4(
-                new double[] {
-                    1, 0, 0, 0,
-                    0, Math.Cos(oxAngle), Math.Sin(oxAngle), 0,
-                    0, -Math.Sin(oxAngle), Math.Cos(oxAngle), 0,
-                    0, 0, 0, 1
-                });
-
-            double ozAngle = degreeToRadian(trackBar3.Value);
-            Matrix4 ozTransform = new Matrix4(
-                new double[] {
-                    Math.Cos(ozAngle), Math.Sin(ozAngle), 0, 0,
-                    -Math.Sin(ozAngle), Math.Cos(ozAngle), 0, 0,
-                    0, 0, 1, 0,
-                    0, 0, 0, 1
-                });
-            Matrix4 transform = oxTransform.multiply(oyTansform);
-            transform = transform.multiply(ozTransform);
-            transform = transform.multiply(scaleTransform);
-            transform = transform.multiply(movingTransform);
+            Matrix4 transform = rtTransform.OxMatrix.multiply(rtTransform.OyMatrix);
+            transform = transform.multiply(rtTransform.OzMatrix);
+            transform = transform.multiply(scTransform.Matrix);
+            transform = transform.multiply(trTransform.Matrix);
 
             // инициализация заполнение z-буфера
             double[] zBuffer = new double[renderArea.Width * renderArea.Height];
@@ -191,43 +154,33 @@ namespace TabbyCat
         {
             if(e.KeyCode == Keys.A)
             {
-                xOffset += -xOffsetLength;
+                trTransform.XOffset += -TranslationTransformation.XOffsetLength;
             }
 
             if(e.KeyCode == Keys.D)
             {
-                xOffset += xOffsetLength;
+                trTransform.XOffset += TranslationTransformation.XOffsetLength;
             }
 
             if (e.KeyCode == Keys.W)
             {
-                yOffset += -yOffsetLength;
+                trTransform.YOffset += -TranslationTransformation.YOffsetLength;
             }
 
             if (e.KeyCode == Keys.S)
             {
-                yOffset += yOffsetLength;
+                trTransform.YOffset += TranslationTransformation.XOffsetLength;
             }
 
-            if (e.KeyCode == Keys.C)
+            if (e.KeyCode == Keys.Z)
             {
-                scaleOffset += scaleOffsetLength;
+                scTransform.ScaleOffset += ScaleTransformation.ScaleOffsetLength;
             }
 
-            if (e.KeyCode == Keys.V)
+            if (e.KeyCode == Keys.X)
             {
-                scaleOffset += -scaleOffsetLength;
+                scTransform.ScaleOffset += -ScaleTransformation.ScaleOffsetLength;
             }
-
-            //if (e.KeyCode == Keys.Z)
-            //{
-            //    zOffset += zOffsetLength;
-            //}
-
-            //if (e.KeyCode == Keys.X)
-            //{
-            //    zOffset += -zOffsetLength;
-            //}
         }
     }
 }
