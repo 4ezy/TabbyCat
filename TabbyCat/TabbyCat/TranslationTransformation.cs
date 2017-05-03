@@ -8,9 +8,6 @@ namespace TabbyCat
 {
     class TranslationTransformation
     {
-        const int xOffsetLength = 10;
-        const int yOffsetLength = 10;
-
         int xOffset = 0;
         int yOffset = 0;
         int zOffset = 0;
@@ -56,22 +53,6 @@ namespace TabbyCat
             {
                 zOffset = value;
                 matrix.Values[14] = xOffset;
-            }
-        }
-
-        public static int XOffsetLength
-        {
-            get
-            {
-                return xOffsetLength;
-            }
-        }
-
-        public static int YOffsetLength
-        {
-            get
-            {
-                return yOffsetLength;
             }
         }
 

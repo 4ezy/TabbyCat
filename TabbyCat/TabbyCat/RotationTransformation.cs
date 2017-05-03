@@ -109,35 +109,35 @@ namespace TabbyCat
             }
         }
 
-        public RotationTransformation()
-        {
-            this.oxAngle = 0;
-            this.oxMatrix = new Matrix4(
-                new double[] {
-                    1, 0, 0, 0,
-                    0, Math.Cos(oxAngle), Math.Sin(oxAngle), 0,
-                    0, -Math.Sin(oxAngle), Math.Cos(oxAngle), 0,
-                    0, 0, 0, 1
-                });
+        //public RotationTransformation()
+        //{
+        //    this.oxAngle = 0;
+        //    this.oxMatrix = new Matrix4(
+        //        new double[] {
+        //            1, 0, 0, 0,
+        //            0, Math.Cos(oxAngle), Math.Sin(oxAngle), 0,
+        //            0, -Math.Sin(oxAngle), Math.Cos(oxAngle), 0,
+        //            0, 0, 0, 1
+        //        });
 
-            this.oyAngle = 0;
-            this.oyMatrix = new Matrix4(
-                new double[] {
-                    Math.Cos(oyAngle), 0, -Math.Sin(oyAngle), 0,
-                    0, 1, 0, 0,
-                    Math.Sin(oyAngle), 0, Math.Cos(oyAngle), 0,
-                    0, 0, 0, 1
-                });
+        //    this.oyAngle = 0;
+        //    this.oyMatrix = new Matrix4(
+        //        new double[] {
+        //            Math.Cos(oyAngle), 0, -Math.Sin(oyAngle), 0,
+        //            0, 1, 0, 0,
+        //            Math.Sin(oyAngle), 0, Math.Cos(oyAngle), 0,
+        //            0, 0, 0, 1
+        //        });
 
-            this.ozAngle = 0;
-            this.ozMatrix = new Matrix4(
-                new double[] {
-                    Math.Cos(ozAngle), Math.Sin(ozAngle), 0, 0,
-                    -Math.Sin(ozAngle), Math.Cos(ozAngle), 0, 0,
-                    0, 0, 1, 0,
-                    0, 0, 0, 1
-                });
-        }
+        //    this.ozAngle = 0;
+        //    this.ozMatrix = new Matrix4(
+        //        new double[] {
+        //            Math.Cos(ozAngle), Math.Sin(ozAngle), 0, 0,
+        //            -Math.Sin(ozAngle), Math.Cos(ozAngle), 0, 0,
+        //            0, 0, 1, 0,
+        //            0, 0, 0, 1
+        //        });
+        //}
 
         public RotationTransformation(double oxAngle, double oyAngle, double ozAngle)
         {

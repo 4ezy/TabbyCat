@@ -8,19 +8,9 @@ namespace TabbyCat
 {
     class ScaleTransformation
     {
-        const double scaleOffsetLength = 0.05;
-
         double scaleOffset = 0.5;
 
         Matrix4 matrix;
-
-        public static double ScaleOffsetLength
-        {
-            get
-            {
-                return scaleOffsetLength;
-            }
-        }
 
         public double ScaleOffset
         {

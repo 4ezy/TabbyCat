@@ -29,9 +29,9 @@ namespace TabbyCat
             trTransform = new TranslationTransformation();
 
             rtTransform = new RotationTransformation(
-                degreeToRadian(oxAngleTrackbar.Value),
-                degreeToRadian(oyAngleTrackbar.Value),
-                degreeToRadian(ozAngleTrackbar.Value)
+                degreeToRadian((double)xAngleControl.Value),
+                degreeToRadian((double)yAngleControl.Value),
+                degreeToRadian((double)zAngleControl.Value)
             );
 
             scTransform = new ScaleTransformation();
@@ -128,9 +128,15 @@ namespace TabbyCat
             // рисование фона
             g.FillRectangle(Brushes.Black, new RectangleF(0, 0, renderArea.Width, renderArea.Height));
 
-            rtTransform.OxAngle = degreeToRadian(oxAngleTrackbar.Value);
-            rtTransform.OyAngle = degreeToRadian(oyAngleTrackbar.Value);
-            rtTransform.OzAngle = degreeToRadian(ozAngleTrackbar.Value);
+            trTransform.XOffset = (int)xCoordinateLocationControl.Value;
+            trTransform.YOffset = (int)yCoordinateLocationControl.Value;
+            trTransform.ZOffset = (int)zCoordinateLocationControl.Value;
+
+            scTransform.ScaleOffset = (double)scaleControl.Value;
+
+            rtTransform.OxAngle = degreeToRadian((double)xAngleControl.Value);
+            rtTransform.OyAngle = degreeToRadian((double)yAngleControl.Value);
+            rtTransform.OzAngle = degreeToRadian((double)zAngleControl.Value);    // для того, чтобы это работало нужно сделать камеру
 
             Matrix4 transform = rtTransform.OxMatrix.multiply(rtTransform.OyMatrix);
             transform = transform.multiply(rtTransform.OzMatrix);
@@ -148,39 +154,6 @@ namespace TabbyCat
             render(transform, zBuffer);
             
             g.DrawImage(renderArea, 0, 0);
-        }
-
-        private void trackBar1_KeyDown(object sender, KeyEventArgs e)
-        {
-            if(e.KeyCode == Keys.A)
-            {
-                trTransform.XOffset += -TranslationTransformation.XOffsetLength;
-            }
-
-            if(e.KeyCode == Keys.D)
-            {
-                trTransform.XOffset += TranslationTransformation.XOffsetLength;
-            }
-
-            if (e.KeyCode == Keys.W)
-            {
-                trTransform.YOffset += -TranslationTransformation.YOffsetLength;
-            }
-
-            if (e.KeyCode == Keys.S)
-            {
-                trTransform.YOffset += TranslationTransformation.XOffsetLength;
-            }
-
-            if (e.KeyCode == Keys.Z)
-            {
-                scTransform.ScaleOffset += ScaleTransformation.ScaleOffsetLength;
-            }
-
-            if (e.KeyCode == Keys.X)
-            {
-                scTransform.ScaleOffset += -ScaleTransformation.ScaleOffsetLength;
-            }
         }
     }
 }
