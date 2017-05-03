@@ -29,17 +29,12 @@ namespace TabbyCat
             trTransform = new TranslationTransformation();
 
             rtTransform = new RotationTransformation(
-                degreeToRadian((double)xAngleControl.Value),
-                degreeToRadian((double)yAngleControl.Value),
-                degreeToRadian((double)zAngleControl.Value)
+                (double)xAngleControl.Value,
+                (double)yAngleControl.Value,
+                (double)zAngleControl.Value
             );
 
             scTransform = new ScaleTransformation();
-        }
-
-        private double degreeToRadian(double angle)
-        {
-            return Math.PI * angle / 180.0;
         }
 
         private List<Triangle> tetrahedronDrafting()
@@ -69,7 +64,18 @@ namespace TabbyCat
             return tris;
         }
 
-        private void surface(double[] zBuffer, Vertex v1, Vertex v2, Vertex v3, Color color)
+        private GraphicsPath wireFrameRender(Vertex v1, Vertex v2, Vertex v3)
+        {
+            GraphicsPath gPath = new GraphicsPath();
+
+            gPath.AddLine((float)v1.X, (float)v1.Y, (float)v2.X, (float)v2.Y);
+            gPath.AddLine((float)v2.X, (float)v2.Y, (float)v3.X, (float)v3.Y);
+            gPath.AddLine((float)v3.X, (float)v3.Y, (float)v1.X, (float)v1.Y);
+
+            return gPath;
+        }
+
+        private void surfaceRender(double[] zBuffer, Vertex v1, Vertex v2, Vertex v3, Color color)
         {
             // compute rectangular bounds for triangle
             int minX = (int)Math.Max(0, Math.Ceiling(Math.Min(v1.X, Math.Min(v2.X, v3.X))));
@@ -103,7 +109,7 @@ namespace TabbyCat
             }
         }
 
-        private void render(Matrix4 transform, double[] zBuffer)
+        private void render(Graphics g, Matrix4 transform, double[] zBuffer)
         {
             foreach (Triangle t in tris)
             {
@@ -118,8 +124,20 @@ namespace TabbyCat
                 v3.X += renderArea.Width / 2;
                 v3.Y += renderArea.Height / 2;
 
-                surface(zBuffer, v1, v2, v3, t.Color);
+                if(wireFrameRadioButton.Checked)
+                {
+                    GraphicsPath gPath = wireFrameRender(v1, v2, v3);
+
+                    g.DrawPath(new Pen(Color.White, 2), gPath); 
+                }
+
+                if(surfaceRadioButton.Checked)
+                {
+                    surfaceRender(zBuffer, v1, v2, v3, t.Color);
+                }
             }
+
+            g.DrawImage(renderArea, 0, 0);
         }
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
@@ -133,15 +151,11 @@ namespace TabbyCat
             // рисование фона
             g.FillRectangle(Brushes.Black, new RectangleF(0, 0, renderArea.Width, renderArea.Height));
 
-            trTransform.XOffset = (double)xCoordinateLocationControl.Value;
-            trTransform.YOffset = (double)yCoordinateLocationControl.Value;
-            trTransform.ZOffset = (double)zCoordinateLocationControl.Value;
+            trTransform.setOffsets(xOffsetControl.Value, yOffsetControl.Value, zOffsetControlControl.Value);
 
             scTransform.ScaleOffset = (double)scaleControl.Value;
 
-            rtTransform.OxAngle = degreeToRadian((double)xAngleControl.Value);
-            rtTransform.OyAngle = degreeToRadian((double)yAngleControl.Value);
-            rtTransform.OzAngle = degreeToRadian((double)zAngleControl.Value);    // для того, чтобы это работало нужно сделать камеру
+            rtTransform.setAngles(xAngleControl.Value, yAngleControl.Value, zAngleControl.Value);
 
             Matrix4 transform = rtTransform.OxMatrix.multiply(rtTransform.OyMatrix);
             transform = transform.multiply(rtTransform.OzMatrix);
@@ -156,9 +170,7 @@ namespace TabbyCat
                 zBuffer[q] = double.NegativeInfinity;
             }
 
-            render(transform, zBuffer);
-            
-            g.DrawImage(renderArea, 0, 0);
+            render(g, transform, zBuffer);
         }
     }
 }

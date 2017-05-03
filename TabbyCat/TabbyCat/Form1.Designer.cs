@@ -36,6 +36,13 @@
             this.scaleGroupBox = new System.Windows.Forms.GroupBox();
             this.scaleControl = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
+            this.tanslationGroupBox = new System.Windows.Forms.GroupBox();
+            this.zOffsetControlControl = new System.Windows.Forms.NumericUpDown();
+            this.label5 = new System.Windows.Forms.Label();
+            this.yOffsetControl = new System.Windows.Forms.NumericUpDown();
+            this.label6 = new System.Windows.Forms.Label();
+            this.xOffsetControl = new System.Windows.Forms.NumericUpDown();
+            this.label4 = new System.Windows.Forms.Label();
             this.angleGroupBox = new System.Windows.Forms.GroupBox();
             this.zAngleControl = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
@@ -43,17 +50,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.xAngleControl = new System.Windows.Forms.NumericUpDown();
-            this.tanslationGroupBox = new System.Windows.Forms.GroupBox();
-            this.zCoordinateLocationControl = new System.Windows.Forms.NumericUpDown();
-            this.label5 = new System.Windows.Forms.Label();
-            this.yCoordinateLocationControl = new System.Windows.Forms.NumericUpDown();
-            this.label6 = new System.Windows.Forms.Label();
-            this.xCoordinateLocationControl = new System.Windows.Forms.NumericUpDown();
-            this.label4 = new System.Windows.Forms.Label();
+            this.modelGeometricType = new System.Windows.Forms.GroupBox();
+            this.surfaceRadioButton = new System.Windows.Forms.RadioButton();
+            this.wireFrameRadioButton = new System.Windows.Forms.RadioButton();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -61,15 +61,15 @@
             this.tableLayoutPanel2.SuspendLayout();
             this.scaleGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.scaleControl)).BeginInit();
+            this.tanslationGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.zOffsetControlControl)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.yOffsetControl)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.xOffsetControl)).BeginInit();
             this.angleGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.zAngleControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.yAngleControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xAngleControl)).BeginInit();
-            this.tanslationGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.zCoordinateLocationControl)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.yCoordinateLocationControl)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.xCoordinateLocationControl)).BeginInit();
-            this.groupBox1.SuspendLayout();
+            this.modelGeometricType.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -127,7 +127,7 @@
             this.tableLayoutPanel2.Controls.Add(this.scaleGroupBox, 0, 3);
             this.tableLayoutPanel2.Controls.Add(this.tanslationGroupBox, 0, 2);
             this.tableLayoutPanel2.Controls.Add(this.angleGroupBox, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.groupBox1, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.modelGeometricType, 0, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -187,6 +187,100 @@
             this.label7.TabIndex = 0;
             this.label7.Text = "Кратность";
             // 
+            // tanslationGroupBox
+            // 
+            this.tanslationGroupBox.Controls.Add(this.zOffsetControlControl);
+            this.tanslationGroupBox.Controls.Add(this.label5);
+            this.tanslationGroupBox.Controls.Add(this.yOffsetControl);
+            this.tanslationGroupBox.Controls.Add(this.label6);
+            this.tanslationGroupBox.Controls.Add(this.xOffsetControl);
+            this.tanslationGroupBox.Controls.Add(this.label4);
+            this.tanslationGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tanslationGroupBox.Location = new System.Drawing.Point(3, 248);
+            this.tanslationGroupBox.Name = "tanslationGroupBox";
+            this.tanslationGroupBox.Size = new System.Drawing.Size(204, 160);
+            this.tanslationGroupBox.TabIndex = 4;
+            this.tanslationGroupBox.TabStop = false;
+            this.tanslationGroupBox.Text = "Перенос";
+            // 
+            // zOffsetControlControl
+            // 
+            this.zOffsetControlControl.Location = new System.Drawing.Point(6, 131);
+            this.zOffsetControlControl.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.zOffsetControlControl.Minimum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            -2147483648});
+            this.zOffsetControlControl.Name = "zOffsetControlControl";
+            this.zOffsetControlControl.Size = new System.Drawing.Size(192, 20);
+            this.zOffsetControlControl.TabIndex = 10;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 115);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(37, 13);
+            this.label5.TabIndex = 9;
+            this.label5.Text = "Ось Z";
+            // 
+            // yOffsetControl
+            // 
+            this.yOffsetControl.Location = new System.Drawing.Point(6, 80);
+            this.yOffsetControl.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.yOffsetControl.Minimum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            -2147483648});
+            this.yOffsetControl.Name = "yOffsetControl";
+            this.yOffsetControl.Size = new System.Drawing.Size(192, 20);
+            this.yOffsetControl.TabIndex = 8;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(6, 64);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(37, 13);
+            this.label6.TabIndex = 7;
+            this.label6.Text = "Ось Y";
+            // 
+            // xOffsetControl
+            // 
+            this.xOffsetControl.Location = new System.Drawing.Point(6, 32);
+            this.xOffsetControl.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.xOffsetControl.Minimum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            -2147483648});
+            this.xOffsetControl.Name = "xOffsetControl";
+            this.xOffsetControl.Size = new System.Drawing.Size(192, 20);
+            this.xOffsetControl.TabIndex = 6;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 16);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(37, 13);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "Ось X";
+            // 
             // angleGroupBox
             // 
             this.angleGroupBox.Controls.Add(this.zAngleControl);
@@ -211,6 +305,11 @@
             0,
             0,
             0});
+            this.zAngleControl.Minimum = new decimal(new int[] {
+            360,
+            0,
+            0,
+            -2147483648});
             this.zAngleControl.Name = "zAngleControl";
             this.zAngleControl.Size = new System.Drawing.Size(192, 20);
             this.zAngleControl.TabIndex = 5;
@@ -232,6 +331,11 @@
             0,
             0,
             0});
+            this.yAngleControl.Minimum = new decimal(new int[] {
+            360,
+            0,
+            0,
+            -2147483648});
             this.yAngleControl.Name = "yAngleControl";
             this.yAngleControl.Size = new System.Drawing.Size(192, 20);
             this.yAngleControl.TabIndex = 3;
@@ -262,147 +366,58 @@
             0,
             0,
             0});
+            this.xAngleControl.Minimum = new decimal(new int[] {
+            360,
+            0,
+            0,
+            -2147483648});
             this.xAngleControl.Name = "xAngleControl";
             this.xAngleControl.Size = new System.Drawing.Size(189, 20);
             this.xAngleControl.TabIndex = 0;
             // 
-            // tanslationGroupBox
+            // modelGeometricType
             // 
-            this.tanslationGroupBox.Controls.Add(this.zCoordinateLocationControl);
-            this.tanslationGroupBox.Controls.Add(this.label5);
-            this.tanslationGroupBox.Controls.Add(this.yCoordinateLocationControl);
-            this.tanslationGroupBox.Controls.Add(this.label6);
-            this.tanslationGroupBox.Controls.Add(this.xCoordinateLocationControl);
-            this.tanslationGroupBox.Controls.Add(this.label4);
-            this.tanslationGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tanslationGroupBox.Location = new System.Drawing.Point(3, 248);
-            this.tanslationGroupBox.Name = "tanslationGroupBox";
-            this.tanslationGroupBox.Size = new System.Drawing.Size(204, 160);
-            this.tanslationGroupBox.TabIndex = 4;
-            this.tanslationGroupBox.TabStop = false;
-            this.tanslationGroupBox.Text = "Перенос";
+            this.modelGeometricType.Controls.Add(this.surfaceRadioButton);
+            this.modelGeometricType.Controls.Add(this.wireFrameRadioButton);
+            this.modelGeometricType.Dock = System.Windows.Forms.DockStyle.Top;
+            this.modelGeometricType.Location = new System.Drawing.Point(3, 3);
+            this.modelGeometricType.Name = "modelGeometricType";
+            this.modelGeometricType.Size = new System.Drawing.Size(204, 69);
+            this.modelGeometricType.TabIndex = 5;
+            this.modelGeometricType.TabStop = false;
+            this.modelGeometricType.Text = "Тип геометрической модели";
             // 
-            // zCoordinateLocationControl
+            // surfaceRadioButton
             // 
-            this.zCoordinateLocationControl.Location = new System.Drawing.Point(6, 131);
-            this.zCoordinateLocationControl.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.zCoordinateLocationControl.Minimum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            -2147483648});
-            this.zCoordinateLocationControl.Name = "zCoordinateLocationControl";
-            this.zCoordinateLocationControl.Size = new System.Drawing.Size(192, 20);
-            this.zCoordinateLocationControl.TabIndex = 10;
+            this.surfaceRadioButton.AutoSize = true;
+            this.surfaceRadioButton.Location = new System.Drawing.Point(9, 42);
+            this.surfaceRadioButton.Name = "surfaceRadioButton";
+            this.surfaceRadioButton.Size = new System.Drawing.Size(103, 17);
+            this.surfaceRadioButton.TabIndex = 1;
+            this.surfaceRadioButton.Text = "Поверхностная";
+            this.surfaceRadioButton.UseVisualStyleBackColor = true;
             // 
-            // label5
+            // wireFrameRadioButton
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 115);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(37, 13);
-            this.label5.TabIndex = 9;
-            this.label5.Text = "Ось Z";
-            // 
-            // yCoordinateLocationControl
-            // 
-            this.yCoordinateLocationControl.Location = new System.Drawing.Point(6, 80);
-            this.yCoordinateLocationControl.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.yCoordinateLocationControl.Minimum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            -2147483648});
-            this.yCoordinateLocationControl.Name = "yCoordinateLocationControl";
-            this.yCoordinateLocationControl.Size = new System.Drawing.Size(192, 20);
-            this.yCoordinateLocationControl.TabIndex = 8;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(6, 64);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(37, 13);
-            this.label6.TabIndex = 7;
-            this.label6.Text = "Ось Y";
-            // 
-            // xCoordinateLocationControl
-            // 
-            this.xCoordinateLocationControl.Location = new System.Drawing.Point(6, 32);
-            this.xCoordinateLocationControl.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.xCoordinateLocationControl.Minimum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            -2147483648});
-            this.xCoordinateLocationControl.Name = "xCoordinateLocationControl";
-            this.xCoordinateLocationControl.Size = new System.Drawing.Size(192, 20);
-            this.xCoordinateLocationControl.TabIndex = 6;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 16);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(37, 13);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "Ось X";
+            this.wireFrameRadioButton.AutoSize = true;
+            this.wireFrameRadioButton.Checked = true;
+            this.wireFrameRadioButton.Location = new System.Drawing.Point(9, 19);
+            this.wireFrameRadioButton.Name = "wireFrameRadioButton";
+            this.wireFrameRadioButton.Size = new System.Drawing.Size(80, 17);
+            this.wireFrameRadioButton.TabIndex = 0;
+            this.wireFrameRadioButton.TabStop = true;
+            this.wireFrameRadioButton.Text = "Каркасная";
+            this.wireFrameRadioButton.UseVisualStyleBackColor = true;
             // 
             // tabPage2
             // 
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(216, 455);
+            this.tabPage2.Size = new System.Drawing.Size(216, 500);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.radioButton2);
-            this.groupBox1.Controls.Add(this.radioButton1);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox1.Location = new System.Drawing.Point(3, 3);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(204, 69);
-            this.groupBox1.TabIndex = 5;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
-            // 
-            // radioButton1
-            // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(9, 19);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(85, 17);
-            this.radioButton1.TabIndex = 0;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "radioButton1";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            // 
-            // radioButton2
-            // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(9, 42);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(85, 17);
-            this.radioButton2.TabIndex = 1;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "radioButton2";
-            this.radioButton2.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -421,18 +436,18 @@
             this.scaleGroupBox.ResumeLayout(false);
             this.scaleGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.scaleControl)).EndInit();
+            this.tanslationGroupBox.ResumeLayout(false);
+            this.tanslationGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.zOffsetControlControl)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.yOffsetControl)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.xOffsetControl)).EndInit();
             this.angleGroupBox.ResumeLayout(false);
             this.angleGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.zAngleControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.yAngleControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xAngleControl)).EndInit();
-            this.tanslationGroupBox.ResumeLayout(false);
-            this.tanslationGroupBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.zCoordinateLocationControl)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.yCoordinateLocationControl)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.xCoordinateLocationControl)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.modelGeometricType.ResumeLayout(false);
+            this.modelGeometricType.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -451,19 +466,19 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.NumericUpDown xAngleControl;
         private System.Windows.Forms.GroupBox tanslationGroupBox;
-        private System.Windows.Forms.NumericUpDown zCoordinateLocationControl;
+        private System.Windows.Forms.NumericUpDown zOffsetControlControl;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.NumericUpDown yCoordinateLocationControl;
+        private System.Windows.Forms.NumericUpDown yOffsetControl;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.NumericUpDown xCoordinateLocationControl;
+        private System.Windows.Forms.NumericUpDown xOffsetControl;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.GroupBox modelGeometricType;
+        private System.Windows.Forms.RadioButton surfaceRadioButton;
+        private System.Windows.Forms.RadioButton wireFrameRadioButton;
     }
 }
 
