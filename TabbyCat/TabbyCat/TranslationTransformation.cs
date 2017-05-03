@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace TabbyCat
 {
     class TranslationTransformation
     {
-        int xOffset = 0;
-        int yOffset = 0;
-        int zOffset = 0;
+        double xOffset = 0;
+        double yOffset = 0;
+        double zOffset = 0;
 
         Matrix4 matrix;
 
-        public int XOffset
+        public double XOffset
         {
             get
             {
@@ -28,7 +29,7 @@ namespace TabbyCat
             }
         }
 
-        public int YOffset
+        public double YOffset
         {
             get
             {
@@ -42,7 +43,7 @@ namespace TabbyCat
             }
         }
 
-        public int ZOffset
+        public double ZOffset
         {
             get
             {
@@ -78,6 +79,22 @@ namespace TabbyCat
                     0, 0, 1, 0,
                     xOffset, yOffset, zOffset, 1
                 });
+        }
+
+        public void setOffsets(decimal xOffset,
+            decimal yOffset, decimal zOffset)
+        {
+            this.XOffset = (int)xOffset;
+            this.YOffset = (int)yOffset;
+            this.ZOffset = (int)zOffset;
+        }
+
+        public void setOffsets(int xOffset,
+            int yOffset, int zOffset)
+        {
+            this.XOffset = xOffset;
+            this.YOffset = yOffset;
+            this.ZOffset = zOffset;
         }
     }
 }

@@ -69,6 +69,40 @@ namespace TabbyCat
             return tris;
         }
 
+        private void surface(double[] zBuffer, Vertex v1, Vertex v2, Vertex v3, Color color)
+        {
+            // compute rectangular bounds for triangle
+            int minX = (int)Math.Max(0, Math.Ceiling(Math.Min(v1.X, Math.Min(v2.X, v3.X))));
+            int maxX = (int)Math.Min(renderArea.Width - 1, Math.Floor(Math.Max(v1.X, Math.Max(v2.X, v3.X))));
+            int minY = (int)Math.Max(0, Math.Ceiling(Math.Min(v1.Y, Math.Min(v2.Y, v3.Y))));
+            int maxY = (int)Math.Min(renderArea.Height - 1, Math.Floor(Math.Max(v1.Y, Math.Max(v2.Y, v3.Y))));
+
+            double triangleArea = (v1.Y - v3.Y) * (v2.X - v3.X) + (v2.Y - v3.Y) * (v3.X - v1.X);
+
+            for (int y = minY; y <= maxY; y++)
+            {
+                for (int x = minX; x <= maxX; x++)
+                {
+                    double b1 = ((y - v3.Y) * (v2.X - v3.X) + (v2.Y - v3.Y) * (v3.X - x)) / triangleArea;
+                    double b2 = ((y - v1.Y) * (v3.X - v1.X) + (v3.Y - v1.Y) * (v1.X - x)) / triangleArea;
+                    double b3 = ((y - v2.Y) * (v1.X - v2.X) + (v1.Y - v2.Y) * (v2.X - x)) / triangleArea;
+
+                    if (b1 >= 0 && b1 <= 1 && b2 >= 0 && b2 <= 1 && b3 >= 0 && b3 <= 1)
+                    {
+                        // for each rasterized pixel:
+                        double depth = b1 * v1.Z + b2 * v2.Z + b3 * v3.Z;
+                        int zIndex = y * renderArea.Width + x;
+
+                        if (zBuffer[zIndex] < depth)
+                        {
+                            renderArea.SetPixel(x, y, color);
+                            zBuffer[zIndex] = depth;
+                        }
+                    }
+                }
+            }
+        }
+
         private void render(Matrix4 transform, double[] zBuffer)
         {
             foreach (Triangle t in tris)
@@ -84,36 +118,7 @@ namespace TabbyCat
                 v3.X += renderArea.Width / 2;
                 v3.Y += renderArea.Height / 2;
 
-                // compute rectangular bounds for triangle
-                int minX = (int)Math.Max(0, Math.Ceiling(Math.Min(v1.X, Math.Min(v2.X, v3.X))));
-                int maxX = (int)Math.Min(renderArea.Width - 1, Math.Floor(Math.Max(v1.X, Math.Max(v2.X, v3.X))));
-                int minY = (int)Math.Max(0, Math.Ceiling(Math.Min(v1.Y, Math.Min(v2.Y, v3.Y))));
-                int maxY = (int)Math.Min(renderArea.Height - 1, Math.Floor(Math.Max(v1.Y, Math.Max(v2.Y, v3.Y))));
-
-                double triangleArea = (v1.Y - v3.Y) * (v2.X - v3.X) + (v2.Y - v3.Y) * (v3.X - v1.X);
-
-                for (int y = minY; y <= maxY; y++)
-                {
-                    for (int x = minX; x <= maxX; x++)
-                    {
-                        double b1 = ((y - v3.Y) * (v2.X - v3.X) + (v2.Y - v3.Y) * (v3.X - x)) / triangleArea;
-                        double b2 = ((y - v1.Y) * (v3.X - v1.X) + (v3.Y - v1.Y) * (v1.X - x)) / triangleArea;
-                        double b3 = ((y - v2.Y) * (v1.X - v2.X) + (v1.Y - v2.Y) * (v2.X - x)) / triangleArea;
-
-                        if (b1 >= 0 && b1 <= 1 && b2 >= 0 && b2 <= 1 && b3 >= 0 && b3 <= 1)
-                        {
-                            // for each rasterized pixel:
-                            double depth = b1 * v1.Z + b2 * v2.Z + b3 * v3.Z;
-                            int zIndex = y * renderArea.Width + x;
-
-                            if (zBuffer[zIndex] < depth)
-                            {
-                                renderArea.SetPixel(x, y, t.Color);
-                                zBuffer[zIndex] = depth;
-                            }
-                        }
-                    }
-                }
+                surface(zBuffer, v1, v2, v3, t.Color);
             }
         }
 
@@ -128,9 +133,9 @@ namespace TabbyCat
             // рисование фона
             g.FillRectangle(Brushes.Black, new RectangleF(0, 0, renderArea.Width, renderArea.Height));
 
-            trTransform.XOffset = (int)xCoordinateLocationControl.Value;
-            trTransform.YOffset = (int)yCoordinateLocationControl.Value;
-            trTransform.ZOffset = (int)zCoordinateLocationControl.Value;
+            trTransform.XOffset = (double)xCoordinateLocationControl.Value;
+            trTransform.YOffset = (double)yCoordinateLocationControl.Value;
+            trTransform.ZOffset = (double)zCoordinateLocationControl.Value;
 
             scTransform.ScaleOffset = (double)scaleControl.Value;
 

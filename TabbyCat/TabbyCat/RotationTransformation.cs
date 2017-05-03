@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace TabbyCat
 {
@@ -109,39 +110,9 @@ namespace TabbyCat
             }
         }
 
-        //public RotationTransformation()
-        //{
-        //    this.oxAngle = 0;
-        //    this.oxMatrix = new Matrix4(
-        //        new double[] {
-        //            1, 0, 0, 0,
-        //            0, Math.Cos(oxAngle), Math.Sin(oxAngle), 0,
-        //            0, -Math.Sin(oxAngle), Math.Cos(oxAngle), 0,
-        //            0, 0, 0, 1
-        //        });
-
-        //    this.oyAngle = 0;
-        //    this.oyMatrix = new Matrix4(
-        //        new double[] {
-        //            Math.Cos(oyAngle), 0, -Math.Sin(oyAngle), 0,
-        //            0, 1, 0, 0,
-        //            Math.Sin(oyAngle), 0, Math.Cos(oyAngle), 0,
-        //            0, 0, 0, 1
-        //        });
-
-        //    this.ozAngle = 0;
-        //    this.ozMatrix = new Matrix4(
-        //        new double[] {
-        //            Math.Cos(ozAngle), Math.Sin(ozAngle), 0, 0,
-        //            -Math.Sin(ozAngle), Math.Cos(ozAngle), 0, 0,
-        //            0, 0, 1, 0,
-        //            0, 0, 0, 1
-        //        });
-        //}
-
         public RotationTransformation(double oxAngle, double oyAngle, double ozAngle)
         {
-            this.oxAngle = oxAngle;
+            this.oxAngle = degreeToRadian(oxAngle);
             this.oxMatrix = new Matrix4(
                 new double[] {
                     1, 0, 0, 0,
@@ -150,7 +121,7 @@ namespace TabbyCat
                     0, 0, 0, 1
                 });
 
-            this.oyAngle = oyAngle;
+            this.oyAngle = degreeToRadian(oyAngle);
             this.oyMatrix = new Matrix4(
                 new double[] {
                     Math.Cos(oyAngle), 0, -Math.Sin(oyAngle), 0,
@@ -159,7 +130,7 @@ namespace TabbyCat
                     0, 0, 0, 1
                 });
 
-            this.ozAngle = ozAngle;
+            this.ozAngle = degreeToRadian(ozAngle);
             this.ozMatrix = new Matrix4(
                 new double[] {
                     Math.Cos(ozAngle), Math.Sin(ozAngle), 0, 0,
@@ -167,6 +138,25 @@ namespace TabbyCat
                     0, 0, 1, 0,
                     0, 0, 0, 1
                 });
+        }
+
+        private double degreeToRadian(double angle)
+        {
+            return Math.PI * angle / 180.0;
+        }
+
+        public void setAngles(double xAngle, double yAngle, double zAngle)
+        {
+            this.OxAngle = degreeToRadian(xAngle);
+            this.OyAngle = degreeToRadian(yAngle);
+            this.OzAngle = degreeToRadian(zAngle);
+        }
+
+        public void setAngles(decimal xAngle, decimal yAngle, decimal zAngle)
+        {
+            this.OxAngle = degreeToRadian((double)xAngle);
+            this.OyAngle = degreeToRadian((double)yAngle);
+            this.OzAngle = degreeToRadian((double)zAngle);
         }
     }
 }
