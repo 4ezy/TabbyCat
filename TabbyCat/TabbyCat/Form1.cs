@@ -64,15 +64,41 @@ namespace TabbyCat
             return tris;
         }
 
-        private GraphicsPath wireFrameRender(Vertex v1, Vertex v2, Vertex v3)
+        private void drawLine(int x1, int y1, int x2, int y2)
         {
-            GraphicsPath gPath = new GraphicsPath();
+            int deltaX = Math.Abs(x2 - x1);
+            int deltaY = Math.Abs(y2 - y1);
 
-            gPath.AddLine((float)v1.X, (float)v1.Y, (float)v2.X, (float)v2.Y);
-            gPath.AddLine((float)v2.X, (float)v2.Y, (float)v3.X, (float)v3.Y);
-            gPath.AddLine((float)v3.X, (float)v3.Y, (float)v1.X, (float)v1.Y);
+            int signX = x1 < x2 ? 1 : -1;
+            int signY = y1 < y2 ? 1 : -1;
 
-            return gPath;
+            int error = deltaX - deltaY;
+
+            renderArea.SetPixel(x2, y2, Color.White);
+
+            while(x1 != x2 || y1 != y2)
+            {
+                renderArea.SetPixel(x1, y1, Color.White);
+                int error2 = error * 2;
+
+                if(error2 > -deltaY)
+                {
+                    error -= deltaY;
+                    x1 += signX;
+                }
+                if (error2 < deltaX)
+                {
+                    error += deltaX;
+                    y1 += signY;
+                }
+            }
+        }
+
+        private void wireFrameRender(Vertex v1, Vertex v2, Vertex v3)
+        {
+            drawLine((int)v1.X, (int)v1.Y, (int)v2.X, (int)v2.Y);
+            drawLine((int)v2.X, (int)v2.Y, (int)v3.X, (int)v3.Y);
+            drawLine((int)v3.X, (int)v3.Y, (int)v1.X, (int)v1.Y);
         }
 
         private void surfaceRender(double[] zBuffer, Vertex v1, Vertex v2, Vertex v3, Color color)
@@ -126,9 +152,7 @@ namespace TabbyCat
 
                 if(wireFrameRadioButton.Checked)
                 {
-                    GraphicsPath gPath = wireFrameRender(v1, v2, v3);
-
-                    g.DrawPath(new Pen(Color.White, 2), gPath); 
+                    wireFrameRender(v1, v2, v3);
                 }
 
                 if(surfaceRadioButton.Checked)
