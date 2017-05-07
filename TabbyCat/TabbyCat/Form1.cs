@@ -152,6 +152,12 @@ namespace TabbyCat
             drawLine(v3.X, v3.Y, v1.X, v1.Y);
         }
 
+        private void conturesRender(Vertex v1, Vertex v2, Vertex v3)
+        {
+            drawLine(v1.X, v1.Y, v2.X, v2.Y);
+            drawLine(v3.X, v3.Y, v1.X, v1.Y);
+        }
+
         private void surfaceRender(double[] zBuffer, Vertex v1, Vertex v2, Vertex v3, Color color)
         {
             // алгоритм построчного заполнения
@@ -178,8 +184,16 @@ namespace TabbyCat
 
                         if (zBuffer[zIndex] < depth)
                         {
-                            renderArea.SetPixel(x, y, color);
-                            zBuffer[zIndex] = depth;
+                            if(x == minX || x == maxX || y == minY || y == maxY)
+                            {
+                                renderArea.SetPixel(x, y, Color.White);
+                                zBuffer[zIndex] = depth;
+                            }
+                            else
+                            {
+                                renderArea.SetPixel(x, y, color);
+                                zBuffer[zIndex] = depth;
+                            }
                         }
                     }
                 }

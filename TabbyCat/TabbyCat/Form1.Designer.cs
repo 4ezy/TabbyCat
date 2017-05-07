@@ -173,10 +173,10 @@
             this.scaleControl.Size = new System.Drawing.Size(192, 20);
             this.scaleControl.TabIndex = 1;
             this.scaleControl.Value = new decimal(new int[] {
-            5,
+            1,
             0,
             0,
-            65536});
+            0});
             // 
             // label7
             // 
