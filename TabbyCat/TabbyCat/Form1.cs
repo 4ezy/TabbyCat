@@ -186,8 +186,11 @@ namespace TabbyCat
                         {
                             if(x == minX || x == maxX || y == minY || y == maxY)
                             {
-                                renderArea.SetPixel(x, y, Color.White);
-                                zBuffer[zIndex] = depth;
+                                if ((x > 0) && (x < renderArea.Width) && (y > 0) && (y < renderArea.Height))
+                                {
+                                    renderArea.SetPixel(x, y, Color.White);
+                                    zBuffer[zIndex] = depth;
+                                }
                             }
                             else
                             {
