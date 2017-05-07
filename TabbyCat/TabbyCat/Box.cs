@@ -7,14 +7,14 @@ using System.Drawing;
 
 namespace TabbyCat
 {
-    class Box
+    struct Box
     {
-        List<Triangle> bottomEdge = new List<Triangle>();
-        List<Triangle> topEdge = new List<Triangle>();
-        List<Triangle> leftEdge = new List<Triangle>();
-        List<Triangle> rightEdge = new List<Triangle>();
-        List<Triangle> nearEdge = new List<Triangle>();
-        List<Triangle> distantEdge = new List<Triangle>();
+        List<Triangle> bottomEdge;
+        List<Triangle> topEdge;
+        List<Triangle> leftEdge;
+        List<Triangle> rightEdge;
+        List<Triangle> nearEdge;
+        List<Triangle> distantEdge;
 
         internal List<Triangle> BottomEdge
         {
@@ -94,7 +94,7 @@ namespace TabbyCat
             }
         }
 
-        public void setBottomEdge(int x1, int z1, int x2, int z2, int y1, int stepX, int stepZ)
+        public void setBottomEdge(int x1, int z1, int x2, int z2, int y1, int stepX, int stepZ, Color color)
         {
             for (int i = x1; i != x2; i += stepX)
             {
@@ -104,7 +104,7 @@ namespace TabbyCat
                         new Vertex(i, y1, j, 1),
                         new Vertex(i, y1, j + stepZ, 1),
                         new Vertex(i + stepX, y1, j, 1),
-                        Color.Blue
+                        color
                     ));
                 }
             }
@@ -117,13 +117,13 @@ namespace TabbyCat
                         new Vertex(i, y1, j, 1),
                         new Vertex(i, y1, j - stepZ, 1),
                         new Vertex(i - stepX, y1, j, 1),
-                        Color.Blue
+                        color
                     ));
                 }
             }
         }
 
-        public void setTopEdge(int x1, int z1, int x2, int z2, int y2, int stepX, int stepZ)
+        public void setTopEdge(int x1, int z1, int x2, int z2, int y2, int stepX, int stepZ, Color color)
         {
             for (int i = x1; i != x2; i += stepX)
             {
@@ -133,7 +133,7 @@ namespace TabbyCat
                         new Vertex(i, y2, j, 1),
                         new Vertex(i, y2, j + stepZ, 1),
                         new Vertex(i + stepX, y2, j, 1),
-                        Color.Blue
+                        color
                     ));
                 }
             }
@@ -146,13 +146,13 @@ namespace TabbyCat
                         new Vertex(i, y2, j, 1),
                         new Vertex(i, y2, j - stepZ, 1),
                         new Vertex(i - stepX, y2, j, 1),
-                        Color.Blue
+                        color
                     ));
                 }
             }
         }
 
-        public void setLeftEdge(int y1, int z1, int y2, int z2, int x1, int stepY, int stepZ)
+        public void setLeftEdge(int y1, int z1, int y2, int z2, int x1, int stepY, int stepZ, Color color)
         {
             for (int i = y1; i != y2; i += stepY)
             {
@@ -162,7 +162,7 @@ namespace TabbyCat
                         new Vertex(x1, i, j, 1),
                         new Vertex(x1, i, j + stepZ, 1),
                         new Vertex(x1, i + stepY, j, 1),
-                        Color.Blue
+                        color
                     ));
                 }
             }
@@ -175,13 +175,13 @@ namespace TabbyCat
                         new Vertex(x1, i, j, 1),
                         new Vertex(x1, i, j - stepZ, 1),
                         new Vertex(x1, i - stepY, j, 1),
-                        Color.Blue
+                        color
                     ));
                 }
             }
         }
 
-        public void setRightEdge(int y1, int z1, int y2, int z2, int x2, int stepY, int stepZ)
+        public void setRightEdge(int y1, int z1, int y2, int z2, int x2, int stepY, int stepZ, Color color)
         {
             for (int i = y1; i != y2; i += stepY)
             {
@@ -191,7 +191,7 @@ namespace TabbyCat
                         new Vertex(x2, i, j, 1),
                         new Vertex(x2, i, j + stepZ, 1),
                         new Vertex(x2, i + stepY, j, 1),
-                        Color.Blue
+                        color
                     ));
                 }
             }
@@ -204,13 +204,13 @@ namespace TabbyCat
                         new Vertex(x2, i, j, 1),
                         new Vertex(x2, i, j - stepZ, 1),
                         new Vertex(x2, i - stepY, j, 1),
-                        Color.Blue
+                        color
                     ));
                 }
             }
         }
 
-        public void setNearEdge(int x1, int y1, int x2, int y2, int z1, int stepX, int stepY)
+        public void setNearEdge(int x1, int y1, int x2, int y2, int z1, int stepX, int stepY, Color color)
         {
             for (int i = x1; i != x2; i += stepX)
             {
@@ -220,7 +220,7 @@ namespace TabbyCat
                         new Vertex(i, j, z1, 1),
                         new Vertex(i, j + stepY, z1, 1),
                         new Vertex(i + stepX, j, z1, 1),
-                        Color.Blue
+                        color
                     ));
                 }
             }
@@ -233,13 +233,13 @@ namespace TabbyCat
                         new Vertex(i, j, z1, 1),
                         new Vertex(i, j - stepY, z1, 1),
                         new Vertex(i - stepX, j, z1, 1),
-                        Color.Blue
+                        color
                     ));
                 }
             }
         }
 
-        public void setDistantEdge(int x1, int y1, int x2, int y2, int z2, int stepX, int stepY)
+        public void setDistantEdge(int x1, int y1, int x2, int y2, int z2, int stepX, int stepY, Color color)
         {
             for (int i = x1; i != x2; i += stepX)
             {
@@ -249,7 +249,7 @@ namespace TabbyCat
                         new Vertex(i, j, z2, 1),
                         new Vertex(i, j + stepY, z2, 1),
                         new Vertex(i + stepX, j, z2, 1),
-                        Color.Blue
+                        color
                     ));
                 }
             }
@@ -262,14 +262,21 @@ namespace TabbyCat
                         new Vertex(i, j, z2, 1),
                         new Vertex(i, j - stepY, z2, 1),
                         new Vertex(i - stepX, j, z2, 1),
-                        Color.Blue
+                        color
                     ));
                 }
             }
         }
 
-        public Box(double xStart, double yStart, double zStart, double xEnd, double yEnd, double zEnd)
+        public Box(double xStart, double yStart, double zStart, double xEnd, double yEnd, double zEnd, Color color)
         {
+            bottomEdge = new List<Triangle>();
+            topEdge = new List<Triangle>();
+            leftEdge = new List<Triangle>();
+            rightEdge = new List<Triangle>();
+            nearEdge = new List<Triangle>();
+            distantEdge = new List<Triangle>();
+
             int x1 = (int)(xStart);
             int y1 = (int)(yStart);
             int z1 = (int)(zStart);
@@ -277,21 +284,21 @@ namespace TabbyCat
             int y2 = (int)(yEnd);
             int z2 = (int)(zEnd);
 
-            int stepX = x1 < x2 ? 10 : -10;
-            int stepY = y1 < y2 ? 10 : -10;
-            int stepZ = z1 < z2 ? 10 : -10;
+            int stepX = x1 < x2 ? Math.Abs((x2 - x1)) : -Math.Abs((x1 - x2));
+            int stepY = y1 < y2 ? Math.Abs((y2 - y1)) : -Math.Abs((y1 - y2));
+            int stepZ = z1 < z2 ? Math.Abs((z2 - z1)) : -Math.Abs((z1 - z2));
 
-            setBottomEdge(x1, z1, x2, z2, y1, stepX, stepZ);
+            setBottomEdge(x1, z1, x2, z2, y1, stepX, stepZ, color);
 
-            setLeftEdge(y1, z1, y2, z2, x1, stepY, stepZ);
+            setLeftEdge(y1, z1, y2, z2, x1, stepY, stepZ, color);
 
-            setRightEdge(y1, z1, y2, z2, x2, stepY, stepZ);
+            setRightEdge(y1, z1, y2, z2, x2, stepY, stepZ, color);
 
-            setDistantEdge(x1, y1, x2, y2, z2, stepX, stepY);
+            setDistantEdge(x1, y1, x2, y2, z2, stepX, stepY, color);
 
-            setNearEdge(x1, y1, x2, y2, z1, stepX, stepY);
+            setNearEdge(x1, y1, x2, y2, z1, stepX, stepY, color);
 
-            setTopEdge(x1, z1, x2, z2, y2, stepX, stepZ);
+            setTopEdge(x1, z1, x2, z2, y2, stepX, stepZ, color);
         }
     }
 }

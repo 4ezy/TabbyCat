@@ -37,15 +37,42 @@ namespace TabbyCat
 
             scTransform = new ScaleTransformation();
 
-            boxes = new List<Box>();
-            boxes.Add(boxDrafting());
+            boxes = boxDrafting(Color.Orange);
         }
 
-        private Box boxDrafting()
+        private List<Box> boxDrafting(Color color)
         {
-            Box box = new Box(0, 0, 0, 100, 100, 100);
+            List<Box> boxes = new List<Box>();
 
-            return box;
+            // подушки лап
+            boxes.Add(new Box(0, 3, 0, 15, 13, 5, color));
+            boxes.Add(new Box(0, -23, 0, 15, -13, 5, color));
+            boxes.Add(new Box(45, 3, 0, 60, 13, 5, color));
+            boxes.Add(new Box(45, -23, 0, 60, -13, 5, color));
+
+            // лапы
+            boxes.Add(new Box(0, 3, 5, 10, 13, 35, color));
+            boxes.Add(new Box(0, -23, 5, 10, -13, 35, color));
+            boxes.Add(new Box(45, 3, 5, 55, 13, 35, color));
+            boxes.Add(new Box(45, -23, 5, 55, -13, 35, color));
+
+            // туловище
+            boxes.Add(new Box(-10, 20, 35, 70, -30, 60, color));
+
+            // голова
+            boxes.Add(new Box(70, 20, 35, 95, -30, 75, color));
+
+            // хвост
+            boxes.Add(new Box(-10, -2, 45, -30, -8, 50, color));
+            boxes.Add(new Box(-30, -2, 45, -35, -8, 75, color));
+            boxes.Add(new Box(-30, -2, 75, -70, -8, 80, color));
+
+            // полосы
+            boxes.Add(new Box(40, 10, 60, 45, -20, 61, Color.Red));
+            boxes.Add(new Box(25, 10, 60, 30, -20, 61, Color.Red));
+            boxes.Add(new Box(10, 10, 60, 15, -20, 61, Color.Red));
+
+            return boxes;
         }
 
         private List<Triangle> tethraedronDrafting()
