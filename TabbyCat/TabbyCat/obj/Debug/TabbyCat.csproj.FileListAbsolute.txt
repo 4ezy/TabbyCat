@@ -22,6 +22,6 @@ A:\Текущие лабы\Курсовая АПГС\TabbyCat\TabbyCat\TabbyCat\
 A:\Текущие лабы\Курсовая АПГС\TabbyCat\TabbyCat\TabbyCat\bin\Debug\TabbyCat.exe
 A:\Текущие лабы\Курсовая АПГС\TabbyCat\TabbyCat\TabbyCat\bin\Debug\TabbyCat.pdb
 A:\Текущие лабы\Курсовая АПГС\TabbyCat\TabbyCat\TabbyCat\obj\Debug\TabbyCat.csprojResolveAssemblyReference.cache
-A:\Текущие лабы\Курсовая АПГС\TabbyCat\TabbyCat\TabbyCat\obj\Debug\TabbyCat.Form1.resources
 A:\Текущие лабы\Курсовая АПГС\TabbyCat\TabbyCat\TabbyCat\obj\Debug\TabbyCat.Properties.Resources.resources
 A:\Текущие лабы\Курсовая АПГС\TabbyCat\TabbyCat\TabbyCat\obj\Debug\TabbyCat.csproj.GenerateResource.Cache
+A:\Текущие лабы\Курсовая АПГС\TabbyCat\TabbyCat\TabbyCat\obj\Debug\TabbyCat.tabbyCatRenderForm.resources

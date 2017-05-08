@@ -16,6 +16,8 @@ namespace TabbyCat
         List<Triangle> nearEdge;
         List<Triangle> distantEdge;
 
+        Color color;
+
         internal List<Triangle> BottomEdge
         {
             get
@@ -94,8 +96,23 @@ namespace TabbyCat
             }
         }
 
+        public Color Color
+        {
+            get
+            {
+                return color;
+            }
+
+            set
+            {
+                color = value;
+            }
+        }
+
         public void setBottomEdge(int x1, int z1, int x2, int z2, int y1, int stepX, int stepZ, Color color)
         {
+            bottomEdge.Clear();
+
             for (int i = x1; i != x2; i += stepX)
             {
                 for (int j = z1; j != z2; j += stepZ)
@@ -125,6 +142,8 @@ namespace TabbyCat
 
         public void setTopEdge(int x1, int z1, int x2, int z2, int y2, int stepX, int stepZ, Color color)
         {
+            topEdge.Clear();
+
             for (int i = x1; i != x2; i += stepX)
             {
                 for (int j = z1; j != z2; j += stepZ)
@@ -154,6 +173,8 @@ namespace TabbyCat
 
         public void setLeftEdge(int y1, int z1, int y2, int z2, int x1, int stepY, int stepZ, Color color)
         {
+            leftEdge.Clear();
+
             for (int i = y1; i != y2; i += stepY)
             {
                 for (int j = z1; j != z2; j += stepZ)
@@ -183,6 +204,8 @@ namespace TabbyCat
 
         public void setRightEdge(int y1, int z1, int y2, int z2, int x2, int stepY, int stepZ, Color color)
         {
+            rightEdge.Clear();
+
             for (int i = y1; i != y2; i += stepY)
             {
                 for (int j = z1; j != z2; j += stepZ)
@@ -212,6 +235,8 @@ namespace TabbyCat
 
         public void setNearEdge(int x1, int y1, int x2, int y2, int z1, int stepX, int stepY, Color color)
         {
+            nearEdge.Clear();
+
             for (int i = x1; i != x2; i += stepX)
             {
                 for (int j = y1; j != y2; j += stepY)
@@ -241,6 +266,8 @@ namespace TabbyCat
 
         public void setDistantEdge(int x1, int y1, int x2, int y2, int z2, int stepX, int stepY, Color color)
         {
+            distantEdge.Clear();
+
             for (int i = x1; i != x2; i += stepX)
             {
                 for (int j = y1; j != y2; j += stepY)
@@ -277,6 +304,8 @@ namespace TabbyCat
             nearEdge = new List<Triangle>();
             distantEdge = new List<Triangle>();
 
+            this.color = color;
+
             int x1 = (int)(xStart);
             int y1 = (int)(yStart);
             int z1 = (int)(zStart);
@@ -299,6 +328,24 @@ namespace TabbyCat
             setNearEdge(x1, y1, x2, y2, z1, stepX, stepY, color);
 
             setTopEdge(x1, z1, x2, z2, y2, stepX, stepZ, color);
+        }
+
+        public decimal getBoxLength()
+        {
+            decimal length = this.leftEdge[0].V1.X < this.rightEdge[0].V1.X ?
+                (decimal)Math.Abs(this.rightEdge[0].V1.X - this.leftEdge[0].V1.X) :
+                (decimal)Math.Abs(this.leftEdge[0].V1.X - this.rightEdge[0].V1.X);
+
+            return length;
+        }
+
+        public decimal getBoxWidth()
+        {
+            decimal width = this.bottomEdge[0].V1.Y < this.topEdge[0].V1.Y ?
+                (decimal)Math.Abs(this.topEdge[0].V1.Y - this.bottomEdge[0].V1.Y) :
+                (decimal)Math.Abs(this.bottomEdge[0].V1.Y - this.topEdge[0].V1.Y);
+
+            return width;
         }
     }
 }

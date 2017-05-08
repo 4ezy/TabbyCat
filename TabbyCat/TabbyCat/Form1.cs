@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace TabbyCat
 {
-    public partial class Form1 : Form
+    public partial class tabbyCatRenderForm : Form
     {
         Bitmap renderArea;
 
@@ -23,7 +23,7 @@ namespace TabbyCat
         RotationTransformation rtTransform;
         ScaleTransformation scTransform;
 
-        public Form1()
+        public tabbyCatRenderForm()
         {
             InitializeComponent();
 
@@ -38,19 +38,22 @@ namespace TabbyCat
             scTransform = new ScaleTransformation();
 
             boxes = boxDrafting(Color.Orange);
+
+            pawsLengthControl.Value = boxes[0].getBoxLength();
+            pawsWidthControl.Value = boxes[0].getBoxWidth();
         }
 
         private List<Box> boxDrafting(Color color)
         {
             List<Box> boxes = new List<Box>();
 
-            // подушки лап
+            // лапы
             boxes.Add(new Box(0, 3, 0, 15, 13, 5, color));
             boxes.Add(new Box(0, -23, 0, 15, -13, 5, color));
             boxes.Add(new Box(45, 3, 0, 60, 13, 5, color));
             boxes.Add(new Box(45, -23, 0, 60, -13, 5, color));
 
-            // лапы
+            // конечности
             boxes.Add(new Box(0, 3, 5, 10, 13, 35, color));
             boxes.Add(new Box(0, -23, 5, 10, -13, 35, color));
             boxes.Add(new Box(45, 3, 5, 55, 13, 35, color));
@@ -68,9 +71,9 @@ namespace TabbyCat
             boxes.Add(new Box(-30, -2, 75, -70, -8, 80, color));
 
             // полосы
-            boxes.Add(new Box(40, 10, 60, 45, -20, 61, Color.Red));
-            boxes.Add(new Box(25, 10, 60, 30, -20, 61, Color.Red));
-            boxes.Add(new Box(10, 10, 60, 15, -20, 61, Color.Red));
+            boxes.Add(new Box(40, 10, 60, 45, -20, 61, Color.Brown));
+            boxes.Add(new Box(25, 10, 60, 30, -20, 61, Color.Brown));
+            boxes.Add(new Box(10, 10, 60, 15, -20, 61, Color.Brown));
 
             return boxes;
         }
@@ -152,12 +155,6 @@ namespace TabbyCat
             drawLine(v3.X, v3.Y, v1.X, v1.Y);
         }
 
-        private void conturesRender(Vertex v1, Vertex v2, Vertex v3)
-        {
-            drawLine(v1.X, v1.Y, v2.X, v2.Y);
-            drawLine(v3.X, v3.Y, v1.X, v1.Y);
-        }
-
         private void surfaceRender(double[] zBuffer, Vertex v1, Vertex v2, Vertex v3, Color color)
         {
             // алгоритм построчного заполнения
@@ -184,7 +181,7 @@ namespace TabbyCat
 
                         if (zBuffer[zIndex] < depth)
                         {
-                            if(x == minX || x == maxX || y == minY || y == maxY)
+                            if(x == minX || x == maxX || y == minY || y == maxY)     // прорисовка контура
                             {
                                 if ((x > 0) && (x < renderArea.Width) && (y > 0) && (y < renderArea.Height))
                                 {
@@ -192,7 +189,7 @@ namespace TabbyCat
                                     zBuffer[zIndex] = depth;
                                 }
                             }
-                            else
+                            else     // заливка
                             {
                                 renderArea.SetPixel(x, y, color);
                                 zBuffer[zIndex] = depth;
@@ -362,8 +359,8 @@ namespace TabbyCat
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
-            renderArea = new Bitmap(pictureBox1.Size.Width, pictureBox1.Size.Height);
-            pictureBox1.Image = renderArea;
+            renderArea = new Bitmap(renderPictureBox.Size.Width, renderPictureBox.Size.Height);
+            renderPictureBox.Image = renderArea;
 
             Graphics g;
             g = Graphics.FromImage(renderArea);
@@ -381,6 +378,13 @@ namespace TabbyCat
             transform = transform.multiply(rtTransform.OzMatrix);
             transform = transform.multiply(scTransform.Matrix);
             transform = transform.multiply(trTransform.Matrix);
+
+            //for (int i = 0; i < 4; i++)
+            //{
+            //    boxes[i] = new Box(boxes[i].BottomEdge[0].V1.X, boxes[i].BottomEdge[0].V1.Y, boxes[i].BottomEdge[0].V1.Z,
+            //        (double)pawsLengthControl.Value, (double)pawsWidthControl.Value,
+            //        5, boxes[i].Color);
+            //}
 
             // инициализация заполнение z-буфера
             double[] zBuffer = new double[renderArea.Width * renderArea.Height];

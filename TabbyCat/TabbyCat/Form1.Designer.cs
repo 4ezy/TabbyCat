@@ -1,6 +1,6 @@
 ﻿namespace TabbyCat
 {
-    partial class Form1
+    partial class tabbyCatRenderForm
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.renderPictureBox = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -54,7 +54,13 @@
             this.surfaceRadioButton = new System.Windows.Forms.RadioButton();
             this.wireFrameRadioButton = new System.Windows.Forms.RadioButton();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.pawsGroupBox = new System.Windows.Forms.GroupBox();
+            this.pawsWidthControl = new System.Windows.Forms.NumericUpDown();
+            this.label9 = new System.Windows.Forms.Label();
+            this.pawsLengthControl = new System.Windows.Forms.NumericUpDown();
+            this.label8 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.renderPictureBox)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -70,18 +76,23 @@
             ((System.ComponentModel.ISupportInitialize)(this.yAngleControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xAngleControl)).BeginInit();
             this.modelGeometricType.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
+            this.pawsGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pawsWidthControl)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pawsLengthControl)).BeginInit();
             this.SuspendLayout();
             // 
-            // pictureBox1
+            // renderPictureBox
             // 
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(765, 532);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
+            this.renderPictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.renderPictureBox.Location = new System.Drawing.Point(0, 0);
+            this.renderPictureBox.Margin = new System.Windows.Forms.Padding(0);
+            this.renderPictureBox.Name = "renderPictureBox";
+            this.renderPictureBox.Size = new System.Drawing.Size(764, 521);
+            this.renderPictureBox.TabIndex = 0;
+            this.renderPictureBox.TabStop = false;
+            this.renderPictureBox.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
             // 
             // tableLayoutPanel1
             // 
@@ -89,13 +100,13 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 230F));
             this.tableLayoutPanel1.Controls.Add(this.tabControl1, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.pictureBox1, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.renderPictureBox, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(995, 532);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(994, 521);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // tabControl1
@@ -103,10 +114,10 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(768, 3);
+            this.tabControl1.Location = new System.Drawing.Point(767, 3);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(224, 526);
+            this.tabControl1.Size = new System.Drawing.Size(224, 515);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -115,7 +126,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(216, 500);
+            this.tabPage1.Size = new System.Drawing.Size(216, 489);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Геометрические преобразования";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -411,24 +422,86 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.tableLayoutPanel3);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(216, 500);
+            this.tabPage2.Size = new System.Drawing.Size(216, 489);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.Text = "Качественные характеристики";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // Form1
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.ColumnCount = 1;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.Controls.Add(this.pawsGroupBox, 0, 0);
+            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 2;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.6383F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 49.3617F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(210, 235);
+            this.tableLayoutPanel3.TabIndex = 0;
+            // 
+            // pawsGroupBox
+            // 
+            this.pawsGroupBox.Controls.Add(this.pawsWidthControl);
+            this.pawsGroupBox.Controls.Add(this.label9);
+            this.pawsGroupBox.Controls.Add(this.pawsLengthControl);
+            this.pawsGroupBox.Controls.Add(this.label8);
+            this.pawsGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pawsGroupBox.Location = new System.Drawing.Point(3, 3);
+            this.pawsGroupBox.Name = "pawsGroupBox";
+            this.pawsGroupBox.Size = new System.Drawing.Size(204, 113);
+            this.pawsGroupBox.TabIndex = 0;
+            this.pawsGroupBox.TabStop = false;
+            this.pawsGroupBox.Text = "Лапы";
+            // 
+            // pawsWidthControl
+            // 
+            this.pawsWidthControl.Location = new System.Drawing.Point(9, 81);
+            this.pawsWidthControl.Name = "pawsWidthControl";
+            this.pawsWidthControl.Size = new System.Drawing.Size(189, 20);
+            this.pawsWidthControl.TabIndex = 3;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(6, 65);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(67, 13);
+            this.label9.TabIndex = 2;
+            this.label9.Text = "Ширина лап";
+            // 
+            // pawsLengthControl
+            // 
+            this.pawsLengthControl.Location = new System.Drawing.Point(9, 32);
+            this.pawsLengthControl.Name = "pawsLengthControl";
+            this.pawsLengthControl.Size = new System.Drawing.Size(189, 20);
+            this.pawsLengthControl.TabIndex = 1;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(6, 16);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(61, 13);
+            this.label8.TabIndex = 0;
+            this.label8.Text = "Длина лап";
+            // 
+            // tabbyCatRenderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(995, 532);
+            this.ClientSize = new System.Drawing.Size(994, 521);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Name = "Form1";
+            this.MinimumSize = new System.Drawing.Size(1010, 560);
+            this.Name = "tabbyCatRenderForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.Text = "TabbyCat";
+            ((System.ComponentModel.ISupportInitialize)(this.renderPictureBox)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -448,12 +521,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.xAngleControl)).EndInit();
             this.modelGeometricType.ResumeLayout(false);
             this.modelGeometricType.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.pawsGroupBox.ResumeLayout(false);
+            this.pawsGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pawsWidthControl)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pawsLengthControl)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox renderPictureBox;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.GroupBox scaleGroupBox;
         private System.Windows.Forms.NumericUpDown scaleControl;
@@ -479,6 +558,12 @@
         private System.Windows.Forms.GroupBox modelGeometricType;
         private System.Windows.Forms.RadioButton surfaceRadioButton;
         private System.Windows.Forms.RadioButton wireFrameRadioButton;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.GroupBox pawsGroupBox;
+        private System.Windows.Forms.NumericUpDown pawsWidthControl;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.NumericUpDown pawsLengthControl;
+        private System.Windows.Forms.Label label8;
     }
 }
 
