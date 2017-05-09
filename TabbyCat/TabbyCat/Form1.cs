@@ -39,13 +39,32 @@ namespace TabbyCat
 
             boxes = boxDrafting(Color.Orange);
 
-            pawsLengthControl.Value = boxes[0].getBoxLength();
-            pawsWidthControl.Value = boxes[0].getBoxWidth();
+            // длина измеряется по оси x
+            pawsLengthControl.Value = (decimal)boxes[1].getLength();
+            pawsLengthControl.Minimum = (decimal)boxes[1].getLength();
+            pawsLengthControl.Maximum = (decimal)boxes[1].getLength() + (decimal)boxes[1].getLength() / 2;
+
+            // в ск координат это является высотой (т.к. измерение идёт по оси y), но для кота - это ширина лап
+            pawsWidthControl.Value = (decimal)boxes[1].getHeight();
+            pawsWidthControl.Minimum = (decimal)boxes[1].getHeight();
+            pawsWidthControl.Maximum = (decimal)boxes[1].getHeight() + (decimal)boxes[1].getHeight() / 2;
+
+            bodyLengthControl.Value = (decimal)boxes[0].getLength();
+            bodyLengthControl.Minimum = (decimal)boxes[0].getLength();
+            bodyLengthControl.Maximum = (decimal)boxes[0].getLength() + (decimal)boxes[0].getLength() / 2;
+
+            bodyWidthControl.Value = (decimal)boxes[0].getHeight();
+            bodyWidthControl.Minimum = (decimal)boxes[0].getHeight();
+            bodyWidthControl.Maximum = (decimal)boxes[0].getHeight() + (decimal)boxes[0].getHeight() / 2;
+
         }
 
         private List<Box> boxDrafting(Color color)
         {
             List<Box> boxes = new List<Box>();
+
+            // туловище
+            boxes.Add(new Box(-10, 20, 35, 70, -30, 60, color));
 
             // лапы
             boxes.Add(new Box(0, 3, 0, 15, 13, 5, color));
@@ -58,9 +77,6 @@ namespace TabbyCat
             boxes.Add(new Box(0, -23, 5, 10, -13, 35, color));
             boxes.Add(new Box(45, 3, 5, 55, 13, 35, color));
             boxes.Add(new Box(45, -23, 5, 55, -13, 35, color));
-
-            // туловище
-            boxes.Add(new Box(-10, 20, 35, 70, -30, 60, color));
 
             // голова
             boxes.Add(new Box(70, 20, 35, 95, -30, 75, color));
@@ -151,7 +167,7 @@ namespace TabbyCat
         private void wireFrameRender(Vertex v1, Vertex v2, Vertex v3)
         {
             drawLine(v1.X, v1.Y, v2.X, v2.Y);
-            drawLine(v2.X, v2.Y, v3.X, v3.Y);
+            //drawLine(v2.X, v2.Y, v3.X, v3.Y);
             drawLine(v3.X, v3.Y, v1.X, v1.Y);
         }
 
@@ -200,153 +216,70 @@ namespace TabbyCat
             }
         }
 
+        private void drawBoxEdge(List<Triangle> edge, Matrix4 transform, double[] zBuffer)
+        {
+            foreach (Triangle t in edge)
+            {
+                Vertex v1 = transform.transform(t.V1);
+                Vertex v2 = transform.transform(t.V2);
+                Vertex v3 = transform.transform(t.V3);
+
+                v1.X += renderArea.Width / 2;
+                v1.Y += renderArea.Height / 2;
+                v2.X += renderArea.Width / 2;
+                v2.Y += renderArea.Height / 2;
+                v3.X += renderArea.Width / 2;
+                v3.Y += renderArea.Height / 2;
+
+                if (wireFrameRadioButton.Checked)
+                {
+                    wireFrameRender(v1, v2, v3);
+                }
+
+                if (surfaceRadioButton.Checked)
+                {
+                    surfaceRender(zBuffer, v1, v2, v3, t.Color);
+                }
+            }
+        }
+
         private void drawBoxes(Matrix4 transform, double[] zBuffer)
         {
+            short counter = 0;
+
+            Box body = new Box();
+
             foreach(Box b in boxes)
             {
-                foreach (Triangle t in b.BottomEdge)
+                Box box = b;
+
+                if (counter == 0)
                 {
-                    Vertex v1 = transform.transform(t.V1);
-                    Vertex v2 = transform.transform(t.V2);
-                    Vertex v3 = transform.transform(t.V3);
+                    double xOffset = b.getLength() - (double)bodyLengthControl.Value;
+                    double yOffset = b.getHeight() - (double)bodyWidthControl.Value;
 
-                    v1.X += renderArea.Width / 2;
-                    v1.Y += renderArea.Height / 2;
-                    v2.X += renderArea.Width / 2;
-                    v2.Y += renderArea.Height / 2;
-                    v3.X += renderArea.Width / 2;
-                    v3.Y += renderArea.Height / 2;
+                    box = new Box(box.XStart + xOffset, box.YStart - yOffset, box.ZStart,
+                        box.XEnd - xOffset, box.YEnd + yOffset, box.ZEnd, box.Color);
 
-                    if (wireFrameRadioButton.Checked)
-                    {
-                        wireFrameRender(v1, v2, v3);
-                    }
+                    body = box;
+                }
+                else if (counter > 0 && counter < 5)
+                {
+                    double yOffset = b.getHeight() - (double)pawsWidthControl.Value;
+                    double xOffset = b.getLength() - (double)pawsLengthControl.Value;
 
-                    if (surfaceRadioButton.Checked)
-                    {
-                        surfaceRender(zBuffer, v1, v2, v3, t.Color);
-                    }
+                    box = new Box(box.XStart, box.YStart + yOffset, box.ZStart,
+                        box.XEnd - xOffset, box.YEnd - yOffset, box.ZEnd, box.Color);
                 }
 
-                foreach (Triangle t in b.LeftEdge)
-                {
-                    Vertex v1 = transform.transform(t.V1);
-                    Vertex v2 = transform.transform(t.V2);
-                    Vertex v3 = transform.transform(t.V3);
+                drawBoxEdge(box.BottomEdge, transform, zBuffer);
+                drawBoxEdge(box.TopEdge, transform, zBuffer);
+                drawBoxEdge(box.LeftEdge, transform, zBuffer);
+                drawBoxEdge(box.RightEdge, transform, zBuffer);
+                drawBoxEdge(box.NearEdge, transform, zBuffer);
+                drawBoxEdge(box.DistantEdge, transform, zBuffer);
 
-                    v1.X += renderArea.Width / 2;
-                    v1.Y += renderArea.Height / 2;
-                    v2.X += renderArea.Width / 2;
-                    v2.Y += renderArea.Height / 2;
-                    v3.X += renderArea.Width / 2;
-                    v3.Y += renderArea.Height / 2;
-
-                    if (wireFrameRadioButton.Checked)
-                    {
-                        wireFrameRender(v1, v2, v3);
-                    }
-
-                    if (surfaceRadioButton.Checked)
-                    {
-                        surfaceRender(zBuffer, v1, v2, v3, t.Color);
-                    }
-                }
-
-                foreach (Triangle t in b.RightEdge)
-                {
-                    Vertex v1 = transform.transform(t.V1);
-                    Vertex v2 = transform.transform(t.V2);
-                    Vertex v3 = transform.transform(t.V3);
-
-                    v1.X += renderArea.Width / 2;
-                    v1.Y += renderArea.Height / 2;
-                    v2.X += renderArea.Width / 2;
-                    v2.Y += renderArea.Height / 2;
-                    v3.X += renderArea.Width / 2;
-                    v3.Y += renderArea.Height / 2;
-
-                    if (wireFrameRadioButton.Checked)
-                    {
-                        wireFrameRender(v1, v2, v3);
-                    }
-
-                    if (surfaceRadioButton.Checked)
-                    {
-                        surfaceRender(zBuffer, v1, v2, v3, t.Color);
-                    }
-                }
-
-                foreach (Triangle t in b.DistantEdge)
-                {
-                    Vertex v1 = transform.transform(t.V1);
-                    Vertex v2 = transform.transform(t.V2);
-                    Vertex v3 = transform.transform(t.V3);
-
-                    v1.X += renderArea.Width / 2;
-                    v1.Y += renderArea.Height / 2;
-                    v2.X += renderArea.Width / 2;
-                    v2.Y += renderArea.Height / 2;
-                    v3.X += renderArea.Width / 2;
-                    v3.Y += renderArea.Height / 2;
-
-                    if (wireFrameRadioButton.Checked)
-                    {
-                        wireFrameRender(v1, v2, v3);
-                    }
-
-                    if (surfaceRadioButton.Checked)
-                    {
-                        surfaceRender(zBuffer, v1, v2, v3, t.Color);
-                    }
-                }
-
-                foreach (Triangle t in b.NearEdge)
-                {
-                    Vertex v1 = transform.transform(t.V1);
-                    Vertex v2 = transform.transform(t.V2);
-                    Vertex v3 = transform.transform(t.V3);
-
-                    v1.X += renderArea.Width / 2;
-                    v1.Y += renderArea.Height / 2;
-                    v2.X += renderArea.Width / 2;
-                    v2.Y += renderArea.Height / 2;
-                    v3.X += renderArea.Width / 2;
-                    v3.Y += renderArea.Height / 2;
-
-                    if (wireFrameRadioButton.Checked)
-                    {
-                        wireFrameRender(v1, v2, v3);
-                    }
-
-                    if (surfaceRadioButton.Checked)
-                    {
-                        surfaceRender(zBuffer, v1, v2, v3, t.Color);
-                    }
-                }
-
-                foreach (Triangle t in b.TopEdge)
-                {
-                    Vertex v1 = transform.transform(t.V1);
-                    Vertex v2 = transform.transform(t.V2);
-                    Vertex v3 = transform.transform(t.V3);
-
-                    v1.X += renderArea.Width / 2;
-                    v1.Y += renderArea.Height / 2;
-                    v2.X += renderArea.Width / 2;
-                    v2.Y += renderArea.Height / 2;
-                    v3.X += renderArea.Width / 2;
-                    v3.Y += renderArea.Height / 2;
-
-                    if (wireFrameRadioButton.Checked)
-                    {
-                        wireFrameRender(v1, v2, v3);
-                    }
-
-                    if (surfaceRadioButton.Checked)
-                    {
-                        surfaceRender(zBuffer, v1, v2, v3, t.Color);
-                    }
-                }
+                counter++;
             }
         }
 
@@ -378,13 +311,6 @@ namespace TabbyCat
             transform = transform.multiply(rtTransform.OzMatrix);
             transform = transform.multiply(scTransform.Matrix);
             transform = transform.multiply(trTransform.Matrix);
-
-            //for (int i = 0; i < 4; i++)
-            //{
-            //    boxes[i] = new Box(boxes[i].BottomEdge[0].V1.X, boxes[i].BottomEdge[0].V1.Y, boxes[i].BottomEdge[0].V1.Z,
-            //        (double)pawsLengthControl.Value, (double)pawsWidthControl.Value,
-            //        5, boxes[i].Color);
-            //}
 
             // инициализация заполнение z-буфера
             double[] zBuffer = new double[renderArea.Width * renderArea.Height];

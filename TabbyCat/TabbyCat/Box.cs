@@ -16,6 +16,13 @@ namespace TabbyCat
         List<Triangle> nearEdge;
         List<Triangle> distantEdge;
 
+        double xStart;
+        double yStart;
+        double zStart;
+        double xEnd;
+        double yEnd;
+        double zEnd;
+
         Color color;
 
         internal List<Triangle> BottomEdge
@@ -106,6 +113,84 @@ namespace TabbyCat
             set
             {
                 color = value;
+            }
+        }
+
+        public double XStart
+        {
+            get
+            {
+                return xStart;
+            }
+
+            set
+            {
+                xStart = value;
+            }
+        }
+
+        public double YStart
+        {
+            get
+            {
+                return yStart;
+            }
+
+            set
+            {
+                yStart = value;
+            }
+        }
+
+        public double ZStart
+        {
+            get
+            {
+                return zStart;
+            }
+
+            set
+            {
+                zStart = value;
+            }
+        }
+
+        public double XEnd
+        {
+            get
+            {
+                return xEnd;
+            }
+
+            set
+            {
+                xEnd = value;
+            }
+        }
+
+        public double YEnd
+        {
+            get
+            {
+                return yEnd;
+            }
+
+            set
+            {
+                yEnd = value;
+            }
+        }
+
+        public double ZEnd
+        {
+            get
+            {
+                return zEnd;
+            }
+
+            set
+            {
+                zEnd = value;
             }
         }
 
@@ -304,6 +389,13 @@ namespace TabbyCat
             nearEdge = new List<Triangle>();
             distantEdge = new List<Triangle>();
 
+            this.xStart = xStart;
+            this.yStart = yStart;
+            this.zStart = zStart;
+            this.xEnd = xEnd;
+            this.yEnd = yEnd;
+            this.zEnd = zEnd;
+
             this.color = color;
 
             int x1 = (int)(xStart);
@@ -330,22 +422,34 @@ namespace TabbyCat
             setTopEdge(x1, z1, x2, z2, y2, stepX, stepZ, color);
         }
 
-        public decimal getBoxLength()
+        // длина измеряется по оси x
+        public double getLength()
         {
-            decimal length = this.leftEdge[0].V1.X < this.rightEdge[0].V1.X ?
-                (decimal)Math.Abs(this.rightEdge[0].V1.X - this.leftEdge[0].V1.X) :
-                (decimal)Math.Abs(this.leftEdge[0].V1.X - this.rightEdge[0].V1.X);
+            double length = xStart < xEnd ?
+                Math.Abs(xEnd - xStart) :
+                Math.Abs(xStart - xEnd);
 
             return length;
         }
 
-        public decimal getBoxWidth()
+        // ширина измеряется по оси z
+        public double getWidth()
         {
-            decimal width = this.bottomEdge[0].V1.Y < this.topEdge[0].V1.Y ?
-                (decimal)Math.Abs(this.topEdge[0].V1.Y - this.bottomEdge[0].V1.Y) :
-                (decimal)Math.Abs(this.bottomEdge[0].V1.Y - this.topEdge[0].V1.Y);
+            double width = zStart < zEnd ?
+                Math.Abs(zEnd - zStart) :
+                Math.Abs(zStart - zEnd);
 
             return width;
+        }
+
+        // высота измеряется по оси y
+        public double getHeight()
+        {
+            double height = yStart < yEnd ?
+                Math.Abs(yEnd - yStart) :
+                Math.Abs(yStart - yEnd);
+
+            return height;
         }
     }
 }

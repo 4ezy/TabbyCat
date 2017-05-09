@@ -60,6 +60,16 @@
             this.label9 = new System.Windows.Forms.Label();
             this.pawsLengthControl = new System.Windows.Forms.NumericUpDown();
             this.label8 = new System.Windows.Forms.Label();
+            this.tailGroupBox = new System.Windows.Forms.GroupBox();
+            this.tailWidthControl = new System.Windows.Forms.NumericUpDown();
+            this.label11 = new System.Windows.Forms.Label();
+            this.tailLengthControl = new System.Windows.Forms.NumericUpDown();
+            this.label10 = new System.Windows.Forms.Label();
+            this.bodyGroupBox = new System.Windows.Forms.GroupBox();
+            this.bodyWidthControl = new System.Windows.Forms.NumericUpDown();
+            this.label13 = new System.Windows.Forms.Label();
+            this.bodyLengthControl = new System.Windows.Forms.NumericUpDown();
+            this.label12 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.renderPictureBox)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -81,6 +91,12 @@
             this.pawsGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pawsWidthControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pawsLengthControl)).BeginInit();
+            this.tailGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tailWidthControl)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tailLengthControl)).BeginInit();
+            this.bodyGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bodyWidthControl)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bodyLengthControl)).BeginInit();
             this.SuspendLayout();
             // 
             // renderPictureBox
@@ -89,7 +105,7 @@
             this.renderPictureBox.Location = new System.Drawing.Point(0, 0);
             this.renderPictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.renderPictureBox.Name = "renderPictureBox";
-            this.renderPictureBox.Size = new System.Drawing.Size(764, 521);
+            this.renderPictureBox.Size = new System.Drawing.Size(764, 531);
             this.renderPictureBox.TabIndex = 0;
             this.renderPictureBox.TabStop = false;
             this.renderPictureBox.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
@@ -106,7 +122,7 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(994, 521);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(994, 531);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // tabControl1
@@ -115,18 +131,19 @@
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(767, 3);
+            this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(224, 515);
+            this.tabControl1.Size = new System.Drawing.Size(224, 525);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.tableLayoutPanel2);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Location = new System.Drawing.Point(4, 40);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(216, 489);
+            this.tabPage1.Size = new System.Drawing.Size(216, 481);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Геометрические преобразования";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -423,26 +440,30 @@
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.tableLayoutPanel3);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Location = new System.Drawing.Point(4, 40);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(216, 489);
+            this.tabPage2.Size = new System.Drawing.Size(216, 481);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Качественные характеристики";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel3
             // 
+            this.tableLayoutPanel3.AutoScroll = true;
             this.tableLayoutPanel3.ColumnCount = 1;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel3.Controls.Add(this.pawsGroupBox, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.tailGroupBox, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.bodyGroupBox, 0, 2);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 2;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.6383F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 49.3617F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(210, 235);
+            this.tableLayoutPanel3.RowCount = 3;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 32.62032F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 232F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(210, 472);
             this.tableLayoutPanel3.TabIndex = 0;
             // 
             // pawsGroupBox
@@ -491,13 +512,105 @@
             this.label8.TabIndex = 0;
             this.label8.Text = "Длина лап";
             // 
+            // tailGroupBox
+            // 
+            this.tailGroupBox.Controls.Add(this.tailWidthControl);
+            this.tailGroupBox.Controls.Add(this.label11);
+            this.tailGroupBox.Controls.Add(this.tailLengthControl);
+            this.tailGroupBox.Controls.Add(this.label10);
+            this.tailGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tailGroupBox.Location = new System.Drawing.Point(3, 124);
+            this.tailGroupBox.Name = "tailGroupBox";
+            this.tailGroupBox.Size = new System.Drawing.Size(204, 113);
+            this.tailGroupBox.TabIndex = 1;
+            this.tailGroupBox.TabStop = false;
+            this.tailGroupBox.Text = "Хвост";
+            // 
+            // tailWidthControl
+            // 
+            this.tailWidthControl.Location = new System.Drawing.Point(9, 81);
+            this.tailWidthControl.Name = "tailWidthControl";
+            this.tailWidthControl.Size = new System.Drawing.Size(189, 20);
+            this.tailWidthControl.TabIndex = 3;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(6, 65);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(90, 13);
+            this.label11.TabIndex = 2;
+            this.label11.Text = "Толщина хвоста";
+            // 
+            // tailLengthControl
+            // 
+            this.tailLengthControl.Location = new System.Drawing.Point(13, 32);
+            this.tailLengthControl.Name = "tailLengthControl";
+            this.tailLengthControl.Size = new System.Drawing.Size(185, 20);
+            this.tailLengthControl.TabIndex = 1;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(6, 16);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(77, 13);
+            this.label10.TabIndex = 0;
+            this.label10.Text = "Длина хвоста";
+            // 
+            // bodyGroupBox
+            // 
+            this.bodyGroupBox.Controls.Add(this.bodyWidthControl);
+            this.bodyGroupBox.Controls.Add(this.label13);
+            this.bodyGroupBox.Controls.Add(this.bodyLengthControl);
+            this.bodyGroupBox.Controls.Add(this.label12);
+            this.bodyGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.bodyGroupBox.Location = new System.Drawing.Point(3, 243);
+            this.bodyGroupBox.Name = "bodyGroupBox";
+            this.bodyGroupBox.Size = new System.Drawing.Size(204, 110);
+            this.bodyGroupBox.TabIndex = 2;
+            this.bodyGroupBox.TabStop = false;
+            this.bodyGroupBox.Text = "Тело";
+            // 
+            // bodyWidthControl
+            // 
+            this.bodyWidthControl.Location = new System.Drawing.Point(9, 81);
+            this.bodyWidthControl.Name = "bodyWidthControl";
+            this.bodyWidthControl.Size = new System.Drawing.Size(189, 20);
+            this.bodyWidthControl.TabIndex = 3;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(6, 65);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(79, 13);
+            this.label13.TabIndex = 2;
+            this.label13.Text = "Толщина тела";
+            // 
+            // bodyLengthControl
+            // 
+            this.bodyLengthControl.Location = new System.Drawing.Point(9, 32);
+            this.bodyLengthControl.Name = "bodyLengthControl";
+            this.bodyLengthControl.Size = new System.Drawing.Size(189, 20);
+            this.bodyLengthControl.TabIndex = 1;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(6, 16);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(66, 13);
+            this.label12.TabIndex = 0;
+            this.label12.Text = "Длина тела";
+            // 
             // tabbyCatRenderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(994, 521);
+            this.ClientSize = new System.Drawing.Size(994, 531);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.MinimumSize = new System.Drawing.Size(1010, 560);
+            this.MinimumSize = new System.Drawing.Size(1010, 570);
             this.Name = "tabbyCatRenderForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "TabbyCat";
@@ -527,6 +640,14 @@
             this.pawsGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pawsWidthControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pawsLengthControl)).EndInit();
+            this.tailGroupBox.ResumeLayout(false);
+            this.tailGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tailWidthControl)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tailLengthControl)).EndInit();
+            this.bodyGroupBox.ResumeLayout(false);
+            this.bodyGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bodyWidthControl)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bodyLengthControl)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -564,6 +685,16 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.NumericUpDown pawsLengthControl;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.GroupBox tailGroupBox;
+        private System.Windows.Forms.NumericUpDown tailWidthControl;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.NumericUpDown tailLengthControl;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.GroupBox bodyGroupBox;
+        private System.Windows.Forms.NumericUpDown bodyWidthControl;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.NumericUpDown bodyLengthControl;
+        private System.Windows.Forms.Label label12;
     }
 }
 
