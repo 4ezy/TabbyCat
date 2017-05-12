@@ -13,12 +13,12 @@ namespace TabbyCat
         double z;
         double one;
 
-        public Vertex (double x, double y, double z, double one)
+        public Vertex (double x, double y, double z)
         {
             this.x = x;
             this.y = y;
             this.z = z;
-            this.one = one;
+            this.one = 1;
         }
 
         public double X
@@ -65,11 +65,6 @@ namespace TabbyCat
             get
             {
                 return one;
-            }
-
-            set
-            {
-                one = value;
             }
         }
     }

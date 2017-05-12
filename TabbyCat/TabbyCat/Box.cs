@@ -122,11 +122,6 @@ namespace TabbyCat
             {
                 return xStart;
             }
-
-            set
-            {
-                xStart = value;
-            }
         }
 
         public double YStart
@@ -134,11 +129,6 @@ namespace TabbyCat
             get
             {
                 return yStart;
-            }
-
-            set
-            {
-                yStart = value;
             }
         }
 
@@ -148,11 +138,6 @@ namespace TabbyCat
             {
                 return zStart;
             }
-
-            set
-            {
-                zStart = value;
-            }
         }
 
         public double XEnd
@@ -160,11 +145,6 @@ namespace TabbyCat
             get
             {
                 return xEnd;
-            }
-
-            set
-            {
-                xEnd = value;
             }
         }
 
@@ -174,11 +154,6 @@ namespace TabbyCat
             {
                 return yEnd;
             }
-
-            set
-            {
-                yEnd = value;
-            }
         }
 
         public double ZEnd
@@ -187,200 +162,195 @@ namespace TabbyCat
             {
                 return zEnd;
             }
-
-            set
-            {
-                zEnd = value;
-            }
         }
 
-        public void setBottomEdge(int x1, int z1, int x2, int z2, int y1, int stepX, int stepZ, Color color)
+        public void setBottomEdge(double x1, double z1, double x2, double z2, double y1, double stepX, double stepZ, Color color)
         {
             bottomEdge.Clear();
 
-            for (int i = x1; i != x2; i += stepX)
+            for (double i = x1; i != x2; i += stepX)
             {
-                for (int j = z1; j != z2; j += stepZ)
+                for (double j = z1; j != z2; j += stepZ)
                 {
                     this.bottomEdge.Add(new Triangle(
-                        new Vertex(i, y1, j, 1),
-                        new Vertex(i, y1, j + stepZ, 1),
-                        new Vertex(i + stepX, y1, j, 1),
+                        new Vertex(i, y1, j),
+                        new Vertex(i, y1, j + stepZ),
+                        new Vertex(i + stepX, y1, j),
                         color
                     ));
                 }
             }
 
-            for (int i = x2; i != x1; i -= stepX)
+            for (double i = x2; i != x1; i -= stepX)
             {
-                for (int j = z2; j != z1; j -= stepZ)
+                for (double j = z2; j != z1; j -= stepZ)
                 {
                     this.bottomEdge.Add(new Triangle(
-                        new Vertex(i, y1, j, 1),
-                        new Vertex(i, y1, j - stepZ, 1),
-                        new Vertex(i - stepX, y1, j, 1),
+                        new Vertex(i, y1, j),
+                        new Vertex(i, y1, j - stepZ),
+                        new Vertex(i - stepX, y1, j),
                         color
                     ));
                 }
             }
         }
 
-        public void setTopEdge(int x1, int z1, int x2, int z2, int y2, int stepX, int stepZ, Color color)
+        public void setTopEdge(double x1, double z1, double x2, double z2, double y2, double stepX, double stepZ, Color color)
         {
             topEdge.Clear();
 
-            for (int i = x1; i != x2; i += stepX)
+            for (double i = x1; i != x2; i += stepX)
             {
-                for (int j = z1; j != z2; j += stepZ)
+                for (double j = z1; j != z2; j += stepZ)
                 {
                     this.topEdge.Add(new Triangle(
-                        new Vertex(i, y2, j, 1),
-                        new Vertex(i, y2, j + stepZ, 1),
-                        new Vertex(i + stepX, y2, j, 1),
+                        new Vertex(i, y2, j),
+                        new Vertex(i, y2, j + stepZ),
+                        new Vertex(i + stepX, y2, j),
                         color
                     ));
                 }
             }
 
-            for (int i = x2; i != x1; i -= stepX)
+            for (double i = x2; i != x1; i -= stepX)
             {
-                for (int j = z2; j != z1; j -= stepZ)
+                for (double j = z2; j != z1; j -= stepZ)
                 {
                     this.topEdge.Add(new Triangle(
-                        new Vertex(i, y2, j, 1),
-                        new Vertex(i, y2, j - stepZ, 1),
-                        new Vertex(i - stepX, y2, j, 1),
+                        new Vertex(i, y2, j),
+                        new Vertex(i, y2, j - stepZ),
+                        new Vertex(i - stepX, y2, j),
                         color
                     ));
                 }
             }
         }
 
-        public void setLeftEdge(int y1, int z1, int y2, int z2, int x1, int stepY, int stepZ, Color color)
+        public void setLeftEdge(double y1, double z1, double y2, double z2, double x1, double stepY, double stepZ, Color color)
         {
             leftEdge.Clear();
 
-            for (int i = y1; i != y2; i += stepY)
+            for (double i = y1; i != y2; i += stepY)
             {
-                for (int j = z1; j != z2; j += stepZ)
+                for (double j = z1; j != z2; j += stepZ)
                 {
                     this.leftEdge.Add(new Triangle(
-                        new Vertex(x1, i, j, 1),
-                        new Vertex(x1, i, j + stepZ, 1),
-                        new Vertex(x1, i + stepY, j, 1),
+                        new Vertex(x1, i, j),
+                        new Vertex(x1, i, j + stepZ),
+                        new Vertex(x1, i + stepY, j),
                         color
                     ));
                 }
             }
 
-            for (int i = y2; i != y1; i -= stepY)
+            for (double i = y2; i != y1; i -= stepY)
             {
-                for (int j = z2; j != z1; j -= stepZ)
+                for (double j = z2; j != z1; j -= stepZ)
                 {
                     this.leftEdge.Add(new Triangle(
-                        new Vertex(x1, i, j, 1),
-                        new Vertex(x1, i, j - stepZ, 1),
-                        new Vertex(x1, i - stepY, j, 1),
+                        new Vertex(x1, i, j),
+                        new Vertex(x1, i, j - stepZ),
+                        new Vertex(x1, i - stepY, j),
                         color
                     ));
                 }
             }
         }
 
-        public void setRightEdge(int y1, int z1, int y2, int z2, int x2, int stepY, int stepZ, Color color)
+        public void setRightEdge(double y1, double z1, double y2, double z2, double x2, double stepY, double stepZ, Color color)
         {
             rightEdge.Clear();
 
-            for (int i = y1; i != y2; i += stepY)
+            for (double i = y1; i != y2; i += stepY)
             {
-                for (int j = z1; j != z2; j += stepZ)
+                for (double j = z1; j != z2; j += stepZ)
                 {
                     this.rightEdge.Add(new Triangle(
-                        new Vertex(x2, i, j, 1),
-                        new Vertex(x2, i, j + stepZ, 1),
-                        new Vertex(x2, i + stepY, j, 1),
+                        new Vertex(x2, i, j),
+                        new Vertex(x2, i, j + stepZ),
+                        new Vertex(x2, i + stepY, j),
                         color
                     ));
                 }
             }
 
-            for (int i = y2; i != y1; i -= stepY)
+            for (double i = y2; i != y1; i -= stepY)
             {
-                for (int j = z2; j != z1; j -= stepZ)
+                for (double j = z2; j != z1; j -= stepZ)
                 {
                     this.rightEdge.Add(new Triangle(
-                        new Vertex(x2, i, j, 1),
-                        new Vertex(x2, i, j - stepZ, 1),
-                        new Vertex(x2, i - stepY, j, 1),
+                        new Vertex(x2, i, j),
+                        new Vertex(x2, i, j - stepZ),
+                        new Vertex(x2, i - stepY, j),
                         color
                     ));
                 }
             }
         }
 
-        public void setNearEdge(int x1, int y1, int x2, int y2, int z1, int stepX, int stepY, Color color)
+        public void setNearEdge(double x1, double y1, double x2, double y2, double z1, double stepX, double stepY, Color color)
         {
             nearEdge.Clear();
 
-            for (int i = x1; i != x2; i += stepX)
+            for (double i = x1; i != x2; i += stepX)
             {
-                for (int j = y1; j != y2; j += stepY)
+                for (double j = y1; j != y2; j += stepY)
                 {
                     this.nearEdge.Add(new Triangle(
-                        new Vertex(i, j, z1, 1),
-                        new Vertex(i, j + stepY, z1, 1),
-                        new Vertex(i + stepX, j, z1, 1),
+                        new Vertex(i, j, z1),
+                        new Vertex(i, j + stepY, z1),
+                        new Vertex(i + stepX, j, z1),
                         color
                     ));
                 }
             }
 
-            for (int i = x2; i != x1; i -= stepX)
+            for (double i = x2; i != x1; i -= stepX)
             {
-                for (int j = y2; j != y1; j -= stepY)
+                for (double j = y2; j != y1; j -= stepY)
                 {
                     this.nearEdge.Add(new Triangle(
-                        new Vertex(i, j, z1, 1),
-                        new Vertex(i, j - stepY, z1, 1),
-                        new Vertex(i - stepX, j, z1, 1),
+                        new Vertex(i, j, z1),
+                        new Vertex(i, j - stepY, z1),
+                        new Vertex(i - stepX, j, z1),
                         color
                     ));
                 }
             }
         }
 
-        public void setDistantEdge(int x1, int y1, int x2, int y2, int z2, int stepX, int stepY, Color color)
+        public void setDistantEdge(double x1, double y1, double x2, double y2, double z2, double stepX, double stepY, Color color)
         {
             distantEdge.Clear();
 
-            for (int i = x1; i != x2; i += stepX)
+            for (double i = x1; i != x2; i += stepX)
             {
-                for (int j = y1; j != y2; j += stepY)
+                for (double j = y1; j != y2; j += stepY)
                 {
                     this.distantEdge.Add(new Triangle(
-                        new Vertex(i, j, z2, 1),
-                        new Vertex(i, j + stepY, z2, 1),
-                        new Vertex(i + stepX, j, z2, 1),
+                        new Vertex(i, j, z2),
+                        new Vertex(i, j + stepY, z2),
+                        new Vertex(i + stepX, j, z2),
                         color
                     ));
                 }
             }
 
-            for (int i = x2; i != x1; i -= stepX)
+            for (double i = x2; i != x1; i -= stepX)
             {
-                for (int j = y2; j != y1; j -= stepY)
+                for (double j = y2; j != y1; j -= stepY)
                 {
                     this.distantEdge.Add(new Triangle(
-                        new Vertex(i, j, z2, 1),
-                        new Vertex(i, j - stepY, z2, 1),
-                        new Vertex(i - stepX, j, z2, 1),
+                        new Vertex(i, j, z2),
+                        new Vertex(i, j - stepY, z2),
+                        new Vertex(i - stepX, j, z2),
                         color
                     ));
                 }
             }
         }
 
-        public Box(double xStart, double yStart, double zStart, double xEnd, double yEnd, double zEnd, Color color)
+        public Box(Vertex v1, Vertex v2, Color color)
         {
             bottomEdge = new List<Triangle>();
             topEdge = new List<Triangle>();
@@ -389,65 +359,166 @@ namespace TabbyCat
             nearEdge = new List<Triangle>();
             distantEdge = new List<Triangle>();
 
-            this.xStart = xStart;
-            this.yStart = yStart;
-            this.zStart = zStart;
-            this.xEnd = xEnd;
-            this.yEnd = yEnd;
-            this.zEnd = zEnd;
+
+            // x
+            if (v1.X < 0 && v2.X < 0)
+            {
+                if (Math.Abs(v1.X) < Math.Abs(v2.X))
+                {
+                    xStart = v1.X;
+                    xEnd = v2.X;
+                }
+                else if (Math.Abs(v1.X) > Math.Abs(v2.X))
+                {
+                    xStart = v2.X;
+                    xEnd = v1.X;
+                }
+                else
+                {
+                    xStart = v1.X;
+                    xEnd = v1.X;
+                }
+            }
+            else
+            {
+                if (v1.X < v2.X)
+                {
+                    xStart = v1.X;
+                    xEnd = v2.X;
+                }
+                else if (v1.X > v2.X)
+                {
+                    xStart = v2.X;
+                    xEnd = v1.X;
+                }
+                else
+                {
+                    xStart = v1.X;
+                    xEnd = v1.X;
+                }
+            }
+
+            // y
+            if (v1.Y < 0 && v2.Y < 0)
+            {
+                if (Math.Abs(v1.Y) < Math.Abs(v2.Y))
+                {
+                    yStart = v1.Y;
+                    yEnd = v2.Y;
+                }
+                else if (Math.Abs(v1.Y) > Math.Abs(v2.Y))
+                {
+                    yStart = v2.Y;
+                    yEnd = v1.Y;
+                }
+                else
+                {
+                    yStart = v1.Y;
+                    yEnd = v1.Y;
+                }
+            }
+            else
+            {
+                if (v1.Y < v2.Y)
+                {
+                    yStart = v1.Y;
+                    yEnd = v2.Y;
+                }
+                else if (v1.Y > v2.Y)
+                {
+                    yStart = v2.Y;
+                    yEnd = v1.Y;
+                }
+                else
+                {
+                    yStart = v1.Y;
+                    yEnd = v1.Y;
+                }
+            }
+
+            // z
+            if (v1.Z < 0 && v2.Z < 0)
+            {
+                if (Math.Abs(v1.Z) < Math.Abs(v2.Z))
+                {
+                    zStart = v1.Z;
+                    zEnd = v2.Z;
+                }
+                else if (Math.Abs(v1.Z) > Math.Abs(v2.Z))
+                {
+                    zStart = v2.Z;
+                    zEnd = v1.Z;
+                }
+                else
+                {
+                    zStart = v1.Z;
+                    zEnd = v1.Z;
+                }
+            }
+            else
+            {
+                if (v1.Z < v2.Z)
+                {
+                    zStart = v1.Z;
+                    zEnd = v2.Z;
+                }
+                else if (v1.Z > v2.Z)
+                {
+                    zStart = v2.Z;
+                    zEnd = v1.Z;
+                }
+                else
+                {
+                    zStart = v1.Z;
+                    zEnd = v1.Z;
+                }
+            }
 
             this.color = color;
 
-            int x1 = (int)(xStart);
-            int y1 = (int)(yStart);
-            int z1 = (int)(zStart);
-            int x2 = (int)(xEnd);
-            int y2 = (int)(yEnd);
-            int z2 = (int)(zEnd);
+            double stepX = xEnd - xStart;
+            double stepY = yEnd - yStart;
+            double stepZ = zEnd - zStart;
 
-            int stepX = x1 < x2 ? Math.Abs((x2 - x1)) : -Math.Abs((x1 - x2));
-            int stepY = y1 < y2 ? Math.Abs((y2 - y1)) : -Math.Abs((y1 - y2));
-            int stepZ = z1 < z2 ? Math.Abs((z2 - z1)) : -Math.Abs((z1 - z2));
+            setBottomEdge(xStart, zStart, xEnd, zEnd, yStart, stepX, stepZ, color);
 
-            setBottomEdge(x1, z1, x2, z2, y1, stepX, stepZ, color);
+            setLeftEdge(yStart, zStart, yEnd, zEnd, xStart, stepY, stepZ, color);
 
-            setLeftEdge(y1, z1, y2, z2, x1, stepY, stepZ, color);
+            setRightEdge(yStart, zStart, yEnd, zEnd, xEnd, stepY, stepZ, color);
 
-            setRightEdge(y1, z1, y2, z2, x2, stepY, stepZ, color);
+            setDistantEdge(xStart, yStart, xEnd, yEnd, zEnd, stepX, stepY, color);
 
-            setDistantEdge(x1, y1, x2, y2, z2, stepX, stepY, color);
+            setNearEdge(xStart, yStart, xEnd, yEnd, zStart, stepX, stepY, color);
 
-            setNearEdge(x1, y1, x2, y2, z1, stepX, stepY, color);
-
-            setTopEdge(x1, z1, x2, z2, y2, stepX, stepZ, color);
+            setTopEdge(xStart, zStart, xEnd, zEnd, yEnd, stepX, stepZ, color);
         }
 
         // длина измеряется по оси x
         public double getLength()
         {
-            double length = xStart < xEnd ?
-                Math.Abs(xEnd - xStart) :
-                Math.Abs(xStart - xEnd);
+            double length = this.xStart < this.xEnd ?
+                Math.Abs(this.xEnd - this.xStart) :
+                Math.Abs(this.xStart - this.xEnd);
 
             return length;
         }
 
-        // ширина измеряется по оси z
+        // ширина измеряется по оси y
         public double getWidth()
         {
-            double width = zStart < zEnd ?
-                Math.Abs(zEnd - zStart) :
-                Math.Abs(zStart - zEnd);
+            double width = this.yStart < this.yEnd ?
+                Math.Abs(this.yEnd - this.yStart) :
+                Math.Abs(this.yStart - this.yEnd);
 
             return width;
         }
 
-        // высота измеряется по оси y
+        // высота измеряется по оси z
         public double getHeight()
         {
-            double height = yStart < yEnd ?
-                Math.Abs(yEnd - yStart) :
-                Math.Abs(yStart - yEnd);
+            double height = this.zStart < this.zEnd ?
+                Math.Abs(this.zEnd - this.zStart) :
+                Math.Abs(this.zStart - this.zEnd);
 
             return height;
         }

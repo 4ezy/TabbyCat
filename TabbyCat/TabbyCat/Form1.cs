@@ -16,16 +16,20 @@ namespace TabbyCat
     {
         Bitmap renderArea;
 
-        List<Triangle> tris;
         List<Box> boxes;
 
         TranslationTransformation trTransform;
         RotationTransformation rtTransform;
         ScaleTransformation scTransform;
 
+        double tailLength;
+        double tailWidth;
+
         public tabbyCatRenderForm()
         {
             InitializeComponent();
+
+            boxes = boxesDrafting(Color.Orange);
 
             trTransform = new TranslationTransformation();
 
@@ -37,88 +41,49 @@ namespace TabbyCat
 
             scTransform = new ScaleTransformation();
 
-            boxes = boxDrafting(Color.Orange);
+            torsoLengthControl.Value = (decimal)boxes[0].getLength();
+            torsoWidthControl.Value = (decimal)boxes[0].getWidth();
 
-            // длина измеряется по оси x
-            pawsLengthControl.Value = (decimal)boxes[1].getLength();
-            pawsLengthControl.Minimum = (decimal)boxes[1].getLength();
-            pawsLengthControl.Maximum = (decimal)boxes[1].getLength() + (decimal)boxes[1].getLength() / 2;
+            tailLengthControl.Value = (decimal)(boxes[10].getLength() + boxes[12].getLength());
+            tailWidthControl.Value = (decimal)boxes[10].getWidth();
 
-            // в ск координат это является высотой (т.к. измерение идёт по оси y), но для кота - это ширина лап
-            pawsWidthControl.Value = (decimal)boxes[1].getHeight();
-            pawsWidthControl.Minimum = (decimal)boxes[1].getHeight();
-            pawsWidthControl.Maximum = (decimal)boxes[1].getHeight() + (decimal)boxes[1].getHeight() / 2;
-
-            bodyLengthControl.Value = (decimal)boxes[0].getLength();
-            bodyLengthControl.Minimum = (decimal)boxes[0].getLength();
-            bodyLengthControl.Maximum = (decimal)boxes[0].getLength() + (decimal)boxes[0].getLength() / 2;
-
-            bodyWidthControl.Value = (decimal)boxes[0].getHeight();
-            bodyWidthControl.Minimum = (decimal)boxes[0].getHeight();
-            bodyWidthControl.Maximum = (decimal)boxes[0].getHeight() + (decimal)boxes[0].getHeight() / 2;
-
+            tailLength = (double)tailLengthControl.Value;
+            tailWidth = (double)tailWidthControl.Value;
         }
 
-        private List<Box> boxDrafting(Color color)
+        private List<Box> boxesDrafting(Color color)
         {
             List<Box> boxes = new List<Box>();
 
             // туловище
-            boxes.Add(new Box(-10, 20, 35, 70, -30, 60, color));
-
-            // лапы
-            boxes.Add(new Box(0, 3, 0, 15, 13, 5, color));
-            boxes.Add(new Box(0, -23, 0, 15, -13, 5, color));
-            boxes.Add(new Box(45, 3, 0, 60, 13, 5, color));
-            boxes.Add(new Box(45, -23, 0, 60, -13, 5, color));
+            boxes.Add(new Box(new Vertex(-10, 20, 35), new Vertex(70, -30, 60), color));
 
             // конечности
-            boxes.Add(new Box(0, 3, 5, 10, 13, 35, color));
-            boxes.Add(new Box(0, -23, 5, 10, -13, 35, color));
-            boxes.Add(new Box(45, 3, 5, 55, 13, 35, color));
-            boxes.Add(new Box(45, -23, 5, 55, -13, 35, color));
+            boxes.Add(new Box(new Vertex(0, 3, 5), new Vertex(10, 13, 35), color));
+            boxes.Add(new Box(new Vertex(0, -23, 5), new Vertex(10, -13, 35), color));
+            boxes.Add(new Box(new Vertex(45, 3, 5), new Vertex(55, 13, 35), color));
+            boxes.Add(new Box(new Vertex(45, -23, 5), new Vertex(55, -13, 35), color));
+
+            // лапы
+            boxes.Add(new Box(new Vertex(0, 3, 0), new Vertex(15, 13, 5), color));
+            boxes.Add(new Box(new Vertex(0, -23, 0), new Vertex(15, -13, 5), color));
+            boxes.Add(new Box(new Vertex(45, 3, 0), new Vertex(60, 13, 5), color));
+            boxes.Add(new Box(new Vertex(45, -23, 0), new Vertex(60, -13, 5), color));
 
             // голова
-            boxes.Add(new Box(70, 20, 35, 95, -30, 75, color));
+            boxes.Add(new Box(new Vertex(70, 20, 35), new Vertex(95, -30, 75), color));
 
             // хвост
-            boxes.Add(new Box(-10, -2, 45, -30, -8, 50, color));
-            boxes.Add(new Box(-30, -2, 45, -35, -8, 75, color));
-            boxes.Add(new Box(-30, -2, 75, -70, -8, 80, color));
+            boxes.Add(new Box(new Vertex(-10, -2, 45), new Vertex(-30, -8, 50), color));
+            boxes.Add(new Box(new Vertex(-30, -2, 45), new Vertex(-35, -8, 75), color));
+            boxes.Add(new Box(new Vertex(-30, -2, 75), new Vertex(-70, -8, 80), color));
 
             // полосы
-            boxes.Add(new Box(40, 10, 60, 45, -20, 61, Color.Brown));
-            boxes.Add(new Box(25, 10, 60, 30, -20, 61, Color.Brown));
-            boxes.Add(new Box(10, 10, 60, 15, -20, 61, Color.Brown));
+            boxes.Add(new Box(new Vertex(40, 10, 60), new Vertex(45, -20, 61), color));
+            boxes.Add(new Box(new Vertex(25, 10, 60), new Vertex(30, -20, 61), color));
+            boxes.Add(new Box(new Vertex(10, 10, 60), new Vertex(15, -20, 61), color));
 
             return boxes;
-        }
-
-        private List<Triangle> tethraedronDrafting()
-        {
-            List<Triangle> tris = new List<Triangle>();
-
-            tris.Add(new Triangle(new Vertex(100, 100, 100, 1),
-                new Vertex(-100, -100, 100, 1),
-                new Vertex(-100, 100, -100, 1),
-                Color.White));
-
-            tris.Add(new Triangle(new Vertex(100, 100, 100, 1),
-                new Vertex(-100, -100, 100, 1),
-                new Vertex(100, -100, -100, 1),
-                Color.Red));
-
-            tris.Add(new Triangle(new Vertex(-100, 100, -100, 1),
-                new Vertex(100, -100, -100, 1),
-                new Vertex(100, 100, 100, 1),
-                Color.Green));
-
-            tris.Add(new Triangle(new Vertex(-100, 100, -100, 1),
-                new Vertex(100, -100, -100, 1),
-                new Vertex(-100, -100, 100, 1),
-                Color.Blue));
-
-            return tris;
         }
 
         private void drawLine(double xStart, double yStart, double xEnd, double yEnd)
@@ -137,7 +102,7 @@ namespace TabbyCat
 
             int error = deltaX - deltaY;
 
-            if((x2 > 0) && (x2 < renderArea.Width) && (y2 > 0) && (y2 < renderArea.Height)) 
+            if ((x2 > 0) && (x2 < renderArea.Width) && (y2 > 0) && (y2 < renderArea.Height))
             {
                 renderArea.SetPixel(x2, y2, Color.White);
             }
@@ -164,14 +129,7 @@ namespace TabbyCat
             }
         }
 
-        private void wireFrameRender(Vertex v1, Vertex v2, Vertex v3)
-        {
-            drawLine(v1.X, v1.Y, v2.X, v2.Y);
-            //drawLine(v2.X, v2.Y, v3.X, v3.Y);
-            drawLine(v3.X, v3.Y, v1.X, v1.Y);
-        }
-
-        private void surfaceRender(double[] zBuffer, Vertex v1, Vertex v2, Vertex v3, Color color)
+        private void boxSurfaceRender(double[] zBuffer, Vertex v1, Vertex v2, Vertex v3, Color color)
         {
             // алгоритм построчного заполнения
             int minX = (int)Math.Max(0, Math.Ceiling(Math.Min(v1.X, Math.Min(v2.X, v3.X))));
@@ -197,7 +155,7 @@ namespace TabbyCat
 
                         if (zBuffer[zIndex] < depth)
                         {
-                            if(x == minX || x == maxX || y == minY || y == maxY)     // прорисовка контура
+                            if (x == minX || x == maxX || y == minY || y == maxY)     // прорисовка контура
                             {
                                 if ((x > 0) && (x < renderArea.Width) && (y > 0) && (y < renderArea.Height))
                                 {
@@ -233,12 +191,14 @@ namespace TabbyCat
 
                 if (wireFrameRadioButton.Checked)
                 {
-                    wireFrameRender(v1, v2, v3);
+                    drawLine(v1.X, v1.Y, v2.X, v2.Y);
+                    //drawLine(v2.X, v2.Y, v3.X, v3.Y);
+                    drawLine(v3.X, v3.Y, v1.X, v1.Y);
                 }
 
                 if (surfaceRadioButton.Checked)
                 {
-                    surfaceRender(zBuffer, v1, v2, v3, t.Color);
+                    boxSurfaceRender(zBuffer, v1, v2, v3, t.Color);
                 }
             }
         }
@@ -246,31 +206,163 @@ namespace TabbyCat
         private void drawBoxes(Matrix4 transform, double[] zBuffer)
         {
             short counter = 0;
+            double torsoXOffset = 0;
+            double torsoYOffset = 0;
 
-            Box body = new Box();
-
-            foreach(Box b in boxes)
+            foreach (Box b in boxes)
             {
                 Box box = b;
 
-                if (counter == 0)
+                double xOffset = 0;
+                double yOffset = 0;
+
+                double x0 = box.XStart;
+                double y0 = box.YStart;
+                double z0 = box.ZStart;
+                double x1 = box.XEnd;
+                double y1 = box.YEnd;
+                double z1 = box.ZEnd;
+
+                switch (counter)
                 {
-                    double xOffset = b.getLength() - (double)bodyLengthControl.Value;
-                    double yOffset = b.getHeight() - (double)bodyWidthControl.Value;
+                    // торс
+                    case 0:
+                        torsoXOffset = ((double)torsoLengthControl.Value - box.getLength()) / 2; ;
+                        torsoYOffset = ((double)torsoWidthControl.Value - box.getWidth()) / 2; ;
 
-                    box = new Box(box.XStart + xOffset, box.YStart - yOffset, box.ZStart,
-                        box.XEnd - xOffset, box.YEnd + yOffset, box.ZEnd, box.Color);
+                        x0 = box.XStart - torsoXOffset;
+                        y0 = box.YStart - torsoYOffset;
+                        z0 = box.ZStart;
+                        x1 = box.XEnd + torsoXOffset;
+                        y1 = box.YEnd + torsoYOffset;
+                        z1 = box.ZEnd;
 
-                    body = box;
+                        break;
+                    // конечности
+                    case 1:
+                        x0 = box.XStart - torsoXOffset;
+                        y0 = box.YStart + torsoYOffset;
+                        z0 = box.ZStart;
+                        x1 = box.XEnd - torsoXOffset;
+                        y1 = box.YEnd + torsoYOffset;
+                        z1 = box.ZEnd;
+
+                        break;
+                    case 2:
+                        x0 = box.XStart - torsoXOffset;
+                        y0 = box.YStart - torsoYOffset;
+                        z0 = box.ZStart;
+                        x1 = box.XEnd - torsoXOffset;
+                        y1 = box.YEnd - torsoYOffset;
+                        z1 = box.ZEnd;;
+
+                        break;
+                    case 3:
+                        x0 = box.XStart + torsoXOffset;
+                        y0 = box.YStart + torsoYOffset;
+                        z0 = box.ZStart;
+                        x1 = box.XEnd + torsoXOffset;
+                        y1 = box.YEnd + torsoYOffset;
+                        z1 = box.ZEnd;
+
+                        break;
+                    case 4:
+                        x0 = box.XStart + torsoXOffset;
+                        y0 = box.YStart - torsoYOffset;
+                        z0 = box.ZStart;
+                        x1 = box.XEnd + torsoXOffset;
+                        y1 = box.YEnd - torsoYOffset;
+                        z1 = box.ZEnd;
+
+                        break;
+                    // лапы
+                    case 5:
+                        x0 = box.XStart - torsoXOffset;
+                        y0 = box.YStart + torsoYOffset;
+                        z0 = box.ZStart;
+                        x1 = box.XEnd - torsoXOffset;
+                        y1 = box.YEnd + torsoYOffset;
+                        z1 = box.ZEnd;
+
+                        break;
+                    case 6:
+                        x0 = box.XStart - torsoXOffset;
+                        y0 = box.YStart - torsoYOffset;
+                        z0 = box.ZStart;
+                        x1 = box.XEnd - torsoXOffset;
+                        y1 = box.YEnd - torsoYOffset;
+                        z1 = box.ZEnd;
+
+                        break;
+                    case 7:
+                        x0 = box.XStart + torsoXOffset;
+                        y0 = box.YStart + torsoYOffset;
+                        z0 = box.ZStart;
+                        x1 = box.XEnd + torsoXOffset;
+                        y1 = box.YEnd + torsoYOffset;
+                        z1 = box.ZEnd;
+
+                        break;
+                    case 8:
+                        x0 = box.XStart + torsoXOffset;
+                        y0 = box.YStart - torsoYOffset;
+                        z0 = box.ZStart;
+                        x1 = box.XEnd + torsoXOffset;
+                        y1 = box.YEnd - torsoYOffset;
+                        z1 = box.ZEnd;
+
+                        break;
+                    // голова
+                    case 9:
+                        x0 = box.XStart + torsoXOffset;
+                        y0 = box.YStart;
+                        z0 = box.ZStart;
+                        x1 = box.XEnd + torsoXOffset;
+                        y1 = box.YEnd;
+                        z1 = box.ZEnd;
+
+                        break;
+                    // хвост
+                    case 10:
+                        xOffset = ((double)tailLengthControl.Value - tailLength) / 2;
+                        yOffset = ((double)tailWidthControl.Value - tailWidth) / 2; ;
+
+                        x0 = box.XStart - torsoXOffset;
+                        y0 = box.YStart + yOffset;
+                        z0 = box.ZStart;
+                        x1 = box.XEnd - torsoXOffset - xOffset;
+                        y1 = box.YEnd - yOffset;
+                        z1 = box.ZEnd;
+
+                        break;
+                    case 11:
+                        xOffset = ((double)tailLengthControl.Value - tailLength) / 2;
+                        yOffset = ((double)tailWidthControl.Value - tailWidth) / 2; ;
+
+                        x0 = box.XStart - torsoXOffset - xOffset;
+                        y0 = box.YStart + yOffset;
+                        z0 = box.ZStart;
+                        x1 = box.XEnd - torsoXOffset - xOffset;
+                        y1 = box.YEnd - yOffset;
+                        z1 = box.ZEnd;
+
+                        break;
+                    case 12:
+                        xOffset = ((double)tailLengthControl.Value - tailLength) / 2;
+                        yOffset = ((double)tailWidthControl.Value - tailWidth) / 2; ;
+
+                        x0 = box.XStart - torsoXOffset - xOffset;
+                        y0 = box.YStart + yOffset;
+                        z0 = box.ZStart;
+                        x1 = box.XEnd - torsoXOffset - xOffset * 2;
+                        y1 = box.YEnd - yOffset;
+                        z1 = box.ZEnd;
+
+                        break;
                 }
-                else if (counter > 0 && counter < 5)
-                {
-                    double yOffset = b.getHeight() - (double)pawsWidthControl.Value;
-                    double xOffset = b.getLength() - (double)pawsLengthControl.Value;
 
-                    box = new Box(box.XStart, box.YStart + yOffset, box.ZStart,
-                        box.XEnd - xOffset, box.YEnd - yOffset, box.ZEnd, box.Color);
-                }
+                box = new Box(new Vertex(x0, y0, z0),
+                    new Vertex(x1, y1, z1), box.Color);
 
                 drawBoxEdge(box.BottomEdge, transform, zBuffer);
                 drawBoxEdge(box.TopEdge, transform, zBuffer);
@@ -281,6 +373,7 @@ namespace TabbyCat
 
                 counter++;
             }
+
         }
 
         private void render(Graphics g, Matrix4 transform, double[] zBuffer)

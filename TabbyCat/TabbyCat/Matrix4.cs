@@ -52,8 +52,7 @@ namespace TabbyCat
             return new Vertex(
                 inv.X * values[0] + inv.Y * values[4] + inv.Z * values[8] + inv.One * values[12],
                 inv.X * values[1] + inv.Y * values[5] + inv.Z * values[9] + inv.One * values[13],
-                inv.X * values[2] + inv.Y * values[6] + inv.Z * values[10] + inv.One * values[14],
-                inv.X * values[3] + inv.Y * values[7] + inv.Z * values[11] + inv.One * values[15]);
+                inv.X * values[2] + inv.Y * values[6] + inv.Z * values[10] + inv.One * values[14]);
         }
     }
 }
