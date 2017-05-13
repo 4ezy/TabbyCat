@@ -22,6 +22,8 @@ namespace TabbyCat
         RotationTransformation rtTransform;
         ScaleTransformation scTransform;
 
+        double pawsHeight;
+        double pawsWidth;
         double tailLength;
         double tailWidth;
 
@@ -44,7 +46,13 @@ namespace TabbyCat
             torsoLengthControl.Value = (decimal)boxes[0].getLength();
             torsoWidthControl.Value = (decimal)boxes[0].getWidth();
 
-            tailLengthControl.Value = (decimal)(boxes[10].getLength() + boxes[12].getLength());
+            pawsHeightControl.Value = (decimal)boxes[1].getHeight();
+            pawsWidthControl.Value = (decimal)boxes[1].getWidth();
+            pawsHeight = (double)pawsHeightControl.Value;
+            pawsWidth = (double)pawsWidthControl.Value;
+
+
+            tailLengthControl.Value = (decimal)boxes[10].getLength();
             tailWidthControl.Value = (decimal)boxes[10].getWidth();
 
             tailLength = (double)tailLengthControl.Value;
@@ -215,6 +223,7 @@ namespace TabbyCat
 
                 double xOffset = 0;
                 double yOffset = 0;
+                double zOffset = 0;
 
                 double x0 = box.XStart;
                 double y0 = box.YStart;
@@ -240,76 +249,100 @@ namespace TabbyCat
                         break;
                     // конечности
                     case 1:
+                        yOffset = ((double)pawsWidthControl.Value - pawsWidth) / 2;
+                        zOffset = ((double)pawsHeightControl.Value - pawsHeight) / 2;
+
                         x0 = box.XStart - torsoXOffset;
-                        y0 = box.YStart + torsoYOffset;
-                        z0 = box.ZStart;
+                        y0 = box.YStart + torsoYOffset - yOffset;
+                        z0 = box.ZStart - zOffset;
                         x1 = box.XEnd - torsoXOffset;
-                        y1 = box.YEnd + torsoYOffset;
+                        y1 = box.YEnd + torsoYOffset + yOffset;
                         z1 = box.ZEnd;
 
                         break;
                     case 2:
+                        yOffset = ((double)pawsWidthControl.Value - pawsWidth) / 2;
+                        zOffset = ((double)pawsHeightControl.Value - pawsHeight) / 2;
+
                         x0 = box.XStart - torsoXOffset;
-                        y0 = box.YStart - torsoYOffset;
-                        z0 = box.ZStart;
+                        y0 = box.YStart - torsoYOffset + yOffset;
+                        z0 = box.ZStart - zOffset;
                         x1 = box.XEnd - torsoXOffset;
-                        y1 = box.YEnd - torsoYOffset;
-                        z1 = box.ZEnd;;
+                        y1 = box.YEnd - torsoYOffset - yOffset;
+                        z1 = box.ZEnd;
 
                         break;
                     case 3:
+                        yOffset = ((double)pawsWidthControl.Value - pawsWidth) / 2;
+                        zOffset = ((double)pawsHeightControl.Value - pawsHeight) / 2;
+
                         x0 = box.XStart + torsoXOffset;
-                        y0 = box.YStart + torsoYOffset;
-                        z0 = box.ZStart;
+                        y0 = box.YStart + torsoYOffset - yOffset;
+                        z0 = box.ZStart - zOffset;
                         x1 = box.XEnd + torsoXOffset;
-                        y1 = box.YEnd + torsoYOffset;
+                        y1 = box.YEnd + torsoYOffset + yOffset;
                         z1 = box.ZEnd;
 
                         break;
                     case 4:
+                        yOffset = ((double)pawsWidthControl.Value - pawsWidth) / 2;
+                        zOffset = ((double)pawsHeightControl.Value - pawsHeight) / 2;
+
                         x0 = box.XStart + torsoXOffset;
-                        y0 = box.YStart - torsoYOffset;
-                        z0 = box.ZStart;
+                        y0 = box.YStart - torsoYOffset + yOffset;
+                        z0 = box.ZStart - zOffset;
                         x1 = box.XEnd + torsoXOffset;
-                        y1 = box.YEnd - torsoYOffset;
+                        y1 = box.YEnd - torsoYOffset - yOffset;
                         z1 = box.ZEnd;
 
                         break;
                     // лапы
                     case 5:
+                        yOffset = ((double)pawsWidthControl.Value - pawsWidth) / 2;
+                        zOffset = ((double)pawsHeightControl.Value - pawsHeight) / 2;
+
                         x0 = box.XStart - torsoXOffset;
-                        y0 = box.YStart + torsoYOffset;
-                        z0 = box.ZStart;
+                        y0 = box.YStart + torsoYOffset - yOffset;
+                        z0 = box.ZStart - zOffset;
                         x1 = box.XEnd - torsoXOffset;
-                        y1 = box.YEnd + torsoYOffset;
-                        z1 = box.ZEnd;
+                        y1 = box.YEnd + torsoYOffset + yOffset;
+                        z1 = box.ZEnd - zOffset;
 
                         break;
                     case 6:
+                        yOffset = ((double)pawsWidthControl.Value - pawsWidth) / 2;
+                        zOffset = ((double)pawsHeightControl.Value - pawsHeight) / 2;
+
                         x0 = box.XStart - torsoXOffset;
-                        y0 = box.YStart - torsoYOffset;
-                        z0 = box.ZStart;
+                        y0 = box.YStart - torsoYOffset + yOffset;
+                        z0 = box.ZStart - zOffset;
                         x1 = box.XEnd - torsoXOffset;
-                        y1 = box.YEnd - torsoYOffset;
-                        z1 = box.ZEnd;
+                        y1 = box.YEnd - torsoYOffset - yOffset;
+                        z1 = box.ZEnd - zOffset;
 
                         break;
                     case 7:
+                        yOffset = ((double)pawsWidthControl.Value - pawsWidth) / 2;
+                        zOffset = ((double)pawsHeightControl.Value - pawsHeight) / 2;
+
                         x0 = box.XStart + torsoXOffset;
-                        y0 = box.YStart + torsoYOffset;
-                        z0 = box.ZStart;
+                        y0 = box.YStart + torsoYOffset - yOffset;
+                        z0 = box.ZStart - zOffset;
                         x1 = box.XEnd + torsoXOffset;
-                        y1 = box.YEnd + torsoYOffset;
-                        z1 = box.ZEnd;
+                        y1 = box.YEnd + torsoYOffset + yOffset;
+                        z1 = box.ZEnd - zOffset;
 
                         break;
                     case 8:
+                        yOffset = ((double)pawsWidthControl.Value - pawsWidth) / 2;
+                        zOffset = ((double)pawsHeightControl.Value - pawsHeight) / 2;
+
                         x0 = box.XStart + torsoXOffset;
-                        y0 = box.YStart - torsoYOffset;
-                        z0 = box.ZStart;
+                        y0 = box.YStart - torsoYOffset + yOffset;
+                        z0 = box.ZStart - zOffset;
                         x1 = box.XEnd + torsoXOffset;
-                        y1 = box.YEnd - torsoYOffset;
-                        z1 = box.ZEnd;
+                        y1 = box.YEnd - torsoYOffset - yOffset;
+                        z1 = box.ZEnd - zOffset;
 
                         break;
                     // голова
@@ -325,7 +358,7 @@ namespace TabbyCat
                     // хвост
                     case 10:
                         xOffset = ((double)tailLengthControl.Value - tailLength) / 2;
-                        yOffset = ((double)tailWidthControl.Value - tailWidth) / 2; ;
+                        yOffset = ((double)tailWidthControl.Value - tailWidth) / 2;
 
                         x0 = box.XStart - torsoXOffset;
                         y0 = box.YStart + yOffset;

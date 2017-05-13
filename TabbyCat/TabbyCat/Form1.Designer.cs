@@ -66,12 +66,13 @@
             this.torsoLengthControl = new System.Windows.Forms.NumericUpDown();
             this.label12 = new System.Windows.Forms.Label();
             this.pawsGroupBox = new System.Windows.Forms.GroupBox();
-            this.pawsHeightControl = new System.Windows.Forms.NumericUpDown();
-            this.label14 = new System.Windows.Forms.Label();
             this.pawsWidthControl = new System.Windows.Forms.NumericUpDown();
             this.label9 = new System.Windows.Forms.Label();
-            this.pawsLengthControl = new System.Windows.Forms.NumericUpDown();
+            this.pawsHeightControl = new System.Windows.Forms.NumericUpDown();
             this.label8 = new System.Windows.Forms.Label();
+            this.bandGroupBox = new System.Windows.Forms.GroupBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.bandsWidthControl = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.renderPictureBox)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -97,9 +98,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.torsoWidthControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.torsoLengthControl)).BeginInit();
             this.pawsGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pawsHeightControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pawsWidthControl)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pawsLengthControl)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pawsHeightControl)).BeginInit();
+            this.bandGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bandsWidthControl)).BeginInit();
             this.SuspendLayout();
             // 
             // renderPictureBox
@@ -459,14 +461,16 @@
             this.tableLayoutPanel3.Controls.Add(this.tailGroupBox, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.bodyGroupBox, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.pawsGroupBox, 0, 2);
+            this.tableLayoutPanel3.Controls.Add(this.bandGroupBox, 0, 3);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 3;
+            this.tableLayoutPanel3.RowCount = 4;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 32.62032F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 234F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(210, 472);
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 120F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 117F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(210, 475);
             this.tableLayoutPanel3.TabIndex = 0;
             // 
             // tailGroupBox
@@ -495,9 +499,9 @@
             this.label11.AutoSize = true;
             this.label11.Location = new System.Drawing.Point(6, 65);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(90, 13);
+            this.label11.Size = new System.Drawing.Size(46, 13);
             this.label11.TabIndex = 2;
-            this.label11.Text = "Толщина хвоста";
+            this.label11.Text = "Ширина";
             // 
             // tailLengthControl
             // 
@@ -511,9 +515,9 @@
             this.label10.AutoSize = true;
             this.label10.Location = new System.Drawing.Point(6, 16);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(77, 13);
+            this.label10.Size = new System.Drawing.Size(40, 13);
             this.label10.TabIndex = 0;
-            this.label10.Text = "Длина хвоста";
+            this.label10.Text = "Длина";
             // 
             // bodyGroupBox
             // 
@@ -523,15 +527,15 @@
             this.bodyGroupBox.Controls.Add(this.label12);
             this.bodyGroupBox.Location = new System.Drawing.Point(3, 3);
             this.bodyGroupBox.Name = "bodyGroupBox";
-            this.bodyGroupBox.Size = new System.Drawing.Size(204, 110);
+            this.bodyGroupBox.Size = new System.Drawing.Size(204, 113);
             this.bodyGroupBox.TabIndex = 2;
             this.bodyGroupBox.TabStop = false;
             this.bodyGroupBox.Text = "Тело";
             // 
-            // bodyWidthControl
+            // torsoWidthControl
             // 
             this.torsoWidthControl.Location = new System.Drawing.Point(9, 81);
-            this.torsoWidthControl.Name = "bodyWidthControl";
+            this.torsoWidthControl.Name = "torsoWidthControl";
             this.torsoWidthControl.Size = new System.Drawing.Size(189, 20);
             this.torsoWidthControl.TabIndex = 3;
             // 
@@ -540,14 +544,14 @@
             this.label13.AutoSize = true;
             this.label13.Location = new System.Drawing.Point(6, 65);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(79, 13);
+            this.label13.Size = new System.Drawing.Size(46, 13);
             this.label13.TabIndex = 2;
-            this.label13.Text = "Толщина тела";
+            this.label13.Text = "Ширина";
             // 
-            // bodyLengthControl
+            // torsoLengthControl
             // 
             this.torsoLengthControl.Location = new System.Drawing.Point(9, 32);
-            this.torsoLengthControl.Name = "bodyLengthControl";
+            this.torsoLengthControl.Name = "torsoLengthControl";
             this.torsoLengthControl.Size = new System.Drawing.Size(189, 20);
             this.torsoLengthControl.TabIndex = 1;
             // 
@@ -556,41 +560,23 @@
             this.label12.AutoSize = true;
             this.label12.Location = new System.Drawing.Point(6, 16);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(66, 13);
+            this.label12.Size = new System.Drawing.Size(40, 13);
             this.label12.TabIndex = 0;
-            this.label12.Text = "Длина тела";
+            this.label12.Text = "Длина";
             // 
             // pawsGroupBox
             // 
-            this.pawsGroupBox.Controls.Add(this.pawsHeightControl);
-            this.pawsGroupBox.Controls.Add(this.label14);
             this.pawsGroupBox.Controls.Add(this.pawsWidthControl);
             this.pawsGroupBox.Controls.Add(this.label9);
-            this.pawsGroupBox.Controls.Add(this.pawsLengthControl);
+            this.pawsGroupBox.Controls.Add(this.pawsHeightControl);
             this.pawsGroupBox.Controls.Add(this.label8);
             this.pawsGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
             this.pawsGroupBox.Location = new System.Drawing.Point(3, 241);
             this.pawsGroupBox.Name = "pawsGroupBox";
-            this.pawsGroupBox.Size = new System.Drawing.Size(204, 168);
+            this.pawsGroupBox.Size = new System.Drawing.Size(204, 114);
             this.pawsGroupBox.TabIndex = 0;
             this.pawsGroupBox.TabStop = false;
             this.pawsGroupBox.Text = "Лапы";
-            // 
-            // pawsHeightControl
-            // 
-            this.pawsHeightControl.Location = new System.Drawing.Point(9, 138);
-            this.pawsHeightControl.Name = "pawsHeightControl";
-            this.pawsHeightControl.Size = new System.Drawing.Size(189, 20);
-            this.pawsHeightControl.TabIndex = 5;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(6, 122);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(45, 13);
-            this.label14.TabIndex = 4;
-            this.label14.Text = "Высота";
             // 
             // pawsWidthControl
             // 
@@ -608,21 +594,49 @@
             this.label9.TabIndex = 2;
             this.label9.Text = "Ширина";
             // 
-            // pawsLengthControl
+            // pawsHeightControl
             // 
-            this.pawsLengthControl.Location = new System.Drawing.Point(9, 32);
-            this.pawsLengthControl.Name = "pawsLengthControl";
-            this.pawsLengthControl.Size = new System.Drawing.Size(189, 20);
-            this.pawsLengthControl.TabIndex = 1;
+            this.pawsHeightControl.Location = new System.Drawing.Point(9, 32);
+            this.pawsHeightControl.Name = "pawsHeightControl";
+            this.pawsHeightControl.Size = new System.Drawing.Size(189, 20);
+            this.pawsHeightControl.TabIndex = 1;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(6, 16);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(40, 13);
+            this.label8.Size = new System.Drawing.Size(45, 13);
             this.label8.TabIndex = 0;
-            this.label8.Text = "Длина";
+            this.label8.Text = "Высота";
+            // 
+            // bandGroupBox
+            // 
+            this.bandGroupBox.Controls.Add(this.bandsWidthControl);
+            this.bandGroupBox.Controls.Add(this.label14);
+            this.bandGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.bandGroupBox.Location = new System.Drawing.Point(3, 361);
+            this.bandGroupBox.Name = "bandGroupBox";
+            this.bandGroupBox.Size = new System.Drawing.Size(204, 60);
+            this.bandGroupBox.TabIndex = 3;
+            this.bandGroupBox.TabStop = false;
+            this.bandGroupBox.Text = "Полосы";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(6, 16);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(46, 13);
+            this.label14.TabIndex = 0;
+            this.label14.Text = "Ширина";
+            // 
+            // bandsWidthControl
+            // 
+            this.bandsWidthControl.Location = new System.Drawing.Point(9, 32);
+            this.bandsWidthControl.Name = "bandsWidthControl";
+            this.bandsWidthControl.Size = new System.Drawing.Size(189, 20);
+            this.bandsWidthControl.TabIndex = 1;
             // 
             // tabbyCatRenderForm
             // 
@@ -666,9 +680,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.torsoLengthControl)).EndInit();
             this.pawsGroupBox.ResumeLayout(false);
             this.pawsGroupBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pawsHeightControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pawsWidthControl)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pawsLengthControl)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pawsHeightControl)).EndInit();
+            this.bandGroupBox.ResumeLayout(false);
+            this.bandGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bandsWidthControl)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -712,12 +728,13 @@
         private System.Windows.Forms.NumericUpDown torsoLengthControl;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.GroupBox pawsGroupBox;
-        private System.Windows.Forms.NumericUpDown pawsHeightControl;
-        private System.Windows.Forms.Label label14;
         private System.Windows.Forms.NumericUpDown pawsWidthControl;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.NumericUpDown pawsLengthControl;
+        private System.Windows.Forms.NumericUpDown pawsHeightControl;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.GroupBox bandGroupBox;
+        private System.Windows.Forms.NumericUpDown bandsWidthControl;
+        private System.Windows.Forms.Label label14;
     }
 }
 
