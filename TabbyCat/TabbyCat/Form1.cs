@@ -18,9 +18,13 @@ namespace TabbyCat
 
         List<Box> boxes;
 
+        Cylinder c = new Cylinder(new Vertex(95, -18, 60), 8, 5, 15, Color.Gray);
+
         TranslationTransformation trTransform;
         RotationTransformation rtTransform;
         ScaleTransformation scTransform;
+
+        //Box mouth = new Box(new Vertex(85, 10, 45), new Vertex(95, -20, 55), Color.White);
 
         double pawsHeight;
         double pawsWidth;
@@ -137,7 +141,7 @@ namespace TabbyCat
             }
         }
 
-        private void boxSurfaceRender(double[] zBuffer, Vertex v1, Vertex v2, Vertex v3, Color color)
+        private void surfaceRender(double[] zBuffer, Vertex v1, Vertex v2, Vertex v3, Color color)
         {
             // алгоритм построчного заполнения
             int minX = (int)Math.Max(0, Math.Ceiling(Math.Min(v1.X, Math.Min(v2.X, v3.X))));
@@ -163,26 +167,15 @@ namespace TabbyCat
 
                         if (zBuffer[zIndex] < depth)
                         {
-                            if (x == minX || x == maxX || y == minY || y == maxY)     // прорисовка контура
-                            {
-                                if ((x > 0) && (x < renderArea.Width) && (y > 0) && (y < renderArea.Height))
-                                {
-                                    renderArea.SetPixel(x, y, Color.White);
-                                    zBuffer[zIndex] = depth;
-                                }
-                            }
-                            else     // заливка
-                            {
-                                renderArea.SetPixel(x, y, color);
-                                zBuffer[zIndex] = depth;
-                            }
+                            renderArea.SetPixel(x, y, color);
+                            zBuffer[zIndex] = depth;
                         }
                     }
                 }
             }
         }
 
-        private void drawBoxEdge(List<Triangle> edge, Matrix4 transform, double[] zBuffer)
+        private void drawTriangles(List<Triangle> edge, Matrix4 transform, double[] zBuffer)
         {
             foreach (Triangle t in edge)
             {
@@ -200,13 +193,16 @@ namespace TabbyCat
                 if (wireFrameRadioButton.Checked)
                 {
                     drawLine(v1.X, v1.Y, v2.X, v2.Y);
-                    //drawLine(v2.X, v2.Y, v3.X, v3.Y);
+                    drawLine(v2.X, v2.Y, v3.X, v3.Y);
                     drawLine(v3.X, v3.Y, v1.X, v1.Y);
                 }
 
                 if (surfaceRadioButton.Checked)
                 {
-                    boxSurfaceRender(zBuffer, v1, v2, v3, t.Color);
+                    surfaceRender(zBuffer, v1, v2, v3, t.Color);
+
+                    drawLine(v1.X, v1.Y, v2.X, v2.Y);
+                    drawLine(v3.X, v3.Y, v1.X, v1.Y);
                 }
             }
         }
@@ -397,21 +393,30 @@ namespace TabbyCat
                 box = new Box(new Vertex(x0, y0, z0),
                     new Vertex(x1, y1, z1), box.Color);
 
-                drawBoxEdge(box.BottomEdge, transform, zBuffer);
-                drawBoxEdge(box.TopEdge, transform, zBuffer);
-                drawBoxEdge(box.LeftEdge, transform, zBuffer);
-                drawBoxEdge(box.RightEdge, transform, zBuffer);
-                drawBoxEdge(box.NearEdge, transform, zBuffer);
-                drawBoxEdge(box.DistantEdge, transform, zBuffer);
+                drawTriangles(box.BottomEdge, transform, zBuffer);
+                drawTriangles(box.TopEdge, transform, zBuffer);
+                drawTriangles(box.LeftEdge, transform, zBuffer);
+                drawTriangles(box.RightEdge, transform, zBuffer);
+                drawTriangles(box.NearEdge, transform, zBuffer);
+                drawTriangles(box.DistantEdge, transform, zBuffer);
 
                 counter++;
             }
 
         }
 
-        private void render(Graphics g, Matrix4 transform, double[] zBuffer)
+        private void drawCylinders(Matrix4 transformMatrix, double[] zBuffer)
         {
-            drawBoxes(transform, zBuffer);
+            drawTriangles(c.BottomBase, transformMatrix, zBuffer);
+            drawTriangles(c.TopBase, transformMatrix, zBuffer);
+            drawTriangles(c.Surface, transformMatrix, zBuffer);
+        }
+
+        private void render(Graphics g, Matrix4 transformMatrix, double[] zBuffer)
+        {
+            drawBoxes(transformMatrix, zBuffer);
+
+            drawCylinders(transformMatrix, zBuffer);
 
             g.DrawImage(renderArea, 0, 0);
         }
@@ -433,10 +438,10 @@ namespace TabbyCat
 
             rtTransform.setAngles(xAngleControl.Value, yAngleControl.Value, zAngleControl.Value);
 
-            Matrix4 transform = rtTransform.OxMatrix.multiply(rtTransform.OyMatrix);
-            transform = transform.multiply(rtTransform.OzMatrix);
-            transform = transform.multiply(scTransform.Matrix);
-            transform = transform.multiply(trTransform.Matrix);
+            Matrix4 transformMatrix = rtTransform.OxMatrix.multiply(rtTransform.OyMatrix);
+            transformMatrix = transformMatrix.multiply(rtTransform.OzMatrix);
+            transformMatrix = transformMatrix.multiply(scTransform.Matrix);
+            transformMatrix = transformMatrix.multiply(trTransform.Matrix);
 
             // инициализация заполнение z-буфера
             double[] zBuffer = new double[renderArea.Width * renderArea.Height];
@@ -446,7 +451,8 @@ namespace TabbyCat
                 zBuffer[q] = double.NegativeInfinity;
             }
 
-            render(g, transform, zBuffer);
+            render(g, transformMatrix, zBuffer);
         }
+
     }
 }
