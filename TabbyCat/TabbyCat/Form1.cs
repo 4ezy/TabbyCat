@@ -18,6 +18,7 @@ namespace TabbyCat
 
         List<Box> boxes;
         List<Cylinder> cylinders;
+        List<HalfCylinder> halfCylinders;
 
         TranslationTransformation trTransform;
         RotationTransformation rtTransform;
@@ -36,7 +37,9 @@ namespace TabbyCat
 
             boxes = boxesDrafting(Color.Orange);
 
-            cylinders = cylindersDrafting(Color.Gray);
+            cylinders = cylindersDrafting(Color.White);
+
+            halfCylinders = halfCylindersDrafting(Color.Brown);
 
             trTransform = new TranslationTransformation();
 
@@ -78,10 +81,10 @@ namespace TabbyCat
             boxes.Add(new Box(new Vertex(45, -23, 5), new Vertex(55, -13, 35), color));
 
             // лапы
-            boxes.Add(new Box(new Vertex(0, 3, 0), new Vertex(15, 13, 5), color));
-            boxes.Add(new Box(new Vertex(0, -23, 0), new Vertex(15, -13, 5), color));
-            boxes.Add(new Box(new Vertex(45, 3, 0), new Vertex(60, 13, 5), color));
-            boxes.Add(new Box(new Vertex(45, -23, 0), new Vertex(60, -13, 5), color));
+            boxes.Add(new Box(new Vertex(0, 3, 0), new Vertex(15, 13, 5), Color.Brown));
+            boxes.Add(new Box(new Vertex(0, -23, 0), new Vertex(15, -13, 5), Color.Brown));
+            boxes.Add(new Box(new Vertex(45, 3, 0), new Vertex(60, 13, 5), Color.Brown));
+            boxes.Add(new Box(new Vertex(45, -23, 0), new Vertex(60, -13, 5), Color.Brown));
 
             // голова
             boxes.Add(new Box(new Vertex(70, 20, 35), new Vertex(95, -30, 75), color));
@@ -89,12 +92,12 @@ namespace TabbyCat
             // хвост
             boxes.Add(new Box(new Vertex(-10, -2, 45), new Vertex(-30, -8, 50), color));
             boxes.Add(new Box(new Vertex(-30, -2, 45), new Vertex(-35, -8, 75), color));
-            boxes.Add(new Box(new Vertex(-30, -2, 75), new Vertex(-70, -8, 80), color));
+            boxes.Add(new Box(new Vertex(-30, -2, 75), new Vertex(-70, -8, 80), Color.Brown));
 
             // полосы
-            boxes.Add(new Box(new Vertex(40, 10, 60), new Vertex(45, -20, 61), color));
-            boxes.Add(new Box(new Vertex(25, 10, 60), new Vertex(30, -20, 61), color));
-            boxes.Add(new Box(new Vertex(10, 10, 60), new Vertex(15, -20, 61), color));
+            boxes.Add(new Box(new Vertex(40, 10, 60), new Vertex(45, -20, 61), Color.Brown));
+            boxes.Add(new Box(new Vertex(25, 10, 60), new Vertex(30, -20, 61), Color.Brown));
+            boxes.Add(new Box(new Vertex(10, 10, 60), new Vertex(15, -20, 61), Color.Brown));
 
             return boxes;
         }
@@ -103,10 +106,27 @@ namespace TabbyCat
         {
             List<Cylinder> cylinders = new List<Cylinder>();
 
-            cylinders.Add(new Cylinder(new Vertex(95, -16, -63), 8, 5, 15, color));
-            cylinders.Add(new Cylinder(new Vertex(95, 6, -63), 8, 5, 15, color));
+            // глаза
+            cylinders.Add(new Cylinder(new Vertex(-95, -16, -63), 8, 4, 15, color));
+            cylinders.Add(new Cylinder(new Vertex(-95, 6, -63), 8, 4, 15, color));
+
+            // зрачки
+            cylinders.Add(new Cylinder(new Vertex(-99, -16, -63), 4, 1, 15, Color.DarkGray));
+            cylinders.Add(new Cylinder(new Vertex(-99, 6, -63), 4, 1, 15, Color.DarkGray));
 
             return cylinders;
+        }
+
+
+        private List<HalfCylinder> halfCylindersDrafting(Color color)
+        {
+            List<HalfCylinder> halfCylinders =  new List<HalfCylinder>();
+
+            // уши
+            halfCylinders.Add(new HalfCylinder(new Vertex(83, 75, -18), 10, 10, 10, color));
+            halfCylinders.Add(new HalfCylinder(new Vertex(83, 75, 8), 10, 10, 10, color));
+
+            return halfCylinders;
         }
 
         private void drawLine(double xStart, double yStart, double xEnd, double yEnd)
@@ -426,11 +446,21 @@ namespace TabbyCat
             }
         }
 
+        private void drawHalfCylinders(Matrix4 transformMatrix, double[] zBuffer)
+        {
+            foreach (HalfCylinder hc in halfCylinders)
+            {
+                drawTriangles(hc.BottomBase, transformMatrix, zBuffer);
+                drawTriangles(hc.TopBase, transformMatrix, zBuffer);
+                drawTriangles(hc.Surface, transformMatrix, zBuffer);
+            }
+        }
+
         private void render(Graphics g, Matrix4 transformMatrix, double[] zBuffer)
         {
             drawBoxes(transformMatrix, zBuffer);
-
             drawCylinders(transformMatrix, zBuffer);
+            drawHalfCylinders(transformMatrix, zBuffer);
 
             g.DrawImage(renderArea, 0, 0);
         }

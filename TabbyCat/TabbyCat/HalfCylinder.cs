@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TabbyCat
 {
-    struct Cylinder
+    struct HalfCylinder
     {
         List<Triangle> bottomBase;
         List<Triangle> topBase;
@@ -58,11 +58,11 @@ namespace TabbyCat
             }
         }
 
-        public Cylinder(Vertex center, double radius, double height, double vertexCount, Color color)
+        public HalfCylinder(Vertex center, double radius, double height, double vertexCount, Color color)
         {
             double x = center.Z;
             double y = center.Y;
-            double z = -center.X;
+            double z = center.X;
 
             this.bottomBase = new List<Triangle>();
             this.surface = new List<Triangle>();
@@ -75,12 +75,12 @@ namespace TabbyCat
             this.topBase = getBase(new Vertex(x, y, z + height), radius, vertexCount, color);
             this.surface = getSurface(bottomBase, topBase, color);
 
-            rotateY(90);
+            rotate(90, 90, 0);
         }
 
-        public void rotateY(int degrees)
+        public void rotate(int xDegrees, int yDegrees, int zDegrees)
         {
-            RotationTransformation rt = new RotationTransformation(0, degreeToRadian(degrees), 0);
+            RotationTransformation rt = new RotationTransformation(degreeToRadian(xDegrees), degreeToRadian(yDegrees), degreeToRadian(zDegrees));
 
             Matrix4 transformMatrix = rt.OyMatrix.multiply(rt.OxMatrix);
             transformMatrix = transformMatrix.multiply(rt.OzMatrix);
@@ -120,12 +120,14 @@ namespace TabbyCat
                 verteces.Add(v);
             }
 
-            for (int i = 0; i < verteces.Count - 1; i++)
+            for (int i = 0; i < verteces.Count / 2 - 1; i++)
             {
                 triangles.Add(new Triangle(center, verteces[i], verteces[i + 1], color));
             }
 
-            triangles.Add(new Triangle(center, verteces[verteces.Count - 1], verteces[0], color));
+            triangles.Add(new Triangle(center,
+                new Vertex(verteces[verteces.Count / 2 - 1].X, verteces[verteces.Count / 2 - 1].Y, verteces[verteces.Count / 2 - 1].Z),
+                new Vertex(verteces[verteces.Count / 2].X, verteces[verteces.Count / 2].Y, verteces[verteces.Count / 2].Z), color));
 
             return triangles;
         }
@@ -143,6 +145,9 @@ namespace TabbyCat
             {
                 triangles.Add(new Triangle(topBase[i].V3, bottomBase[i].V2, bottomBase[i].V3, color));
             }
+
+            triangles.Add(new Triangle(bottomBase[0].V2, topBase[0].V2, bottomBase[bottomBase.Count - 1].V3, color));
+            triangles.Add(new Triangle(topBase[0].V2, topBase[topBase.Count - 1].V3, bottomBase[bottomBase.Count - 1].V3, color));
 
             return triangles;
         }
