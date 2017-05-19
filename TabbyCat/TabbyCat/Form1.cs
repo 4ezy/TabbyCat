@@ -17,8 +17,7 @@ namespace TabbyCat
         Bitmap renderArea;
 
         List<Box> boxes;
-
-        Cylinder c = new Cylinder(new Vertex(95, -18, 60), 8, 5, 15, Color.Gray);
+        List<Cylinder> cylinders;
 
         TranslationTransformation trTransform;
         RotationTransformation rtTransform;
@@ -36,6 +35,8 @@ namespace TabbyCat
             InitializeComponent();
 
             boxes = boxesDrafting(Color.Orange);
+
+            cylinders = cylindersDrafting(Color.Gray);
 
             trTransform = new TranslationTransformation();
 
@@ -96,6 +97,16 @@ namespace TabbyCat
             boxes.Add(new Box(new Vertex(10, 10, 60), new Vertex(15, -20, 61), color));
 
             return boxes;
+        }
+
+        private List<Cylinder> cylindersDrafting(Color color)
+        {
+            List<Cylinder> cylinders = new List<Cylinder>();
+
+            cylinders.Add(new Cylinder(new Vertex(95, -16, -63), 8, 5, 15, color));
+            cylinders.Add(new Cylinder(new Vertex(95, 6, -63), 8, 5, 15, color));
+
+            return cylinders;
         }
 
         private void drawLine(double xStart, double yStart, double xEnd, double yEnd)
@@ -201,8 +212,8 @@ namespace TabbyCat
                 {
                     surfaceRender(zBuffer, v1, v2, v3, t.Color);
 
-                    drawLine(v1.X, v1.Y, v2.X, v2.Y);
-                    drawLine(v3.X, v3.Y, v1.X, v1.Y);
+                    //drawLine(v1.X, v1.Y, v2.X, v2.Y);
+                    //drawLine(v3.X, v3.Y, v1.X, v1.Y);
                 }
             }
         }
@@ -407,9 +418,12 @@ namespace TabbyCat
 
         private void drawCylinders(Matrix4 transformMatrix, double[] zBuffer)
         {
-            drawTriangles(c.BottomBase, transformMatrix, zBuffer);
-            drawTriangles(c.TopBase, transformMatrix, zBuffer);
-            drawTriangles(c.Surface, transformMatrix, zBuffer);
+            foreach (Cylinder c in cylinders)
+            {
+                drawTriangles(c.BottomBase, transformMatrix, zBuffer);
+                drawTriangles(c.TopBase, transformMatrix, zBuffer);
+                drawTriangles(c.Surface, transformMatrix, zBuffer);
+            }
         }
 
         private void render(Graphics g, Matrix4 transformMatrix, double[] zBuffer)

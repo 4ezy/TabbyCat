@@ -60,6 +60,10 @@ namespace TabbyCat
 
         public Cylinder(Vertex center, double radius, double height, double vertexCount, Color color)
         {
+            double x = center.Z;
+            double y = center.Y;
+            double z = center.X;
+
             this.bottomBase = new List<Triangle>();
             this.surface = new List<Triangle>();
             this.topBase = new List<Triangle>();
@@ -67,9 +71,39 @@ namespace TabbyCat
             this.center = center;
             this.height = height;
 
-            bottomBase = getBase(center, radius, vertexCount, color);
-            topBase = getBase(new Vertex(center.X, center.Y, center.Z + height), radius, vertexCount, color);
-            surface = getSurface(bottomBase, topBase, color);
+            this.bottomBase = getBase(new Vertex(x, y, z), radius, vertexCount, color);
+            this.topBase = getBase(new Vertex(x, y, z + height), radius, vertexCount, color);
+            this.surface = getSurface(bottomBase, topBase, color);
+
+            rotateY(90);
+        }
+
+        public void rotateY(int degrees)
+        {
+            RotationTransformation rt = new RotationTransformation(0, degreeToRadian(degrees), 0);
+
+            Matrix4 transformMatrix = rt.OyMatrix.multiply(rt.OxMatrix);
+            transformMatrix = transformMatrix.multiply(rt.OzMatrix);
+
+            bottomBase = elementRotation(bottomBase, transformMatrix);
+            topBase = elementRotation(topBase, transformMatrix);
+            surface = elementRotation(surface, transformMatrix);
+        }
+
+        private List<Triangle> elementRotation(List<Triangle> element, Matrix4 transformMatrix)
+        {
+            for (int i = 0; i < element.Count; i++)
+            {
+                Vertex v1 = transformMatrix.transform(element[i].V1);
+                Vertex v2 = transformMatrix.transform(element[i].V2);
+                Vertex v3 = transformMatrix.transform(element[i].V3);
+
+                element.RemoveAt(i);
+
+                element.Insert(i, new Triangle(v1, v2, v3, color));
+            }
+
+            return element;
         }
 
         private List<Triangle> getBase(Vertex center, double radius, double vertexCount, Color color)
