@@ -26,6 +26,9 @@ namespace TabbyCat
         RotationTransformation rtTransform;
         ScaleTransformation scTransform;
 
+        double torsoXOffset = 0;
+        double torsoYOffset = 0;
+
         double pawsHeight;
         double pawsWidth;
         double tailLength;
@@ -59,12 +62,13 @@ namespace TabbyCat
             pawsHeight = (double)pawsHeightControl.Value;
             pawsWidth = (double)pawsWidthControl.Value;
 
-
             tailLengthControl.Value = (decimal)boxes[10].getLength();
             tailWidthControl.Value = (decimal)boxes[10].getWidth();
-
             tailLength = (double)tailLengthControl.Value;
             tailWidth = (double)tailWidthControl.Value;
+
+            irisSizeControl.Value = (decimal)cylinders[0].Radius;
+            pupilSizeControl.Value = (decimal)cylinders[4].Radius;
         }
 
         private List<Box> boxesDrafting(Color color)
@@ -81,10 +85,10 @@ namespace TabbyCat
             boxes.Add(new Box(new Vertex(45, -23, 5), new Vertex(55, -13, 35), color));
 
             // лапы
-            boxes.Add(new Box(new Vertex(0, 3, 0), new Vertex(15, 13, 5), Color.Brown));
-            boxes.Add(new Box(new Vertex(0, -23, 0), new Vertex(15, -13, 5), Color.Brown));
-            boxes.Add(new Box(new Vertex(45, 3, 0), new Vertex(60, 13, 5), Color.Brown));
-            boxes.Add(new Box(new Vertex(45, -23, 0), new Vertex(60, -13, 5), Color.Brown));
+            boxes.Add(new Box(new Vertex(0, 3, 0), new Vertex(15, 13, 5), Color.DarkGray));
+            boxes.Add(new Box(new Vertex(0, -23, 0), new Vertex(15, -13, 5), Color.DarkGray));
+            boxes.Add(new Box(new Vertex(45, 3, 0), new Vertex(60, 13, 5), Color.DarkGray));
+            boxes.Add(new Box(new Vertex(45, -23, 0), new Vertex(60, -13, 5), Color.DarkGray));
 
             // голова
             boxes.Add(new Box(new Vertex(70, 20, 35), new Vertex(95, -30, 75), color));
@@ -100,15 +104,6 @@ namespace TabbyCat
             // язык
             boxes.Add(new Box(new Vertex(96, 6, 40), new Vertex(97, -16, 44), Color.Red));
 
-            // зубы
-            boxes.Add(new Box(new Vertex(96, 0, 50), new Vertex(97, -4, 47), Color.Yellow));
-            boxes.Add(new Box(new Vertex(96, -6, 50), new Vertex(97, -10, 47), Color.Yellow));
-
-            // полосы
-            boxes.Add(new Box(new Vertex(40, 10, 60), new Vertex(45, -20, 61), Color.Brown));
-            boxes.Add(new Box(new Vertex(25, 10, 60), new Vertex(30, -20, 61), Color.Brown));
-            boxes.Add(new Box(new Vertex(10, 10, 60), new Vertex(15, -20, 61), Color.Brown));
-
             return boxes;
         }
 
@@ -117,12 +112,15 @@ namespace TabbyCat
             List<Cylinder> cylinders = new List<Cylinder>();
 
             // глаза
-            cylinders.Add(new Cylinder(new Vertex(-95, -16, -63), 8, 4, 15, color));
-            cylinders.Add(new Cylinder(new Vertex(-95, 6, -63), 8, 4, 15, color));
+            cylinders.Add(new Cylinder(new Vertex(-95, -16, -63), 8, 1, 15, color));
+            cylinders.Add(new Cylinder(new Vertex(-95, 6, -63), 8, 1, 15, color));
+
+            cylinders.Add(new Cylinder(new Vertex(-96, -16, -63), 6, 1, 15, Color.Green));
+            cylinders.Add(new Cylinder(new Vertex(-96, 6, -63), 6, 1, 15, Color.Green));
 
             // зрачки
-            cylinders.Add(new Cylinder(new Vertex(-99, -16, -63), 4, 1, 15, Color.Green));
-            cylinders.Add(new Cylinder(new Vertex(-99, 6, -63), 4, 1, 15, Color.Green));
+            cylinders.Add(new Cylinder(new Vertex(-97, -16, -63), 3, 1, 15, Color.Black));
+            cylinders.Add(new Cylinder(new Vertex(-97, 6, -63), 3, 1, 15, Color.Black));
 
             return cylinders;
         }
@@ -276,8 +274,6 @@ namespace TabbyCat
         private void drawBoxes(Matrix4 transform, double[] zBuffer)
         {
             short counter = 0;
-            double torsoXOffset = 0;
-            double torsoYOffset = 0;
 
             foreach (Box b in boxes)
             {
@@ -298,8 +294,8 @@ namespace TabbyCat
                 {
                     // торс
                     case 0:
-                        torsoXOffset = ((double)torsoLengthControl.Value - box.getLength()) / 2; ;
-                        torsoYOffset = ((double)torsoWidthControl.Value - box.getWidth()) / 2; ;
+                        torsoXOffset = ((double)torsoLengthControl.Value - box.getLength()) / 2;
+                        torsoYOffset = ((double)torsoWidthControl.Value - box.getWidth()) / 2;
 
                         x0 = box.XStart - torsoXOffset;
                         y0 = box.YStart - torsoYOffset;
@@ -432,7 +428,7 @@ namespace TabbyCat
                         break;
                     case 11:
                         xOffset = ((double)tailLengthControl.Value - tailLength) / 2;
-                        yOffset = ((double)tailWidthControl.Value - tailWidth) / 2; ;
+                        yOffset = ((double)tailWidthControl.Value - tailWidth) / 2;
 
                         x0 = box.XStart - torsoXOffset - xOffset;
                         y0 = box.YStart + yOffset;
@@ -444,13 +440,33 @@ namespace TabbyCat
                         break;
                     case 12:
                         xOffset = ((double)tailLengthControl.Value - tailLength) / 2;
-                        yOffset = ((double)tailWidthControl.Value - tailWidth) / 2; ;
+                        yOffset = ((double)tailWidthControl.Value - tailWidth) / 2;
 
                         x0 = box.XStart - torsoXOffset - xOffset;
                         y0 = box.YStart + yOffset;
                         z0 = box.ZStart;
                         x1 = box.XEnd - torsoXOffset - xOffset * 2;
                         y1 = box.YEnd - yOffset;
+                        z1 = box.ZEnd;
+
+                        break;
+                    case 13:
+
+                        x0 = box.XStart + torsoXOffset;
+                        y0 = box.YStart;
+                        z0 = box.ZStart;
+                        x1 = box.XEnd + torsoXOffset;
+                        y1 = box.YEnd;
+                        z1 = box.ZEnd;
+
+                        break;
+                    case 14:
+
+                        x0 = box.XStart + torsoXOffset;
+                        y0 = box.YStart;
+                        z0 = box.ZStart;
+                        x1 = box.XEnd + torsoXOffset;
+                        y1 = box.YEnd;
                         z1 = box.ZEnd;
 
                         break;
@@ -471,13 +487,73 @@ namespace TabbyCat
 
         }
 
+        private void drawBands(Matrix4 transform, double[] zBuffer)
+        {
+            foreach (Box box in bands)
+            {
+                drawTriangles(box.BottomEdge, transform, zBuffer);
+                drawTriangles(box.TopEdge, transform, zBuffer);
+                drawTriangles(box.LeftEdge, transform, zBuffer);
+                drawTriangles(box.RightEdge, transform, zBuffer);
+                drawTriangles(box.NearEdge, transform, zBuffer);
+                drawTriangles(box.DistantEdge, transform, zBuffer);
+            }
+        }
+
+        private void drawTeeth(Matrix4 transform, double[] zBuffer)
+        {
+            foreach (Box b in teeth)
+            {
+                Box box = new Box(new Vertex(b.XStart + torsoXOffset, b.YStart, b.ZStart),
+                    new Vertex(b.XEnd + torsoXOffset, b.YEnd, b.ZEnd), b.Color);
+
+                drawTriangles(box.BottomEdge, transform, zBuffer);
+                drawTriangles(box.TopEdge, transform, zBuffer);
+                drawTriangles(box.LeftEdge, transform, zBuffer);
+                drawTriangles(box.RightEdge, transform, zBuffer);
+                drawTriangles(box.NearEdge, transform, zBuffer);
+                drawTriangles(box.DistantEdge, transform, zBuffer);
+            }
+        }
+
         private void drawCylinders(Matrix4 transformMatrix, double[] zBuffer)
         {
+            int counter = 0;
+            double whiteOfTheEyeOffset = 0;
+
             foreach (Cylinder c in cylinders)
             {
-                drawTriangles(c.BottomBase, transformMatrix, zBuffer);
-                drawTriangles(c.TopBase, transformMatrix, zBuffer);
-                drawTriangles(c.Surface, transformMatrix, zBuffer);
+                double radiusOffset = 0;
+
+                double x = c.Center.X;
+                double y = c.Center.Y;
+                double z = c.Center.Z;
+                double radius = c.Radius;
+                double height = c.Height;
+                double vertexCount = c.VertexCount;
+
+                if (counter <= 1)
+                {
+                    radiusOffset = (double)irisSizeControl.Value - radius;
+                    whiteOfTheEyeOffset = radiusOffset;
+                }
+                else if (counter >= 2 && counter <= 3)
+                {
+                    radiusOffset = whiteOfTheEyeOffset;
+                }
+                else if (counter >= 4 && counter <= 5)
+                {
+                    radiusOffset = (double)pupilSizeControl.Value - radius;
+                }
+
+                Cylinder tmpC = new Cylinder(new Vertex(x - torsoXOffset, y, z),
+                    radius + radiusOffset, height, vertexCount, c.Color);
+
+                drawTriangles(tmpC.BottomBase, transformMatrix, zBuffer);
+                drawTriangles(tmpC.TopBase, transformMatrix, zBuffer);
+                drawTriangles(tmpC.Surface, transformMatrix, zBuffer);
+
+                counter++;
             }
         }
 
@@ -485,9 +561,12 @@ namespace TabbyCat
         {
             foreach (HalfCylinder hc in halfCylinders)
             {
-                drawTriangles(hc.BottomBase, transformMatrix, zBuffer);
-                drawTriangles(hc.TopBase, transformMatrix, zBuffer);
-                drawTriangles(hc.Surface, transformMatrix, zBuffer);
+                HalfCylinder tmpHc = new HalfCylinder(new Vertex(hc.Center.X + torsoXOffset, hc.Center.Y, hc.Center.Z),
+                    hc.Radius, hc.Height, hc.VertexCount, hc.Color);
+
+                drawTriangles(tmpHc.BottomBase, transformMatrix, zBuffer);
+                drawTriangles(tmpHc.TopBase, transformMatrix, zBuffer);
+                drawTriangles(tmpHc.Surface, transformMatrix, zBuffer);
             }
         }
 
@@ -496,6 +575,8 @@ namespace TabbyCat
             drawBoxes(transformMatrix, zBuffer);
             drawCylinders(transformMatrix, zBuffer);
             drawHalfCylinders(transformMatrix, zBuffer);
+            drawBands(transformMatrix, zBuffer);
+            drawTeeth(transformMatrix, zBuffer);
 
             g.DrawImage(renderArea, 0, 0);
         }

@@ -36,13 +36,6 @@
             this.scaleGroupBox = new System.Windows.Forms.GroupBox();
             this.scaleControl = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
-            this.tanslationGroupBox = new System.Windows.Forms.GroupBox();
-            this.zOffsetControlControl = new System.Windows.Forms.NumericUpDown();
-            this.label5 = new System.Windows.Forms.Label();
-            this.yOffsetControl = new System.Windows.Forms.NumericUpDown();
-            this.label6 = new System.Windows.Forms.Label();
-            this.xOffsetControl = new System.Windows.Forms.NumericUpDown();
-            this.label4 = new System.Windows.Forms.Label();
             this.angleGroupBox = new System.Windows.Forms.GroupBox();
             this.zAngleControl = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
@@ -70,9 +63,23 @@
             this.label9 = new System.Windows.Forms.Label();
             this.pawsHeightControl = new System.Windows.Forms.NumericUpDown();
             this.label8 = new System.Windows.Forms.Label();
-            this.bandGroupBox = new System.Windows.Forms.GroupBox();
-            this.bandsWidthControl = new System.Windows.Forms.NumericUpDown();
+            this.eyesGroupBox = new System.Windows.Forms.GroupBox();
             this.label14 = new System.Windows.Forms.Label();
+            this.irisSizeControl = new System.Windows.Forms.NumericUpDown();
+            this.label15 = new System.Windows.Forms.Label();
+            this.pupilSizeControl = new System.Windows.Forms.NumericUpDown();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.label4 = new System.Windows.Forms.Label();
+            this.xOffsetControl = new System.Windows.Forms.NumericUpDown();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.zOffsetControlControl = new System.Windows.Forms.NumericUpDown();
+            this.tanslationGroupBox = new System.Windows.Forms.GroupBox();
+            this.yOffsetControl = new System.Windows.Forms.NumericUpDown();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.earsGroupBox = new System.Windows.Forms.GroupBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.earsWidthControl = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.renderPictureBox)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -80,10 +87,6 @@
             this.tableLayoutPanel2.SuspendLayout();
             this.scaleGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.scaleControl)).BeginInit();
-            this.tanslationGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.zOffsetControlControl)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.yOffsetControl)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.xOffsetControl)).BeginInit();
             this.angleGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.zAngleControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.yAngleControl)).BeginInit();
@@ -100,8 +103,17 @@
             this.pawsGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pawsWidthControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pawsHeightControl)).BeginInit();
-            this.bandGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bandsWidthControl)).BeginInit();
+            this.eyesGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.irisSizeControl)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pupilSizeControl)).BeginInit();
+            this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.xOffsetControl)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.zOffsetControlControl)).BeginInit();
+            this.tanslationGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.yOffsetControl)).BeginInit();
+            this.tableLayoutPanel4.SuspendLayout();
+            this.earsGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.earsWidthControl)).BeginInit();
             this.SuspendLayout();
             // 
             // renderPictureBox
@@ -110,7 +122,7 @@
             this.renderPictureBox.Location = new System.Drawing.Point(0, 0);
             this.renderPictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.renderPictureBox.Name = "renderPictureBox";
-            this.renderPictureBox.Size = new System.Drawing.Size(764, 531);
+            this.renderPictureBox.Size = new System.Drawing.Size(764, 549);
             this.renderPictureBox.TabIndex = 0;
             this.renderPictureBox.TabStop = false;
             this.renderPictureBox.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
@@ -127,25 +139,26 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(994, 531);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(994, 549);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(767, 3);
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(224, 525);
+            this.tabControl1.Size = new System.Drawing.Size(224, 543);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.tableLayoutPanel2);
-            this.tabPage1.Location = new System.Drawing.Point(4, 40);
+            this.tabPage1.Location = new System.Drawing.Point(4, 58);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(216, 481);
@@ -167,18 +180,19 @@
             this.tableLayoutPanel2.RowCount = 4;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 75F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 170F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 170F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(210, 477);
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 166F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 54F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(210, 482);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // scaleGroupBox
             // 
             this.scaleGroupBox.Controls.Add(this.scaleControl);
             this.scaleGroupBox.Controls.Add(this.label7);
-            this.scaleGroupBox.Location = new System.Drawing.Point(3, 418);
+            this.scaleGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.scaleGroupBox.Location = new System.Drawing.Point(3, 414);
             this.scaleGroupBox.Name = "scaleGroupBox";
-            this.scaleGroupBox.Size = new System.Drawing.Size(204, 56);
+            this.scaleGroupBox.Size = new System.Drawing.Size(204, 63);
             this.scaleGroupBox.TabIndex = 5;
             this.scaleGroupBox.TabStop = false;
             this.scaleGroupBox.Text = "Масштаб";
@@ -219,100 +233,6 @@
             this.label7.Size = new System.Drawing.Size(60, 13);
             this.label7.TabIndex = 0;
             this.label7.Text = "Кратность";
-            // 
-            // tanslationGroupBox
-            // 
-            this.tanslationGroupBox.Controls.Add(this.zOffsetControlControl);
-            this.tanslationGroupBox.Controls.Add(this.label5);
-            this.tanslationGroupBox.Controls.Add(this.yOffsetControl);
-            this.tanslationGroupBox.Controls.Add(this.label6);
-            this.tanslationGroupBox.Controls.Add(this.xOffsetControl);
-            this.tanslationGroupBox.Controls.Add(this.label4);
-            this.tanslationGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tanslationGroupBox.Location = new System.Drawing.Point(3, 248);
-            this.tanslationGroupBox.Name = "tanslationGroupBox";
-            this.tanslationGroupBox.Size = new System.Drawing.Size(204, 160);
-            this.tanslationGroupBox.TabIndex = 4;
-            this.tanslationGroupBox.TabStop = false;
-            this.tanslationGroupBox.Text = "Перенос";
-            // 
-            // zOffsetControlControl
-            // 
-            this.zOffsetControlControl.Location = new System.Drawing.Point(6, 131);
-            this.zOffsetControlControl.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.zOffsetControlControl.Minimum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            -2147483648});
-            this.zOffsetControlControl.Name = "zOffsetControlControl";
-            this.zOffsetControlControl.Size = new System.Drawing.Size(192, 20);
-            this.zOffsetControlControl.TabIndex = 10;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 115);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(37, 13);
-            this.label5.TabIndex = 9;
-            this.label5.Text = "Ось Z";
-            // 
-            // yOffsetControl
-            // 
-            this.yOffsetControl.Location = new System.Drawing.Point(6, 80);
-            this.yOffsetControl.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.yOffsetControl.Minimum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            -2147483648});
-            this.yOffsetControl.Name = "yOffsetControl";
-            this.yOffsetControl.Size = new System.Drawing.Size(192, 20);
-            this.yOffsetControl.TabIndex = 8;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(6, 64);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(37, 13);
-            this.label6.TabIndex = 7;
-            this.label6.Text = "Ось Y";
-            // 
-            // xOffsetControl
-            // 
-            this.xOffsetControl.Location = new System.Drawing.Point(6, 32);
-            this.xOffsetControl.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.xOffsetControl.Minimum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            -2147483648});
-            this.xOffsetControl.Name = "xOffsetControl";
-            this.xOffsetControl.Size = new System.Drawing.Size(192, 20);
-            this.xOffsetControl.TabIndex = 6;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 16);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(37, 13);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "Ось X";
             // 
             // angleGroupBox
             // 
@@ -445,12 +365,12 @@
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.tableLayoutPanel3);
-            this.tabPage2.Location = new System.Drawing.Point(4, 40);
+            this.tabPage2.Location = new System.Drawing.Point(4, 58);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(216, 481);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Качественные характеристики";
+            this.tabPage2.Text = "Качественные хар-ки (ч. 1)";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel3
@@ -461,16 +381,16 @@
             this.tableLayoutPanel3.Controls.Add(this.tailGroupBox, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.bodyGroupBox, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.pawsGroupBox, 0, 2);
-            this.tableLayoutPanel3.Controls.Add(this.bandGroupBox, 0, 3);
+            this.tableLayoutPanel3.Controls.Add(this.eyesGroupBox, 0, 3);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 4;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 32.62032F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 120F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 117F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(210, 475);
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 123F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 127F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(210, 484);
             this.tableLayoutPanel3.TabIndex = 0;
             // 
             // tailGroupBox
@@ -480,7 +400,7 @@
             this.tailGroupBox.Controls.Add(this.tailLengthControl);
             this.tailGroupBox.Controls.Add(this.label10);
             this.tailGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tailGroupBox.Location = new System.Drawing.Point(3, 122);
+            this.tailGroupBox.Location = new System.Drawing.Point(3, 118);
             this.tailGroupBox.Name = "tailGroupBox";
             this.tailGroupBox.Size = new System.Drawing.Size(204, 113);
             this.tailGroupBox.TabIndex = 1;
@@ -527,7 +447,7 @@
             this.bodyGroupBox.Controls.Add(this.label12);
             this.bodyGroupBox.Location = new System.Drawing.Point(3, 3);
             this.bodyGroupBox.Name = "bodyGroupBox";
-            this.bodyGroupBox.Size = new System.Drawing.Size(204, 113);
+            this.bodyGroupBox.Size = new System.Drawing.Size(204, 109);
             this.bodyGroupBox.TabIndex = 2;
             this.bodyGroupBox.TabStop = false;
             this.bodyGroupBox.Text = "Тело";
@@ -571,7 +491,7 @@
             this.pawsGroupBox.Controls.Add(this.pawsHeightControl);
             this.pawsGroupBox.Controls.Add(this.label8);
             this.pawsGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pawsGroupBox.Location = new System.Drawing.Point(3, 241);
+            this.pawsGroupBox.Location = new System.Drawing.Point(3, 237);
             this.pawsGroupBox.Name = "pawsGroupBox";
             this.pawsGroupBox.Size = new System.Drawing.Size(204, 114);
             this.pawsGroupBox.TabIndex = 0;
@@ -610,41 +530,206 @@
             this.label8.TabIndex = 0;
             this.label8.Text = "Высота";
             // 
-            // bandGroupBox
+            // eyesGroupBox
             // 
-            this.bandGroupBox.Controls.Add(this.bandsWidthControl);
-            this.bandGroupBox.Controls.Add(this.label14);
-            this.bandGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
-            this.bandGroupBox.Location = new System.Drawing.Point(3, 361);
-            this.bandGroupBox.Name = "bandGroupBox";
-            this.bandGroupBox.Size = new System.Drawing.Size(204, 60);
-            this.bandGroupBox.TabIndex = 3;
-            this.bandGroupBox.TabStop = false;
-            this.bandGroupBox.Text = "Полосы";
-            // 
-            // bandsWidthControl
-            // 
-            this.bandsWidthControl.Location = new System.Drawing.Point(9, 32);
-            this.bandsWidthControl.Name = "bandsWidthControl";
-            this.bandsWidthControl.Size = new System.Drawing.Size(189, 20);
-            this.bandsWidthControl.TabIndex = 1;
+            this.eyesGroupBox.Controls.Add(this.pupilSizeControl);
+            this.eyesGroupBox.Controls.Add(this.label15);
+            this.eyesGroupBox.Controls.Add(this.irisSizeControl);
+            this.eyesGroupBox.Controls.Add(this.label14);
+            this.eyesGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.eyesGroupBox.Location = new System.Drawing.Point(3, 360);
+            this.eyesGroupBox.Name = "eyesGroupBox";
+            this.eyesGroupBox.Size = new System.Drawing.Size(204, 113);
+            this.eyesGroupBox.TabIndex = 3;
+            this.eyesGroupBox.TabStop = false;
+            this.eyesGroupBox.Text = "Глаза";
             // 
             // label14
             // 
             this.label14.AutoSize = true;
             this.label14.Location = new System.Drawing.Point(6, 16);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(46, 13);
+            this.label14.Size = new System.Drawing.Size(72, 13);
             this.label14.TabIndex = 0;
-            this.label14.Text = "Ширина";
+            this.label14.Text = "Размер глаз";
+            // 
+            // irisSizeControl
+            // 
+            this.irisSizeControl.Location = new System.Drawing.Point(9, 32);
+            this.irisSizeControl.Name = "irisSizeControl";
+            this.irisSizeControl.Size = new System.Drawing.Size(189, 20);
+            this.irisSizeControl.TabIndex = 1;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(6, 67);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(90, 13);
+            this.label15.TabIndex = 2;
+            this.label15.Text = "Размер зрачков";
+            // 
+            // pupilSizeControl
+            // 
+            this.pupilSizeControl.Location = new System.Drawing.Point(9, 85);
+            this.pupilSizeControl.Name = "pupilSizeControl";
+            this.pupilSizeControl.Size = new System.Drawing.Size(189, 20);
+            this.pupilSizeControl.TabIndex = 3;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.tableLayoutPanel4);
+            this.tabPage3.Location = new System.Drawing.Point(4, 58);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(216, 481);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Качественные хар-ки (ч. 2)";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 16);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(37, 13);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "Ось X";
+            // 
+            // xOffsetControl
+            // 
+            this.xOffsetControl.Location = new System.Drawing.Point(6, 32);
+            this.xOffsetControl.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.xOffsetControl.Minimum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            -2147483648});
+            this.xOffsetControl.Name = "xOffsetControl";
+            this.xOffsetControl.Size = new System.Drawing.Size(192, 20);
+            this.xOffsetControl.TabIndex = 6;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(6, 64);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(37, 13);
+            this.label6.TabIndex = 7;
+            this.label6.Text = "Ось Y";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 115);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(37, 13);
+            this.label5.TabIndex = 9;
+            this.label5.Text = "Ось Z";
+            // 
+            // zOffsetControlControl
+            // 
+            this.zOffsetControlControl.Location = new System.Drawing.Point(6, 131);
+            this.zOffsetControlControl.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.zOffsetControlControl.Minimum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            -2147483648});
+            this.zOffsetControlControl.Name = "zOffsetControlControl";
+            this.zOffsetControlControl.Size = new System.Drawing.Size(192, 20);
+            this.zOffsetControlControl.TabIndex = 10;
+            // 
+            // tanslationGroupBox
+            // 
+            this.tanslationGroupBox.Controls.Add(this.zOffsetControlControl);
+            this.tanslationGroupBox.Controls.Add(this.label5);
+            this.tanslationGroupBox.Controls.Add(this.yOffsetControl);
+            this.tanslationGroupBox.Controls.Add(this.label6);
+            this.tanslationGroupBox.Controls.Add(this.xOffsetControl);
+            this.tanslationGroupBox.Controls.Add(this.label4);
+            this.tanslationGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tanslationGroupBox.Location = new System.Drawing.Point(3, 248);
+            this.tanslationGroupBox.Name = "tanslationGroupBox";
+            this.tanslationGroupBox.Size = new System.Drawing.Size(204, 160);
+            this.tanslationGroupBox.TabIndex = 4;
+            this.tanslationGroupBox.TabStop = false;
+            this.tanslationGroupBox.Text = "Перенос";
+            // 
+            // yOffsetControl
+            // 
+            this.yOffsetControl.Location = new System.Drawing.Point(6, 80);
+            this.yOffsetControl.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.yOffsetControl.Minimum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            -2147483648});
+            this.yOffsetControl.Name = "yOffsetControl";
+            this.yOffsetControl.Size = new System.Drawing.Size(192, 20);
+            this.yOffsetControl.TabIndex = 8;
+            // 
+            // tableLayoutPanel4
+            // 
+            this.tableLayoutPanel4.ColumnCount = 1;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel4.Controls.Add(this.earsGroupBox, 0, 0);
+            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 2;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 31.78947F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 68.21053F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(210, 475);
+            this.tableLayoutPanel4.TabIndex = 0;
+            // 
+            // earsGroupBox
+            // 
+            this.earsGroupBox.Controls.Add(this.earsWidthControl);
+            this.earsGroupBox.Controls.Add(this.label16);
+            this.earsGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.earsGroupBox.Location = new System.Drawing.Point(3, 3);
+            this.earsGroupBox.Name = "earsGroupBox";
+            this.earsGroupBox.Size = new System.Drawing.Size(204, 145);
+            this.earsGroupBox.TabIndex = 0;
+            this.earsGroupBox.TabStop = false;
+            this.earsGroupBox.Text = "Уши";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(6, 16);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(53, 13);
+            this.label16.TabIndex = 0;
+            this.label16.Text = "Толщина";
+            // 
+            // earsWidthControl
+            // 
+            this.earsWidthControl.Location = new System.Drawing.Point(6, 32);
+            this.earsWidthControl.Name = "earsWidthControl";
+            this.earsWidthControl.Size = new System.Drawing.Size(192, 20);
+            this.earsWidthControl.TabIndex = 1;
             // 
             // tabbyCatRenderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(994, 531);
+            this.ClientSize = new System.Drawing.Size(994, 549);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.MinimumSize = new System.Drawing.Size(1010, 570);
+            this.MinimumSize = new System.Drawing.Size(1010, 588);
             this.Name = "tabbyCatRenderForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "TabbyCat";
@@ -656,11 +741,6 @@
             this.scaleGroupBox.ResumeLayout(false);
             this.scaleGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.scaleControl)).EndInit();
-            this.tanslationGroupBox.ResumeLayout(false);
-            this.tanslationGroupBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.zOffsetControlControl)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.yOffsetControl)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.xOffsetControl)).EndInit();
             this.angleGroupBox.ResumeLayout(false);
             this.angleGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.zAngleControl)).EndInit();
@@ -682,9 +762,20 @@
             this.pawsGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pawsWidthControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pawsHeightControl)).EndInit();
-            this.bandGroupBox.ResumeLayout(false);
-            this.bandGroupBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bandsWidthControl)).EndInit();
+            this.eyesGroupBox.ResumeLayout(false);
+            this.eyesGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.irisSizeControl)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pupilSizeControl)).EndInit();
+            this.tabPage3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.xOffsetControl)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.zOffsetControlControl)).EndInit();
+            this.tanslationGroupBox.ResumeLayout(false);
+            this.tanslationGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.yOffsetControl)).EndInit();
+            this.tableLayoutPanel4.ResumeLayout(false);
+            this.earsGroupBox.ResumeLayout(false);
+            this.earsGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.earsWidthControl)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -702,13 +793,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.NumericUpDown xAngleControl;
-        private System.Windows.Forms.GroupBox tanslationGroupBox;
-        private System.Windows.Forms.NumericUpDown zOffsetControlControl;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.NumericUpDown yOffsetControl;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.NumericUpDown xOffsetControl;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
@@ -732,9 +816,23 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.NumericUpDown pawsHeightControl;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.GroupBox bandGroupBox;
-        private System.Windows.Forms.NumericUpDown bandsWidthControl;
+        private System.Windows.Forms.GroupBox eyesGroupBox;
+        private System.Windows.Forms.NumericUpDown pupilSizeControl;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.NumericUpDown irisSizeControl;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.GroupBox tanslationGroupBox;
+        private System.Windows.Forms.NumericUpDown zOffsetControlControl;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.NumericUpDown yOffsetControl;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.NumericUpDown xOffsetControl;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
+        private System.Windows.Forms.GroupBox earsGroupBox;
+        private System.Windows.Forms.NumericUpDown earsWidthControl;
+        private System.Windows.Forms.Label label16;
     }
 }
 

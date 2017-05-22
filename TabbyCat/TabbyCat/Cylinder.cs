@@ -17,7 +17,9 @@ namespace TabbyCat
 
         Color color;
 
+        double radius;
         double height;
+        double vertexCount;
 
         internal List<Triangle> BottomBase
         {
@@ -58,6 +60,71 @@ namespace TabbyCat
             }
         }
 
+        internal Vertex Center
+        {
+            get
+            {
+                return center;
+            }
+
+            set
+            {
+                center = value;
+            }
+        }
+
+        public Color Color
+        {
+            get
+            {
+                return color;
+            }
+
+            set
+            {
+                color = value;
+            }
+        }
+
+        public double Radius
+        {
+            get
+            {
+                return radius;
+            }
+
+            set
+            {
+                radius = value;
+            }
+        }
+
+        public double Height
+        {
+            get
+            {
+                return height;
+            }
+
+            set
+            {
+                height = value;
+            }
+        }
+
+        public double VertexCount
+        {
+            get
+            {
+                return vertexCount;
+            }
+
+            set
+            {
+                vertexCount = value;
+            }
+        }
+
         public Cylinder(Vertex center, double radius, double height, double vertexCount, Color color)
         {
             double x = center.Z;
@@ -69,7 +136,9 @@ namespace TabbyCat
             this.topBase = new List<Triangle>();
             this.color = color;
             this.center = center;
+            this.radius = radius;
             this.height = height;
+            this.vertexCount = vertexCount;
 
             this.bottomBase = getBase(new Vertex(x, y, z), radius, vertexCount, color);
             this.topBase = getBase(new Vertex(x, y, z + height), radius, vertexCount, color);
