@@ -16,15 +16,15 @@ namespace TabbyCat
     {
         Bitmap renderArea;
 
-        List<Box> boxes;
-        List<Cylinder> cylinders;
-        List<HalfCylinder> halfCylinders;
+        List<Box> boxes = new List<Box>();
+        List<Cylinder> cylinders = new List<Cylinder>();
+        List<HalfCylinder> halfCylinders = new List<HalfCylinder>();
+        List<Box> bands = new List<Box>();
+        List<Box> teeth = new List<Box>();
 
         TranslationTransformation trTransform;
         RotationTransformation rtTransform;
         ScaleTransformation scTransform;
-
-        //Box mouth = new Box(new Vertex(85, 10, 45), new Vertex(95, -20, 55), Color.White);
 
         double pawsHeight;
         double pawsWidth;
@@ -36,10 +36,10 @@ namespace TabbyCat
             InitializeComponent();
 
             boxes = boxesDrafting(Color.Orange);
-
             cylinders = cylindersDrafting(Color.White);
-
-            halfCylinders = halfCylindersDrafting(Color.Brown);
+            halfCylinders = halfCylindersDrafting(Color.DarkGray);
+            bands = bandsDrafting(Color.Brown);
+            teeth = teethDrafting(Color.White);
 
             trTransform = new TranslationTransformation();
 
@@ -94,6 +94,16 @@ namespace TabbyCat
             boxes.Add(new Box(new Vertex(-30, -2, 45), new Vertex(-35, -8, 75), color));
             boxes.Add(new Box(new Vertex(-30, -2, 75), new Vertex(-70, -8, 80), Color.Brown));
 
+            // рот
+            boxes.Add(new Box(new Vertex(95, 10, 40), new Vertex(96, -20, 50), Color.Blue));
+
+            // язык
+            boxes.Add(new Box(new Vertex(96, 6, 40), new Vertex(97, -16, 44), Color.Red));
+
+            // зубы
+            boxes.Add(new Box(new Vertex(96, 0, 50), new Vertex(97, -4, 47), Color.Yellow));
+            boxes.Add(new Box(new Vertex(96, -6, 50), new Vertex(97, -10, 47), Color.Yellow));
+
             // полосы
             boxes.Add(new Box(new Vertex(40, 10, 60), new Vertex(45, -20, 61), Color.Brown));
             boxes.Add(new Box(new Vertex(25, 10, 60), new Vertex(30, -20, 61), Color.Brown));
@@ -111,8 +121,8 @@ namespace TabbyCat
             cylinders.Add(new Cylinder(new Vertex(-95, 6, -63), 8, 4, 15, color));
 
             // зрачки
-            cylinders.Add(new Cylinder(new Vertex(-99, -16, -63), 4, 1, 15, Color.DarkGray));
-            cylinders.Add(new Cylinder(new Vertex(-99, 6, -63), 4, 1, 15, Color.DarkGray));
+            cylinders.Add(new Cylinder(new Vertex(-99, -16, -63), 4, 1, 15, Color.Green));
+            cylinders.Add(new Cylinder(new Vertex(-99, 6, -63), 4, 1, 15, Color.Green));
 
             return cylinders;
         }
@@ -125,8 +135,33 @@ namespace TabbyCat
             // уши
             halfCylinders.Add(new HalfCylinder(new Vertex(83, 75, -18), 10, 10, 10, color));
             halfCylinders.Add(new HalfCylinder(new Vertex(83, 75, 8), 10, 10, 10, color));
+            halfCylinders.Add(new HalfCylinder(new Vertex(93, 75, -18), 5, 1, 10, Color.LightPink));
+            halfCylinders.Add(new HalfCylinder(new Vertex(93, 75, 8), 5, 1, 10, Color.LightPink));
 
             return halfCylinders;
+        }
+
+        private List<Box> bandsDrafting(Color color)
+        {
+            List<Box> boxes = new List<Box>();
+
+            // полосы
+            boxes.Add(new Box(new Vertex(40, 10, 60), new Vertex(45, -20, 61), color));
+            boxes.Add(new Box(new Vertex(25, 10, 60), new Vertex(30, -20, 61), color));
+            boxes.Add(new Box(new Vertex(10, 10, 60), new Vertex(15, -20, 61), color));
+
+            return boxes;
+        }
+
+        private List<Box> teethDrafting(Color color)
+        {
+            List<Box> boxes = new List<Box>();
+
+            // зубы
+            boxes.Add(new Box(new Vertex(96, 0, 50), new Vertex(97, -4, 47), color));
+            boxes.Add(new Box(new Vertex(96, -6, 50), new Vertex(97, -10, 47), color));
+
+            return boxes;
         }
 
         private void drawLine(double xStart, double yStart, double xEnd, double yEnd)

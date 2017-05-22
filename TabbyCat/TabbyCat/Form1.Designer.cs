@@ -71,8 +71,8 @@
             this.pawsHeightControl = new System.Windows.Forms.NumericUpDown();
             this.label8 = new System.Windows.Forms.Label();
             this.bandGroupBox = new System.Windows.Forms.GroupBox();
-            this.label14 = new System.Windows.Forms.Label();
             this.bandsWidthControl = new System.Windows.Forms.NumericUpDown();
+            this.label14 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.renderPictureBox)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -193,7 +193,7 @@
             131072});
             this.scaleControl.Location = new System.Drawing.Point(6, 32);
             this.scaleControl.Maximum = new decimal(new int[] {
-            2,
+            5,
             0,
             0,
             0});
@@ -622,6 +622,13 @@
             this.bandGroupBox.TabStop = false;
             this.bandGroupBox.Text = "Полосы";
             // 
+            // bandsWidthControl
+            // 
+            this.bandsWidthControl.Location = new System.Drawing.Point(9, 32);
+            this.bandsWidthControl.Name = "bandsWidthControl";
+            this.bandsWidthControl.Size = new System.Drawing.Size(189, 20);
+            this.bandsWidthControl.TabIndex = 1;
+            // 
             // label14
             // 
             this.label14.AutoSize = true;
@@ -630,13 +637,6 @@
             this.label14.Size = new System.Drawing.Size(46, 13);
             this.label14.TabIndex = 0;
             this.label14.Text = "Ширина";
-            // 
-            // bandsWidthControl
-            // 
-            this.bandsWidthControl.Location = new System.Drawing.Point(9, 32);
-            this.bandsWidthControl.Name = "bandsWidthControl";
-            this.bandsWidthControl.Size = new System.Drawing.Size(189, 20);
-            this.bandsWidthControl.TabIndex = 1;
             // 
             // tabbyCatRenderForm
             // 
