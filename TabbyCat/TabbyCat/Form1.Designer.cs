@@ -88,9 +88,17 @@
             this.teethGroupBox = new System.Windows.Forms.GroupBox();
             this.label19 = new System.Windows.Forms.Label();
             this.teethWidthControl = new System.Windows.Forms.NumericUpDown();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.bandsGroupBox = new System.Windows.Forms.GroupBox();
             this.bandsWidthControl = new System.Windows.Forms.NumericUpDown();
             this.label20 = new System.Windows.Forms.Label();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.bandsNumberGroupBox = new System.Windows.Forms.GroupBox();
+            this.teethNumberGroupBox = new System.Windows.Forms.GroupBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.bandsNumberControl = new System.Windows.Forms.NumericUpDown();
+            this.teethNumberControl = new System.Windows.Forms.NumericUpDown();
+            this.label22 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.renderPictureBox)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -130,8 +138,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.tongueWidthControl)).BeginInit();
             this.teethGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.teethWidthControl)).BeginInit();
-            this.groupBox1.SuspendLayout();
+            this.bandsGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bandsWidthControl)).BeginInit();
+            this.tabPage4.SuspendLayout();
+            this.tableLayoutPanel5.SuspendLayout();
+            this.bandsNumberGroupBox.SuspendLayout();
+            this.teethNumberGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bandsNumberControl)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.teethNumberControl)).BeginInit();
             this.SuspendLayout();
             // 
             // renderPictureBox
@@ -140,7 +154,7 @@
             this.renderPictureBox.Location = new System.Drawing.Point(0, 0);
             this.renderPictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.renderPictureBox.Name = "renderPictureBox";
-            this.renderPictureBox.Size = new System.Drawing.Size(764, 549);
+            this.renderPictureBox.Size = new System.Drawing.Size(754, 569);
             this.renderPictureBox.TabIndex = 0;
             this.renderPictureBox.TabStop = false;
             this.renderPictureBox.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
@@ -149,7 +163,7 @@
             // 
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 230F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 240F));
             this.tableLayoutPanel1.Controls.Add(this.tabControl1, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.renderPictureBox, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -157,31 +171,32 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(994, 549);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(994, 569);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(767, 3);
+            this.tabControl1.Location = new System.Drawing.Point(757, 3);
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(224, 543);
+            this.tabControl1.Size = new System.Drawing.Size(234, 563);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.tableLayoutPanel2);
-            this.tabPage1.Location = new System.Drawing.Point(4, 58);
+            this.tabPage1.Location = new System.Drawing.Point(4, 40);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(216, 481);
+            this.tabPage1.Size = new System.Drawing.Size(226, 519);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Геометрические преобразования";
+            this.tabPage1.Text = "Геометрич. преобр.";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel2
@@ -200,7 +215,7 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 170F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 166F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 54F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(210, 482);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(220, 482);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // scaleGroupBox
@@ -210,7 +225,7 @@
             this.scaleGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
             this.scaleGroupBox.Location = new System.Drawing.Point(3, 414);
             this.scaleGroupBox.Name = "scaleGroupBox";
-            this.scaleGroupBox.Size = new System.Drawing.Size(204, 63);
+            this.scaleGroupBox.Size = new System.Drawing.Size(214, 63);
             this.scaleGroupBox.TabIndex = 5;
             this.scaleGroupBox.TabStop = false;
             this.scaleGroupBox.Text = "Масштаб";
@@ -235,7 +250,7 @@
             0,
             131072});
             this.scaleControl.Name = "scaleControl";
-            this.scaleControl.Size = new System.Drawing.Size(192, 20);
+            this.scaleControl.Size = new System.Drawing.Size(202, 20);
             this.scaleControl.TabIndex = 1;
             this.scaleControl.Value = new decimal(new int[] {
             1,
@@ -263,7 +278,7 @@
             this.angleGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
             this.angleGroupBox.Location = new System.Drawing.Point(3, 78);
             this.angleGroupBox.Name = "angleGroupBox";
-            this.angleGroupBox.Size = new System.Drawing.Size(204, 164);
+            this.angleGroupBox.Size = new System.Drawing.Size(214, 164);
             this.angleGroupBox.TabIndex = 3;
             this.angleGroupBox.TabStop = false;
             this.angleGroupBox.Text = "Поворот";
@@ -282,7 +297,7 @@
             0,
             -2147483648});
             this.zAngleControl.Name = "zAngleControl";
-            this.zAngleControl.Size = new System.Drawing.Size(192, 20);
+            this.zAngleControl.Size = new System.Drawing.Size(202, 20);
             this.zAngleControl.TabIndex = 5;
             // 
             // label3
@@ -308,7 +323,7 @@
             0,
             -2147483648});
             this.yAngleControl.Name = "yAngleControl";
-            this.yAngleControl.Size = new System.Drawing.Size(192, 20);
+            this.yAngleControl.Size = new System.Drawing.Size(202, 20);
             this.yAngleControl.TabIndex = 3;
             // 
             // label2
@@ -343,7 +358,7 @@
             0,
             -2147483648});
             this.xAngleControl.Name = "xAngleControl";
-            this.xAngleControl.Size = new System.Drawing.Size(189, 20);
+            this.xAngleControl.Size = new System.Drawing.Size(199, 20);
             this.xAngleControl.TabIndex = 0;
             // 
             // modelGeometricType
@@ -353,7 +368,7 @@
             this.modelGeometricType.Dock = System.Windows.Forms.DockStyle.Top;
             this.modelGeometricType.Location = new System.Drawing.Point(3, 3);
             this.modelGeometricType.Name = "modelGeometricType";
-            this.modelGeometricType.Size = new System.Drawing.Size(204, 69);
+            this.modelGeometricType.Size = new System.Drawing.Size(214, 69);
             this.modelGeometricType.TabIndex = 5;
             this.modelGeometricType.TabStop = false;
             this.modelGeometricType.Text = "Тип геометрической модели";
@@ -383,12 +398,12 @@
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.tableLayoutPanel3);
-            this.tabPage2.Location = new System.Drawing.Point(4, 58);
+            this.tabPage2.Location = new System.Drawing.Point(4, 40);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(216, 481);
+            this.tabPage2.Size = new System.Drawing.Size(226, 519);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Качественные хар-ки (ч. 1)";
+            this.tabPage2.Text = "Качеств. хар-ки (ч.1)";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel3
@@ -408,7 +423,7 @@
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 123F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 127F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(210, 484);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(220, 484);
             this.tableLayoutPanel3.TabIndex = 0;
             // 
             // tailGroupBox
@@ -420,7 +435,7 @@
             this.tailGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
             this.tailGroupBox.Location = new System.Drawing.Point(3, 118);
             this.tailGroupBox.Name = "tailGroupBox";
-            this.tailGroupBox.Size = new System.Drawing.Size(204, 113);
+            this.tailGroupBox.Size = new System.Drawing.Size(214, 113);
             this.tailGroupBox.TabIndex = 1;
             this.tailGroupBox.TabStop = false;
             this.tailGroupBox.Text = "Хвост";
@@ -429,7 +444,7 @@
             // 
             this.tailWidthControl.Location = new System.Drawing.Point(9, 81);
             this.tailWidthControl.Name = "tailWidthControl";
-            this.tailWidthControl.Size = new System.Drawing.Size(189, 20);
+            this.tailWidthControl.Size = new System.Drawing.Size(199, 20);
             this.tailWidthControl.TabIndex = 3;
             // 
             // label11
@@ -445,7 +460,7 @@
             // 
             this.tailLengthControl.Location = new System.Drawing.Point(13, 32);
             this.tailLengthControl.Name = "tailLengthControl";
-            this.tailLengthControl.Size = new System.Drawing.Size(185, 20);
+            this.tailLengthControl.Size = new System.Drawing.Size(195, 20);
             this.tailLengthControl.TabIndex = 1;
             // 
             // label10
@@ -463,9 +478,10 @@
             this.bodyGroupBox.Controls.Add(this.label13);
             this.bodyGroupBox.Controls.Add(this.torsoLengthControl);
             this.bodyGroupBox.Controls.Add(this.label12);
+            this.bodyGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
             this.bodyGroupBox.Location = new System.Drawing.Point(3, 3);
             this.bodyGroupBox.Name = "bodyGroupBox";
-            this.bodyGroupBox.Size = new System.Drawing.Size(204, 109);
+            this.bodyGroupBox.Size = new System.Drawing.Size(214, 109);
             this.bodyGroupBox.TabIndex = 2;
             this.bodyGroupBox.TabStop = false;
             this.bodyGroupBox.Text = "Тело";
@@ -474,7 +490,7 @@
             // 
             this.torsoWidthControl.Location = new System.Drawing.Point(9, 81);
             this.torsoWidthControl.Name = "torsoWidthControl";
-            this.torsoWidthControl.Size = new System.Drawing.Size(189, 20);
+            this.torsoWidthControl.Size = new System.Drawing.Size(199, 20);
             this.torsoWidthControl.TabIndex = 3;
             // 
             // label13
@@ -490,7 +506,7 @@
             // 
             this.torsoLengthControl.Location = new System.Drawing.Point(9, 32);
             this.torsoLengthControl.Name = "torsoLengthControl";
-            this.torsoLengthControl.Size = new System.Drawing.Size(189, 20);
+            this.torsoLengthControl.Size = new System.Drawing.Size(199, 20);
             this.torsoLengthControl.TabIndex = 1;
             // 
             // label12
@@ -511,7 +527,7 @@
             this.pawsGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
             this.pawsGroupBox.Location = new System.Drawing.Point(3, 237);
             this.pawsGroupBox.Name = "pawsGroupBox";
-            this.pawsGroupBox.Size = new System.Drawing.Size(204, 114);
+            this.pawsGroupBox.Size = new System.Drawing.Size(214, 114);
             this.pawsGroupBox.TabIndex = 0;
             this.pawsGroupBox.TabStop = false;
             this.pawsGroupBox.Text = "Лапы";
@@ -520,7 +536,7 @@
             // 
             this.pawsWidthControl.Location = new System.Drawing.Point(9, 83);
             this.pawsWidthControl.Name = "pawsWidthControl";
-            this.pawsWidthControl.Size = new System.Drawing.Size(189, 20);
+            this.pawsWidthControl.Size = new System.Drawing.Size(199, 20);
             this.pawsWidthControl.TabIndex = 3;
             // 
             // label9
@@ -536,7 +552,7 @@
             // 
             this.pawsHeightControl.Location = new System.Drawing.Point(9, 32);
             this.pawsHeightControl.Name = "pawsHeightControl";
-            this.pawsHeightControl.Size = new System.Drawing.Size(189, 20);
+            this.pawsHeightControl.Size = new System.Drawing.Size(199, 20);
             this.pawsHeightControl.TabIndex = 1;
             // 
             // label8
@@ -557,7 +573,7 @@
             this.eyesGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
             this.eyesGroupBox.Location = new System.Drawing.Point(3, 360);
             this.eyesGroupBox.Name = "eyesGroupBox";
-            this.eyesGroupBox.Size = new System.Drawing.Size(204, 113);
+            this.eyesGroupBox.Size = new System.Drawing.Size(214, 113);
             this.eyesGroupBox.TabIndex = 3;
             this.eyesGroupBox.TabStop = false;
             this.eyesGroupBox.Text = "Глаза";
@@ -575,7 +591,7 @@
             // 
             this.irisSizeControl.Location = new System.Drawing.Point(9, 32);
             this.irisSizeControl.Name = "irisSizeControl";
-            this.irisSizeControl.Size = new System.Drawing.Size(189, 20);
+            this.irisSizeControl.Size = new System.Drawing.Size(199, 20);
             this.irisSizeControl.TabIndex = 1;
             // 
             // label15
@@ -591,18 +607,18 @@
             // 
             this.pupilSizeControl.Location = new System.Drawing.Point(9, 85);
             this.pupilSizeControl.Name = "pupilSizeControl";
-            this.pupilSizeControl.Size = new System.Drawing.Size(189, 20);
+            this.pupilSizeControl.Size = new System.Drawing.Size(199, 20);
             this.pupilSizeControl.TabIndex = 3;
             // 
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.tableLayoutPanel4);
-            this.tabPage3.Location = new System.Drawing.Point(4, 58);
+            this.tabPage3.Location = new System.Drawing.Point(4, 40);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(216, 481);
+            this.tabPage3.Size = new System.Drawing.Size(226, 519);
             this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Качественные хар-ки (ч. 2)";
+            this.tabPage3.Text = "Качеств. хар-ки (ч.2)";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // label4
@@ -628,7 +644,7 @@
             0,
             -2147483648});
             this.xOffsetControl.Name = "xOffsetControl";
-            this.xOffsetControl.Size = new System.Drawing.Size(192, 20);
+            this.xOffsetControl.Size = new System.Drawing.Size(202, 20);
             this.xOffsetControl.TabIndex = 6;
             // 
             // label6
@@ -663,7 +679,7 @@
             0,
             -2147483648});
             this.zOffsetControlControl.Name = "zOffsetControlControl";
-            this.zOffsetControlControl.Size = new System.Drawing.Size(192, 20);
+            this.zOffsetControlControl.Size = new System.Drawing.Size(202, 20);
             this.zOffsetControlControl.TabIndex = 10;
             // 
             // tanslationGroupBox
@@ -677,7 +693,7 @@
             this.tanslationGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
             this.tanslationGroupBox.Location = new System.Drawing.Point(3, 248);
             this.tanslationGroupBox.Name = "tanslationGroupBox";
-            this.tanslationGroupBox.Size = new System.Drawing.Size(204, 160);
+            this.tanslationGroupBox.Size = new System.Drawing.Size(214, 160);
             this.tanslationGroupBox.TabIndex = 4;
             this.tanslationGroupBox.TabStop = false;
             this.tanslationGroupBox.Text = "Перенос";
@@ -696,7 +712,7 @@
             0,
             -2147483648});
             this.yOffsetControl.Name = "yOffsetControl";
-            this.yOffsetControl.Size = new System.Drawing.Size(192, 20);
+            this.yOffsetControl.Size = new System.Drawing.Size(202, 20);
             this.yOffsetControl.TabIndex = 8;
             // 
             // tableLayoutPanel4
@@ -706,7 +722,7 @@
             this.tableLayoutPanel4.Controls.Add(this.earsGroupBox, 0, 0);
             this.tableLayoutPanel4.Controls.Add(this.tongueGroupBox, 0, 1);
             this.tableLayoutPanel4.Controls.Add(this.teethGroupBox, 0, 2);
-            this.tableLayoutPanel4.Controls.Add(this.groupBox1, 0, 3);
+            this.tableLayoutPanel4.Controls.Add(this.bandsGroupBox, 0, 3);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
@@ -715,7 +731,7 @@
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 120F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 70F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 211F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(210, 472);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(220, 477);
             this.tableLayoutPanel4.TabIndex = 0;
             // 
             // earsGroupBox
@@ -725,7 +741,7 @@
             this.earsGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
             this.earsGroupBox.Location = new System.Drawing.Point(3, 3);
             this.earsGroupBox.Name = "earsGroupBox";
-            this.earsGroupBox.Size = new System.Drawing.Size(204, 62);
+            this.earsGroupBox.Size = new System.Drawing.Size(214, 62);
             this.earsGroupBox.TabIndex = 1;
             this.earsGroupBox.TabStop = false;
             this.earsGroupBox.Text = "Уши";
@@ -734,7 +750,7 @@
             // 
             this.earsWidthControl.Location = new System.Drawing.Point(6, 32);
             this.earsWidthControl.Name = "earsWidthControl";
-            this.earsWidthControl.Size = new System.Drawing.Size(192, 20);
+            this.earsWidthControl.Size = new System.Drawing.Size(202, 20);
             this.earsWidthControl.TabIndex = 1;
             // 
             // label16
@@ -755,7 +771,7 @@
             this.tongueGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
             this.tongueGroupBox.Location = new System.Drawing.Point(3, 71);
             this.tongueGroupBox.Name = "tongueGroupBox";
-            this.tongueGroupBox.Size = new System.Drawing.Size(204, 114);
+            this.tongueGroupBox.Size = new System.Drawing.Size(214, 114);
             this.tongueGroupBox.TabIndex = 2;
             this.tongueGroupBox.TabStop = false;
             this.tongueGroupBox.Text = "Язык";
@@ -773,7 +789,7 @@
             // 
             this.tongueLengthControl.Location = new System.Drawing.Point(6, 32);
             this.tongueLengthControl.Name = "tongueLengthControl";
-            this.tongueLengthControl.Size = new System.Drawing.Size(192, 20);
+            this.tongueLengthControl.Size = new System.Drawing.Size(202, 20);
             this.tongueLengthControl.TabIndex = 1;
             // 
             // label18
@@ -789,7 +805,7 @@
             // 
             this.tongueWidthControl.Location = new System.Drawing.Point(6, 85);
             this.tongueWidthControl.Name = "tongueWidthControl";
-            this.tongueWidthControl.Size = new System.Drawing.Size(192, 20);
+            this.tongueWidthControl.Size = new System.Drawing.Size(202, 20);
             this.tongueWidthControl.TabIndex = 3;
             // 
             // teethGroupBox
@@ -799,7 +815,7 @@
             this.teethGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
             this.teethGroupBox.Location = new System.Drawing.Point(3, 191);
             this.teethGroupBox.Name = "teethGroupBox";
-            this.teethGroupBox.Size = new System.Drawing.Size(204, 63);
+            this.teethGroupBox.Size = new System.Drawing.Size(214, 63);
             this.teethGroupBox.TabIndex = 3;
             this.teethGroupBox.TabStop = false;
             this.teethGroupBox.Text = "Зубы";
@@ -817,26 +833,26 @@
             // 
             this.teethWidthControl.Location = new System.Drawing.Point(6, 32);
             this.teethWidthControl.Name = "teethWidthControl";
-            this.teethWidthControl.Size = new System.Drawing.Size(192, 20);
+            this.teethWidthControl.Size = new System.Drawing.Size(202, 20);
             this.teethWidthControl.TabIndex = 1;
             // 
-            // groupBox1
+            // bandsGroupBox
             // 
-            this.groupBox1.Controls.Add(this.bandsWidthControl);
-            this.groupBox1.Controls.Add(this.label20);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox1.Location = new System.Drawing.Point(3, 261);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(204, 64);
-            this.groupBox1.TabIndex = 4;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Полосы";
+            this.bandsGroupBox.Controls.Add(this.bandsWidthControl);
+            this.bandsGroupBox.Controls.Add(this.label20);
+            this.bandsGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.bandsGroupBox.Location = new System.Drawing.Point(3, 261);
+            this.bandsGroupBox.Name = "bandsGroupBox";
+            this.bandsGroupBox.Size = new System.Drawing.Size(214, 64);
+            this.bandsGroupBox.TabIndex = 4;
+            this.bandsGroupBox.TabStop = false;
+            this.bandsGroupBox.Text = "Полосы";
             // 
             // bandsWidthControl
             // 
             this.bandsWidthControl.Location = new System.Drawing.Point(6, 33);
             this.bandsWidthControl.Name = "bandsWidthControl";
-            this.bandsWidthControl.Size = new System.Drawing.Size(192, 20);
+            this.bandsWidthControl.Size = new System.Drawing.Size(202, 20);
             this.bandsWidthControl.TabIndex = 3;
             // 
             // label20
@@ -848,11 +864,93 @@
             this.label20.TabIndex = 2;
             this.label20.Text = "Толщина";
             // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.tableLayoutPanel5);
+            this.tabPage4.Location = new System.Drawing.Point(4, 40);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(226, 519);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Количеств. хар-ки";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel5
+            // 
+            this.tableLayoutPanel5.ColumnCount = 1;
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel5.Controls.Add(this.bandsNumberGroupBox, 0, 0);
+            this.tableLayoutPanel5.Controls.Add(this.teethNumberGroupBox, 0, 1);
+            this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+            this.tableLayoutPanel5.RowCount = 2;
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.46541F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 85.53459F));
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(220, 477);
+            this.tableLayoutPanel5.TabIndex = 0;
+            // 
+            // bandsNumberGroupBox
+            // 
+            this.bandsNumberGroupBox.Controls.Add(this.bandsNumberControl);
+            this.bandsNumberGroupBox.Controls.Add(this.label21);
+            this.bandsNumberGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.bandsNumberGroupBox.Location = new System.Drawing.Point(3, 3);
+            this.bandsNumberGroupBox.Name = "bandsNumberGroupBox";
+            this.bandsNumberGroupBox.Size = new System.Drawing.Size(214, 63);
+            this.bandsNumberGroupBox.TabIndex = 0;
+            this.bandsNumberGroupBox.TabStop = false;
+            this.bandsNumberGroupBox.Text = "Полосы";
+            // 
+            // teethNumberGroupBox
+            // 
+            this.teethNumberGroupBox.Controls.Add(this.teethNumberControl);
+            this.teethNumberGroupBox.Controls.Add(this.label22);
+            this.teethNumberGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.teethNumberGroupBox.Location = new System.Drawing.Point(3, 72);
+            this.teethNumberGroupBox.Name = "teethNumberGroupBox";
+            this.teethNumberGroupBox.Size = new System.Drawing.Size(214, 62);
+            this.teethNumberGroupBox.TabIndex = 1;
+            this.teethNumberGroupBox.TabStop = false;
+            this.teethNumberGroupBox.Text = "Зубы";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(6, 16);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(66, 13);
+            this.label21.TabIndex = 0;
+            this.label21.Text = "Количество";
+            // 
+            // bandsNumberControl
+            // 
+            this.bandsNumberControl.Location = new System.Drawing.Point(6, 32);
+            this.bandsNumberControl.Name = "bandsNumberControl";
+            this.bandsNumberControl.Size = new System.Drawing.Size(202, 20);
+            this.bandsNumberControl.TabIndex = 1;
+            // 
+            // teethNumberControl
+            // 
+            this.teethNumberControl.Location = new System.Drawing.Point(9, 32);
+            this.teethNumberControl.Name = "teethNumberControl";
+            this.teethNumberControl.Size = new System.Drawing.Size(199, 20);
+            this.teethNumberControl.TabIndex = 3;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(9, 16);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(66, 13);
+            this.label22.TabIndex = 2;
+            this.label22.Text = "Количество";
+            // 
             // tabbyCatRenderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(994, 549);
+            this.ClientSize = new System.Drawing.Size(994, 569);
             this.Controls.Add(this.tableLayoutPanel1);
             this.MinimumSize = new System.Drawing.Size(1010, 588);
             this.Name = "tabbyCatRenderForm";
@@ -908,9 +1006,17 @@
             this.teethGroupBox.ResumeLayout(false);
             this.teethGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.teethWidthControl)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.bandsGroupBox.ResumeLayout(false);
+            this.bandsGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bandsWidthControl)).EndInit();
+            this.tabPage4.ResumeLayout(false);
+            this.tableLayoutPanel5.ResumeLayout(false);
+            this.bandsNumberGroupBox.ResumeLayout(false);
+            this.bandsNumberGroupBox.PerformLayout();
+            this.teethNumberGroupBox.ResumeLayout(false);
+            this.teethNumberGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bandsNumberControl)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.teethNumberControl)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -976,9 +1082,17 @@
         private System.Windows.Forms.GroupBox teethGroupBox;
         private System.Windows.Forms.NumericUpDown teethWidthControl;
         private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox bandsGroupBox;
         private System.Windows.Forms.NumericUpDown bandsWidthControl;
         private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
+        private System.Windows.Forms.GroupBox bandsNumberGroupBox;
+        private System.Windows.Forms.GroupBox teethNumberGroupBox;
+        private System.Windows.Forms.NumericUpDown bandsNumberControl;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.NumericUpDown teethNumberControl;
+        private System.Windows.Forms.Label label22;
     }
 }
 
