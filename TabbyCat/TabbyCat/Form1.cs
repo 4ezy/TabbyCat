@@ -68,7 +68,17 @@ namespace TabbyCat
             tailWidth = (double)tailWidthControl.Value;
 
             irisSizeControl.Value = (decimal)cylinders[0].Radius;
+
             pupilSizeControl.Value = (decimal)cylinders[4].Radius;
+
+            earsWidthControl.Value = (decimal)halfCylinders[0].Height;
+
+            tongueLengthControl.Value = (decimal)boxes[14].getLength();
+            tongueWidthControl.Value = (decimal)boxes[14].getWidth();
+
+            teethWidthControl.Value = (decimal)teeth[0].getWidth();
+
+            bandsWidthControl.Value = (decimal)bands[0].getLength();
         }
 
         private List<Box> boxesDrafting(Color color)
@@ -461,12 +471,14 @@ namespace TabbyCat
 
                         break;
                     case 14:
+                        xOffset = (double)tongueLengthControl.Value - box.getLength();
+                        yOffset = ((double)tongueWidthControl.Value - box.getWidth()) / 2;
 
                         x0 = box.XStart + torsoXOffset;
-                        y0 = box.YStart;
+                        y0 = box.YStart - yOffset;
                         z0 = box.ZStart;
-                        x1 = box.XEnd + torsoXOffset;
-                        y1 = box.YEnd;
+                        x1 = box.XEnd + torsoXOffset + xOffset;
+                        y1 = box.YEnd + yOffset;
                         z1 = box.ZEnd;
 
                         break;
@@ -487,35 +499,6 @@ namespace TabbyCat
 
         }
 
-        private void drawBands(Matrix4 transform, double[] zBuffer)
-        {
-            foreach (Box box in bands)
-            {
-                drawTriangles(box.BottomEdge, transform, zBuffer);
-                drawTriangles(box.TopEdge, transform, zBuffer);
-                drawTriangles(box.LeftEdge, transform, zBuffer);
-                drawTriangles(box.RightEdge, transform, zBuffer);
-                drawTriangles(box.NearEdge, transform, zBuffer);
-                drawTriangles(box.DistantEdge, transform, zBuffer);
-            }
-        }
-
-        private void drawTeeth(Matrix4 transform, double[] zBuffer)
-        {
-            foreach (Box b in teeth)
-            {
-                Box box = new Box(new Vertex(b.XStart + torsoXOffset, b.YStart, b.ZStart),
-                    new Vertex(b.XEnd + torsoXOffset, b.YEnd, b.ZEnd), b.Color);
-
-                drawTriangles(box.BottomEdge, transform, zBuffer);
-                drawTriangles(box.TopEdge, transform, zBuffer);
-                drawTriangles(box.LeftEdge, transform, zBuffer);
-                drawTriangles(box.RightEdge, transform, zBuffer);
-                drawTriangles(box.NearEdge, transform, zBuffer);
-                drawTriangles(box.DistantEdge, transform, zBuffer);
-            }
-        }
-
         private void drawCylinders(Matrix4 transformMatrix, double[] zBuffer)
         {
             int counter = 0;
@@ -532,7 +515,7 @@ namespace TabbyCat
                 double height = c.Height;
                 double vertexCount = c.VertexCount;
 
-                if (counter <= 1)
+                if (counter >=0 && counter <= 1)
                 {
                     radiusOffset = (double)irisSizeControl.Value - radius;
                     whiteOfTheEyeOffset = radiusOffset;
@@ -559,14 +542,93 @@ namespace TabbyCat
 
         private void drawHalfCylinders(Matrix4 transformMatrix, double[] zBuffer)
         {
+            int counter = 0;
             foreach (HalfCylinder hc in halfCylinders)
             {
-                HalfCylinder tmpHc = new HalfCylinder(new Vertex(hc.Center.X + torsoXOffset, hc.Center.Y, hc.Center.Z),
-                    hc.Radius, hc.Height, hc.VertexCount, hc.Color);
+                double heigthOffset = 0;
+
+                double x = hc.Center.X;
+                double y = hc.Center.Y;
+                double z = hc.Center.Z;
+                double radius = hc.Radius;
+                double height = hc.Height;
+                double vertexCount = hc.VertexCount;
+
+                if (counter >= 0 && counter <= 1)
+                {
+                    heigthOffset = (double)earsWidthControl.Value - height;
+                    x = x - heigthOffset;
+                }
+
+                HalfCylinder tmpHc = new HalfCylinder(new Vertex(x + torsoXOffset, y, z),
+                   radius, height + heigthOffset, vertexCount, hc.Color);
 
                 drawTriangles(tmpHc.BottomBase, transformMatrix, zBuffer);
                 drawTriangles(tmpHc.TopBase, transformMatrix, zBuffer);
                 drawTriangles(tmpHc.Surface, transformMatrix, zBuffer);
+
+                counter++;
+            }
+        }
+
+        private void drawBands(Matrix4 transform, double[] zBuffer)
+        {
+            foreach (Box b in bands)
+            {
+                double xOffset = ((double)bandsWidthControl.Value - b.getLength()) / 2;
+
+                double x0 = b.XStart - xOffset;
+                double y0 = b.YStart;
+                double z0 = b.ZStart;
+                double x1 = b.XEnd + xOffset;
+                double y1 = b.YEnd;
+                double z1 = b.ZEnd;
+
+                Box box = new Box(new Vertex(x0, y0, z0),
+                    new Vertex(x1, y1, z1), b.Color);
+
+                drawTriangles(box.BottomEdge, transform, zBuffer);
+                drawTriangles(box.TopEdge, transform, zBuffer);
+                drawTriangles(box.LeftEdge, transform, zBuffer);
+                drawTriangles(box.RightEdge, transform, zBuffer);
+                drawTriangles(box.NearEdge, transform, zBuffer);
+                drawTriangles(box.DistantEdge, transform, zBuffer);
+            }
+        }
+
+        private void drawTeeth(Matrix4 transform, double[] zBuffer)
+        {
+            int counter = 0;
+
+            foreach (Box b in teeth)
+            {
+                double yOffset = ((double)teethWidthControl.Value - b.getWidth()) / 2;
+
+                double x0 = 0;
+                double y0 = 0;
+                double z0 = 0;
+                double x1 = 0;
+                double y1 = 0;
+                double z1 = 0;
+
+                x0 = b.XStart + torsoXOffset;
+                y0 = b.YStart < b.YEnd ? b.YStart - yOffset : b.YStart + yOffset;
+                z0 = b.ZStart;
+                x1 = b.XEnd + torsoXOffset;
+                y1 = b.YStart < b.YEnd ? b.YEnd + yOffset : b.YEnd - yOffset;
+                z1 = b.ZEnd;
+
+                Box box = new Box(new Vertex(x0, y0, z0),
+                    new Vertex(x1, y1, z1), b.Color);
+
+                drawTriangles(box.BottomEdge, transform, zBuffer);
+                drawTriangles(box.TopEdge, transform, zBuffer);
+                drawTriangles(box.LeftEdge, transform, zBuffer);
+                drawTriangles(box.RightEdge, transform, zBuffer);
+                drawTriangles(box.NearEdge, transform, zBuffer);
+                drawTriangles(box.DistantEdge, transform, zBuffer);
+
+                counter++;
             }
         }
 

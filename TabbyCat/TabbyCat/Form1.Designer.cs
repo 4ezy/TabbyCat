@@ -78,8 +78,19 @@
             this.yOffsetControl = new System.Windows.Forms.NumericUpDown();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.earsGroupBox = new System.Windows.Forms.GroupBox();
-            this.label16 = new System.Windows.Forms.Label();
             this.earsWidthControl = new System.Windows.Forms.NumericUpDown();
+            this.label16 = new System.Windows.Forms.Label();
+            this.tongueGroupBox = new System.Windows.Forms.GroupBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.tongueLengthControl = new System.Windows.Forms.NumericUpDown();
+            this.label18 = new System.Windows.Forms.Label();
+            this.tongueWidthControl = new System.Windows.Forms.NumericUpDown();
+            this.teethGroupBox = new System.Windows.Forms.GroupBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.teethWidthControl = new System.Windows.Forms.NumericUpDown();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.bandsWidthControl = new System.Windows.Forms.NumericUpDown();
+            this.label20 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.renderPictureBox)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -114,6 +125,13 @@
             this.tableLayoutPanel4.SuspendLayout();
             this.earsGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.earsWidthControl)).BeginInit();
+            this.tongueGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tongueLengthControl)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tongueWidthControl)).BeginInit();
+            this.teethGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.teethWidthControl)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bandsWidthControl)).BeginInit();
             this.SuspendLayout();
             // 
             // renderPictureBox
@@ -684,15 +702,20 @@
             // tableLayoutPanel4
             // 
             this.tableLayoutPanel4.ColumnCount = 1;
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel4.Controls.Add(this.earsGroupBox, 0, 0);
+            this.tableLayoutPanel4.Controls.Add(this.tongueGroupBox, 0, 1);
+            this.tableLayoutPanel4.Controls.Add(this.teethGroupBox, 0, 2);
+            this.tableLayoutPanel4.Controls.Add(this.groupBox1, 0, 3);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            this.tableLayoutPanel4.RowCount = 2;
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 31.78947F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 68.21053F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(210, 475);
+            this.tableLayoutPanel4.RowCount = 4;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 68F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 120F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 70F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 211F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(210, 472);
             this.tableLayoutPanel4.TabIndex = 0;
             // 
             // earsGroupBox
@@ -702,10 +725,17 @@
             this.earsGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
             this.earsGroupBox.Location = new System.Drawing.Point(3, 3);
             this.earsGroupBox.Name = "earsGroupBox";
-            this.earsGroupBox.Size = new System.Drawing.Size(204, 145);
-            this.earsGroupBox.TabIndex = 0;
+            this.earsGroupBox.Size = new System.Drawing.Size(204, 62);
+            this.earsGroupBox.TabIndex = 1;
             this.earsGroupBox.TabStop = false;
             this.earsGroupBox.Text = "Уши";
+            // 
+            // earsWidthControl
+            // 
+            this.earsWidthControl.Location = new System.Drawing.Point(6, 32);
+            this.earsWidthControl.Name = "earsWidthControl";
+            this.earsWidthControl.Size = new System.Drawing.Size(192, 20);
+            this.earsWidthControl.TabIndex = 1;
             // 
             // label16
             // 
@@ -716,12 +746,107 @@
             this.label16.TabIndex = 0;
             this.label16.Text = "Толщина";
             // 
-            // earsWidthControl
+            // tongueGroupBox
             // 
-            this.earsWidthControl.Location = new System.Drawing.Point(6, 32);
-            this.earsWidthControl.Name = "earsWidthControl";
-            this.earsWidthControl.Size = new System.Drawing.Size(192, 20);
-            this.earsWidthControl.TabIndex = 1;
+            this.tongueGroupBox.Controls.Add(this.tongueWidthControl);
+            this.tongueGroupBox.Controls.Add(this.label18);
+            this.tongueGroupBox.Controls.Add(this.tongueLengthControl);
+            this.tongueGroupBox.Controls.Add(this.label17);
+            this.tongueGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tongueGroupBox.Location = new System.Drawing.Point(3, 71);
+            this.tongueGroupBox.Name = "tongueGroupBox";
+            this.tongueGroupBox.Size = new System.Drawing.Size(204, 114);
+            this.tongueGroupBox.TabIndex = 2;
+            this.tongueGroupBox.TabStop = false;
+            this.tongueGroupBox.Text = "Язык";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(6, 16);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(40, 13);
+            this.label17.TabIndex = 0;
+            this.label17.Text = "Длина";
+            // 
+            // tongueLengthControl
+            // 
+            this.tongueLengthControl.Location = new System.Drawing.Point(6, 32);
+            this.tongueLengthControl.Name = "tongueLengthControl";
+            this.tongueLengthControl.Size = new System.Drawing.Size(192, 20);
+            this.tongueLengthControl.TabIndex = 1;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(6, 69);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(46, 13);
+            this.label18.TabIndex = 2;
+            this.label18.Text = "Ширина";
+            // 
+            // tongueWidthControl
+            // 
+            this.tongueWidthControl.Location = new System.Drawing.Point(6, 85);
+            this.tongueWidthControl.Name = "tongueWidthControl";
+            this.tongueWidthControl.Size = new System.Drawing.Size(192, 20);
+            this.tongueWidthControl.TabIndex = 3;
+            // 
+            // teethGroupBox
+            // 
+            this.teethGroupBox.Controls.Add(this.teethWidthControl);
+            this.teethGroupBox.Controls.Add(this.label19);
+            this.teethGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.teethGroupBox.Location = new System.Drawing.Point(3, 191);
+            this.teethGroupBox.Name = "teethGroupBox";
+            this.teethGroupBox.Size = new System.Drawing.Size(204, 63);
+            this.teethGroupBox.TabIndex = 3;
+            this.teethGroupBox.TabStop = false;
+            this.teethGroupBox.Text = "Зубы";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(3, 16);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(53, 13);
+            this.label19.TabIndex = 0;
+            this.label19.Text = "Толщина";
+            // 
+            // teethWidthControl
+            // 
+            this.teethWidthControl.Location = new System.Drawing.Point(6, 32);
+            this.teethWidthControl.Name = "teethWidthControl";
+            this.teethWidthControl.Size = new System.Drawing.Size(192, 20);
+            this.teethWidthControl.TabIndex = 1;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.bandsWidthControl);
+            this.groupBox1.Controls.Add(this.label20);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox1.Location = new System.Drawing.Point(3, 261);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(204, 64);
+            this.groupBox1.TabIndex = 4;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Полосы";
+            // 
+            // bandsWidthControl
+            // 
+            this.bandsWidthControl.Location = new System.Drawing.Point(6, 33);
+            this.bandsWidthControl.Name = "bandsWidthControl";
+            this.bandsWidthControl.Size = new System.Drawing.Size(192, 20);
+            this.bandsWidthControl.TabIndex = 3;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(3, 17);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(53, 13);
+            this.label20.TabIndex = 2;
+            this.label20.Text = "Толщина";
             // 
             // tabbyCatRenderForm
             // 
@@ -776,6 +901,16 @@
             this.earsGroupBox.ResumeLayout(false);
             this.earsGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.earsWidthControl)).EndInit();
+            this.tongueGroupBox.ResumeLayout(false);
+            this.tongueGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tongueLengthControl)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tongueWidthControl)).EndInit();
+            this.teethGroupBox.ResumeLayout(false);
+            this.teethGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.teethWidthControl)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bandsWidthControl)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -833,6 +968,17 @@
         private System.Windows.Forms.GroupBox earsGroupBox;
         private System.Windows.Forms.NumericUpDown earsWidthControl;
         private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.GroupBox tongueGroupBox;
+        private System.Windows.Forms.NumericUpDown tongueWidthControl;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.NumericUpDown tongueLengthControl;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.GroupBox teethGroupBox;
+        private System.Windows.Forms.NumericUpDown teethWidthControl;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.NumericUpDown bandsWidthControl;
+        private System.Windows.Forms.Label label20;
     }
 }
 
