@@ -34,6 +34,9 @@ namespace TabbyCat
         double tailLength;
         double tailWidth;
 
+        const int bandsXOffset = 15;
+        const int teethYOffset = 6;
+
         public tabbyCatRenderForm()
         {
             InitializeComponent();
@@ -79,6 +82,9 @@ namespace TabbyCat
             teethWidthControl.Value = (decimal)teeth[0].getWidth();
 
             bandsWidthControl.Value = (decimal)bands[0].getLength();
+
+            bandsNumberControl.Value = bands.Count;
+            teethNumberControl.Value = teeth.Count;
         }
 
         private List<Box> boxesDrafting(Color color)
@@ -154,9 +160,8 @@ namespace TabbyCat
             List<Box> boxes = new List<Box>();
 
             // полосы
-            boxes.Add(new Box(new Vertex(40, 10, 60), new Vertex(45, -20, 61), color));
-            boxes.Add(new Box(new Vertex(25, 10, 60), new Vertex(30, -20, 61), color));
-            boxes.Add(new Box(new Vertex(10, 10, 60), new Vertex(15, -20, 61), color));
+            boxes.Add(new Box(new Vertex(60, 10, 60), new Vertex(65, -20, 61), color));
+            boxes.Add(new Box(new Vertex(45, 10, 60), new Vertex(50, -20, 61), color));
 
             return boxes;
         }
@@ -573,14 +578,40 @@ namespace TabbyCat
 
         private void drawBands(Matrix4 transform, double[] zBuffer)
         {
+            if (bands.Count != (int)bandsNumberControl.Value)
+            {
+                if (bands.Count != 0)
+                {
+                    if ((int)bandsNumberControl.Value < bands.Count)
+                    {
+                        for (int i = (bands.Count - 1); i >= (int)bandsNumberControl.Value; i--)
+                        {
+                            bands.RemoveAt(i);
+                        }
+                    }
+                    else if ((int)bandsNumberControl.Value > bands.Count)
+                    {
+                        for (int i = (bands.Count - 1); i < (int)bandsNumberControl.Value - 1; i++)
+                        {
+                            bands.Add(new Box(new Vertex(bands[i].XStart - bandsXOffset, bands[i].YStart, bands[i].ZStart),
+                                new Vertex(bands[i].XEnd - bandsXOffset, bands[i].YEnd, bands[i].ZEnd), bands[i].Color));
+                        }
+                    }
+                }
+                else
+                {
+                    bands.Add(new Box(new Vertex(60, 10, 60), new Vertex(65, -20, 61), Color.Brown));
+                }
+            }
+
             foreach (Box b in bands)
             {
                 double xOffset = ((double)bandsWidthControl.Value - b.getLength()) / 2;
 
-                double x0 = b.XStart - xOffset;
+                double x0 = b.XStart + torsoXOffset - xOffset;
                 double y0 = b.YStart;
                 double z0 = b.ZStart;
-                double x1 = b.XEnd + xOffset;
+                double x1 = b.XEnd + torsoXOffset + xOffset;
                 double y1 = b.YEnd;
                 double z1 = b.ZEnd;
 
@@ -598,6 +629,45 @@ namespace TabbyCat
 
         private void drawTeeth(Matrix4 transform, double[] zBuffer)
         {
+            if (teeth.Count != (int)teethNumberControl.Value)
+            {
+                if (teeth.Count != 0)
+                {
+                    if ((int)teethNumberControl.Value < teeth.Count)
+                    {
+                        for (int i = (teeth.Count - 1); i >= (int)teethNumberControl.Value; i--)
+                        {
+                            teeth.RemoveAt(i);
+                        }
+                    }
+                    else
+                    {
+                        for (int i = (teeth.Count - 1); i < (int)teethNumberControl.Value - 1; i++)
+                        {
+                            if (i == 0)
+                            {
+                                teeth.Add(new Box(new Vertex(teeth[i].XStart, teeth[i].YStart - teethYOffset, teeth[i].ZStart),
+                                    new Vertex(teeth[i].XEnd, teeth[i].YEnd - teethYOffset, teeth[i].ZEnd), teeth[i].Color));
+                            }
+                            else if (i % 2 != 0)
+                            {
+                                teeth.Add(new Box(new Vertex(teeth[i - 1].XStart, teeth[i - 1].YStart + teethYOffset, teeth[i - 1].ZStart),
+                                    new Vertex(teeth[i - 1].XEnd, teeth[i - 1].YEnd + teethYOffset, teeth[i - 1].ZEnd), teeth[i - 1].Color));
+                            }
+                            else
+                            {
+                                teeth.Add(new Box(new Vertex(teeth[i - 1].XStart, teeth[i - 1].YStart - teethYOffset, teeth[i - 1].ZStart),
+                                    new Vertex(teeth[i - 1].XEnd, teeth[i - 1].YEnd - teethYOffset, teeth[i - 1].ZEnd), teeth[i - 1].Color));
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    teeth.Add(new Box(new Vertex(96, 0, 50), new Vertex(97, -4, 47), Color.White));
+                }
+            }
+
             int counter = 0;
 
             foreach (Box b in teeth)
