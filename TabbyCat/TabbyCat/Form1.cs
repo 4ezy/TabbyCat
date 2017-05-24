@@ -90,13 +90,18 @@ namespace TabbyCat
             numericUpDown8.Value = pupilSizeControl.Value;
 
             earsWidthControl.Value = (decimal)halfCylinders[0].Height;
+            numericUpDown9.Value = earsWidthControl.Value;
 
             tongueLengthControl.Value = (decimal)boxes[14].getLength();
+            numericUpDown10.Value = tongueLengthControl.Value;
             tongueWidthControl.Value = (decimal)boxes[14].getWidth();
+            numericUpDown11.Value = tongueWidthControl.Value;
 
             teethWidthControl.Value = (decimal)teeth[0].getWidth();
+            numericUpDown12.Value = teethWidthControl.Value;
 
             bandsWidthControl.Value = (decimal)bands[0].getLength();
+            numericUpDown13.Value = bandsWidthControl.Value;
 
             bandsNumberControl.Value = bands.Count;
             teethNumberControl.Value = teeth.Count;
@@ -728,7 +733,7 @@ namespace TabbyCat
             g.DrawImage(renderArea, 0, 0);
         }
 
-        private void setControlValues()
+        private void setControlValues1()
         {
             string str;
 
@@ -814,14 +819,126 @@ namespace TabbyCat
                 pawsWidthControl.Value = numericUpDown6.Value;
             }
 
+            if (numericUpDown7.Value < (decimal)cylinders[0].Radius - 2 || numericUpDown7.Value > (decimal)cylinders[0].Radius + 2)
+            {
+                str = string.Format("Радиус глаз должен лежать в диапазоне от {0} до {1}",
+                    (decimal)cylinders[0].Radius - 2, (decimal)cylinders[0].Radius + 2);
+                numericUpDown7.Value = irisSizeControl.Value;
+                MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                isUpdated = true;
+                return;
+            }
+            else
+            {
+                irisSizeControl.Value = numericUpDown7.Value;
+            }
+
+            if (numericUpDown8.Value < (decimal)cylinders[4].Radius - 2 || numericUpDown8.Value > (decimal)cylinders[4].Radius + 2)
+            {
+                str = string.Format("Радиус зрачков должен лежать в диапазоне от {0} до {1}",
+                    (decimal)cylinders[4].Radius - 2, (decimal)cylinders[4].Radius + 2);
+                numericUpDown8.Value = pupilSizeControl.Value;
+                MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                isUpdated = true;
+                return;
+            }
+            else
+            {
+                pupilSizeControl.Value = numericUpDown8.Value;
+            }
+
             isUpdated = true;
+        }
+
+        private void setControlValues2()
+        {
+            string str;
+
+            if (numericUpDown9.Value < Math.Round((decimal)halfCylinders[0].Height / 2) || numericUpDown9.Value > (decimal)halfCylinders[0].Height * 2)
+            {
+                str = string.Format("Ширина ушей должна лежать в диапазоне от {0} до {1}",
+                    Math.Round((decimal)halfCylinders[0].Height / 2), (decimal)halfCylinders[0].Height * 2);
+                numericUpDown9.Value = earsWidthControl.Value;
+                MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                isUpdated = true;
+                return;
+            }
+            else
+            {
+                earsWidthControl.Value = numericUpDown9.Value;
+            }
+
+            if (numericUpDown10.Value < (decimal)boxes[14].getLength() || numericUpDown10.Value > (decimal)boxes[14].getLength() + 5)
+            {
+                str = string.Format("Длина языка должна лежать в диапазоне от {0} до {1}",
+                    (decimal)boxes[14].getLength(), (decimal)boxes[14].getLength() + 5);
+                numericUpDown10.Value = tongueLengthControl.Value;
+                MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                isUpdated = true;
+                return;
+            }
+            else
+            {
+                tongueLengthControl.Value = numericUpDown10.Value;
+            }
+
+            if (numericUpDown11.Value < (decimal)boxes[14].getWidth() / 2 || numericUpDown11.Value > (decimal)boxes[14].getWidth() + 5)
+            {
+                str = string.Format("Ширина языка должна лежать в диапазоне от {0} до {1}",
+                    (decimal)boxes[14].getWidth() / 2, (decimal)boxes[14].getWidth() + 5);
+                numericUpDown11.Value = tongueWidthControl.Value;
+                MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                isUpdated = true;
+                return;
+            }
+            else
+            {
+                tongueWidthControl.Value = numericUpDown11.Value;
+            }
+
+            if (numericUpDown12.Value < (decimal)teeth[0].getWidth() - 1 || numericUpDown12.Value > (decimal)teeth[0].getWidth() + 1)
+            {
+                str = string.Format("Ширина зубов должна лежать в диапазоне от {0} до {1}",
+                    (decimal)teeth[0].getWidth() - 1, (decimal)teeth[0].getWidth() + 1);
+                numericUpDown12.Value = teethWidthControl.Value;
+                MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                isUpdated = true;
+                return;
+            }
+            else
+            {
+                teethWidthControl.Value = numericUpDown12.Value;
+            }
+
+            if (numericUpDown13.Value < Math.Round((decimal)bands[0].getLength() / 2) || numericUpDown13.Value > (decimal)bands[0].getLength() * 2)
+            {
+                str = string.Format("Ширина языка должна лежать в диапазоне от {0} до {1}",
+                    (decimal)bands[0].getLength() / 2, (decimal)bands[0].getLength() * 2);
+                numericUpDown13.Value = bandsWidthControl.Value;
+                MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                isUpdated = true;
+                return;
+            }
+            else
+            {
+                bandsWidthControl.Value = numericUpDown13.Value;
+            }
+
+            isUpdated = true;
+        }
+
+        private void setControlValues3()
+        {
+
         }
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
             if (isUpdated == false)
             {
-                setControlValues();
+                setControlValues1();
+                setControlValues2();
+                setControlValues3();
             }
 
             renderArea = new Bitmap(renderPictureBox.Size.Width, renderPictureBox.Size.Height);
@@ -868,6 +985,16 @@ namespace TabbyCat
         private void confrimQualityButton1_Click(object sender, EventArgs e)
         {
             isUpdated = !isUpdated;   
+        }
+
+        private void confrimQualityButton2_Click(object sender, EventArgs e)
+        {
+            isUpdated = !isUpdated;
+        }
+
+        private void quantityAcceptButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -112,6 +112,11 @@
             this.numericUpDown6 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown7 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown8 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown9 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown10 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown11 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown12 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown13 = new System.Windows.Forms.NumericUpDown();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage5.SuspendLayout();
@@ -169,6 +174,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown10)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown11)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown12)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown13)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -583,9 +593,9 @@
             this.label15.AutoSize = true;
             this.label15.Location = new System.Drawing.Point(6, 67);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(90, 13);
+            this.label15.Size = new System.Drawing.Size(87, 13);
             this.label15.TabIndex = 2;
-            this.label15.Text = "Размер зрачков";
+            this.label15.Text = "Радиус зрачков";
             // 
             // irisSizeControl
             // 
@@ -611,9 +621,9 @@
             this.label14.AutoSize = true;
             this.label14.Location = new System.Drawing.Point(6, 16);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(72, 13);
+            this.label14.Size = new System.Drawing.Size(69, 13);
             this.label14.TabIndex = 0;
-            this.label14.Text = "Размер глаз";
+            this.label14.Text = "Радиус глаз";
             // 
             // confrimQualityButton1
             // 
@@ -660,6 +670,7 @@
             // 
             // earsGroupBox
             // 
+            this.earsGroupBox.Controls.Add(this.numericUpDown9);
             this.earsGroupBox.Controls.Add(this.earsWidthControl);
             this.earsGroupBox.Controls.Add(this.label16);
             this.earsGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
@@ -672,10 +683,22 @@
             // 
             // earsWidthControl
             // 
+            this.earsWidthControl.Enabled = false;
             this.earsWidthControl.Location = new System.Drawing.Point(6, 32);
+            this.earsWidthControl.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.earsWidthControl.Minimum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            -2147483648});
             this.earsWidthControl.Name = "earsWidthControl";
             this.earsWidthControl.Size = new System.Drawing.Size(180, 20);
             this.earsWidthControl.TabIndex = 1;
+            this.earsWidthControl.Visible = false;
             // 
             // label16
             // 
@@ -688,6 +711,8 @@
             // 
             // tongueGroupBox
             // 
+            this.tongueGroupBox.Controls.Add(this.numericUpDown11);
+            this.tongueGroupBox.Controls.Add(this.numericUpDown10);
             this.tongueGroupBox.Controls.Add(this.tongueWidthControl);
             this.tongueGroupBox.Controls.Add(this.label18);
             this.tongueGroupBox.Controls.Add(this.tongueLengthControl);
@@ -702,10 +727,22 @@
             // 
             // tongueWidthControl
             // 
+            this.tongueWidthControl.Enabled = false;
             this.tongueWidthControl.Location = new System.Drawing.Point(6, 85);
+            this.tongueWidthControl.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.tongueWidthControl.Minimum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            -2147483648});
             this.tongueWidthControl.Name = "tongueWidthControl";
             this.tongueWidthControl.Size = new System.Drawing.Size(180, 20);
             this.tongueWidthControl.TabIndex = 3;
+            this.tongueWidthControl.Visible = false;
             // 
             // label18
             // 
@@ -718,10 +755,22 @@
             // 
             // tongueLengthControl
             // 
+            this.tongueLengthControl.Enabled = false;
             this.tongueLengthControl.Location = new System.Drawing.Point(6, 32);
+            this.tongueLengthControl.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.tongueLengthControl.Minimum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            -2147483648});
             this.tongueLengthControl.Name = "tongueLengthControl";
             this.tongueLengthControl.Size = new System.Drawing.Size(180, 20);
             this.tongueLengthControl.TabIndex = 1;
+            this.tongueLengthControl.Visible = false;
             // 
             // label17
             // 
@@ -734,6 +783,7 @@
             // 
             // teethGroupBox
             // 
+            this.teethGroupBox.Controls.Add(this.numericUpDown12);
             this.teethGroupBox.Controls.Add(this.teethWidthControl);
             this.teethGroupBox.Controls.Add(this.label19);
             this.teethGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
@@ -746,10 +796,22 @@
             // 
             // teethWidthControl
             // 
+            this.teethWidthControl.Enabled = false;
             this.teethWidthControl.Location = new System.Drawing.Point(6, 32);
+            this.teethWidthControl.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.teethWidthControl.Minimum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            -2147483648});
             this.teethWidthControl.Name = "teethWidthControl";
             this.teethWidthControl.Size = new System.Drawing.Size(180, 20);
             this.teethWidthControl.TabIndex = 1;
+            this.teethWidthControl.Visible = false;
             // 
             // label19
             // 
@@ -762,6 +824,7 @@
             // 
             // bandsGroupBox
             // 
+            this.bandsGroupBox.Controls.Add(this.numericUpDown13);
             this.bandsGroupBox.Controls.Add(this.bandsWidthControl);
             this.bandsGroupBox.Controls.Add(this.label20);
             this.bandsGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
@@ -774,10 +837,22 @@
             // 
             // bandsWidthControl
             // 
+            this.bandsWidthControl.Enabled = false;
             this.bandsWidthControl.Location = new System.Drawing.Point(6, 33);
+            this.bandsWidthControl.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.bandsWidthControl.Minimum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            -2147483648});
             this.bandsWidthControl.Name = "bandsWidthControl";
             this.bandsWidthControl.Size = new System.Drawing.Size(180, 20);
             this.bandsWidthControl.TabIndex = 3;
+            this.bandsWidthControl.Visible = false;
             // 
             // label20
             // 
@@ -797,6 +872,7 @@
             this.confrimQualityButton2.TabIndex = 5;
             this.confrimQualityButton2.Text = "Подтвердить";
             this.confrimQualityButton2.UseVisualStyleBackColor = true;
+            this.confrimQualityButton2.Click += new System.EventHandler(this.confrimQualityButton2_Click);
             // 
             // tabPage1
             // 
@@ -1102,10 +1178,22 @@
             // 
             // bandsNumberControl
             // 
+            this.bandsNumberControl.Enabled = false;
             this.bandsNumberControl.Location = new System.Drawing.Point(6, 32);
+            this.bandsNumberControl.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.bandsNumberControl.Minimum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            -2147483648});
             this.bandsNumberControl.Name = "bandsNumberControl";
             this.bandsNumberControl.Size = new System.Drawing.Size(180, 20);
             this.bandsNumberControl.TabIndex = 1;
+            this.bandsNumberControl.Visible = false;
             // 
             // label21
             // 
@@ -1130,10 +1218,22 @@
             // 
             // teethNumberControl
             // 
+            this.teethNumberControl.Enabled = false;
             this.teethNumberControl.Location = new System.Drawing.Point(9, 32);
+            this.teethNumberControl.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.teethNumberControl.Minimum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            -2147483648});
             this.teethNumberControl.Name = "teethNumberControl";
             this.teethNumberControl.Size = new System.Drawing.Size(177, 20);
             this.teethNumberControl.TabIndex = 3;
+            this.teethNumberControl.Visible = false;
             // 
             // label22
             // 
@@ -1153,6 +1253,7 @@
             this.quantityAcceptButton.TabIndex = 2;
             this.quantityAcceptButton.Text = "Подтвердить";
             this.quantityAcceptButton.UseVisualStyleBackColor = true;
+            this.quantityAcceptButton.Click += new System.EventHandler(this.quantityAcceptButton_Click);
             // 
             // renderPictureBox
             // 
@@ -1267,6 +1368,91 @@
             this.numericUpDown8.Size = new System.Drawing.Size(177, 20);
             this.numericUpDown8.TabIndex = 7;
             // 
+            // numericUpDown9
+            // 
+            this.numericUpDown9.Location = new System.Drawing.Point(6, 32);
+            this.numericUpDown9.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numericUpDown9.Minimum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            -2147483648});
+            this.numericUpDown9.Name = "numericUpDown9";
+            this.numericUpDown9.Size = new System.Drawing.Size(180, 20);
+            this.numericUpDown9.TabIndex = 2;
+            // 
+            // numericUpDown10
+            // 
+            this.numericUpDown10.Location = new System.Drawing.Point(6, 32);
+            this.numericUpDown10.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numericUpDown10.Minimum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            -2147483648});
+            this.numericUpDown10.Name = "numericUpDown10";
+            this.numericUpDown10.Size = new System.Drawing.Size(180, 20);
+            this.numericUpDown10.TabIndex = 4;
+            // 
+            // numericUpDown11
+            // 
+            this.numericUpDown11.Location = new System.Drawing.Point(6, 85);
+            this.numericUpDown11.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numericUpDown11.Minimum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            -2147483648});
+            this.numericUpDown11.Name = "numericUpDown11";
+            this.numericUpDown11.Size = new System.Drawing.Size(180, 20);
+            this.numericUpDown11.TabIndex = 5;
+            // 
+            // numericUpDown12
+            // 
+            this.numericUpDown12.Location = new System.Drawing.Point(6, 32);
+            this.numericUpDown12.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numericUpDown12.Minimum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            -2147483648});
+            this.numericUpDown12.Name = "numericUpDown12";
+            this.numericUpDown12.Size = new System.Drawing.Size(180, 20);
+            this.numericUpDown12.TabIndex = 6;
+            // 
+            // numericUpDown13
+            // 
+            this.numericUpDown13.Location = new System.Drawing.Point(6, 33);
+            this.numericUpDown13.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numericUpDown13.Minimum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            -2147483648});
+            this.numericUpDown13.Name = "numericUpDown13";
+            this.numericUpDown13.Size = new System.Drawing.Size(180, 20);
+            this.numericUpDown13.TabIndex = 7;
+            // 
             // tabbyCatRenderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1348,6 +1534,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown10)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown11)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown12)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown13)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1437,6 +1628,11 @@
         private System.Windows.Forms.NumericUpDown numericUpDown5;
         private System.Windows.Forms.NumericUpDown numericUpDown8;
         private System.Windows.Forms.NumericUpDown numericUpDown7;
+        private System.Windows.Forms.NumericUpDown numericUpDown9;
+        private System.Windows.Forms.NumericUpDown numericUpDown11;
+        private System.Windows.Forms.NumericUpDown numericUpDown10;
+        private System.Windows.Forms.NumericUpDown numericUpDown12;
+        private System.Windows.Forms.NumericUpDown numericUpDown13;
     }
 }
 
