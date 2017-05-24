@@ -34,8 +34,13 @@ namespace TabbyCat
         double tailLength;
         double tailWidth;
 
+        decimal headLength;
+        decimal headWidth;
+
         const int bandsXOffset = 15;
         const int teethYOffset = 6;
+
+        bool isUpdated = false;
 
         public tabbyCatRenderForm()
         {
@@ -57,22 +62,32 @@ namespace TabbyCat
 
             scTransform = new ScaleTransformation();
 
+            headLength = (decimal)boxes[9].getLength();
+            headWidth = (decimal)boxes[9].getWidth();
+
             torsoLengthControl.Value = (decimal)boxes[0].getLength();
+            numericUpDown1.Value = torsoLengthControl.Value;
             torsoWidthControl.Value = (decimal)boxes[0].getWidth();
+            numericUpDown2.Value = torsoWidthControl.Value;
 
-            pawsHeightControl.Value = (decimal)boxes[1].getHeight();
-            pawsWidthControl.Value = (decimal)boxes[1].getWidth();
-            pawsHeight = (double)pawsHeightControl.Value;
-            pawsWidth = (double)pawsWidthControl.Value;
-
-            tailLengthControl.Value = (decimal)boxes[10].getLength();
+            tailLengthControl.Value = (decimal)boxes[10].getLength() + (decimal)boxes[12].getLength();
+            numericUpDown3.Value = tailLengthControl.Value;
             tailWidthControl.Value = (decimal)boxes[10].getWidth();
+            numericUpDown4.Value = tailWidthControl.Value;
             tailLength = (double)tailLengthControl.Value;
             tailWidth = (double)tailWidthControl.Value;
 
-            irisSizeControl.Value = (decimal)cylinders[0].Radius;
+            pawsHeightControl.Value = (decimal)boxes[1].getHeight();
+            numericUpDown5.Value = pawsHeightControl.Value;
+            pawsWidthControl.Value = (decimal)boxes[1].getWidth();
+            numericUpDown6.Value = pawsWidthControl.Value;
+            pawsHeight = (double)pawsHeightControl.Value;
+            pawsWidth = (double)pawsWidthControl.Value;
 
+            irisSizeControl.Value = (decimal)cylinders[0].Radius;
+            numericUpDown7.Value = irisSizeControl.Value;
             pupilSizeControl.Value = (decimal)cylinders[4].Radius;
+            numericUpDown8.Value = pupilSizeControl.Value;
 
             earsWidthControl.Value = (decimal)halfCylinders[0].Height;
 
@@ -713,8 +728,102 @@ namespace TabbyCat
             g.DrawImage(renderArea, 0, 0);
         }
 
+        private void setControlValues()
+        {
+            string str;
+
+            if (numericUpDown1.Value < headLength * 2 + 5 || numericUpDown1.Value > headLength * 10)
+            {
+                str = string.Format("Длина тела должна лежать в диапазоне от {0} до {1}", headLength * 2 + 5, headLength * 10);
+                numericUpDown1.Value = torsoLengthControl.Value;
+                MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                isUpdated = true;
+                return;
+            }
+            else
+            {
+                torsoLengthControl.Value = numericUpDown1.Value;
+            }
+
+            if (numericUpDown2.Value < headWidth || numericUpDown2.Value > headWidth * 5)
+            {
+                str = string.Format("Ширина тела должна лежать в диапазоне от {0} до {1}", headWidth, headWidth * 5);
+                numericUpDown2.Value = torsoWidthControl.Value;
+                MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                isUpdated = true;
+                return;
+            }
+            else
+            {
+                torsoWidthControl.Value = numericUpDown2.Value;
+            }
+
+            if (numericUpDown3.Value < (decimal)Math.Round(tailLength / 2) || numericUpDown3.Value > (decimal)tailLength * 2)
+            {
+                str = string.Format("Длина хвоста должна лежать в диапазоне от {0} до {1}",
+                    (decimal)Math.Round(tailLength / 2), (decimal)tailLength * 2);
+                numericUpDown3.Value = tailLengthControl.Value;
+                MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                isUpdated = true;
+                return;
+            }
+            else
+            {
+                tailLengthControl.Value = numericUpDown3.Value;
+            }
+
+            if (numericUpDown4.Value < (decimal)Math.Round(tailWidth / 2) || numericUpDown4.Value > (decimal)tailWidth * 2)
+            {
+                str = string.Format("Ширина хвоста должна лежать в диапазоне от {0} до {1}",
+                    (decimal)Math.Round(tailWidth / 2), (decimal)tailWidth * 2);
+                numericUpDown4.Value = tailWidthControl.Value;
+                MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                isUpdated = true;
+                return;
+            }
+            else
+            {
+                tailWidthControl.Value = numericUpDown4.Value;
+            }
+
+            if (numericUpDown5.Value < (decimal)pawsHeight / 2 || numericUpDown5.Value > (decimal)pawsHeight * 2)
+            {
+                str = string.Format("Длина лап должна лежать в диапазоне от {0} до {1}",
+                    (decimal)pawsHeight / 2, (decimal)pawsHeight * 2);
+                numericUpDown5.Value = pawsHeightControl.Value;
+                MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                isUpdated = true;
+                return;
+            }
+            else
+            {
+                pawsHeightControl.Value = numericUpDown5.Value;
+            }
+
+            if (numericUpDown6.Value < (decimal)pawsWidth - 2 || numericUpDown6.Value > (decimal)pawsWidth * 2)
+            {
+                str = string.Format("Ширина лап должна лежать в диапазоне от {0} до {1}",
+                    (decimal)pawsWidth - 2, (decimal)pawsWidth * 2);
+                numericUpDown6.Value = pawsWidthControl.Value;
+                MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                isUpdated = true;
+                return;
+            }
+            else
+            {
+                pawsWidthControl.Value = numericUpDown6.Value;
+            }
+
+            isUpdated = true;
+        }
+
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
+            if (isUpdated == false)
+            {
+                setControlValues();
+            }
+
             renderArea = new Bitmap(renderPictureBox.Size.Width, renderPictureBox.Size.Height);
             renderPictureBox.Image = renderArea;
 
@@ -746,5 +855,19 @@ namespace TabbyCat
             render(g, transformMatrix, zBuffer);
         }
 
+        private void torsoLengthControl_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void angleGroupBox_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void confrimQualityButton1_Click(object sender, EventArgs e)
+        {
+            isUpdated = !isUpdated;   
+        }
     }
 }
