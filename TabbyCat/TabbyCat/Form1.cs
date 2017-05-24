@@ -33,14 +33,18 @@ namespace TabbyCat
         double pawsWidth;
         double tailLength;
         double tailWidth;
+        double torsoXMin;
+        double lastBandXMin;
 
         decimal headLength;
         decimal headWidth;
-
+        
         const int bandsXOffset = 15;
         const int teethYOffset = 6;
 
-        bool isUpdated = false;
+        bool isUpdated1 = false;
+        bool isUpdated2 = false;
+        bool isUpdated3 = false;
 
         public tabbyCatRenderForm()
         {
@@ -104,7 +108,9 @@ namespace TabbyCat
             numericUpDown13.Value = bandsWidthControl.Value;
 
             bandsNumberControl.Value = bands.Count;
+            numericUpDown14.Value = bandsNumberControl.Value;
             teethNumberControl.Value = teeth.Count;
+            teethNumberControl.Value = teethNumberControl.Value;
         }
 
         private List<Box> boxesDrafting(Color color)
@@ -299,9 +305,6 @@ namespace TabbyCat
                 if (surfaceRadioButton.Checked)
                 {
                     surfaceRender(zBuffer, v1, v2, v3, t.Color);
-
-                    //drawLine(v1.X, v1.Y, v2.X, v2.Y);
-                    //drawLine(v3.X, v3.Y, v1.X, v1.Y);
                 }
             }
         }
@@ -338,6 +341,8 @@ namespace TabbyCat
                         x1 = box.XEnd + torsoXOffset;
                         y1 = box.YEnd + torsoYOffset;
                         z1 = box.ZEnd;
+
+                        torsoXMin = x0;
 
                         break;
                     // конечности
@@ -644,6 +649,8 @@ namespace TabbyCat
                 drawTriangles(box.RightEdge, transform, zBuffer);
                 drawTriangles(box.NearEdge, transform, zBuffer);
                 drawTriangles(box.DistantEdge, transform, zBuffer);
+
+                lastBandXMin = box.XStart;
             }
         }
 
@@ -737,12 +744,12 @@ namespace TabbyCat
         {
             string str;
 
-            if (numericUpDown1.Value < headLength * 2 + 5 || numericUpDown1.Value > headLength * 10)
+            if (numericUpDown1.Value < headLength * 2 + 5 || numericUpDown1.Value > headLength * 10 + 10)
             {
-                str = string.Format("Длина тела должна лежать в диапазоне от {0} до {1}", headLength * 2 + 5, headLength * 10);
+                str = string.Format("Длина тела должна лежать в диапазоне от {0} до {1}", headLength * 2 + 5, headLength * 10 + 10);
                 numericUpDown1.Value = torsoLengthControl.Value;
                 MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                isUpdated = true;
+                isUpdated1 = true;
                 return;
             }
             else
@@ -755,7 +762,7 @@ namespace TabbyCat
                 str = string.Format("Ширина тела должна лежать в диапазоне от {0} до {1}", headWidth, headWidth * 5);
                 numericUpDown2.Value = torsoWidthControl.Value;
                 MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                isUpdated = true;
+                isUpdated1 = true;
                 return;
             }
             else
@@ -769,7 +776,7 @@ namespace TabbyCat
                     (decimal)Math.Round(tailLength / 2), (decimal)tailLength * 2);
                 numericUpDown3.Value = tailLengthControl.Value;
                 MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                isUpdated = true;
+                isUpdated1 = true;
                 return;
             }
             else
@@ -783,7 +790,7 @@ namespace TabbyCat
                     (decimal)Math.Round(tailWidth / 2), (decimal)tailWidth * 2);
                 numericUpDown4.Value = tailWidthControl.Value;
                 MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                isUpdated = true;
+                isUpdated1 = true;
                 return;
             }
             else
@@ -797,7 +804,7 @@ namespace TabbyCat
                     (decimal)pawsHeight / 2, (decimal)pawsHeight * 2);
                 numericUpDown5.Value = pawsHeightControl.Value;
                 MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                isUpdated = true;
+                isUpdated1 = true;
                 return;
             }
             else
@@ -811,7 +818,7 @@ namespace TabbyCat
                     (decimal)pawsWidth - 2, (decimal)pawsWidth * 2);
                 numericUpDown6.Value = pawsWidthControl.Value;
                 MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                isUpdated = true;
+                isUpdated1 = true;
                 return;
             }
             else
@@ -825,7 +832,7 @@ namespace TabbyCat
                     (decimal)cylinders[0].Radius - 2, (decimal)cylinders[0].Radius + 2);
                 numericUpDown7.Value = irisSizeControl.Value;
                 MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                isUpdated = true;
+                isUpdated1 = true;
                 return;
             }
             else
@@ -839,7 +846,7 @@ namespace TabbyCat
                     (decimal)cylinders[4].Radius - 2, (decimal)cylinders[4].Radius + 2);
                 numericUpDown8.Value = pupilSizeControl.Value;
                 MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                isUpdated = true;
+                isUpdated1 = true;
                 return;
             }
             else
@@ -847,7 +854,7 @@ namespace TabbyCat
                 pupilSizeControl.Value = numericUpDown8.Value;
             }
 
-            isUpdated = true;
+            isUpdated1 = true;
         }
 
         private void setControlValues2()
@@ -860,7 +867,7 @@ namespace TabbyCat
                     Math.Round((decimal)halfCylinders[0].Height / 2), (decimal)halfCylinders[0].Height * 2);
                 numericUpDown9.Value = earsWidthControl.Value;
                 MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                isUpdated = true;
+                isUpdated2 = true;
                 return;
             }
             else
@@ -874,7 +881,7 @@ namespace TabbyCat
                     (decimal)boxes[14].getLength(), (decimal)boxes[14].getLength() + 5);
                 numericUpDown10.Value = tongueLengthControl.Value;
                 MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                isUpdated = true;
+                isUpdated2 = true;
                 return;
             }
             else
@@ -888,7 +895,7 @@ namespace TabbyCat
                     (decimal)boxes[14].getWidth() / 2, (decimal)boxes[14].getWidth() + 5);
                 numericUpDown11.Value = tongueWidthControl.Value;
                 MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                isUpdated = true;
+                isUpdated2 = true;
                 return;
             }
             else
@@ -902,7 +909,7 @@ namespace TabbyCat
                     (decimal)teeth[0].getWidth() - 1, (decimal)teeth[0].getWidth() + 1);
                 numericUpDown12.Value = teethWidthControl.Value;
                 MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                isUpdated = true;
+                isUpdated2 = true;
                 return;
             }
             else
@@ -916,7 +923,7 @@ namespace TabbyCat
                     (decimal)bands[0].getLength() / 2, (decimal)bands[0].getLength() * 2);
                 numericUpDown13.Value = bandsWidthControl.Value;
                 MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                isUpdated = true;
+                isUpdated2 = true;
                 return;
             }
             else
@@ -924,22 +931,64 @@ namespace TabbyCat
                 bandsWidthControl.Value = numericUpDown13.Value;
             }
 
-            isUpdated = true;
+            isUpdated2 = true;
         }
 
         private void setControlValues3()
         {
+            string str;
 
+            if (numericUpDown14.Value >= 0)
+            {
+                if (numericUpDown14.Value == 1)
+                {
+                    bandsNumberControl.Value = numericUpDown14.Value;
+                }
+                else
+                {
+                    double x = lastBandXMin;
+
+                    for (int i = (bands.Count - 1); i < (int)numericUpDown14.Value - 1; i++)
+                    {
+                        if (x - bandsXOffset < torsoXMin)
+                        {
+                            str = string.Format("Количество полос, должно быть в диапазоне от {0} до {1}",
+                                0, i + 1);
+                            numericUpDown14.Value = bandsNumberControl.Value;
+                            MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            isUpdated3 = true;
+                            return;
+                        }
+                        else
+                        {
+                            x -= bandsXOffset;
+                        }
+                    }
+
+                    bandsNumberControl.Value = numericUpDown14.Value;
+                }
+            }
+            else
+            {
+                numericUpDown14.Value = bandsNumberControl.Value;
+                MessageBox.Show("Количество полос не может быть меньше 0", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                isUpdated3 = true;
+                return;
+            }
+
+            isUpdated3 = true;
         }
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
-            if (isUpdated == false)
-            {
+            if (isUpdated1 == false)
                 setControlValues1();
+
+            if (isUpdated2 == false)
                 setControlValues2();
+
+            if (isUpdated3 == false)
                 setControlValues3();
-            }
 
             renderArea = new Bitmap(renderPictureBox.Size.Width, renderPictureBox.Size.Height);
             renderPictureBox.Image = renderArea;
@@ -984,17 +1033,17 @@ namespace TabbyCat
 
         private void confrimQualityButton1_Click(object sender, EventArgs e)
         {
-            isUpdated = !isUpdated;   
+            isUpdated1 = !isUpdated1;   
         }
 
         private void confrimQualityButton2_Click(object sender, EventArgs e)
         {
-            isUpdated = !isUpdated;
+            isUpdated2 = !isUpdated2;
         }
 
         private void quantityAcceptButton_Click(object sender, EventArgs e)
         {
-
+            isUpdated3 = !isUpdated3;
         }
     }
 }
