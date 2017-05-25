@@ -34,7 +34,11 @@ namespace TabbyCat
         double tailLength;
         double tailWidth;
         double torsoXMin;
+
         double lastBandXMin;
+        double firstBandXStart;
+        double teethFirstYMin;
+        double teethFirstYMax;
 
         decimal headLength;
         decimal headWidth;
@@ -110,7 +114,7 @@ namespace TabbyCat
             bandsNumberControl.Value = bands.Count;
             numericUpDown14.Value = bandsNumberControl.Value;
             teethNumberControl.Value = teeth.Count;
-            teethNumberControl.Value = teethNumberControl.Value;
+            numericUpDown15.Value = teethNumberControl.Value;
         }
 
         private List<Box> boxesDrafting(Color color)
@@ -605,7 +609,7 @@ namespace TabbyCat
         {
             if (bands.Count != (int)bandsNumberControl.Value)
             {
-                if (bands.Count != 0)
+                if (bands.Count > 0)
                 {
                     if ((int)bandsNumberControl.Value < bands.Count)
                     {
@@ -623,11 +627,13 @@ namespace TabbyCat
                         }
                     }
                 }
-                else
+                else if (bands.Count == 0)
                 {
                     bands.Add(new Box(new Vertex(60, 10, 60), new Vertex(65, -20, 61), Color.Brown));
                 }
             }
+
+            int counter = 0;
 
             foreach (Box b in bands)
             {
@@ -650,7 +656,11 @@ namespace TabbyCat
                 drawTriangles(box.NearEdge, transform, zBuffer);
                 drawTriangles(box.DistantEdge, transform, zBuffer);
 
+                if (counter == 0)
+                    firstBandXStart = box.XStart;
+
                 lastBandXMin = box.XStart;
+                counter++;
             }
         }
 
@@ -725,7 +735,11 @@ namespace TabbyCat
                 drawTriangles(box.NearEdge, transform, zBuffer);
                 drawTriangles(box.DistantEdge, transform, zBuffer);
 
-                counter++;
+                if (counter == 0)
+                {
+                    teethFirstYMin = box.YStart;
+                    teethFirstYMax = box.YEnd;
+                }
             }
         }
 
@@ -940,8 +954,27 @@ namespace TabbyCat
 
             if (numericUpDown14.Value >= 0)
             {
-                if (numericUpDown14.Value == 1)
+                if (bands.Count == 0)
                 {
+                    double x = firstBandXStart;
+
+                    for (int i = (bands.Count); i < (int)numericUpDown14.Value - 1; i++)
+                    {
+                        if (x - bandsXOffset < torsoXMin + 10)
+                        {
+                            str = string.Format("Количество полос, должно быть в диапазоне от {0} до {1}",
+                                0, i + 1);
+                            numericUpDown14.Value = bandsNumberControl.Value;
+                            MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            isUpdated3 = true;
+                            return;
+                        }
+                        else
+                        {
+                            x -= bandsXOffset;
+                        }
+                    }
+
                     bandsNumberControl.Value = numericUpDown14.Value;
                 }
                 else
@@ -950,7 +983,7 @@ namespace TabbyCat
 
                     for (int i = (bands.Count - 1); i < (int)numericUpDown14.Value - 1; i++)
                     {
-                        if (x - bandsXOffset < torsoXMin)
+                        if (x - bandsXOffset < torsoXMin + 10)
                         {
                             str = string.Format("Количество полос, должно быть в диапазоне от {0} до {1}",
                                 0, i + 1);
@@ -972,6 +1005,135 @@ namespace TabbyCat
             {
                 numericUpDown14.Value = bandsNumberControl.Value;
                 MessageBox.Show("Количество полос не может быть меньше 0", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                isUpdated3 = true;
+                return;
+            }
+
+            /*
+            if (teeth.Count != (int)teethNumberControl.Value)
+            {
+                if (teeth.Count != 0)
+                {
+                    if ((int)teethNumberControl.Value < teeth.Count)
+                    {
+                        for (int i = (teeth.Count - 1); i >= (int)teethNumberControl.Value; i--)
+                        {
+                            teeth.RemoveAt(i);
+                        }
+                    }
+                    else
+                    {
+                        for (int i = (teeth.Count - 1); i < (int)teethNumberControl.Value - 1; i++)
+                        {
+                            if (i == 0)
+                            {
+                                teeth.Add(new Box(new Vertex(teeth[i].XStart, teeth[i].YStart - teethYOffset, teeth[i].ZStart),
+                                    new Vertex(teeth[i].XEnd, teeth[i].YEnd - teethYOffset, teeth[i].ZEnd), teeth[i].Color));
+                            }
+                            else if (i % 2 != 0)
+                            {
+                                teeth.Add(new Box(new Vertex(teeth[i - 1].XStart, teeth[i - 1].YStart + teethYOffset, teeth[i - 1].ZStart),
+                                    new Vertex(teeth[i - 1].XEnd, teeth[i - 1].YEnd + teethYOffset, teeth[i - 1].ZEnd), teeth[i - 1].Color));
+                            }
+                            else
+                            {
+                                teeth.Add(new Box(new Vertex(teeth[i - 1].XStart, teeth[i - 1].YStart - teethYOffset, teeth[i - 1].ZStart),
+                                    new Vertex(teeth[i - 1].XEnd, teeth[i - 1].YEnd - teethYOffset, teeth[i - 1].ZEnd), teeth[i - 1].Color));
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    teeth.Add(new Box(new Vertex(96, 0, 50), new Vertex(97, -4, 47), Color.White));
+                }
+            }*/
+
+            if (numericUpDown15.Value >= 0)
+            {
+                double teethYMin = 0;
+                double teethYMax = 0;
+
+                if (teeth.Count == 0)
+                {
+                    if (numericUpDown15.Value <= 4)
+                    {
+                        teethNumberControl.Value = numericUpDown15.Value;
+                    }
+                    else
+                    {
+                        str = string.Format("Количество зубов, должно быть в диапазоне от {0} до {1}",
+                                0, 4);
+                        numericUpDown15.Value = teethNumberControl.Value;
+                        MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        isUpdated3 = true;
+                        return;
+                    }
+                }
+                else
+                {
+                    if (teeth.Count == 1)
+                    {
+                        teethYMax = teethFirstYMax;
+                        teethYMin = teethFirstYMin;
+                    }
+                    else
+                    {
+                        if ((teeth.Count - 1) % 2 == 0)
+                        {
+                            teethYMax = teeth[teeth.Count - 1].YEnd;
+                            teethYMin = teeth[teeth.Count - 2].YEnd;
+                        }
+                        else
+                        {
+                            teethYMax = teeth[teeth.Count - 2].YEnd;
+                            teethYMin = teeth[teeth.Count - 1].YEnd;
+                        }
+                    }
+
+                    for (int i = (teeth.Count - 1); i < (int)numericUpDown15.Value - 1; i++)
+                    {
+                        if (i % 2 != 0)
+                        {
+                            if (teethYMax + teethYOffset < boxes[13].YEnd - 2)
+                            {
+                                teethYMax += teethYOffset;
+                            }
+                            else
+                            {
+                                str = string.Format("Количество зубов, должно быть в диапазоне от {0} до {1}",
+                                0, i + 1);
+                                numericUpDown15.Value = teethNumberControl.Value;
+                                MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                isUpdated3 = true;
+                                return;
+                            }
+                        }
+                        else
+                        {
+                            if (teethYMin - teethYOffset > boxes[13].YStart + 2)
+                            {
+                                teethYMin -= teethYOffset;
+                            }
+                            else
+                            {
+                                str = string.Format("Количество зубов, должно быть в диапазоне от {0} до {1}",
+                                0, i + 1);
+                                numericUpDown15.Value = teethNumberControl.Value;
+                                MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                isUpdated3 = true;
+                                return;
+                            }
+                        }
+                    }
+
+                    teethNumberControl.Value = numericUpDown15.Value;
+                }
+            }
+            else
+            {
+                numericUpDown15.Value = teethNumberControl.Value;
+                MessageBox.Show("Количество зубов не может быть меньше 0", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 isUpdated3 = true;
                 return;
             }
