@@ -933,8 +933,8 @@ namespace TabbyCat
 
             if (numericUpDown13.Value < Math.Round((decimal)bands[0].getLength() / 2) || numericUpDown13.Value > (decimal)bands[0].getLength() * 2)
             {
-                str = string.Format("Ширина языка должна лежать в диапазоне от {0} до {1}",
-                    (decimal)bands[0].getLength() / 2, (decimal)bands[0].getLength() * 2);
+                str = string.Format("Толщина полос должна лежать в диапазоне от {0} до {1}",
+                    Math.Round((decimal)bands[0].getLength() / 2), (decimal)bands[0].getLength() * 2);
                 numericUpDown13.Value = bandsWidthControl.Value;
                 MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 isUpdated2 = true;
@@ -962,7 +962,7 @@ namespace TabbyCat
                     {
                         if (x - bandsXOffset < torsoXMin + 10)
                         {
-                            str = string.Format("Количество полос, должно быть в диапазоне от {0} до {1}",
+                            str = string.Format("Количество полос должно быть в диапазоне от {0} до {1}",
                                 0, i + 1);
                             numericUpDown14.Value = bandsNumberControl.Value;
                             MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -985,7 +985,7 @@ namespace TabbyCat
                     {
                         if (x - bandsXOffset < torsoXMin + 10)
                         {
-                            str = string.Format("Количество полос, должно быть в диапазоне от {0} до {1}",
+                            str = string.Format("Количество полос должно быть в диапазоне от {0} до {1}",
                                 0, i + 1);
                             numericUpDown14.Value = bandsNumberControl.Value;
                             MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -1009,46 +1009,6 @@ namespace TabbyCat
                 return;
             }
 
-            /*
-            if (teeth.Count != (int)teethNumberControl.Value)
-            {
-                if (teeth.Count != 0)
-                {
-                    if ((int)teethNumberControl.Value < teeth.Count)
-                    {
-                        for (int i = (teeth.Count - 1); i >= (int)teethNumberControl.Value; i--)
-                        {
-                            teeth.RemoveAt(i);
-                        }
-                    }
-                    else
-                    {
-                        for (int i = (teeth.Count - 1); i < (int)teethNumberControl.Value - 1; i++)
-                        {
-                            if (i == 0)
-                            {
-                                teeth.Add(new Box(new Vertex(teeth[i].XStart, teeth[i].YStart - teethYOffset, teeth[i].ZStart),
-                                    new Vertex(teeth[i].XEnd, teeth[i].YEnd - teethYOffset, teeth[i].ZEnd), teeth[i].Color));
-                            }
-                            else if (i % 2 != 0)
-                            {
-                                teeth.Add(new Box(new Vertex(teeth[i - 1].XStart, teeth[i - 1].YStart + teethYOffset, teeth[i - 1].ZStart),
-                                    new Vertex(teeth[i - 1].XEnd, teeth[i - 1].YEnd + teethYOffset, teeth[i - 1].ZEnd), teeth[i - 1].Color));
-                            }
-                            else
-                            {
-                                teeth.Add(new Box(new Vertex(teeth[i - 1].XStart, teeth[i - 1].YStart - teethYOffset, teeth[i - 1].ZStart),
-                                    new Vertex(teeth[i - 1].XEnd, teeth[i - 1].YEnd - teethYOffset, teeth[i - 1].ZEnd), teeth[i - 1].Color));
-                            }
-                        }
-                    }
-                }
-                else
-                {
-                    teeth.Add(new Box(new Vertex(96, 0, 50), new Vertex(97, -4, 47), Color.White));
-                }
-            }*/
-
             if (numericUpDown15.Value >= 0)
             {
                 double teethYMin = 0;
@@ -1062,7 +1022,7 @@ namespace TabbyCat
                     }
                     else
                     {
-                        str = string.Format("Количество зубов, должно быть в диапазоне от {0} до {1}",
+                        str = string.Format("Количество зубов должно быть в диапазоне от {0} до {1}",
                                 0, 4);
                         numericUpDown15.Value = teethNumberControl.Value;
                         MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -1101,7 +1061,7 @@ namespace TabbyCat
                             }
                             else
                             {
-                                str = string.Format("Количество зубов, должно быть в диапазоне от {0} до {1}",
+                                str = string.Format("Количество зубов должно быть в диапазоне от {0} до {1}",
                                 0, i + 1);
                                 numericUpDown15.Value = teethNumberControl.Value;
                                 MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -1117,7 +1077,7 @@ namespace TabbyCat
                             }
                             else
                             {
-                                str = string.Format("Количество зубов, должно быть в диапазоне от {0} до {1}",
+                                str = string.Format("Количество зубов должно быть в диапазоне от {0} до {1}",
                                 0, i + 1);
                                 numericUpDown15.Value = teethNumberControl.Value;
                                 MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -1181,16 +1141,6 @@ namespace TabbyCat
             }
 
             render(g, transformMatrix, zBuffer);
-        }
-
-        private void torsoLengthControl_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void angleGroupBox_Enter(object sender, EventArgs e)
-        {
-
         }
 
         private void confrimQualityButton1_Click(object sender, EventArgs e)
