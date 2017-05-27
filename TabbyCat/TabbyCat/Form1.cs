@@ -26,6 +26,9 @@ namespace TabbyCat
         RotationTransformation rtTransform;
         ScaleTransformation scTransform;
 
+        CameraRotationTransformation viewRtTransform;
+        CameraTranslationTransformation viewTrTransform;
+
         double torsoXOffset = 0;
         double torsoYOffset = 0;
 
@@ -69,6 +72,10 @@ namespace TabbyCat
             );
 
             scTransform = new ScaleTransformation();
+
+            viewTrTransform = new CameraTranslationTransformation();
+
+            viewRtTransform = new CameraRotationTransformation();
 
             headLength = (decimal)boxes[9].getLength();
             headWidth = (decimal)boxes[9].getWidth();
@@ -115,6 +122,8 @@ namespace TabbyCat
             numericUpDown14.Value = bandsNumberControl.Value;
             teethNumberControl.Value = teeth.Count;
             numericUpDown15.Value = teethNumberControl.Value;
+
+            radioButton1.Checked = true;
         }
 
         private List<Box> boxesDrafting(Color color)
@@ -291,6 +300,28 @@ namespace TabbyCat
                 Vertex v1 = transform.transform(t.V1);
                 Vertex v2 = transform.transform(t.V2);
                 Vertex v3 = transform.transform(t.V3);
+
+                //if (radioButton2.Checked)
+                //{
+                //    double f = 10;
+                //    double n = 2;
+                //    double d = 8;
+
+                //    double a = (f + n) / (f - n);
+                //    double b = (-2 * f * n) / (f - n);
+
+                //    v1.X = v1.X * (d / v1.Z);
+                //    v1.Y = v1.Y * (d / v1.Z);
+                //    v1.Z = (a * v1.Z + b) / v1.Z;
+
+                //    v2.X = v2.X * (d / v2.Z);
+                //    v2.Y = v2.Y * (d / v2.Z);
+                //    v2.Z = (a * v2.Z + b) / v2.Z;
+
+                //    v3.X = v3.X * (d / v3.Z);
+                //    v3.Y = v3.Y * (d / v3.Z);
+                //    v3.Z = (a * v3.Z + b) / v3.Z;
+                //}
 
                 v1.X += renderArea.Width / 2;
                 v1.Y += renderArea.Height / 2;
@@ -1127,10 +1158,55 @@ namespace TabbyCat
 
             rtTransform.setAngles(xAngleControl.Value, yAngleControl.Value, zAngleControl.Value);
 
+            viewTrTransform.setOffsets(cameraXPositionControl.Value, cameraYPositionControl.Value, cameraZPositionControl.Value);
+
+            viewRtTransform.setAngles(cameraXAngleControl.Value, cameraYAngleControl.Value, cameraZAngleControl.Value);
+
             Matrix4 transformMatrix = rtTransform.OxMatrix.multiply(rtTransform.OyMatrix);
             transformMatrix = transformMatrix.multiply(rtTransform.OzMatrix);
             transformMatrix = transformMatrix.multiply(scTransform.Matrix);
             transformMatrix = transformMatrix.multiply(trTransform.Matrix);
+            transformMatrix = transformMatrix.multiply(viewTrTransform.Matrix);
+
+            Matrix4 viewMatrix = viewTrTransform.Matrix.multiply(viewRtTransform.OyMatrix);
+            viewMatrix = viewMatrix.multiply(viewRtTransform.OxMatrix);
+            viewMatrix = viewMatrix.multiply(viewRtTransform.OzMatrix);
+
+            transformMatrix = transformMatrix.multiply(viewMatrix);
+
+            //if (radioButton2.Checked)
+            //{
+            //    double d = (renderArea.Width / 2) * Math.Tan(90 / 2);
+
+            //    double f = 10;
+            //    double n = 2;
+
+            //    double[] matrix =
+            //    {
+            //        1, 0, 0, 0,
+            //        0, 1, 0, 0,
+            //        0, 0, (f + n) / (f - n), 1,
+            //        0, 0, (-2 * f * n) / (f - n), 0
+            //    };
+
+            //    double ar = renderArea.Width / renderArea.Height;
+            //    double zNear = 2;
+            //    double zFar = 10;
+            //    double zRange = zNear - zFar;
+            //    double tanHalfFOV = Math.Tan(RotationTransformation.degreeToRadian(90 / 2.0));
+
+            //    double[] matrix =
+            //    {
+            //        1.0 / (tanHalfFOV * ar), 0.0, 0.0, 0.0,
+            //        0.0, 1.0 / tanHalfFOV, 0.0, 0.0,
+            //        0.0, 0.0, (-zNear - zFar) / zRange, 2.0 * zFar * zNear / zRange,
+            //        0.0, 0.0, 1.0, 0.0
+            //    };
+
+            //    Matrix4 perspective = new Matrix4(matrix);
+
+            //    transformMatrix = transformMatrix.multiply(perspective);
+            //}
 
             // инициализация заполнение z-буфера
             double[] zBuffer = new double[renderArea.Width * renderArea.Height];

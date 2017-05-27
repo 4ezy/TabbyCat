@@ -54,5 +54,7 @@ namespace TabbyCat
                 inv.X * values[1] + inv.Y * values[5] + inv.Z * values[9] + inv.One * values[13],
                 inv.X * values[2] + inv.Y * values[6] + inv.Z * values[10] + inv.One * values[14]);
         }
+
+
     }
 }

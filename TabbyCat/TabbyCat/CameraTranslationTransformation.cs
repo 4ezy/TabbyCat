@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace TabbyCat
 {
-    class TranslationTransformation
+    class CameraTranslationTransformation
     {
         double xOffset = 0;
         double yOffset = 0;
@@ -25,7 +24,7 @@ namespace TabbyCat
             set
             {
                 xOffset = value;
-                matrix.Values[12] = xOffset; 
+                matrix.Values[12] = -xOffset;
             }
         }
 
@@ -39,7 +38,7 @@ namespace TabbyCat
             set
             {
                 yOffset = value;
-                matrix.Values[13] = yOffset;
+                matrix.Values[13] = -yOffset;
             }
         }
 
@@ -53,7 +52,7 @@ namespace TabbyCat
             set
             {
                 zOffset = value;
-                matrix.Values[14] = zOffset;
+                matrix.Values[14] = -zOffset;
             }
         }
 
@@ -70,19 +69,19 @@ namespace TabbyCat
             }
         }
 
-        public TranslationTransformation()
+        public CameraTranslationTransformation()
         {
             this.matrix = new Matrix4(
                 new double[] {
                     1, 0, 0, 0,
                     0, 1, 0, 0,
                     0, 0, 1, 0,
-                    xOffset, yOffset, zOffset, 1
+                    -xOffset, -yOffset, -zOffset, 1
                 });
         }
 
         public void setOffsets(decimal xOffset,
-            decimal yOffset, decimal zOffset)
+    decimal yOffset, decimal zOffset)
         {
             this.XOffset = (int)xOffset;
             this.YOffset = (int)yOffset;

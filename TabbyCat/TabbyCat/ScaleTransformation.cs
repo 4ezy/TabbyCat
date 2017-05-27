@@ -8,7 +8,7 @@ namespace TabbyCat
 {
     class ScaleTransformation
     {
-        double scaleOffset = 0.5;
+        double scaleOffset = 0.25;
 
         Matrix4 matrix;
 

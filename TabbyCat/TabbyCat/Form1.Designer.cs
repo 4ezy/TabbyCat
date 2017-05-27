@@ -32,6 +32,25 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.cameraZAngleControl = new System.Windows.Forms.NumericUpDown();
+            this.label25 = new System.Windows.Forms.Label();
+            this.cameraYAngleControl = new System.Windows.Forms.NumericUpDown();
+            this.cameraXAngleControl = new System.Windows.Forms.NumericUpDown();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.cameraZPositionControl = new System.Windows.Forms.NumericUpDown();
+            this.label28 = new System.Windows.Forms.Label();
+            this.cameraYPositionControl = new System.Windows.Forms.NumericUpDown();
+            this.label27 = new System.Windows.Forms.Label();
+            this.cameraXPositionControl = new System.Windows.Forms.NumericUpDown();
+            this.label26 = new System.Windows.Forms.Label();
             this.modelGeometricType = new System.Windows.Forms.GroupBox();
             this.surfaceRadioButton = new System.Windows.Forms.RadioButton();
             this.wireFrameRadioButton = new System.Windows.Forms.RadioButton();
@@ -119,20 +138,21 @@
             this.label22 = new System.Windows.Forms.Label();
             this.quantityAcceptButton = new System.Windows.Forms.Button();
             this.renderPictureBox = new System.Windows.Forms.PictureBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.label23 = new System.Windows.Forms.Label();
-            this.label24 = new System.Windows.Forms.Label();
-            this.cameraXAngleControl = new System.Windows.Forms.NumericUpDown();
-            this.cameraYAngleControl = new System.Windows.Forms.NumericUpDown();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage5.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.tableLayoutPanel7.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cameraZAngleControl)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cameraYAngleControl)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cameraXAngleControl)).BeginInit();
+            this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cameraZPositionControl)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cameraYPositionControl)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cameraXPositionControl)).BeginInit();
             this.modelGeometricType.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -193,12 +213,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown15)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.teethNumberControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.renderPictureBox)).BeginInit();
-            this.groupBox1.SuspendLayout();
-            this.tableLayoutPanel7.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cameraXAngleControl)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cameraYAngleControl)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -256,6 +270,256 @@
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 84.34959F));
             this.tableLayoutPanel6.Size = new System.Drawing.Size(198, 492);
             this.tableLayoutPanel6.TabIndex = 0;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.tableLayoutPanel7);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox1.Location = new System.Drawing.Point(3, 80);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(192, 409);
+            this.groupBox1.TabIndex = 8;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Камера";
+            // 
+            // tableLayoutPanel7
+            // 
+            this.tableLayoutPanel7.ColumnCount = 1;
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel7.Controls.Add(this.groupBox2, 0, 0);
+            this.tableLayoutPanel7.Controls.Add(this.groupBox3, 0, 1);
+            this.tableLayoutPanel7.Controls.Add(this.groupBox4, 0, 2);
+            this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tableLayoutPanel7.Location = new System.Drawing.Point(3, 16);
+            this.tableLayoutPanel7.Name = "tableLayoutPanel7";
+            this.tableLayoutPanel7.RowCount = 3;
+            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 70F));
+            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 166F));
+            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(186, 387);
+            this.tableLayoutPanel7.TabIndex = 0;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.radioButton2);
+            this.groupBox2.Controls.Add(this.radioButton1);
+            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox2.Location = new System.Drawing.Point(3, 3);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(180, 64);
+            this.groupBox2.TabIndex = 2;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Проецирование";
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(6, 42);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(92, 17);
+            this.radioButton2.TabIndex = 1;
+            this.radioButton2.TabStop = true;
+            this.radioButton2.Text = "Центральное";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(6, 19);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(99, 17);
+            this.radioButton1.TabIndex = 0;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "Параллельное";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.cameraZAngleControl);
+            this.groupBox3.Controls.Add(this.label25);
+            this.groupBox3.Controls.Add(this.cameraYAngleControl);
+            this.groupBox3.Controls.Add(this.cameraXAngleControl);
+            this.groupBox3.Controls.Add(this.label24);
+            this.groupBox3.Controls.Add(this.label23);
+            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox3.Location = new System.Drawing.Point(3, 73);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(180, 160);
+            this.groupBox3.TabIndex = 3;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Поворот";
+            // 
+            // cameraZAngleControl
+            // 
+            this.cameraZAngleControl.Location = new System.Drawing.Point(9, 120);
+            this.cameraZAngleControl.Maximum = new decimal(new int[] {
+            360,
+            0,
+            0,
+            0});
+            this.cameraZAngleControl.Minimum = new decimal(new int[] {
+            360,
+            0,
+            0,
+            -2147483648});
+            this.cameraZAngleControl.Name = "cameraZAngleControl";
+            this.cameraZAngleControl.Size = new System.Drawing.Size(165, 20);
+            this.cameraZAngleControl.TabIndex = 5;
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(6, 104);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(37, 13);
+            this.label25.TabIndex = 4;
+            this.label25.Text = "Ось Z";
+            // 
+            // cameraYAngleControl
+            // 
+            this.cameraYAngleControl.Location = new System.Drawing.Point(9, 76);
+            this.cameraYAngleControl.Maximum = new decimal(new int[] {
+            360,
+            0,
+            0,
+            0});
+            this.cameraYAngleControl.Minimum = new decimal(new int[] {
+            360,
+            0,
+            0,
+            -2147483648});
+            this.cameraYAngleControl.Name = "cameraYAngleControl";
+            this.cameraYAngleControl.Size = new System.Drawing.Size(165, 20);
+            this.cameraYAngleControl.TabIndex = 3;
+            // 
+            // cameraXAngleControl
+            // 
+            this.cameraXAngleControl.Location = new System.Drawing.Point(9, 32);
+            this.cameraXAngleControl.Maximum = new decimal(new int[] {
+            360,
+            0,
+            0,
+            0});
+            this.cameraXAngleControl.Minimum = new decimal(new int[] {
+            360,
+            0,
+            0,
+            -2147483648});
+            this.cameraXAngleControl.Name = "cameraXAngleControl";
+            this.cameraXAngleControl.Size = new System.Drawing.Size(165, 20);
+            this.cameraXAngleControl.TabIndex = 2;
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(6, 60);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(37, 13);
+            this.label24.TabIndex = 1;
+            this.label24.Text = "Ось Y";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(6, 16);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(37, 13);
+            this.label23.TabIndex = 0;
+            this.label23.Text = "Ось X";
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.cameraZPositionControl);
+            this.groupBox4.Controls.Add(this.label28);
+            this.groupBox4.Controls.Add(this.cameraYPositionControl);
+            this.groupBox4.Controls.Add(this.label27);
+            this.groupBox4.Controls.Add(this.cameraXPositionControl);
+            this.groupBox4.Controls.Add(this.label26);
+            this.groupBox4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox4.Location = new System.Drawing.Point(3, 239);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(180, 145);
+            this.groupBox4.TabIndex = 4;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Перенос";
+            // 
+            // cameraZPositionControl
+            // 
+            this.cameraZPositionControl.Location = new System.Drawing.Point(9, 119);
+            this.cameraZPositionControl.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.cameraZPositionControl.Minimum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            -2147483648});
+            this.cameraZPositionControl.Name = "cameraZPositionControl";
+            this.cameraZPositionControl.Size = new System.Drawing.Size(165, 20);
+            this.cameraZPositionControl.TabIndex = 5;
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(6, 103);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(37, 13);
+            this.label28.TabIndex = 4;
+            this.label28.Text = "Ось Z";
+            // 
+            // cameraYPositionControl
+            // 
+            this.cameraYPositionControl.Location = new System.Drawing.Point(9, 76);
+            this.cameraYPositionControl.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.cameraYPositionControl.Minimum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            -2147483648});
+            this.cameraYPositionControl.Name = "cameraYPositionControl";
+            this.cameraYPositionControl.Size = new System.Drawing.Size(165, 20);
+            this.cameraYPositionControl.TabIndex = 3;
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(6, 60);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(37, 13);
+            this.label27.TabIndex = 2;
+            this.label27.Text = "Ось Y";
+            // 
+            // cameraXPositionControl
+            // 
+            this.cameraXPositionControl.Location = new System.Drawing.Point(9, 32);
+            this.cameraXPositionControl.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.cameraXPositionControl.Minimum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            -2147483648});
+            this.cameraXPositionControl.Name = "cameraXPositionControl";
+            this.cameraXPositionControl.Size = new System.Drawing.Size(165, 20);
+            this.cameraXPositionControl.TabIndex = 1;
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(6, 16);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(37, 13);
+            this.label26.TabIndex = 0;
+            this.label26.Text = "Ось X";
             // 
             // modelGeometricType
             // 
@@ -1104,9 +1368,9 @@
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 4;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 166F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 116F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 68F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 115F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 167F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 73F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 59F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(198, 492);
             this.tableLayoutPanel2.TabIndex = 0;
@@ -1216,7 +1480,7 @@
             this.tanslationGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
             this.tanslationGroupBox.Location = new System.Drawing.Point(3, 169);
             this.tanslationGroupBox.Name = "tanslationGroupBox";
-            this.tanslationGroupBox.Size = new System.Drawing.Size(192, 110);
+            this.tanslationGroupBox.Size = new System.Drawing.Size(192, 160);
             this.tanslationGroupBox.TabIndex = 4;
             this.tanslationGroupBox.TabStop = false;
             this.tanslationGroupBox.Text = "Перенос";
@@ -1303,7 +1567,7 @@
             // 
             this.scaleGroupBox.Controls.Add(this.scaleControl);
             this.scaleGroupBox.Controls.Add(this.label7);
-            this.scaleGroupBox.Location = new System.Drawing.Point(3, 285);
+            this.scaleGroupBox.Location = new System.Drawing.Point(3, 336);
             this.scaleGroupBox.Name = "scaleGroupBox";
             this.scaleGroupBox.Size = new System.Drawing.Size(192, 62);
             this.scaleGroupBox.TabIndex = 5;
@@ -1320,7 +1584,7 @@
             131072});
             this.scaleControl.Location = new System.Drawing.Point(6, 32);
             this.scaleControl.Minimum = new decimal(new int[] {
-            5,
+            1,
             0,
             0,
             131072});
@@ -1507,122 +1771,6 @@
             this.renderPictureBox.TabStop = false;
             this.renderPictureBox.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.tableLayoutPanel7);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox1.Location = new System.Drawing.Point(3, 80);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(192, 409);
-            this.groupBox1.TabIndex = 8;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Камера";
-            // 
-            // tableLayoutPanel7
-            // 
-            this.tableLayoutPanel7.ColumnCount = 1;
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel7.Controls.Add(this.groupBox2, 0, 0);
-            this.tableLayoutPanel7.Controls.Add(this.groupBox3, 0, 1);
-            this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel7.Location = new System.Drawing.Point(3, 16);
-            this.tableLayoutPanel7.Name = "tableLayoutPanel7";
-            this.tableLayoutPanel7.RowCount = 2;
-            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 19.63824F));
-            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80.36176F));
-            this.tableLayoutPanel7.Size = new System.Drawing.Size(186, 387);
-            this.tableLayoutPanel7.TabIndex = 0;
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.radioButton2);
-            this.groupBox2.Controls.Add(this.radioButton1);
-            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox2.Location = new System.Drawing.Point(3, 3);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(180, 69);
-            this.groupBox2.TabIndex = 2;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Проецирование";
-            // 
-            // radioButton2
-            // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(6, 42);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(92, 17);
-            this.radioButton2.TabIndex = 1;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Центральное";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            // 
-            // radioButton1
-            // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(6, 19);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(99, 17);
-            this.radioButton1.TabIndex = 0;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Параллельное";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.cameraYAngleControl);
-            this.groupBox3.Controls.Add(this.cameraXAngleControl);
-            this.groupBox3.Controls.Add(this.label24);
-            this.groupBox3.Controls.Add(this.label23);
-            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox3.Location = new System.Drawing.Point(3, 78);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(180, 133);
-            this.groupBox3.TabIndex = 3;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Поворот";
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(6, 16);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(14, 13);
-            this.label23.TabIndex = 0;
-            this.label23.Text = "X";
-            // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(6, 68);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(14, 13);
-            this.label24.TabIndex = 1;
-            this.label24.Text = "Y";
-            // 
-            // cameraXAngleControl
-            // 
-            this.cameraXAngleControl.Location = new System.Drawing.Point(9, 32);
-            this.cameraXAngleControl.Maximum = new decimal(new int[] {
-            360,
-            0,
-            0,
-            0});
-            this.cameraXAngleControl.Name = "cameraXAngleControl";
-            this.cameraXAngleControl.Size = new System.Drawing.Size(165, 20);
-            this.cameraXAngleControl.TabIndex = 2;
-            // 
-            // cameraYAngleControl
-            // 
-            this.cameraYAngleControl.Location = new System.Drawing.Point(9, 84);
-            this.cameraYAngleControl.Maximum = new decimal(new int[] {
-            360,
-            0,
-            0,
-            0});
-            this.cameraYAngleControl.Name = "cameraYAngleControl";
-            this.cameraYAngleControl.Size = new System.Drawing.Size(165, 20);
-            this.cameraYAngleControl.TabIndex = 3;
-            // 
             // tabbyCatRenderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1637,6 +1785,20 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage5.ResumeLayout(false);
             this.tableLayoutPanel6.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.tableLayoutPanel7.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cameraZAngleControl)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cameraYAngleControl)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cameraXAngleControl)).EndInit();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cameraZPositionControl)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cameraYPositionControl)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cameraXPositionControl)).EndInit();
             this.modelGeometricType.ResumeLayout(false);
             this.modelGeometricType.PerformLayout();
             this.tabPage2.ResumeLayout(false);
@@ -1711,14 +1873,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown15)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.teethNumberControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.renderPictureBox)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.tableLayoutPanel7.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cameraXAngleControl)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cameraYAngleControl)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1825,6 +1979,15 @@
         private System.Windows.Forms.NumericUpDown cameraXAngleControl;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.NumericUpDown cameraZAngleControl;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.NumericUpDown cameraZPositionControl;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.NumericUpDown cameraYPositionControl;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.NumericUpDown cameraXPositionControl;
+        private System.Windows.Forms.Label label26;
     }
 }
 

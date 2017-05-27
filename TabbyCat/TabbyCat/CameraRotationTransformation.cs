@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace TabbyCat
 {
-    class RotationTransformation
+    class CameraRotationTransformation
     {
         double oxAngle;
         double oyAngle;
@@ -28,10 +27,10 @@ namespace TabbyCat
             {
                 oxAngle = value;
 
-                oxMatrix.Values[5] = Math.Cos(oxAngle);
-                oxMatrix.Values[6] = Math.Sin(oxAngle);
-                oxMatrix.Values[9] = -Math.Sin(oxAngle);
-                oxMatrix.Values[10] = Math.Cos(oxAngle);
+                oxMatrix.Values[5] = Math.Cos(-oxAngle);
+                oxMatrix.Values[6] = Math.Sin(-oxAngle);
+                oxMatrix.Values[9] = -Math.Sin(-oxAngle);
+                oxMatrix.Values[10] = Math.Cos(-oxAngle);
             }
         }
 
@@ -46,10 +45,10 @@ namespace TabbyCat
             {
                 oyAngle = value;
 
-                oyMatrix.Values[0] = Math.Cos(oyAngle);
-                oyMatrix.Values[2] = -Math.Sin(oyAngle);
-                oyMatrix.Values[8] = Math.Sin(oyAngle);
-                oyMatrix.Values[10] = Math.Cos(oyAngle);
+                oyMatrix.Values[0] = Math.Cos(-oyAngle);
+                oyMatrix.Values[2] = -Math.Sin(-oyAngle);
+                oyMatrix.Values[8] = Math.Sin(-oyAngle);
+                oyMatrix.Values[10] = Math.Cos(-oyAngle);
             }
         }
 
@@ -64,10 +63,10 @@ namespace TabbyCat
             {
                 ozAngle = value;
 
-                ozMatrix.Values[0] = Math.Cos(ozAngle);
-                ozMatrix.Values[1] = Math.Sin(ozAngle);
-                ozMatrix.Values[4] = -Math.Sin(ozAngle);
-                ozMatrix.Values[5] = Math.Cos(ozAngle);
+                ozMatrix.Values[0] = Math.Cos(-ozAngle);
+                ozMatrix.Values[1] = Math.Sin(-ozAngle);
+                ozMatrix.Values[4] = -Math.Sin(-ozAngle);
+                ozMatrix.Values[5] = Math.Cos(-ozAngle);
             }
         }
 
@@ -110,37 +109,37 @@ namespace TabbyCat
             }
         }
 
-        public RotationTransformation(double oxAngle, double oyAngle, double ozAngle)
+        public CameraRotationTransformation()
         {
             this.oxAngle = degreeToRadian(oxAngle);
             this.oxMatrix = new Matrix4(
                 new double[] {
                     1, 0, 0, 0,
-                    0, Math.Cos(oxAngle), Math.Sin(oxAngle), 0,
-                    0, -Math.Sin(oxAngle), Math.Cos(oxAngle), 0,
+                    0, Math.Cos(-oxAngle), Math.Sin(-oxAngle), 0,
+                    0, -Math.Sin(-oxAngle), Math.Cos(-oxAngle), 0,
                     0, 0, 0, 1
                 });
 
             this.oyAngle = degreeToRadian(oyAngle);
             this.oyMatrix = new Matrix4(
                 new double[] {
-                    Math.Cos(oyAngle), 0, -Math.Sin(oyAngle), 0,
+                    Math.Cos(-oyAngle), 0, -Math.Sin(-oyAngle), 0,
                     0, 1, 0, 0,
-                    Math.Sin(oyAngle), 0, Math.Cos(oyAngle), 0,
+                    Math.Sin(-oyAngle), 0, Math.Cos(-oyAngle), 0,
                     0, 0, 0, 1
                 });
 
             this.ozAngle = degreeToRadian(ozAngle);
             this.ozMatrix = new Matrix4(
                 new double[] {
-                    Math.Cos(ozAngle), Math.Sin(ozAngle), 0, 0,
-                    -Math.Sin(ozAngle), Math.Cos(ozAngle), 0, 0,
+                    Math.Cos(-ozAngle), Math.Sin(-ozAngle), 0, 0,
+                    -Math.Sin(-ozAngle), Math.Cos(-ozAngle), 0, 0,
                     0, 0, 1, 0,
                     0, 0, 0, 1
                 });
         }
 
-        public static double degreeToRadian(double angle)
+        private double degreeToRadian(double angle)
         {
             return Math.PI * angle / 180.0;
         }
