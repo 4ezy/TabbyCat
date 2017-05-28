@@ -54,6 +54,11 @@
             this.modelGeometricType = new System.Windows.Forms.GroupBox();
             this.surfaceRadioButton = new System.Windows.Forms.RadioButton();
             this.wireFrameRadioButton = new System.Windows.Forms.RadioButton();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.deleteCatButton = new System.Windows.Forms.Button();
+            this.addCatButton = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.tailGroupBox = new System.Windows.Forms.GroupBox();
@@ -117,7 +122,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.xAngleControl = new System.Windows.Forms.NumericUpDown();
             this.tanslationGroupBox = new System.Windows.Forms.GroupBox();
-            this.zOffsetControlControl = new System.Windows.Forms.NumericUpDown();
+            this.zOffsetControl = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
             this.yOffsetControl = new System.Windows.Forms.NumericUpDown();
             this.label6 = new System.Windows.Forms.Label();
@@ -138,6 +143,7 @@
             this.label22 = new System.Windows.Forms.Label();
             this.quantityAcceptButton = new System.Windows.Forms.Button();
             this.renderPictureBox = new System.Windows.Forms.PictureBox();
+            this.catsListBox = new System.Windows.Forms.ListBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage5.SuspendLayout();
@@ -154,6 +160,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.cameraYPositionControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cameraXPositionControl)).BeginInit();
             this.modelGeometricType.SuspendLayout();
+            this.tabPage6.SuspendLayout();
+            this.tableLayoutPanel8.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.tailGroupBox.SuspendLayout();
@@ -199,7 +208,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.yAngleControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xAngleControl)).BeginInit();
             this.tanslationGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.zOffsetControlControl)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.zOffsetControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.yOffsetControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xOffsetControl)).BeginInit();
             this.scaleGroupBox.SuspendLayout();
@@ -233,6 +242,7 @@
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage5);
+            this.tabControl1.Controls.Add(this.tabPage6);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage1);
@@ -253,7 +263,7 @@
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage5.Size = new System.Drawing.Size(204, 501);
             this.tabPage5.TabIndex = 4;
-            this.tabPage5.Text = "Тип модели и параметры камеры";
+            this.tabPage5.Text = "Тип модели и камера";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel6
@@ -554,6 +564,63 @@
             this.wireFrameRadioButton.TabStop = true;
             this.wireFrameRadioButton.Text = "Каркасная";
             this.wireFrameRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // tabPage6
+            // 
+            this.tabPage6.Controls.Add(this.tableLayoutPanel8);
+            this.tabPage6.Location = new System.Drawing.Point(4, 58);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage6.Size = new System.Drawing.Size(204, 501);
+            this.tabPage6.TabIndex = 5;
+            this.tabPage6.Text = "Объекты";
+            this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel8
+            // 
+            this.tableLayoutPanel8.ColumnCount = 1;
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel8.Controls.Add(this.groupBox5, 0, 0);
+            this.tableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tableLayoutPanel8.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel8.Name = "tableLayoutPanel8";
+            this.tableLayoutPanel8.RowCount = 2;
+            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 46.95122F));
+            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 53.04878F));
+            this.tableLayoutPanel8.Size = new System.Drawing.Size(198, 492);
+            this.tableLayoutPanel8.TabIndex = 0;
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.catsListBox);
+            this.groupBox5.Controls.Add(this.deleteCatButton);
+            this.groupBox5.Controls.Add(this.addCatButton);
+            this.groupBox5.Location = new System.Drawing.Point(3, 3);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(192, 224);
+            this.groupBox5.TabIndex = 0;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Объект";
+            // 
+            // deleteCatButton
+            // 
+            this.deleteCatButton.Location = new System.Drawing.Point(106, 189);
+            this.deleteCatButton.Name = "deleteCatButton";
+            this.deleteCatButton.Size = new System.Drawing.Size(80, 26);
+            this.deleteCatButton.TabIndex = 2;
+            this.deleteCatButton.Text = "Удалить";
+            this.deleteCatButton.UseVisualStyleBackColor = true;
+            this.deleteCatButton.Click += new System.EventHandler(this.deleteCatButton_Click);
+            // 
+            // addCatButton
+            // 
+            this.addCatButton.Location = new System.Drawing.Point(6, 189);
+            this.addCatButton.Name = "addCatButton";
+            this.addCatButton.Size = new System.Drawing.Size(80, 26);
+            this.addCatButton.TabIndex = 1;
+            this.addCatButton.Text = "Добавить";
+            this.addCatButton.UseVisualStyleBackColor = true;
+            this.addCatButton.Click += new System.EventHandler(this.addCatButton_Click);
             // 
             // tabPage2
             // 
@@ -1471,7 +1538,7 @@
             // 
             // tanslationGroupBox
             // 
-            this.tanslationGroupBox.Controls.Add(this.zOffsetControlControl);
+            this.tanslationGroupBox.Controls.Add(this.zOffsetControl);
             this.tanslationGroupBox.Controls.Add(this.label5);
             this.tanslationGroupBox.Controls.Add(this.yOffsetControl);
             this.tanslationGroupBox.Controls.Add(this.label6);
@@ -1485,22 +1552,22 @@
             this.tanslationGroupBox.TabStop = false;
             this.tanslationGroupBox.Text = "Перенос";
             // 
-            // zOffsetControlControl
+            // zOffsetControl
             // 
-            this.zOffsetControlControl.Location = new System.Drawing.Point(6, 131);
-            this.zOffsetControlControl.Maximum = new decimal(new int[] {
+            this.zOffsetControl.Location = new System.Drawing.Point(6, 131);
+            this.zOffsetControl.Maximum = new decimal(new int[] {
             360,
             0,
             0,
             0});
-            this.zOffsetControlControl.Minimum = new decimal(new int[] {
+            this.zOffsetControl.Minimum = new decimal(new int[] {
             360,
             0,
             0,
             -2147483648});
-            this.zOffsetControlControl.Name = "zOffsetControlControl";
-            this.zOffsetControlControl.Size = new System.Drawing.Size(180, 20);
-            this.zOffsetControlControl.TabIndex = 10;
+            this.zOffsetControl.Name = "zOffsetControl";
+            this.zOffsetControl.Size = new System.Drawing.Size(180, 20);
+            this.zOffsetControl.TabIndex = 10;
             // 
             // label5
             // 
@@ -1771,6 +1838,15 @@
             this.renderPictureBox.TabStop = false;
             this.renderPictureBox.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
             // 
+            // catsListBox
+            // 
+            this.catsListBox.FormattingEnabled = true;
+            this.catsListBox.Location = new System.Drawing.Point(6, 19);
+            this.catsListBox.Name = "catsListBox";
+            this.catsListBox.Size = new System.Drawing.Size(180, 160);
+            this.catsListBox.TabIndex = 3;
+            this.catsListBox.SelectedIndexChanged += new System.EventHandler(this.catsListBox_SelectedIndexChanged);
+            // 
             // tabbyCatRenderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1801,6 +1877,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.cameraXPositionControl)).EndInit();
             this.modelGeometricType.ResumeLayout(false);
             this.modelGeometricType.PerformLayout();
+            this.tabPage6.ResumeLayout(false);
+            this.tableLayoutPanel8.ResumeLayout(false);
+            this.groupBox5.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tailGroupBox.ResumeLayout(false);
@@ -1856,7 +1935,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.xAngleControl)).EndInit();
             this.tanslationGroupBox.ResumeLayout(false);
             this.tanslationGroupBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.zOffsetControlControl)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.zOffsetControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.yOffsetControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xOffsetControl)).EndInit();
             this.scaleGroupBox.ResumeLayout(false);
@@ -1888,7 +1967,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.GroupBox tanslationGroupBox;
-        private System.Windows.Forms.NumericUpDown zOffsetControlControl;
+        private System.Windows.Forms.NumericUpDown zOffsetControl;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.NumericUpDown yOffsetControl;
         private System.Windows.Forms.Label label6;
@@ -1921,9 +2000,6 @@
         private System.Windows.Forms.PictureBox renderPictureBox;
         private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
-        private System.Windows.Forms.GroupBox modelGeometricType;
-        private System.Windows.Forms.RadioButton surfaceRadioButton;
-        private System.Windows.Forms.RadioButton wireFrameRadioButton;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.GroupBox tailGroupBox;
         private System.Windows.Forms.NumericUpDown tailWidthControl;
@@ -1988,6 +2064,15 @@
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.NumericUpDown cameraXPositionControl;
         private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.GroupBox modelGeometricType;
+        private System.Windows.Forms.RadioButton surfaceRadioButton;
+        private System.Windows.Forms.RadioButton wireFrameRadioButton;
+        private System.Windows.Forms.TabPage tabPage6;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel8;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.Button deleteCatButton;
+        private System.Windows.Forms.Button addCatButton;
+        private System.Windows.Forms.ListBox catsListBox;
     }
 }
 

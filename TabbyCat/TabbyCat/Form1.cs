@@ -16,11 +16,7 @@ namespace TabbyCat
     {
         Bitmap renderArea;
 
-        List<Box> boxes = new List<Box>();
-        List<Cylinder> cylinders = new List<Cylinder>();
-        List<HalfCylinder> halfCylinders = new List<HalfCylinder>();
-        List<Box> bands = new List<Box>();
-        List<Box> teeth = new List<Box>();
+        List<Cat> cats;
 
         TranslationTransformation trTransform;
         RotationTransformation rtTransform;
@@ -28,6 +24,9 @@ namespace TabbyCat
 
         CameraRotationTransformation viewRtTransform;
         CameraTranslationTransformation viewTrTransform;
+
+        int changingIndex = 0;
+        int catNumber = 0;
 
         double torsoXOffset = 0;
         double torsoYOffset = 0;
@@ -57,11 +56,7 @@ namespace TabbyCat
         {
             InitializeComponent();
 
-            boxes = boxesDrafting(Color.Orange);
-            cylinders = cylindersDrafting(Color.White);
-            halfCylinders = halfCylindersDrafting(Color.DarkGray);
-            bands = bandsDrafting(Color.Brown);
-            teeth = teethDrafting(Color.White);
+            cats = new List<Cat>();
 
             trTransform = new TranslationTransformation();
 
@@ -77,143 +72,56 @@ namespace TabbyCat
 
             viewRtTransform = new CameraRotationTransformation();
 
-            headLength = (decimal)boxes[9].getLength();
-            headWidth = (decimal)boxes[9].getWidth();
+            radioButton1.Checked = true;
+        }
 
-            torsoLengthControl.Value = (decimal)boxes[0].getLength();
+        private void setControls(Cat cat)
+        {
+            headLength = (decimal)cat.Boxes[9].getLength();
+            headWidth = (decimal)cat.Boxes[9].getWidth();
+
+            torsoLengthControl.Value = (decimal)cat.Boxes[0].getLength();
             numericUpDown1.Value = torsoLengthControl.Value;
-            torsoWidthControl.Value = (decimal)boxes[0].getWidth();
+            torsoWidthControl.Value = (decimal)cat.Boxes[0].getWidth();
             numericUpDown2.Value = torsoWidthControl.Value;
 
-            tailLengthControl.Value = (decimal)boxes[10].getLength() + (decimal)boxes[12].getLength();
+            tailLengthControl.Value = (decimal)cat.Boxes[10].getLength() + (decimal)cat.Boxes[12].getLength();
             numericUpDown3.Value = tailLengthControl.Value;
-            tailWidthControl.Value = (decimal)boxes[10].getWidth();
+            tailWidthControl.Value = (decimal)cat.Boxes[10].getWidth();
             numericUpDown4.Value = tailWidthControl.Value;
             tailLength = (double)tailLengthControl.Value;
             tailWidth = (double)tailWidthControl.Value;
 
-            pawsHeightControl.Value = (decimal)boxes[1].getHeight();
+            pawsHeightControl.Value = (decimal)cat.Boxes[1].getHeight();
             numericUpDown5.Value = pawsHeightControl.Value;
-            pawsWidthControl.Value = (decimal)boxes[1].getWidth();
+            pawsWidthControl.Value = (decimal)cat.Boxes[1].getWidth();
             numericUpDown6.Value = pawsWidthControl.Value;
             pawsHeight = (double)pawsHeightControl.Value;
             pawsWidth = (double)pawsWidthControl.Value;
 
-            irisSizeControl.Value = (decimal)cylinders[0].Radius;
+            irisSizeControl.Value = (decimal)cat.Cylinders[0].Radius;
             numericUpDown7.Value = irisSizeControl.Value;
-            pupilSizeControl.Value = (decimal)cylinders[4].Radius;
+            pupilSizeControl.Value = (decimal)cat.Cylinders[4].Radius;
             numericUpDown8.Value = pupilSizeControl.Value;
 
-            earsWidthControl.Value = (decimal)halfCylinders[0].Height;
+            earsWidthControl.Value = (decimal)cat.HalfCylinders[0].Height;
             numericUpDown9.Value = earsWidthControl.Value;
 
-            tongueLengthControl.Value = (decimal)boxes[14].getLength();
+            tongueLengthControl.Value = (decimal)cat.Boxes[14].getLength();
             numericUpDown10.Value = tongueLengthControl.Value;
-            tongueWidthControl.Value = (decimal)boxes[14].getWidth();
+            tongueWidthControl.Value = (decimal)cat.Boxes[14].getWidth();
             numericUpDown11.Value = tongueWidthControl.Value;
 
-            teethWidthControl.Value = (decimal)teeth[0].getWidth();
+            teethWidthControl.Value = (decimal)cat.Teeth[0].getWidth();
             numericUpDown12.Value = teethWidthControl.Value;
 
-            bandsWidthControl.Value = (decimal)bands[0].getLength();
+            bandsWidthControl.Value = (decimal)cat.Bands[0].getLength();
             numericUpDown13.Value = bandsWidthControl.Value;
 
-            bandsNumberControl.Value = bands.Count;
+            bandsNumberControl.Value = cat.Bands.Count;
             numericUpDown14.Value = bandsNumberControl.Value;
-            teethNumberControl.Value = teeth.Count;
+            teethNumberControl.Value = cat.Teeth.Count;
             numericUpDown15.Value = teethNumberControl.Value;
-
-            radioButton1.Checked = true;
-        }
-
-        private List<Box> boxesDrafting(Color color)
-        {
-            List<Box> boxes = new List<Box>();
-
-            // туловище
-            boxes.Add(new Box(new Vertex(-10, 20, 35), new Vertex(70, -30, 60), color));
-
-            // конечности
-            boxes.Add(new Box(new Vertex(0, 3, 5), new Vertex(10, 13, 35), color));
-            boxes.Add(new Box(new Vertex(0, -23, 5), new Vertex(10, -13, 35), color));
-            boxes.Add(new Box(new Vertex(45, 3, 5), new Vertex(55, 13, 35), color));
-            boxes.Add(new Box(new Vertex(45, -23, 5), new Vertex(55, -13, 35), color));
-
-            // лапы
-            boxes.Add(new Box(new Vertex(0, 3, 0), new Vertex(15, 13, 5), Color.DarkGray));
-            boxes.Add(new Box(new Vertex(0, -23, 0), new Vertex(15, -13, 5), Color.DarkGray));
-            boxes.Add(new Box(new Vertex(45, 3, 0), new Vertex(60, 13, 5), Color.DarkGray));
-            boxes.Add(new Box(new Vertex(45, -23, 0), new Vertex(60, -13, 5), Color.DarkGray));
-
-            // голова
-            boxes.Add(new Box(new Vertex(70, 20, 35), new Vertex(95, -30, 75), color));
-
-            // хвост
-            boxes.Add(new Box(new Vertex(-10, -2, 45), new Vertex(-30, -8, 50), color));
-            boxes.Add(new Box(new Vertex(-30, -2, 45), new Vertex(-35, -8, 75), color));
-            boxes.Add(new Box(new Vertex(-30, -2, 75), new Vertex(-70, -8, 80), Color.Brown));
-
-            // рот
-            boxes.Add(new Box(new Vertex(95, 10, 40), new Vertex(96, -20, 50), Color.Blue));
-
-            // язык
-            boxes.Add(new Box(new Vertex(96, 6, 40), new Vertex(97, -16, 44), Color.Red));
-
-            return boxes;
-        }
-
-        private List<Cylinder> cylindersDrafting(Color color)
-        {
-            List<Cylinder> cylinders = new List<Cylinder>();
-
-            // глаза
-            cylinders.Add(new Cylinder(new Vertex(-95, -16, -63), 8, 1, 15, color));
-            cylinders.Add(new Cylinder(new Vertex(-95, 6, -63), 8, 1, 15, color));
-
-            cylinders.Add(new Cylinder(new Vertex(-96, -16, -63), 6, 1, 15, Color.Green));
-            cylinders.Add(new Cylinder(new Vertex(-96, 6, -63), 6, 1, 15, Color.Green));
-
-            // зрачки
-            cylinders.Add(new Cylinder(new Vertex(-97, -16, -63), 3, 1, 15, Color.Black));
-            cylinders.Add(new Cylinder(new Vertex(-97, 6, -63), 3, 1, 15, Color.Black));
-
-            return cylinders;
-        }
-
-
-        private List<HalfCylinder> halfCylindersDrafting(Color color)
-        {
-            List<HalfCylinder> halfCylinders =  new List<HalfCylinder>();
-
-            // уши
-            halfCylinders.Add(new HalfCylinder(new Vertex(83, 75, -18), 10, 10, 10, color));
-            halfCylinders.Add(new HalfCylinder(new Vertex(83, 75, 8), 10, 10, 10, color));
-            halfCylinders.Add(new HalfCylinder(new Vertex(93, 75, -18), 5, 1, 10, Color.LightPink));
-            halfCylinders.Add(new HalfCylinder(new Vertex(93, 75, 8), 5, 1, 10, Color.LightPink));
-
-            return halfCylinders;
-        }
-
-        private List<Box> bandsDrafting(Color color)
-        {
-            List<Box> boxes = new List<Box>();
-
-            // полосы
-            boxes.Add(new Box(new Vertex(60, 10, 60), new Vertex(65, -20, 61), color));
-            boxes.Add(new Box(new Vertex(45, 10, 60), new Vertex(50, -20, 61), color));
-
-            return boxes;
-        }
-
-        private List<Box> teethDrafting(Color color)
-        {
-            List<Box> boxes = new List<Box>();
-
-            // зубы
-            boxes.Add(new Box(new Vertex(96, 0, 50), new Vertex(97, -4, 47), color));
-            boxes.Add(new Box(new Vertex(96, -6, 50), new Vertex(97, -10, 47), color));
-
-            return boxes;
         }
 
         private void drawLine(double xStart, double yStart, double xEnd, double yEnd)
@@ -293,9 +201,9 @@ namespace TabbyCat
             }
         }
 
-        private void drawTriangles(List<Triangle> edge, Matrix4 transform, double[] zBuffer)
+        private void drawTriangles(List<Triangle> tris, Matrix4 transform, double[] zBuffer)
         {
-            foreach (Triangle t in edge)
+            foreach (Triangle t in tris)
             {
                 Vertex v1 = transform.transform(t.V1);
                 Vertex v2 = transform.transform(t.V2);
@@ -344,7 +252,7 @@ namespace TabbyCat
             }
         }
 
-        private void drawBoxes(Matrix4 transform, double[] zBuffer)
+        private void drawBoxes(List<Box> boxes, Matrix4 transform, double[] zBuffer)
         {
             short counter = 0;
 
@@ -564,7 +472,7 @@ namespace TabbyCat
 
         }
 
-        private void drawCylinders(Matrix4 transformMatrix, double[] zBuffer)
+        private void drawCylinders(List<Cylinder> cylinders, Matrix4 transformMatrix, double[] zBuffer)
         {
             int counter = 0;
             double whiteOfTheEyeOffset = 0;
@@ -605,7 +513,7 @@ namespace TabbyCat
             }
         }
 
-        private void drawHalfCylinders(Matrix4 transformMatrix, double[] zBuffer)
+        private void drawHalfCylinders(List<HalfCylinder> halfCylinders, Matrix4 transformMatrix, double[] zBuffer)
         {
             int counter = 0;
             foreach (HalfCylinder hc in halfCylinders)
@@ -636,7 +544,7 @@ namespace TabbyCat
             }
         }
 
-        private void drawBands(Matrix4 transform, double[] zBuffer)
+        private void drawBands(List<Box> bands, Matrix4 transform, double[] zBuffer)
         {
             if (bands.Count != (int)bandsNumberControl.Value)
             {
@@ -695,7 +603,7 @@ namespace TabbyCat
             }
         }
 
-        private void drawTeeth(Matrix4 transform, double[] zBuffer)
+        private void drawTeeth(List<Box> teeth, Matrix4 transform, double[] zBuffer)
         {
             if (teeth.Count != (int)teethNumberControl.Value)
             {
@@ -774,18 +682,18 @@ namespace TabbyCat
             }
         }
 
-        private void render(Graphics g, Matrix4 transformMatrix, double[] zBuffer)
+        private void render(Cat cat, Graphics g, Matrix4 transformMatrix, double[] zBuffer)
         {
-            drawBoxes(transformMatrix, zBuffer);
-            drawCylinders(transformMatrix, zBuffer);
-            drawHalfCylinders(transformMatrix, zBuffer);
-            drawBands(transformMatrix, zBuffer);
-            drawTeeth(transformMatrix, zBuffer);
+            drawBoxes(cat.Boxes,transformMatrix, zBuffer);
+            drawCylinders(cat.Cylinders, transformMatrix, zBuffer);
+            drawHalfCylinders(cat.HalfCylinders, transformMatrix, zBuffer);
+            drawBands(cat.Bands, transformMatrix, zBuffer);
+            drawTeeth(cat.Teeth, transformMatrix, zBuffer);
 
             g.DrawImage(renderArea, 0, 0);
         }
 
-        private void setControlValues1()
+        private void checkControlValues1(Cat cat)
         {
             string str;
 
@@ -871,10 +779,10 @@ namespace TabbyCat
                 pawsWidthControl.Value = numericUpDown6.Value;
             }
 
-            if (numericUpDown7.Value < (decimal)cylinders[0].Radius - 2 || numericUpDown7.Value > (decimal)cylinders[0].Radius + 2)
+            if (numericUpDown7.Value < (decimal)cat.Cylinders[0].Radius - 2 || numericUpDown7.Value > (decimal)cat.Cylinders[0].Radius + 2)
             {
                 str = string.Format("Радиус глаз должен лежать в диапазоне от {0} до {1}",
-                    (decimal)cylinders[0].Radius - 2, (decimal)cylinders[0].Radius + 2);
+                    (decimal)cat.Cylinders[0].Radius - 2, (decimal)cat.Cylinders[0].Radius + 2);
                 numericUpDown7.Value = irisSizeControl.Value;
                 MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 isUpdated1 = true;
@@ -885,10 +793,10 @@ namespace TabbyCat
                 irisSizeControl.Value = numericUpDown7.Value;
             }
 
-            if (numericUpDown8.Value < (decimal)cylinders[4].Radius - 2 || numericUpDown8.Value > (decimal)cylinders[4].Radius + 2)
+            if (numericUpDown8.Value < (decimal)cat.Cylinders[4].Radius - 2 || numericUpDown8.Value > (decimal)cat.Cylinders[4].Radius + 2)
             {
                 str = string.Format("Радиус зрачков должен лежать в диапазоне от {0} до {1}",
-                    (decimal)cylinders[4].Radius - 2, (decimal)cylinders[4].Radius + 2);
+                    (decimal)cat.Cylinders[4].Radius - 2, (decimal)cat.Cylinders[4].Radius + 2);
                 numericUpDown8.Value = pupilSizeControl.Value;
                 MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 isUpdated1 = true;
@@ -902,14 +810,14 @@ namespace TabbyCat
             isUpdated1 = true;
         }
 
-        private void setControlValues2()
+        private void checkControlValues2(Cat cat)
         {
             string str;
 
-            if (numericUpDown9.Value < Math.Round((decimal)halfCylinders[0].Height / 2) || numericUpDown9.Value > (decimal)halfCylinders[0].Height * 2)
+            if (numericUpDown9.Value < Math.Round((decimal)cat.HalfCylinders[0].Height / 2) || numericUpDown9.Value > (decimal)cat.HalfCylinders[0].Height * 2)
             {
                 str = string.Format("Ширина ушей должна лежать в диапазоне от {0} до {1}",
-                    Math.Round((decimal)halfCylinders[0].Height / 2), (decimal)halfCylinders[0].Height * 2);
+                    Math.Round((decimal)cat.HalfCylinders[0].Height / 2), (decimal)cat.HalfCylinders[0].Height * 2);
                 numericUpDown9.Value = earsWidthControl.Value;
                 MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 isUpdated2 = true;
@@ -920,10 +828,10 @@ namespace TabbyCat
                 earsWidthControl.Value = numericUpDown9.Value;
             }
 
-            if (numericUpDown10.Value < (decimal)boxes[14].getLength() || numericUpDown10.Value > (decimal)boxes[14].getLength() + 5)
+            if (numericUpDown10.Value < (decimal)cat.Boxes[14].getLength() || numericUpDown10.Value > (decimal)cat.Boxes[14].getLength() + 5)
             {
                 str = string.Format("Длина языка должна лежать в диапазоне от {0} до {1}",
-                    (decimal)boxes[14].getLength(), (decimal)boxes[14].getLength() + 5);
+                    (decimal)cat.Boxes[14].getLength(), (decimal)cat.Boxes[14].getLength() + 5);
                 numericUpDown10.Value = tongueLengthControl.Value;
                 MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 isUpdated2 = true;
@@ -934,10 +842,10 @@ namespace TabbyCat
                 tongueLengthControl.Value = numericUpDown10.Value;
             }
 
-            if (numericUpDown11.Value < (decimal)boxes[14].getWidth() / 2 || numericUpDown11.Value > (decimal)boxes[14].getWidth() + 5)
+            if (numericUpDown11.Value < (decimal)cat.Boxes[14].getWidth() / 2 || numericUpDown11.Value > (decimal)cat.Boxes[14].getWidth() + 5)
             {
                 str = string.Format("Ширина языка должна лежать в диапазоне от {0} до {1}",
-                    (decimal)boxes[14].getWidth() / 2, (decimal)boxes[14].getWidth() + 5);
+                    (decimal)cat.Boxes[14].getWidth() / 2, (decimal)cat.Boxes[14].getWidth() + 5);
                 numericUpDown11.Value = tongueWidthControl.Value;
                 MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 isUpdated2 = true;
@@ -948,10 +856,10 @@ namespace TabbyCat
                 tongueWidthControl.Value = numericUpDown11.Value;
             }
 
-            if (numericUpDown12.Value < (decimal)teeth[0].getWidth() - 1 || numericUpDown12.Value > (decimal)teeth[0].getWidth() + 1)
+            if (numericUpDown12.Value < (decimal)cat.Teeth[0].getWidth() - 1 || numericUpDown12.Value > (decimal)cat.Teeth[0].getWidth() + 1)
             {
                 str = string.Format("Ширина зубов должна лежать в диапазоне от {0} до {1}",
-                    (decimal)teeth[0].getWidth() - 1, (decimal)teeth[0].getWidth() + 1);
+                    (decimal)cat.Teeth[0].getWidth() - 1, (decimal)cat.Teeth[0].getWidth() + 1);
                 numericUpDown12.Value = teethWidthControl.Value;
                 MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 isUpdated2 = true;
@@ -962,10 +870,10 @@ namespace TabbyCat
                 teethWidthControl.Value = numericUpDown12.Value;
             }
 
-            if (numericUpDown13.Value < Math.Round((decimal)bands[0].getLength() / 2) || numericUpDown13.Value > (decimal)bands[0].getLength() * 2)
+            if (numericUpDown13.Value < Math.Round((decimal)cat.Bands[0].getLength() / 2) || numericUpDown13.Value > (decimal)cat.Bands[0].getLength() * 2)
             {
                 str = string.Format("Толщина полос должна лежать в диапазоне от {0} до {1}",
-                    Math.Round((decimal)bands[0].getLength() / 2), (decimal)bands[0].getLength() * 2);
+                    Math.Round((decimal)cat.Bands[0].getLength() / 2), (decimal)cat.Bands[0].getLength() * 2);
                 numericUpDown13.Value = bandsWidthControl.Value;
                 MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 isUpdated2 = true;
@@ -979,17 +887,17 @@ namespace TabbyCat
             isUpdated2 = true;
         }
 
-        private void setControlValues3()
+        private void checkControlValues3(Cat cat)
         {
             string str;
 
             if (numericUpDown14.Value >= 0)
             {
-                if (bands.Count == 0)
+                if (cat.Bands.Count == 0)
                 {
                     double x = firstBandXStart;
 
-                    for (int i = (bands.Count); i < (int)numericUpDown14.Value - 1; i++)
+                    for (int i = (cat.Bands.Count); i < (int)numericUpDown14.Value - 1; i++)
                     {
                         if (x - bandsXOffset < torsoXMin + 10)
                         {
@@ -1012,7 +920,7 @@ namespace TabbyCat
                 {
                     double x = lastBandXMin;
 
-                    for (int i = (bands.Count - 1); i < (int)numericUpDown14.Value - 1; i++)
+                    for (int i = (cat.Bands.Count - 1); i < (int)numericUpDown14.Value - 1; i++)
                     {
                         if (x - bandsXOffset < torsoXMin + 10)
                         {
@@ -1045,7 +953,7 @@ namespace TabbyCat
                 double teethYMin = 0;
                 double teethYMax = 0;
 
-                if (teeth.Count == 0)
+                if (cat.Teeth.Count == 0)
                 {
                     if (numericUpDown15.Value <= 4)
                     {
@@ -1063,30 +971,30 @@ namespace TabbyCat
                 }
                 else
                 {
-                    if (teeth.Count == 1)
+                    if (cat.Teeth.Count == 1)
                     {
                         teethYMax = teethFirstYMax;
                         teethYMin = teethFirstYMin;
                     }
                     else
                     {
-                        if ((teeth.Count - 1) % 2 == 0)
+                        if ((cat.Teeth.Count - 1) % 2 == 0)
                         {
-                            teethYMax = teeth[teeth.Count - 1].YEnd;
-                            teethYMin = teeth[teeth.Count - 2].YEnd;
+                            teethYMax = cat.Teeth[cat.Teeth.Count - 1].YEnd;
+                            teethYMin = cat.Teeth[cat.Teeth.Count - 2].YEnd;
                         }
                         else
                         {
-                            teethYMax = teeth[teeth.Count - 2].YEnd;
-                            teethYMin = teeth[teeth.Count - 1].YEnd;
+                            teethYMax = cat.Teeth[cat.Teeth.Count - 2].YEnd;
+                            teethYMin = cat.Teeth[cat.Teeth.Count - 1].YEnd;
                         }
                     }
 
-                    for (int i = (teeth.Count - 1); i < (int)numericUpDown15.Value - 1; i++)
+                    for (int i = (cat.Teeth.Count - 1); i < (int)numericUpDown15.Value - 1; i++)
                     {
                         if (i % 2 != 0)
                         {
-                            if (teethYMax + teethYOffset < boxes[13].YEnd - 2)
+                            if (teethYMax + teethYOffset < cat.Boxes[13].YEnd - 2)
                             {
                                 teethYMax += teethYOffset;
                             }
@@ -1102,7 +1010,7 @@ namespace TabbyCat
                         }
                         else
                         {
-                            if (teethYMin - teethYOffset > boxes[13].YStart + 2)
+                            if (teethYMin - teethYOffset > cat.Boxes[13].YStart + 2)
                             {
                                 teethYMin -= teethYOffset;
                             }
@@ -1134,15 +1042,6 @@ namespace TabbyCat
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
-            if (isUpdated1 == false)
-                setControlValues1();
-
-            if (isUpdated2 == false)
-                setControlValues2();
-
-            if (isUpdated3 == false)
-                setControlValues3();
-
             renderArea = new Bitmap(renderPictureBox.Size.Width, renderPictureBox.Size.Height);
             renderPictureBox.Image = renderArea;
 
@@ -1152,34 +1051,72 @@ namespace TabbyCat
             // рисование фона
             g.FillRectangle(Brushes.Black, new RectangleF(0, 0, renderArea.Width, renderArea.Height));
 
-            trTransform.setOffsets(xOffsetControl.Value, yOffsetControl.Value, zOffsetControlControl.Value);
+            List<Matrix4> matrices = new List<Matrix4>();
 
-            scTransform.ScaleOffset = (double)scaleControl.Value;
+            for (int i = 0; i < cats.Count; i++)
+            {
+                if (catsListBox.SelectedItem.ToString() == cats[i].Name)
+                {
+                    if (isUpdated1 == false)
+                        checkControlValues1(cats[i]);
 
-            rtTransform.setAngles(xAngleControl.Value, yAngleControl.Value, zAngleControl.Value);
+                    if (isUpdated2 == false)
+                        checkControlValues2(cats[i]);
 
-            viewTrTransform.setOffsets(cameraXPositionControl.Value, cameraYPositionControl.Value, cameraZPositionControl.Value);
+                    if (isUpdated3 == false)
+                        checkControlValues3(cats[i]);
 
-            viewRtTransform.setAngles(cameraXAngleControl.Value, cameraYAngleControl.Value, cameraZAngleControl.Value);
+                    if (changingIndex == i)
+                    {
+                        cats[i].XOffset = xOffsetControl.Value;
+                        cats[i].YOffset = yOffsetControl.Value;
+                        cats[i].ZOffset = zOffsetControl.Value;
+                        cats[i].XAngle = xAngleControl.Value;
+                        cats[i].YAngle = yAngleControl.Value;
+                        cats[i].ZAngle = zAngleControl.Value;
+                        cats[i].ScaleOffset = scaleControl.Value;
+                    }
+                }
+            }
 
-            Matrix4 transformMatrix = rtTransform.OxMatrix.multiply(rtTransform.OyMatrix);
-            transformMatrix = transformMatrix.multiply(rtTransform.OzMatrix);
-            transformMatrix = transformMatrix.multiply(scTransform.Matrix);
-            transformMatrix = transformMatrix.multiply(trTransform.Matrix);
-            transformMatrix = transformMatrix.multiply(viewTrTransform.Matrix);
+            foreach (Cat cat in cats)
+            {
+                trTransform.setOffsets(cat.XOffset, cat.YOffset, cat.ZOffset);
+                scTransform.ScaleOffset = (double)cat.ScaleOffset;
+                rtTransform.setAngles(cat.XAngle, cat.YAngle, cat.ZAngle);
 
-            Matrix4 viewMatrix = viewTrTransform.Matrix.multiply(viewRtTransform.OyMatrix);
-            viewMatrix = viewMatrix.multiply(viewRtTransform.OxMatrix);
-            viewMatrix = viewMatrix.multiply(viewRtTransform.OzMatrix);
+                viewTrTransform.setOffsets(cameraXPositionControl.Value, cameraYPositionControl.Value, cameraZPositionControl.Value);
+                viewRtTransform.setAngles(cameraXAngleControl.Value, cameraYAngleControl.Value, cameraZAngleControl.Value);
 
-            transformMatrix = transformMatrix.multiply(viewMatrix);
+                Matrix4 transformMatrix = rtTransform.OxMatrix.multiply(rtTransform.OyMatrix);
+                transformMatrix = transformMatrix.multiply(rtTransform.OzMatrix);
+                transformMatrix = transformMatrix.multiply(scTransform.Matrix);
+                transformMatrix = transformMatrix.multiply(trTransform.Matrix);
+                transformMatrix = transformMatrix.multiply(viewTrTransform.Matrix);
+
+                Matrix4 viewMatrix = viewTrTransform.Matrix.multiply(viewRtTransform.OyMatrix);
+                viewMatrix = viewMatrix.multiply(viewRtTransform.OxMatrix);
+                viewMatrix = viewMatrix.multiply(viewRtTransform.OzMatrix);
+
+                transformMatrix = transformMatrix.multiply(viewMatrix);
+
+                matrices.Add(transformMatrix);
+            }
 
             //if (radioButton2.Checked)
             //{
-            //    double d = (renderArea.Width / 2) * Math.Tan(90 / 2);
+            //    double d = -10;
 
-            //    double f = 10;
-            //    double n = 2;
+            //    double[] matrix =
+            //    {
+            //        1, 0, 0, 0,
+            //        0, 1, 0, 0,
+            //        0, 0, 1, 1 / d,
+            //        0, 0, 0, 0
+            //    };
+
+            //    double f = 100;
+            //    double n = 1;
 
             //    double[] matrix =
             //    {
@@ -1197,11 +1134,11 @@ namespace TabbyCat
 
             //    double[] matrix =
             //    {
-            //        1.0 / (tanHalfFOV * ar), 0.0, 0.0, 0.0,
-            //        0.0, 1.0 / tanHalfFOV, 0.0, 0.0,
-            //        0.0, 0.0, (-zNear - zFar) / zRange, 2.0 * zFar * zNear / zRange,
-            //        0.0, 0.0, 1.0, 0.0
-            //    };
+            //            1.0 / (tanHalfFOV * ar), 0.0, 0.0, 0.0,
+            //            0.0, 1.0 / tanHalfFOV, 0.0, 0.0,
+            //            0.0, 0.0, (-zNear - zFar) / zRange, 2.0 * zFar * zNear / zRange,
+            //            0.0, 0.0, 1.0, 0.0
+            //        };
 
             //    Matrix4 perspective = new Matrix4(matrix);
 
@@ -1216,7 +1153,10 @@ namespace TabbyCat
                 zBuffer[q] = double.NegativeInfinity;
             }
 
-            render(g, transformMatrix, zBuffer);
+            for (int i = 0; i < cats.Count; i++)
+            {
+                render(cats[i], g, matrices[i], zBuffer);
+            }
         }
 
         private void confrimQualityButton1_Click(object sender, EventArgs e)
@@ -1232,6 +1172,85 @@ namespace TabbyCat
         private void quantityAcceptButton_Click(object sender, EventArgs e)
         {
             isUpdated3 = !isUpdated3;
+        }
+
+        private void addCatButton_Click(object sender, EventArgs e)
+        {
+            cats.Add(new Cat());
+            cats[cats.Count - 1].Name = "Cat" + catNumber;
+            catNumber++;
+            catsListBox.Items.Add(cats[cats.Count - 1].Name);
+            catsListBox.SelectedItem = catsListBox.Items[cats.Count - 1];
+            setControls(cats[cats.Count - 1]);
+
+            xOffsetControl.Value = cats[catsListBox.SelectedIndex].XOffset;
+            yOffsetControl.Value = cats[catsListBox.SelectedIndex].YOffset;
+            zOffsetControl.Value = cats[catsListBox.SelectedIndex].ZOffset;
+
+            scaleControl.Value = cats[catsListBox.SelectedIndex].ScaleOffset;
+
+            xAngleControl.Value = cats[catsListBox.SelectedIndex].XAngle;
+            yAngleControl.Value = cats[catsListBox.SelectedIndex].YAngle;
+            zAngleControl.Value = cats[catsListBox.SelectedIndex].ZAngle;
+        }
+
+        private void catsListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //setControls(cats[catsListBox.SelectedIndex]);
+
+            try
+            {
+                xOffsetControl.Value = cats[catsListBox.SelectedIndex].XOffset;
+                yOffsetControl.Value = cats[catsListBox.SelectedIndex].YOffset;
+                zOffsetControl.Value = cats[catsListBox.SelectedIndex].ZOffset;
+
+                scaleControl.Value = cats[catsListBox.SelectedIndex].ScaleOffset;
+
+                xAngleControl.Value = cats[catsListBox.SelectedIndex].XAngle;
+                yAngleControl.Value = cats[catsListBox.SelectedIndex].YAngle;
+                zAngleControl.Value = cats[catsListBox.SelectedIndex].ZAngle;
+
+                changingIndex = catsListBox.SelectedIndex;
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                xOffsetControl.Value = 0;
+                yOffsetControl.Value = 0;
+                zOffsetControl.Value = 0;
+
+                scaleControl.Value = 1;
+
+                xAngleControl.Value = 0;
+                yAngleControl.Value = 0;
+                zAngleControl.Value = 0;
+
+                changingIndex = 0;
+            }
+        }
+
+        private void deleteCatButton_Click(object sender, EventArgs e)
+        {
+            if (catsListBox.SelectedIndex > 0)
+            {
+                catsListBox.SelectedIndex = catsListBox.SelectedIndex - 1;
+                catsListBox.Items.RemoveAt(catsListBox.SelectedIndex + 1);
+                cats.RemoveAt(catsListBox.SelectedIndex + 1);
+            }
+            if (catsListBox.SelectedIndex == 0)
+            {
+                if (catsListBox.Items.Count > 0)
+                {
+                    catsListBox.SelectedIndex = 1;
+                    catsListBox.Items.RemoveAt(0);
+                    cats.RemoveAt(0);
+                }
+                else
+                {
+                    catsListBox.ClearSelected();
+                    catsListBox.Items.RemoveAt(0);
+                    cats.RemoveAt(0);
+                }
+            }
         }
     }
 }
