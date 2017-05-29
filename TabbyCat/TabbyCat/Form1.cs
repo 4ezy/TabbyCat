@@ -14,39 +14,38 @@ namespace TabbyCat
 {
     public partial class tabbyCatRenderForm : Form
     {
-        Bitmap renderArea;
-
         List<Cat> cats;
-
+        List<Matrix4> matrices;
+        Bitmap renderArea;
         TranslationTransformation trTransform;
         RotationTransformation rtTransform;
         ScaleTransformation scTransform;
-
         CameraRotationTransformation viewRtTransform;
         CameraTranslationTransformation viewTrTransform;
 
-        int changingIndex = 0;
-        int catNumber = 0;
+        int lastSelectedListBoxIndex = 0;
+        int catNameNumber = 0;
+        int catCounter = 0;
 
-        double torsoXOffset = 0;
-        double torsoYOffset = 0;
+        //double torsoXOffset = 0;
+        //double torsoYOffset = 0;
 
-        double pawsHeight;
-        double pawsWidth;
-        double tailLength;
-        double tailWidth;
-        double torsoXMin;
+        //double pawsHeight;
+        //double pawsWidth;
+        //double tailLength;
+        //double tailWidth;
+        //double torsoXMin;
 
-        double lastBandXMin;
-        double firstBandXStart;
-        double teethFirstYMin;
-        double teethFirstYMax;
+        //double lastBandXMin;
+        //double firstBandXStart;
+        //double teethFirstYMin;
+        //double teethFirstYMax;
 
-        decimal headLength;
-        decimal headWidth;
-        
-        const int bandsXOffset = 15;
-        const int teethYOffset = 6;
+        //decimal headLength;
+        //decimal headWidth;
+
+        //const int bandsXOffset = 15;
+        //const int teethYOffset = 6;
 
         bool isUpdated1 = false;
         bool isUpdated2 = false;
@@ -58,13 +57,11 @@ namespace TabbyCat
 
             cats = new List<Cat>();
 
+            matrices = new List<Matrix4>();
+
             trTransform = new TranslationTransformation();
 
-            rtTransform = new RotationTransformation(
-                (double)xAngleControl.Value,
-                (double)yAngleControl.Value,
-                (double)zAngleControl.Value
-            );
+            rtTransform = new RotationTransformation();
 
             scTransform = new ScaleTransformation();
 
@@ -77,51 +74,56 @@ namespace TabbyCat
 
         private void setControls(Cat cat)
         {
-            headLength = (decimal)cat.Boxes[9].getLength();
-            headWidth = (decimal)cat.Boxes[9].getWidth();
+            numericUpDown1.Value = (decimal)cat.TorsoLength;
+            numericUpDown2.Value = (decimal)cat.TorsoWidth;
+            numericUpDown3.Value = (decimal)cat.TailLength;
+            numericUpDown4.Value = (decimal)cat.TailWidth;
+            numericUpDown5.Value = (decimal)cat.PawsHeight;
+            numericUpDown6.Value = (decimal)cat.PawsWidth;
+            numericUpDown7.Value = (decimal)cat.IrisSize;
+            numericUpDown8.Value = (decimal)cat.PupilSize;
+            numericUpDown9.Value = (decimal)cat.EarsWidth;
+            numericUpDown10.Value = (decimal)cat.TongueLength;
+            numericUpDown11.Value = (decimal)cat.TongueWidth;
+            numericUpDown12.Value = (decimal)cat.TeethWidth;
+            numericUpDown13.Value = (decimal)cat.BandsWidth;
+            numericUpDown14.Value = (decimal)cat.BandsNumber;
+            numericUpDown15.Value = (decimal)cat.TeethNumber;
 
-            torsoLengthControl.Value = (decimal)cat.Boxes[0].getLength();
-            numericUpDown1.Value = torsoLengthControl.Value;
-            torsoWidthControl.Value = (decimal)cat.Boxes[0].getWidth();
-            numericUpDown2.Value = torsoWidthControl.Value;
+            xOffsetControl.Value = cat.XOffset;
+            yOffsetControl.Value = cat.YOffset;
+            zOffsetControl.Value = cat.ZOffset;
+            scaleControl.Value = cat.ScaleOffset;
+            xAngleControl.Value = cat.XAngle;
+            yAngleControl.Value = cat.YAngle;
+            zAngleControl.Value = cat.ZAngle;
+        }
 
-            tailLengthControl.Value = (decimal)cat.Boxes[10].getLength() + (decimal)cat.Boxes[12].getLength();
-            numericUpDown3.Value = tailLengthControl.Value;
-            tailWidthControl.Value = (decimal)cat.Boxes[10].getWidth();
-            numericUpDown4.Value = tailWidthControl.Value;
-            tailLength = (double)tailLengthControl.Value;
-            tailWidth = (double)tailWidthControl.Value;
+        private void clearControls()
+        {
+            numericUpDown1.Value = 0;
+            numericUpDown2.Value = 0;
+            numericUpDown3.Value = 0;
+            numericUpDown4.Value = 0;
+            numericUpDown5.Value = 0;
+            numericUpDown6.Value = 0;
+            numericUpDown7.Value = 0;
+            numericUpDown8.Value = 0;
+            numericUpDown9.Value = 0;
+            numericUpDown10.Value = 0;
+            numericUpDown11.Value = 0;
+            numericUpDown12.Value = 0;
+            numericUpDown13.Value = 0;
+            numericUpDown14.Value = 0;
+            numericUpDown15.Value = 0;
 
-            pawsHeightControl.Value = (decimal)cat.Boxes[1].getHeight();
-            numericUpDown5.Value = pawsHeightControl.Value;
-            pawsWidthControl.Value = (decimal)cat.Boxes[1].getWidth();
-            numericUpDown6.Value = pawsWidthControl.Value;
-            pawsHeight = (double)pawsHeightControl.Value;
-            pawsWidth = (double)pawsWidthControl.Value;
-
-            irisSizeControl.Value = (decimal)cat.Cylinders[0].Radius;
-            numericUpDown7.Value = irisSizeControl.Value;
-            pupilSizeControl.Value = (decimal)cat.Cylinders[4].Radius;
-            numericUpDown8.Value = pupilSizeControl.Value;
-
-            earsWidthControl.Value = (decimal)cat.HalfCylinders[0].Height;
-            numericUpDown9.Value = earsWidthControl.Value;
-
-            tongueLengthControl.Value = (decimal)cat.Boxes[14].getLength();
-            numericUpDown10.Value = tongueLengthControl.Value;
-            tongueWidthControl.Value = (decimal)cat.Boxes[14].getWidth();
-            numericUpDown11.Value = tongueWidthControl.Value;
-
-            teethWidthControl.Value = (decimal)cat.Teeth[0].getWidth();
-            numericUpDown12.Value = teethWidthControl.Value;
-
-            bandsWidthControl.Value = (decimal)cat.Bands[0].getLength();
-            numericUpDown13.Value = bandsWidthControl.Value;
-
-            bandsNumberControl.Value = cat.Bands.Count;
-            numericUpDown14.Value = bandsNumberControl.Value;
-            teethNumberControl.Value = cat.Teeth.Count;
-            numericUpDown15.Value = teethNumberControl.Value;
+            xOffsetControl.Value = 0;
+            yOffsetControl.Value = 0;
+            zOffsetControl.Value = 0;
+            scaleControl.Value = 1;
+            xAngleControl.Value = 0;
+            yAngleControl.Value = 0;
+            zAngleControl.Value = 0;
         }
 
         private void drawLine(double xStart, double yStart, double xEnd, double yEnd)
@@ -275,182 +277,181 @@ namespace TabbyCat
                 {
                     // торс
                     case 0:
-                        torsoXOffset = ((double)torsoLengthControl.Value - box.getLength()) / 2;
-                        torsoYOffset = ((double)torsoWidthControl.Value - box.getWidth()) / 2;
+                        cats[catCounter].TorsoXOffset = (cats[catCounter].TorsoLength - box.getLength()) / 2;
+                        cats[catCounter].TorsoYOffset = (cats[catCounter].TorsoWidth - box.getWidth()) / 2;
 
-                        x0 = box.XStart - torsoXOffset;
-                        y0 = box.YStart - torsoYOffset;
+                        x0 = box.XStart - cats[catCounter].TorsoXOffset;
+                        y0 = box.YStart - cats[catCounter].TorsoYOffset;
                         z0 = box.ZStart;
-                        x1 = box.XEnd + torsoXOffset;
-                        y1 = box.YEnd + torsoYOffset;
+                        x1 = box.XEnd + cats[catCounter].TorsoXOffset;
+                        y1 = box.YEnd + cats[catCounter].TorsoYOffset;
                         z1 = box.ZEnd;
 
-                        torsoXMin = x0;
+                        cats[catCounter].TorsoXMin = x0;
 
                         break;
                     // конечности
                     case 1:
-                        yOffset = ((double)pawsWidthControl.Value - pawsWidth) / 2;
-                        zOffset = ((double)pawsHeightControl.Value - pawsHeight) / 2;
+                        yOffset = (cats[catCounter].PawsWidth - cats[catCounter].DefaultPawsWidth) / 2;
+                        zOffset = (cats[catCounter].PawsHeight - cats[catCounter].DefaultPawsHeight) / 2;
 
-                        x0 = box.XStart - torsoXOffset;
-                        y0 = box.YStart + torsoYOffset - yOffset;
+                        x0 = box.XStart - cats[catCounter].TorsoXOffset;
+                        y0 = box.YStart + cats[catCounter].TorsoYOffset - yOffset;
                         z0 = box.ZStart - zOffset;
-                        x1 = box.XEnd - torsoXOffset;
-                        y1 = box.YEnd + torsoYOffset + yOffset;
+                        x1 = box.XEnd - cats[catCounter].TorsoXOffset;
+                        y1 = box.YEnd + cats[catCounter].TorsoYOffset + yOffset;
                         z1 = box.ZEnd;
 
                         break;
                     case 2:
-                        yOffset = ((double)pawsWidthControl.Value - pawsWidth) / 2;
-                        zOffset = ((double)pawsHeightControl.Value - pawsHeight) / 2;
+                        yOffset = (cats[catCounter].PawsWidth - cats[catCounter].DefaultPawsWidth) / 2;
+                        zOffset = (cats[catCounter].PawsHeight - cats[catCounter].DefaultPawsHeight) / 2;
 
-                        x0 = box.XStart - torsoXOffset;
-                        y0 = box.YStart - torsoYOffset + yOffset;
+                        x0 = box.XStart - cats[catCounter].TorsoXOffset;
+                        y0 = box.YStart - cats[catCounter].TorsoYOffset + yOffset;
                         z0 = box.ZStart - zOffset;
-                        x1 = box.XEnd - torsoXOffset;
-                        y1 = box.YEnd - torsoYOffset - yOffset;
+                        x1 = box.XEnd - cats[catCounter].TorsoXOffset;
+                        y1 = box.YEnd - cats[catCounter].TorsoYOffset - yOffset;
                         z1 = box.ZEnd;
 
                         break;
                     case 3:
-                        yOffset = ((double)pawsWidthControl.Value - pawsWidth) / 2;
-                        zOffset = ((double)pawsHeightControl.Value - pawsHeight) / 2;
+                        yOffset = (cats[catCounter].PawsWidth - cats[catCounter].DefaultPawsWidth) / 2;
+                        zOffset = (cats[catCounter].PawsHeight - cats[catCounter].DefaultPawsHeight) / 2;
 
-                        x0 = box.XStart + torsoXOffset;
-                        y0 = box.YStart + torsoYOffset - yOffset;
+                        x0 = box.XStart + cats[catCounter].TorsoXOffset;
+                        y0 = box.YStart + cats[catCounter].TorsoYOffset - yOffset;
                         z0 = box.ZStart - zOffset;
-                        x1 = box.XEnd + torsoXOffset;
-                        y1 = box.YEnd + torsoYOffset + yOffset;
+                        x1 = box.XEnd + cats[catCounter].TorsoXOffset;
+                        y1 = box.YEnd + cats[catCounter].TorsoYOffset + yOffset;
                         z1 = box.ZEnd;
 
                         break;
                     case 4:
-                        yOffset = ((double)pawsWidthControl.Value - pawsWidth) / 2;
-                        zOffset = ((double)pawsHeightControl.Value - pawsHeight) / 2;
+                        yOffset = (cats[catCounter].PawsWidth - cats[catCounter].DefaultPawsWidth) / 2;
+                        zOffset = (cats[catCounter].PawsHeight - cats[catCounter].DefaultPawsHeight) / 2;
 
-                        x0 = box.XStart + torsoXOffset;
-                        y0 = box.YStart - torsoYOffset + yOffset;
+                        x0 = box.XStart + cats[catCounter].TorsoXOffset;
+                        y0 = box.YStart - cats[catCounter].TorsoYOffset + yOffset;
                         z0 = box.ZStart - zOffset;
-                        x1 = box.XEnd + torsoXOffset;
-                        y1 = box.YEnd - torsoYOffset - yOffset;
+                        x1 = box.XEnd + cats[catCounter].TorsoXOffset;
+                        y1 = box.YEnd - cats[catCounter].TorsoYOffset - yOffset;
                         z1 = box.ZEnd;
 
                         break;
                     // лапы
                     case 5:
-                        yOffset = ((double)pawsWidthControl.Value - pawsWidth) / 2;
-                        zOffset = ((double)pawsHeightControl.Value - pawsHeight) / 2;
+                        yOffset = (cats[catCounter].PawsWidth - cats[catCounter].DefaultPawsWidth) / 2;
+                        zOffset = (cats[catCounter].PawsHeight - cats[catCounter].DefaultPawsHeight) / 2;
 
-                        x0 = box.XStart - torsoXOffset;
-                        y0 = box.YStart + torsoYOffset - yOffset;
+                        x0 = box.XStart - cats[catCounter].TorsoXOffset;
+                        y0 = box.YStart + cats[catCounter].TorsoYOffset - yOffset;
                         z0 = box.ZStart - zOffset;
-                        x1 = box.XEnd - torsoXOffset;
-                        y1 = box.YEnd + torsoYOffset + yOffset;
+                        x1 = box.XEnd - cats[catCounter].TorsoXOffset;
+                        y1 = box.YEnd + cats[catCounter].TorsoYOffset + yOffset;
                         z1 = box.ZEnd - zOffset;
 
                         break;
                     case 6:
-                        yOffset = ((double)pawsWidthControl.Value - pawsWidth) / 2;
-                        zOffset = ((double)pawsHeightControl.Value - pawsHeight) / 2;
+                        yOffset = (cats[catCounter].PawsWidth - cats[catCounter].DefaultPawsWidth) / 2;
+                        zOffset = (cats[catCounter].PawsHeight - cats[catCounter].DefaultPawsHeight) / 2;
 
-                        x0 = box.XStart - torsoXOffset;
-                        y0 = box.YStart - torsoYOffset + yOffset;
+                        x0 = box.XStart - cats[catCounter].TorsoXOffset;
+                        y0 = box.YStart - cats[catCounter].TorsoYOffset + yOffset;
                         z0 = box.ZStart - zOffset;
-                        x1 = box.XEnd - torsoXOffset;
-                        y1 = box.YEnd - torsoYOffset - yOffset;
+                        x1 = box.XEnd - cats[catCounter].TorsoXOffset;
+                        y1 = box.YEnd - cats[catCounter].TorsoYOffset - yOffset;
                         z1 = box.ZEnd - zOffset;
 
                         break;
                     case 7:
-                        yOffset = ((double)pawsWidthControl.Value - pawsWidth) / 2;
-                        zOffset = ((double)pawsHeightControl.Value - pawsHeight) / 2;
+                        yOffset = (cats[catCounter].PawsWidth - cats[catCounter].DefaultPawsWidth) / 2;
+                        zOffset = (cats[catCounter].PawsHeight - cats[catCounter].DefaultPawsHeight) / 2;
 
-                        x0 = box.XStart + torsoXOffset;
-                        y0 = box.YStart + torsoYOffset - yOffset;
+                        x0 = box.XStart + cats[catCounter].TorsoXOffset;
+                        y0 = box.YStart + cats[catCounter].TorsoYOffset - yOffset;
                         z0 = box.ZStart - zOffset;
-                        x1 = box.XEnd + torsoXOffset;
-                        y1 = box.YEnd + torsoYOffset + yOffset;
+                        x1 = box.XEnd + cats[catCounter].TorsoXOffset;
+                        y1 = box.YEnd + cats[catCounter].TorsoYOffset + yOffset;
                         z1 = box.ZEnd - zOffset;
 
                         break;
                     case 8:
-                        yOffset = ((double)pawsWidthControl.Value - pawsWidth) / 2;
-                        zOffset = ((double)pawsHeightControl.Value - pawsHeight) / 2;
+                        yOffset = (cats[catCounter].PawsWidth - cats[catCounter].DefaultPawsWidth) / 2;
+                        zOffset = (cats[catCounter].PawsHeight - cats[catCounter].DefaultPawsHeight) / 2;
 
-                        x0 = box.XStart + torsoXOffset;
-                        y0 = box.YStart - torsoYOffset + yOffset;
+                        x0 = box.XStart + cats[catCounter].TorsoXOffset;
+                        y0 = box.YStart - cats[catCounter].TorsoYOffset + yOffset;
                         z0 = box.ZStart - zOffset;
-                        x1 = box.XEnd + torsoXOffset;
-                        y1 = box.YEnd - torsoYOffset - yOffset;
+                        x1 = box.XEnd + cats[catCounter].TorsoXOffset;
+                        y1 = box.YEnd - cats[catCounter].TorsoYOffset - yOffset;
                         z1 = box.ZEnd - zOffset;
 
                         break;
                     // голова
                     case 9:
-                        x0 = box.XStart + torsoXOffset;
+                        x0 = box.XStart + cats[catCounter].TorsoXOffset;
                         y0 = box.YStart;
                         z0 = box.ZStart;
-                        x1 = box.XEnd + torsoXOffset;
+                        x1 = box.XEnd + cats[catCounter].TorsoXOffset;
                         y1 = box.YEnd;
                         z1 = box.ZEnd;
 
                         break;
                     // хвост
                     case 10:
-                        xOffset = ((double)tailLengthControl.Value - tailLength) / 2;
-                        yOffset = ((double)tailWidthControl.Value - tailWidth) / 2;
+                        xOffset = (cats[catCounter].TailLength - cats[catCounter].DefaultTailLength) / 2;
+                        yOffset = (cats[catCounter].TailWidth - cats[catCounter].DefaultTailWidth) / 2;
 
-                        x0 = box.XStart - torsoXOffset;
+                        x0 = box.XStart - cats[catCounter].TorsoXOffset;
                         y0 = box.YStart + yOffset;
                         z0 = box.ZStart;
-                        x1 = box.XEnd - torsoXOffset - xOffset;
+                        x1 = box.XEnd - cats[catCounter].TorsoXOffset - xOffset;
                         y1 = box.YEnd - yOffset;
                         z1 = box.ZEnd;
 
                         break;
                     case 11:
-                        xOffset = ((double)tailLengthControl.Value - tailLength) / 2;
-                        yOffset = ((double)tailWidthControl.Value - tailWidth) / 2;
+                        xOffset = (cats[catCounter].TailLength - cats[catCounter].DefaultTailLength) / 2;
+                        yOffset = (cats[catCounter].TailWidth - cats[catCounter].DefaultTailWidth) / 2;
 
-                        x0 = box.XStart - torsoXOffset - xOffset;
+                        x0 = box.XStart - cats[catCounter].TorsoXOffset - xOffset;
                         y0 = box.YStart + yOffset;
                         z0 = box.ZStart;
-                        x1 = box.XEnd - torsoXOffset - xOffset;
+                        x1 = box.XEnd - cats[catCounter].TorsoXOffset - xOffset;
                         y1 = box.YEnd - yOffset;
                         z1 = box.ZEnd;
 
                         break;
                     case 12:
-                        xOffset = ((double)tailLengthControl.Value - tailLength) / 2;
-                        yOffset = ((double)tailWidthControl.Value - tailWidth) / 2;
+                        xOffset = (cats[catCounter].TailLength - cats[catCounter].DefaultTailLength) / 2;
+                        yOffset = (cats[catCounter].TailWidth - cats[catCounter].DefaultTailWidth) / 2;
 
-                        x0 = box.XStart - torsoXOffset - xOffset;
+                        x0 = box.XStart - cats[catCounter].TorsoXOffset - xOffset;
                         y0 = box.YStart + yOffset;
                         z0 = box.ZStart;
-                        x1 = box.XEnd - torsoXOffset - xOffset * 2;
+                        x1 = box.XEnd - cats[catCounter].TorsoXOffset - xOffset * 2;
                         y1 = box.YEnd - yOffset;
                         z1 = box.ZEnd;
 
                         break;
                     case 13:
-
-                        x0 = box.XStart + torsoXOffset;
+                        x0 = box.XStart + cats[catCounter].TorsoXOffset;
                         y0 = box.YStart;
                         z0 = box.ZStart;
-                        x1 = box.XEnd + torsoXOffset;
+                        x1 = box.XEnd + cats[catCounter].TorsoXOffset;
                         y1 = box.YEnd;
                         z1 = box.ZEnd;
 
                         break;
                     case 14:
-                        xOffset = (double)tongueLengthControl.Value - box.getLength();
-                        yOffset = ((double)tongueWidthControl.Value - box.getWidth()) / 2;
+                        xOffset = (cats[catCounter].TongueLength - box.getLength());
+                        yOffset = (cats[catCounter].TongueWidth - box.getWidth()) / 2;
 
-                        x0 = box.XStart + torsoXOffset;
+                        x0 = box.XStart + cats[catCounter].TorsoXOffset;
                         y0 = box.YStart - yOffset;
                         z0 = box.ZStart;
-                        x1 = box.XEnd + torsoXOffset + xOffset;
+                        x1 = box.XEnd + cats[catCounter].TorsoXOffset + xOffset;
                         y1 = box.YEnd + yOffset;
                         z1 = box.ZEnd;
 
@@ -488,9 +489,9 @@ namespace TabbyCat
                 double height = c.Height;
                 double vertexCount = c.VertexCount;
 
-                if (counter >=0 && counter <= 1)
+                if (counter >= 0 && counter <= 1)
                 {
-                    radiusOffset = (double)irisSizeControl.Value - radius;
+                    radiusOffset = cats[catCounter].IrisSize - radius;
                     whiteOfTheEyeOffset = radiusOffset;
                 }
                 else if (counter >= 2 && counter <= 3)
@@ -499,10 +500,10 @@ namespace TabbyCat
                 }
                 else if (counter >= 4 && counter <= 5)
                 {
-                    radiusOffset = (double)pupilSizeControl.Value - radius;
+                    radiusOffset = cats[catCounter].PupilSize - radius;
                 }
 
-                Cylinder tmpC = new Cylinder(new Vertex(x - torsoXOffset, y, z),
+                Cylinder tmpC = new Cylinder(new Vertex(x - cats[catCounter].TorsoXOffset, y, z),
                     radius + radiusOffset, height, vertexCount, c.Color);
 
                 drawTriangles(tmpC.BottomBase, transformMatrix, zBuffer);
@@ -529,11 +530,11 @@ namespace TabbyCat
 
                 if (counter >= 0 && counter <= 1)
                 {
-                    heigthOffset = (double)earsWidthControl.Value - height;
+                    heigthOffset = cats[catCounter].EarsWidth - height;
                     x = x - heigthOffset;
                 }
 
-                HalfCylinder tmpHc = new HalfCylinder(new Vertex(x + torsoXOffset, y, z),
+                HalfCylinder tmpHc = new HalfCylinder(new Vertex(x + cats[catCounter].TorsoXOffset, y, z),
                    radius, height + heigthOffset, vertexCount, hc.Color);
 
                 drawTriangles(tmpHc.BottomBase, transformMatrix, zBuffer);
@@ -550,19 +551,19 @@ namespace TabbyCat
             {
                 if (bands.Count > 0)
                 {
-                    if ((int)bandsNumberControl.Value < bands.Count)
+                    if (cats[catCounter].BandsNumber < bands.Count)
                     {
-                        for (int i = (bands.Count - 1); i >= (int)bandsNumberControl.Value; i--)
+                        for (int i = (bands.Count - 1); i >= cats[catCounter].BandsNumber; i--)
                         {
                             bands.RemoveAt(i);
                         }
                     }
-                    else if ((int)bandsNumberControl.Value > bands.Count)
+                    else if (cats[catCounter].BandsNumber > bands.Count)
                     {
-                        for (int i = (bands.Count - 1); i < (int)bandsNumberControl.Value - 1; i++)
+                        for (int i = (bands.Count - 1); i < cats[catCounter].BandsNumber - 1; i++)
                         {
-                            bands.Add(new Box(new Vertex(bands[i].XStart - bandsXOffset, bands[i].YStart, bands[i].ZStart),
-                                new Vertex(bands[i].XEnd - bandsXOffset, bands[i].YEnd, bands[i].ZEnd), bands[i].Color));
+                            bands.Add(new Box(new Vertex(bands[i].XStart - Cat.BandsXOffset, bands[i].YStart, bands[i].ZStart),
+                                new Vertex(bands[i].XEnd - Cat.BandsXOffset, bands[i].YEnd, bands[i].ZEnd), bands[i].Color));
                         }
                     }
                 }
@@ -576,12 +577,12 @@ namespace TabbyCat
 
             foreach (Box b in bands)
             {
-                double xOffset = ((double)bandsWidthControl.Value - b.getLength()) / 2;
+                double xOffset = (cats[catCounter].BandsWidth - b.getLength()) / 2;
 
-                double x0 = b.XStart + torsoXOffset - xOffset;
+                double x0 = b.XStart + cats[catCounter].TorsoXOffset - xOffset;
                 double y0 = b.YStart;
                 double z0 = b.ZStart;
-                double x1 = b.XEnd + torsoXOffset + xOffset;
+                double x1 = b.XEnd + cats[catCounter].TorsoXOffset + xOffset;
                 double y1 = b.YEnd;
                 double z1 = b.ZEnd;
 
@@ -596,22 +597,22 @@ namespace TabbyCat
                 drawTriangles(box.DistantEdge, transform, zBuffer);
 
                 if (counter == 0)
-                    firstBandXStart = box.XStart;
+                    cats[catCounter].FirstBandXStart = box.XStart;
 
-                lastBandXMin = box.XStart;
+                cats[catCounter].LastBandXMin = box.XStart;
                 counter++;
             }
         }
 
         private void drawTeeth(List<Box> teeth, Matrix4 transform, double[] zBuffer)
         {
-            if (teeth.Count != (int)teethNumberControl.Value)
+            if (teeth.Count != cats[catCounter].TeethNumber)
             {
                 if (teeth.Count != 0)
                 {
-                    if ((int)teethNumberControl.Value < teeth.Count)
+                    if (cats[catCounter].TeethNumber < teeth.Count)
                     {
-                        for (int i = (teeth.Count - 1); i >= (int)teethNumberControl.Value; i--)
+                        for (int i = (teeth.Count - 1); i >= cats[catCounter].TeethNumber; i--)
                         {
                             teeth.RemoveAt(i);
                         }
@@ -622,18 +623,18 @@ namespace TabbyCat
                         {
                             if (i == 0)
                             {
-                                teeth.Add(new Box(new Vertex(teeth[i].XStart, teeth[i].YStart - teethYOffset, teeth[i].ZStart),
-                                    new Vertex(teeth[i].XEnd, teeth[i].YEnd - teethYOffset, teeth[i].ZEnd), teeth[i].Color));
+                                teeth.Add(new Box(new Vertex(teeth[i].XStart, teeth[i].YStart - Cat.TeethYOffset, teeth[i].ZStart),
+                                    new Vertex(teeth[i].XEnd, teeth[i].YEnd - Cat.TeethYOffset, teeth[i].ZEnd), teeth[i].Color));
                             }
                             else if (i % 2 != 0)
                             {
-                                teeth.Add(new Box(new Vertex(teeth[i - 1].XStart, teeth[i - 1].YStart + teethYOffset, teeth[i - 1].ZStart),
-                                    new Vertex(teeth[i - 1].XEnd, teeth[i - 1].YEnd + teethYOffset, teeth[i - 1].ZEnd), teeth[i - 1].Color));
+                                teeth.Add(new Box(new Vertex(teeth[i - 1].XStart, teeth[i - 1].YStart + Cat.TeethYOffset, teeth[i - 1].ZStart),
+                                    new Vertex(teeth[i - 1].XEnd, teeth[i - 1].YEnd + Cat.TeethYOffset, teeth[i - 1].ZEnd), teeth[i - 1].Color));
                             }
                             else
                             {
-                                teeth.Add(new Box(new Vertex(teeth[i - 1].XStart, teeth[i - 1].YStart - teethYOffset, teeth[i - 1].ZStart),
-                                    new Vertex(teeth[i - 1].XEnd, teeth[i - 1].YEnd - teethYOffset, teeth[i - 1].ZEnd), teeth[i - 1].Color));
+                                teeth.Add(new Box(new Vertex(teeth[i - 1].XStart, teeth[i - 1].YStart - Cat.TeethYOffset, teeth[i - 1].ZStart),
+                                    new Vertex(teeth[i - 1].XEnd, teeth[i - 1].YEnd - Cat.TeethYOffset, teeth[i - 1].ZEnd), teeth[i - 1].Color));
                             }
                         }
                     }
@@ -657,10 +658,10 @@ namespace TabbyCat
                 double y1 = 0;
                 double z1 = 0;
 
-                x0 = b.XStart + torsoXOffset;
+                x0 = b.XStart + cats[catCounter].TorsoXOffset;
                 y0 = b.YStart < b.YEnd ? b.YStart - yOffset : b.YStart + yOffset;
                 z0 = b.ZStart;
-                x1 = b.XEnd + torsoXOffset;
+                x1 = b.XEnd + cats[catCounter].TorsoXOffset;
                 y1 = b.YStart < b.YEnd ? b.YEnd + yOffset : b.YEnd - yOffset;
                 z1 = b.ZEnd;
 
@@ -676,8 +677,8 @@ namespace TabbyCat
 
                 if (counter == 0)
                 {
-                    teethFirstYMin = box.YStart;
-                    teethFirstYMax = box.YEnd;
+                    cats[catCounter].TeethFirstYMin = box.YStart;
+                    cats[catCounter].TeethFirstYMax = box.YEnd;
                 }
             }
         }
@@ -697,114 +698,114 @@ namespace TabbyCat
         {
             string str;
 
-            if (numericUpDown1.Value < headLength * 2 + 5 || numericUpDown1.Value > headLength * 10 + 10)
+            if (numericUpDown1.Value < (decimal)cat.HeadLength * 2 + 5 || numericUpDown1.Value > (decimal)cat.HeadLength * 10 + 10)
             {
-                str = string.Format("Длина тела должна лежать в диапазоне от {0} до {1}", headLength * 2 + 5, headLength * 10 + 10);
-                numericUpDown1.Value = torsoLengthControl.Value;
+                str = string.Format("Длина тела должна лежать в диапазоне от {0} до {1}", cat.HeadLength * 2 + 5, cat.HeadLength * 10 + 10);
+                numericUpDown1.Value = (decimal)cat.TorsoLength;
                 MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 isUpdated1 = true;
                 return;
             }
             else
             {
-                torsoLengthControl.Value = numericUpDown1.Value;
+                cat.TorsoLength = (double)numericUpDown1.Value;
             }
 
-            if (numericUpDown2.Value < headWidth || numericUpDown2.Value > headWidth * 5)
+            if (numericUpDown2.Value < (decimal)cat.HeadWidth || numericUpDown2.Value > (decimal)cat.HeadWidth * 5)
             {
-                str = string.Format("Ширина тела должна лежать в диапазоне от {0} до {1}", headWidth, headWidth * 5);
-                numericUpDown2.Value = torsoWidthControl.Value;
+                str = string.Format("Ширина тела должна лежать в диапазоне от {0} до {1}", cat.HeadWidth, cat.HeadWidth * 5);
+                numericUpDown2.Value = (decimal)cat.TorsoWidth;
                 MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 isUpdated1 = true;
                 return;
             }
             else
             {
-                torsoWidthControl.Value = numericUpDown2.Value;
+                cat.TorsoWidth = (double)numericUpDown2.Value;
             }
 
-            if (numericUpDown3.Value < (decimal)Math.Round(tailLength / 2) || numericUpDown3.Value > (decimal)tailLength * 2)
+            if (numericUpDown3.Value < (decimal)Math.Round(cat.TailLength / 2) || numericUpDown3.Value > (decimal)cat.TailLength * 2)
             {
                 str = string.Format("Длина хвоста должна лежать в диапазоне от {0} до {1}",
-                    (decimal)Math.Round(tailLength / 2), (decimal)tailLength * 2);
-                numericUpDown3.Value = tailLengthControl.Value;
+                    (decimal)Math.Round(cat.TailLength / 2), (decimal)cat.TailLength * 2);
+                numericUpDown3.Value = (decimal)cat.TailLength;
                 MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 isUpdated1 = true;
                 return;
             }
             else
             {
-                tailLengthControl.Value = numericUpDown3.Value;
+                cat.TailLength = (double)numericUpDown3.Value;
             }
 
-            if (numericUpDown4.Value < (decimal)Math.Round(tailWidth / 2) || numericUpDown4.Value > (decimal)tailWidth * 2)
+            if (numericUpDown4.Value < (decimal)Math.Round(cat.TailWidth / 2) || numericUpDown4.Value > (decimal)cat.TailWidth * 2)
             {
                 str = string.Format("Ширина хвоста должна лежать в диапазоне от {0} до {1}",
-                    (decimal)Math.Round(tailWidth / 2), (decimal)tailWidth * 2);
-                numericUpDown4.Value = tailWidthControl.Value;
+                    (decimal)Math.Round(cat.TailWidth / 2), (decimal)cat.TailWidth * 2);
+                numericUpDown4.Value = (decimal)cat.TailWidth;
                 MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 isUpdated1 = true;
                 return;
             }
             else
             {
-                tailWidthControl.Value = numericUpDown4.Value;
+                cat.TailWidth = (double)numericUpDown4.Value;
             }
 
-            if (numericUpDown5.Value < (decimal)pawsHeight / 2 || numericUpDown5.Value > (decimal)pawsHeight * 2)
+            if (numericUpDown5.Value < (decimal)cat.PawsHeight / 2 || numericUpDown5.Value > (decimal)cat.PawsHeight * 2)
             {
                 str = string.Format("Длина лап должна лежать в диапазоне от {0} до {1}",
-                    (decimal)pawsHeight / 2, (decimal)pawsHeight * 2);
-                numericUpDown5.Value = pawsHeightControl.Value;
+                    (decimal)cat.PawsHeight / 2, (decimal)cat.PawsHeight * 2);
+                numericUpDown5.Value = (decimal)cat.PawsHeight;
                 MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 isUpdated1 = true;
                 return;
             }
             else
             {
-                pawsHeightControl.Value = numericUpDown5.Value;
+                cat.PawsHeight = (double)numericUpDown5.Value;
             }
 
-            if (numericUpDown6.Value < (decimal)pawsWidth - 2 || numericUpDown6.Value > (decimal)pawsWidth * 2)
+            if (numericUpDown6.Value < (decimal)cat.PawsWidth - 2 || numericUpDown6.Value > (decimal)cat.PawsWidth * 2)
             {
                 str = string.Format("Ширина лап должна лежать в диапазоне от {0} до {1}",
-                    (decimal)pawsWidth - 2, (decimal)pawsWidth * 2);
-                numericUpDown6.Value = pawsWidthControl.Value;
+                    (decimal)cat.PawsWidth - 2, (decimal)cat.PawsWidth * 2);
+                numericUpDown6.Value = (decimal)cat.PawsWidth;
                 MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 isUpdated1 = true;
                 return;
             }
             else
             {
-                pawsWidthControl.Value = numericUpDown6.Value;
+                cat.PawsWidth = (double)numericUpDown6.Value;
             }
 
             if (numericUpDown7.Value < (decimal)cat.Cylinders[0].Radius - 2 || numericUpDown7.Value > (decimal)cat.Cylinders[0].Radius + 2)
             {
                 str = string.Format("Радиус глаз должен лежать в диапазоне от {0} до {1}",
                     (decimal)cat.Cylinders[0].Radius - 2, (decimal)cat.Cylinders[0].Radius + 2);
-                numericUpDown7.Value = irisSizeControl.Value;
+                numericUpDown7.Value = (decimal)cat.IrisSize;
                 MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 isUpdated1 = true;
                 return;
             }
             else
             {
-                irisSizeControl.Value = numericUpDown7.Value;
+                cat.IrisSize = (double)numericUpDown7.Value;
             }
 
             if (numericUpDown8.Value < (decimal)cat.Cylinders[4].Radius - 2 || numericUpDown8.Value > (decimal)cat.Cylinders[4].Radius + 2)
             {
                 str = string.Format("Радиус зрачков должен лежать в диапазоне от {0} до {1}",
                     (decimal)cat.Cylinders[4].Radius - 2, (decimal)cat.Cylinders[4].Radius + 2);
-                numericUpDown8.Value = pupilSizeControl.Value;
+                numericUpDown8.Value = (decimal)cat.PupilSize;
                 MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 isUpdated1 = true;
                 return;
             }
             else
             {
-                pupilSizeControl.Value = numericUpDown8.Value;
+                cat.PupilSize = (double)numericUpDown8.Value;
             }
 
             isUpdated1 = true;
@@ -818,70 +819,70 @@ namespace TabbyCat
             {
                 str = string.Format("Ширина ушей должна лежать в диапазоне от {0} до {1}",
                     Math.Round((decimal)cat.HalfCylinders[0].Height / 2), (decimal)cat.HalfCylinders[0].Height * 2);
-                numericUpDown9.Value = earsWidthControl.Value;
+                numericUpDown9.Value = (decimal)cat.EarsWidth;
                 MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 isUpdated2 = true;
                 return;
             }
             else
             {
-                earsWidthControl.Value = numericUpDown9.Value;
+                cat.EarsWidth = (double)numericUpDown9.Value;
             }
 
             if (numericUpDown10.Value < (decimal)cat.Boxes[14].getLength() || numericUpDown10.Value > (decimal)cat.Boxes[14].getLength() + 5)
             {
                 str = string.Format("Длина языка должна лежать в диапазоне от {0} до {1}",
                     (decimal)cat.Boxes[14].getLength(), (decimal)cat.Boxes[14].getLength() + 5);
-                numericUpDown10.Value = tongueLengthControl.Value;
+                numericUpDown10.Value = (decimal)cat.TongueLength;
                 MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 isUpdated2 = true;
                 return;
             }
             else
             {
-                tongueLengthControl.Value = numericUpDown10.Value;
+                cat.TongueLength = (double)numericUpDown10.Value;
             }
 
             if (numericUpDown11.Value < (decimal)cat.Boxes[14].getWidth() / 2 || numericUpDown11.Value > (decimal)cat.Boxes[14].getWidth() + 5)
             {
                 str = string.Format("Ширина языка должна лежать в диапазоне от {0} до {1}",
                     (decimal)cat.Boxes[14].getWidth() / 2, (decimal)cat.Boxes[14].getWidth() + 5);
-                numericUpDown11.Value = tongueWidthControl.Value;
+                numericUpDown11.Value = (decimal)cat.TongueWidth;
                 MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 isUpdated2 = true;
                 return;
             }
             else
             {
-                tongueWidthControl.Value = numericUpDown11.Value;
+                cat.TongueWidth = (double)numericUpDown11.Value;
             }
 
             if (numericUpDown12.Value < (decimal)cat.Teeth[0].getWidth() - 1 || numericUpDown12.Value > (decimal)cat.Teeth[0].getWidth() + 1)
             {
                 str = string.Format("Ширина зубов должна лежать в диапазоне от {0} до {1}",
                     (decimal)cat.Teeth[0].getWidth() - 1, (decimal)cat.Teeth[0].getWidth() + 1);
-                numericUpDown12.Value = teethWidthControl.Value;
+                numericUpDown12.Value = (decimal)cat.TeethWidth;
                 MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 isUpdated2 = true;
                 return;
             }
             else
             {
-                teethWidthControl.Value = numericUpDown12.Value;
+                cat.TeethWidth = (double)numericUpDown12.Value;
             }
 
             if (numericUpDown13.Value < Math.Round((decimal)cat.Bands[0].getLength() / 2) || numericUpDown13.Value > (decimal)cat.Bands[0].getLength() * 2)
             {
                 str = string.Format("Толщина полос должна лежать в диапазоне от {0} до {1}",
                     Math.Round((decimal)cat.Bands[0].getLength() / 2), (decimal)cat.Bands[0].getLength() * 2);
-                numericUpDown13.Value = bandsWidthControl.Value;
+                numericUpDown13.Value = (decimal)cat.BandsWidth;
                 MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 isUpdated2 = true;
                 return;
             }
             else
             {
-                bandsWidthControl.Value = numericUpDown13.Value;
+                cat.BandsWidth = (double)numericUpDown13.Value;
             }
 
             isUpdated2 = true;
@@ -895,54 +896,54 @@ namespace TabbyCat
             {
                 if (cat.Bands.Count == 0)
                 {
-                    double x = firstBandXStart;
+                    double x = cat.FirstBandXStart;
 
                     for (int i = (cat.Bands.Count); i < (int)numericUpDown14.Value - 1; i++)
                     {
-                        if (x - bandsXOffset < torsoXMin + 10)
+                        if (x - Cat.BandsXOffset < cat.TorsoXMin + 10)
                         {
                             str = string.Format("Количество полос должно быть в диапазоне от {0} до {1}",
                                 0, i + 1);
-                            numericUpDown14.Value = bandsNumberControl.Value;
+                            numericUpDown14.Value = (decimal)cat.BandsNumber;
                             MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             isUpdated3 = true;
                             return;
                         }
                         else
                         {
-                            x -= bandsXOffset;
+                            x -= Cat.BandsXOffset;
                         }
                     }
 
-                    bandsNumberControl.Value = numericUpDown14.Value;
+                    cat.BandsNumber = (double)numericUpDown14.Value;
                 }
                 else
                 {
-                    double x = lastBandXMin;
+                    double x = cat.LastBandXMin;
 
                     for (int i = (cat.Bands.Count - 1); i < (int)numericUpDown14.Value - 1; i++)
                     {
-                        if (x - bandsXOffset < torsoXMin + 10)
+                        if (x - Cat.BandsXOffset < cat.TorsoXMin + 10)
                         {
                             str = string.Format("Количество полос должно быть в диапазоне от {0} до {1}",
                                 0, i + 1);
-                            numericUpDown14.Value = bandsNumberControl.Value;
+                            numericUpDown14.Value = (decimal)cat.BandsNumber;
                             MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             isUpdated3 = true;
                             return;
                         }
                         else
                         {
-                            x -= bandsXOffset;
+                            x -= Cat.BandsXOffset;
                         }
                     }
 
-                    bandsNumberControl.Value = numericUpDown14.Value;
+                    cat.BandsNumber = (double)numericUpDown14.Value;
                 }
             }
             else
             {
-                numericUpDown14.Value = bandsNumberControl.Value;
+                numericUpDown14.Value = (decimal)cat.BandsNumber;
                 MessageBox.Show("Количество полос не может быть меньше 0", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 isUpdated3 = true;
                 return;
@@ -957,13 +958,13 @@ namespace TabbyCat
                 {
                     if (numericUpDown15.Value <= 4)
                     {
-                        teethNumberControl.Value = numericUpDown15.Value;
+                        cat.TeethNumber = (double)numericUpDown15.Value;
                     }
                     else
                     {
                         str = string.Format("Количество зубов должно быть в диапазоне от {0} до {1}",
                                 0, 4);
-                        numericUpDown15.Value = teethNumberControl.Value;
+                        numericUpDown15.Value = (decimal)cat.TeethNumber;
                         MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         isUpdated3 = true;
                         return;
@@ -973,8 +974,8 @@ namespace TabbyCat
                 {
                     if (cat.Teeth.Count == 1)
                     {
-                        teethYMax = teethFirstYMax;
-                        teethYMin = teethFirstYMin;
+                        teethYMax = cat.TeethFirstYMax;
+                        teethYMin = cat.TeethFirstYMin;
                     }
                     else
                     {
@@ -994,15 +995,15 @@ namespace TabbyCat
                     {
                         if (i % 2 != 0)
                         {
-                            if (teethYMax + teethYOffset < cat.Boxes[13].YEnd - 2)
+                            if (teethYMax + Cat.TeethYOffset < cat.Boxes[13].YEnd - 2)
                             {
-                                teethYMax += teethYOffset;
+                                teethYMax += Cat.TeethYOffset;
                             }
                             else
                             {
                                 str = string.Format("Количество зубов должно быть в диапазоне от {0} до {1}",
                                 0, i + 1);
-                                numericUpDown15.Value = teethNumberControl.Value;
+                                numericUpDown15.Value = (decimal)cat.TeethNumber;
                                 MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 isUpdated3 = true;
                                 return;
@@ -1010,15 +1011,15 @@ namespace TabbyCat
                         }
                         else
                         {
-                            if (teethYMin - teethYOffset > cat.Boxes[13].YStart + 2)
+                            if (teethYMin - Cat.TeethYOffset > cat.Boxes[13].YStart + 2)
                             {
-                                teethYMin -= teethYOffset;
+                                teethYMin -= Cat.TeethYOffset;
                             }
                             else
                             {
                                 str = string.Format("Количество зубов должно быть в диапазоне от {0} до {1}",
                                 0, i + 1);
-                                numericUpDown15.Value = teethNumberControl.Value;
+                                numericUpDown15.Value = (decimal)cat.TeethNumber;
                                 MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 isUpdated3 = true;
                                 return;
@@ -1026,12 +1027,12 @@ namespace TabbyCat
                         }
                     }
 
-                    teethNumberControl.Value = numericUpDown15.Value;
+                    cat.TeethNumber = (double)numericUpDown15.Value;
                 }
             }
             else
             {
-                numericUpDown15.Value = teethNumberControl.Value;
+                numericUpDown15.Value = (decimal)cat.TeethNumber;
                 MessageBox.Show("Количество зубов не может быть меньше 0", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 isUpdated3 = true;
                 return;
@@ -1051,12 +1052,11 @@ namespace TabbyCat
             // рисование фона
             g.FillRectangle(Brushes.Black, new RectangleF(0, 0, renderArea.Width, renderArea.Height));
 
-            List<Matrix4> matrices = new List<Matrix4>();
-
             for (int i = 0; i < cats.Count; i++)
             {
                 if (catsListBox.SelectedItem.ToString() == cats[i].Name)
                 {
+                    // устанавливаем количественные и качественные параметры
                     if (isUpdated1 == false)
                         checkControlValues1(cats[i]);
 
@@ -1066,7 +1066,8 @@ namespace TabbyCat
                     if (isUpdated3 == false)
                         checkControlValues3(cats[i]);
 
-                    if (changingIndex == i)
+                    // устанавливаем сдвиги
+                    if (lastSelectedListBoxIndex == i)
                     {
                         cats[i].XOffset = xOffsetControl.Value;
                         cats[i].YOffset = yOffsetControl.Value;
@@ -1079,12 +1080,14 @@ namespace TabbyCat
                 }
             }
 
+
+            matrices.Clear();
+            // генерируем матрицу для каждого объекта
             foreach (Cat cat in cats)
             {
                 trTransform.setOffsets(cat.XOffset, cat.YOffset, cat.ZOffset);
                 scTransform.ScaleOffset = (double)cat.ScaleOffset;
                 rtTransform.setAngles(cat.XAngle, cat.YAngle, cat.ZAngle);
-
                 viewTrTransform.setOffsets(cameraXPositionControl.Value, cameraYPositionControl.Value, cameraZPositionControl.Value);
                 viewRtTransform.setAngles(cameraXAngleControl.Value, cameraYAngleControl.Value, cameraZAngleControl.Value);
 
@@ -1155,6 +1158,7 @@ namespace TabbyCat
 
             for (int i = 0; i < cats.Count; i++)
             {
+                catCounter = i;
                 render(cats[i], g, matrices[i], zBuffer);
             }
         }
@@ -1177,54 +1181,25 @@ namespace TabbyCat
         private void addCatButton_Click(object sender, EventArgs e)
         {
             cats.Add(new Cat());
-            cats[cats.Count - 1].Name = "Cat" + catNumber;
-            catNumber++;
+            cats[cats.Count - 1].Name = "Cat" + catNameNumber;
+            catNameNumber++;
             catsListBox.Items.Add(cats[cats.Count - 1].Name);
             catsListBox.SelectedItem = catsListBox.Items[cats.Count - 1];
-            setControls(cats[cats.Count - 1]);
-
-            xOffsetControl.Value = cats[catsListBox.SelectedIndex].XOffset;
-            yOffsetControl.Value = cats[catsListBox.SelectedIndex].YOffset;
-            zOffsetControl.Value = cats[catsListBox.SelectedIndex].ZOffset;
-
-            scaleControl.Value = cats[catsListBox.SelectedIndex].ScaleOffset;
-
-            xAngleControl.Value = cats[catsListBox.SelectedIndex].XAngle;
-            yAngleControl.Value = cats[catsListBox.SelectedIndex].YAngle;
-            zAngleControl.Value = cats[catsListBox.SelectedIndex].ZAngle;
         }
 
         private void catsListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //setControls(cats[catsListBox.SelectedIndex]);
-
             try
             {
-                xOffsetControl.Value = cats[catsListBox.SelectedIndex].XOffset;
-                yOffsetControl.Value = cats[catsListBox.SelectedIndex].YOffset;
-                zOffsetControl.Value = cats[catsListBox.SelectedIndex].ZOffset;
+                setControls(cats[catsListBox.SelectedIndex]);
 
-                scaleControl.Value = cats[catsListBox.SelectedIndex].ScaleOffset;
-
-                xAngleControl.Value = cats[catsListBox.SelectedIndex].XAngle;
-                yAngleControl.Value = cats[catsListBox.SelectedIndex].YAngle;
-                zAngleControl.Value = cats[catsListBox.SelectedIndex].ZAngle;
-
-                changingIndex = catsListBox.SelectedIndex;
+                lastSelectedListBoxIndex = catsListBox.SelectedIndex;
             }
             catch (ArgumentOutOfRangeException)
             {
-                xOffsetControl.Value = 0;
-                yOffsetControl.Value = 0;
-                zOffsetControl.Value = 0;
+                clearControls();
 
-                scaleControl.Value = 1;
-
-                xAngleControl.Value = 0;
-                yAngleControl.Value = 0;
-                zAngleControl.Value = 0;
-
-                changingIndex = 0;
+                lastSelectedListBoxIndex = 0;
             }
         }
 
@@ -1235,6 +1210,7 @@ namespace TabbyCat
                 catsListBox.SelectedIndex = catsListBox.SelectedIndex - 1;
                 catsListBox.Items.RemoveAt(catsListBox.SelectedIndex + 1);
                 cats.RemoveAt(catsListBox.SelectedIndex + 1);
+                setControls(cats[catsListBox.SelectedIndex]);
             }
             if (catsListBox.SelectedIndex == 0)
             {
@@ -1243,6 +1219,7 @@ namespace TabbyCat
                     catsListBox.SelectedIndex = 1;
                     catsListBox.Items.RemoveAt(0);
                     cats.RemoveAt(0);
+                    setControls(cats[catsListBox.SelectedIndex]);
                 }
                 else
                 {

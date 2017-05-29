@@ -149,7 +149,8 @@ namespace TabbyCat
 
         public void rotate(int xDegrees, int yDegrees, int zDegrees)
         {
-            RotationTransformation rt = new RotationTransformation(degreeToRadian(xDegrees), degreeToRadian(yDegrees), degreeToRadian(zDegrees));
+            RotationTransformation rt = new RotationTransformation();
+            rt.setAngles((decimal)degreeToRadian(xDegrees), (decimal)degreeToRadian(yDegrees), (decimal)degreeToRadian(zDegrees));
 
             Matrix4 transformMatrix = rt.OyMatrix.multiply(rt.OxMatrix);
             transformMatrix = transformMatrix.multiply(rt.OzMatrix);

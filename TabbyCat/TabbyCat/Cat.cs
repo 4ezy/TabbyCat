@@ -15,6 +15,10 @@ namespace TabbyCat
         List<Box> bands = new List<Box>();
         List<Box> teeth = new List<Box>();
 
+        const int bandsXOffset = 15;
+        const int teethYOffset = 6;
+
+        // матрицы
         decimal xOffset;
         decimal yOffset;
         decimal zOffset;
@@ -22,6 +26,39 @@ namespace TabbyCat
         decimal xAngle;
         decimal yAngle;
         decimal zAngle;
+
+        double torsoXOffset;
+        double torsoYOffset;
+
+        double defaultPawsHeight;
+        double defaultPawsWidth;
+        double defaultTailLength;
+        double defaultTailWidth;
+
+        double headLength;
+        double headWidth;
+        double torsoLength;
+        double torsoWidth;
+        double pawsHeight;
+        double pawsWidth;
+        double tailLength;
+        double tailWidth;
+        double irisSize;
+        double pupilSize;
+        double earsWidth;
+        double tongueLength;
+        double tongueWidth;
+        double bandsWidth;
+        double teethWidth;
+
+        double torsoXMin;
+        double lastBandXMin;
+        double firstBandXStart;
+        double teethFirstYMax;
+        double teethFirstYMin;
+
+        double bandsNumber;
+        double teethNumber;
 
         bool isChecked;
         string name;
@@ -34,15 +71,49 @@ namespace TabbyCat
             bands = bandsDrafting(Color.Brown);
             teeth = teethDrafting(Color.White);
 
-            xOffset = 0;
-            yOffset = 0;
-            zOffset = 0;
-            scaleOffset = 1;
-            xAngle = 0;
-            yAngle = 0;
-            zAngle = 0;
+            XOffset = 0;
+            YOffset = 0;
+            ZOffset = 0;
+            ScaleOffset = 1;
+            XAngle = 0;
+            YAngle = 0;
+            ZAngle = 0;
 
-            isChecked = false;
+            HeadLength = Boxes[9].getLength();
+            HeadWidth = Boxes[9].getWidth();
+
+            TorsoLength = Boxes[0].getLength();
+            TorsoWidth = Boxes[0].getWidth();
+
+            TailLength = Boxes[10].getLength() + Boxes[12].getLength();
+            TailWidth = Boxes[10].getWidth();
+
+            PawsHeight = Boxes[1].getHeight();
+            PawsWidth = Boxes[1].getWidth();
+
+            IrisSize = Cylinders[0].Radius;
+
+            PupilSize = Cylinders[4].Radius;
+
+            EarsWidth = HalfCylinders[0].Height;
+
+            TongueLength = Boxes[14].getLength();
+            TongueWidth = Boxes[14].getWidth();
+
+            TeethWidth = Teeth[0].getWidth();
+
+            BandsWidth = Bands[0].getLength();
+
+            BandsNumber = Bands.Count;
+            TeethNumber = Teeth.Count;
+
+            TorsoXOffset = 0;
+            TorsoYOffset = 0;
+
+            DefaultTailLength = TailLength;
+            DefaultTailWidth = TailWidth;
+            DefaultPawsHeight = PawsHeight;
+            DefaultPawsWidth = PawsWidth;
         }
 
         internal List<Box> Boxes
@@ -224,6 +295,386 @@ namespace TabbyCat
             set
             {
                 zAngle = value;
+            }
+        }
+
+        public double HeadLength
+        {
+            get
+            {
+                return headLength;
+            }
+
+            set
+            {
+                headLength = value;
+            }
+        }
+
+        public double TorsoLength
+        {
+            get
+            {
+                return torsoLength;
+            }
+
+            set
+            {
+                torsoLength = value;
+            }
+        }
+
+        public double TorsoWidth
+        {
+            get
+            {
+                return torsoWidth;
+            }
+
+            set
+            {
+                torsoWidth = value;
+            }
+        }
+
+        public double PawsHeight
+        {
+            get
+            {
+                return pawsHeight;
+            }
+
+            set
+            {
+                pawsHeight = value;
+            }
+        }
+
+        public double PawsWidth
+        {
+            get
+            {
+                return pawsWidth;
+            }
+
+            set
+            {
+                pawsWidth = value;
+            }
+        }
+
+        public double TailLength
+        {
+            get
+            {
+                return tailLength;
+            }
+
+            set
+            {
+                tailLength = value;
+            }
+        }
+
+        public double TailWidth
+        {
+            get
+            {
+                return tailWidth;
+            }
+
+            set
+            {
+                tailWidth = value;
+            }
+        }
+
+        public double HeadWidth
+        {
+            get
+            {
+                return headWidth;
+            }
+
+            set
+            {
+                headWidth = value;
+            }
+        }
+
+        public double IrisSize
+        {
+            get
+            {
+                return irisSize;
+            }
+
+            set
+            {
+                irisSize = value;
+            }
+        }
+
+        public double PupilSize
+        {
+            get
+            {
+                return pupilSize;
+            }
+
+            set
+            {
+                pupilSize = value;
+            }
+        }
+
+        public double EarsWidth
+        {
+            get
+            {
+                return earsWidth;
+            }
+
+            set
+            {
+                earsWidth = value;
+            }
+        }
+
+        public double TongueLength
+        {
+            get
+            {
+                return tongueLength;
+            }
+
+            set
+            {
+                tongueLength = value;
+            }
+        }
+
+        public double TongueWidth
+        {
+            get
+            {
+                return tongueWidth;
+            }
+
+            set
+            {
+                tongueWidth = value;
+            }
+        }
+
+        public double BandsWidth
+        {
+            get
+            {
+                return bandsWidth;
+            }
+
+            set
+            {
+                bandsWidth = value;
+            }
+        }
+
+        public double TeethWidth
+        {
+            get
+            {
+                return teethWidth;
+            }
+
+            set
+            {
+                teethWidth = value;
+            }
+        }
+
+        public double TorsoXMin
+        {
+            get
+            {
+                return torsoXMin;
+            }
+
+            set
+            {
+                torsoXMin = value;
+            }
+        }
+
+        public double BandsNumber
+        {
+            get
+            {
+                return bandsNumber;
+            }
+
+            set
+            {
+                bandsNumber = value;
+            }
+        }
+
+        public double TeethNumber
+        {
+            get
+            {
+                return teethNumber;
+            }
+
+            set
+            {
+                teethNumber = value;
+            }
+        }
+
+        public double LastBandXMin
+        {
+            get
+            {
+                return lastBandXMin;
+            }
+
+            set
+            {
+                lastBandXMin = value;
+            }
+        }
+
+        public double FirstBandXStart
+        {
+            get
+            {
+                return firstBandXStart;
+            }
+
+            set
+            {
+                firstBandXStart = value;
+            }
+        }
+
+        public static int BandsXOffset
+        {
+            get
+            {
+                return bandsXOffset;
+            }
+        }
+
+        public static int TeethYOffset
+        {
+            get
+            {
+                return teethYOffset;
+            }
+        }
+
+        public double TeethFirstYMax
+        {
+            get
+            {
+                return teethFirstYMax;
+            }
+
+            set
+            {
+                teethFirstYMax = value;
+            }
+        }
+
+        public double TeethFirstYMin
+        {
+            get
+            {
+                return teethFirstYMin;
+            }
+
+            set
+            {
+                teethFirstYMin = value;
+            }
+        }
+
+        public double DefaultPawsHeight
+        {
+            get
+            {
+                return defaultPawsHeight;
+            }
+
+            set
+            {
+                defaultPawsHeight = value;
+            }
+        }
+
+        public double DefaultPawsWidth
+        {
+            get
+            {
+                return defaultPawsWidth;
+            }
+
+            set
+            {
+                defaultPawsWidth = value;
+            }
+        }
+
+        public double DefaultTailLength
+        {
+            get
+            {
+                return defaultTailLength;
+            }
+
+            set
+            {
+                defaultTailLength = value;
+            }
+        }
+
+        public double DefaultTailWidth
+        {
+            get
+            {
+                return defaultTailWidth;
+            }
+
+            set
+            {
+                defaultTailWidth = value;
+            }
+        }
+
+        public double TorsoXOffset
+        {
+            get
+            {
+                return torsoXOffset;
+            }
+
+            set
+            {
+                torsoXOffset = value;
+            }
+        }
+
+        public double TorsoYOffset
+        {
+            get
+            {
+                return torsoYOffset;
+            }
+
+            set
+            {
+                torsoYOffset = value;
             }
         }
 
