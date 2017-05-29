@@ -61,7 +61,11 @@ namespace TabbyCat
 
             trTransform = new TranslationTransformation();
 
-            rtTransform = new RotationTransformation();
+            rtTransform = new RotationTransformation(
+                (double)xAngleControl.Value,
+                (double)yAngleControl.Value,
+                (double)zAngleControl.Value
+            );
 
             scTransform = new ScaleTransformation();
 
@@ -698,9 +702,9 @@ namespace TabbyCat
         {
             string str;
 
-            if (numericUpDown1.Value < (decimal)cat.HeadLength * 2 + 5 || numericUpDown1.Value > (decimal)cat.HeadLength * 10 + 10)
+            if (numericUpDown1.Value < (decimal)cat.DefaultHeadLength * 2 + 5 || numericUpDown1.Value > (decimal)cat.DefaultHeadLength * 10 + 10)
             {
-                str = string.Format("Длина тела должна лежать в диапазоне от {0} до {1}", cat.HeadLength * 2 + 5, cat.HeadLength * 10 + 10);
+                str = string.Format("Длина тела должна лежать в диапазоне от {0} до {1}", cat.DefaultHeadLength * 2 + 5, cat.DefaultHeadLength * 10 + 10);
                 numericUpDown1.Value = (decimal)cat.TorsoLength;
                 MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 isUpdated1 = true;
@@ -711,9 +715,9 @@ namespace TabbyCat
                 cat.TorsoLength = (double)numericUpDown1.Value;
             }
 
-            if (numericUpDown2.Value < (decimal)cat.HeadWidth || numericUpDown2.Value > (decimal)cat.HeadWidth * 5)
+            if (numericUpDown2.Value < (decimal)cat.DefaultHeadWidth || numericUpDown2.Value > (decimal)cat.DefaultHeadWidth * 5)
             {
-                str = string.Format("Ширина тела должна лежать в диапазоне от {0} до {1}", cat.HeadWidth, cat.HeadWidth * 5);
+                str = string.Format("Ширина тела должна лежать в диапазоне от {0} до {1}", cat.DefaultHeadWidth, cat.DefaultHeadWidth * 5);
                 numericUpDown2.Value = (decimal)cat.TorsoWidth;
                 MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 isUpdated1 = true;
@@ -724,10 +728,10 @@ namespace TabbyCat
                 cat.TorsoWidth = (double)numericUpDown2.Value;
             }
 
-            if (numericUpDown3.Value < (decimal)Math.Round(cat.TailLength / 2) || numericUpDown3.Value > (decimal)cat.TailLength * 2)
+            if (numericUpDown3.Value < (decimal)Math.Round(cat.DefaultTailLength / 2) || numericUpDown3.Value > (decimal)cat.DefaultTailLength * 2)
             {
                 str = string.Format("Длина хвоста должна лежать в диапазоне от {0} до {1}",
-                    (decimal)Math.Round(cat.TailLength / 2), (decimal)cat.TailLength * 2);
+                    (decimal)Math.Round(cat.DefaultTailLength / 2), (decimal)cat.DefaultTailLength * 2);
                 numericUpDown3.Value = (decimal)cat.TailLength;
                 MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 isUpdated1 = true;
@@ -738,10 +742,10 @@ namespace TabbyCat
                 cat.TailLength = (double)numericUpDown3.Value;
             }
 
-            if (numericUpDown4.Value < (decimal)Math.Round(cat.TailWidth / 2) || numericUpDown4.Value > (decimal)cat.TailWidth * 2)
+            if (numericUpDown4.Value < (decimal)Math.Round(cat.DefaultTailWidth / 2) || numericUpDown4.Value > (decimal)cat.DefaultTailWidth * 2)
             {
                 str = string.Format("Ширина хвоста должна лежать в диапазоне от {0} до {1}",
-                    (decimal)Math.Round(cat.TailWidth / 2), (decimal)cat.TailWidth * 2);
+                    (decimal)Math.Round(cat.DefaultTailWidth / 2), (decimal)cat.DefaultTailWidth * 2);
                 numericUpDown4.Value = (decimal)cat.TailWidth;
                 MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 isUpdated1 = true;
@@ -752,10 +756,10 @@ namespace TabbyCat
                 cat.TailWidth = (double)numericUpDown4.Value;
             }
 
-            if (numericUpDown5.Value < (decimal)cat.PawsHeight / 2 || numericUpDown5.Value > (decimal)cat.PawsHeight * 2)
+            if (numericUpDown5.Value < (decimal)cat.DefaultPawsHeight / 2 || numericUpDown5.Value > (decimal)cat.DefaultPawsHeight * 2)
             {
                 str = string.Format("Длина лап должна лежать в диапазоне от {0} до {1}",
-                    (decimal)cat.PawsHeight / 2, (decimal)cat.PawsHeight * 2);
+                    (decimal)cat.DefaultPawsHeight / 2, (decimal)cat.DefaultPawsHeight * 2);
                 numericUpDown5.Value = (decimal)cat.PawsHeight;
                 MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 isUpdated1 = true;
@@ -766,10 +770,10 @@ namespace TabbyCat
                 cat.PawsHeight = (double)numericUpDown5.Value;
             }
 
-            if (numericUpDown6.Value < (decimal)cat.PawsWidth - 2 || numericUpDown6.Value > (decimal)cat.PawsWidth * 2)
+            if (numericUpDown6.Value < (decimal)cat.DefaultPawsWidth - 2 || numericUpDown6.Value > (decimal)cat.DefaultPawsWidth * 2)
             {
                 str = string.Format("Ширина лап должна лежать в диапазоне от {0} до {1}",
-                    (decimal)cat.PawsWidth - 2, (decimal)cat.PawsWidth * 2);
+                    (decimal)cat.DefaultPawsWidth - 2, (decimal)cat.DefaultPawsWidth * 2);
                 numericUpDown6.Value = (decimal)cat.PawsWidth;
                 MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 isUpdated1 = true;
@@ -1043,15 +1047,6 @@ namespace TabbyCat
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
-            renderArea = new Bitmap(renderPictureBox.Size.Width, renderPictureBox.Size.Height);
-            renderPictureBox.Image = renderArea;
-
-            Graphics g;
-            g = Graphics.FromImage(renderArea);
-
-            // рисование фона
-            g.FillRectangle(Brushes.Black, new RectangleF(0, 0, renderArea.Width, renderArea.Height));
-
             for (int i = 0; i < cats.Count; i++)
             {
                 if (catsListBox.SelectedItem.ToString() == cats[i].Name)
@@ -1080,6 +1075,14 @@ namespace TabbyCat
                 }
             }
 
+            renderArea = new Bitmap(renderPictureBox.Size.Width, renderPictureBox.Size.Height);
+            renderPictureBox.Image = renderArea;
+
+            Graphics g;
+            g = Graphics.FromImage(renderArea);
+
+            // рисование фона
+            g.FillRectangle(Brushes.Black, new RectangleF(0, 0, renderArea.Width, renderArea.Height));
 
             matrices.Clear();
             // генерируем матрицу для каждого объекта

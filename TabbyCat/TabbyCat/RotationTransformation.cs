@@ -110,12 +110,9 @@ namespace TabbyCat
             }
         }
 
-        public RotationTransformation()
+        public RotationTransformation(double oxAngle, double oyAngle, double ozAngle)
         {
-            oxAngle = 0;
-            oyAngle = 0;
-            ozAngle = 0;
-
+            this.oxAngle = degreeToRadian(oxAngle);
             this.oxMatrix = new Matrix4(
                 new double[] {
                     1, 0, 0, 0,
@@ -124,6 +121,7 @@ namespace TabbyCat
                     0, 0, 0, 1
                 });
 
+            this.oyAngle = degreeToRadian(oyAngle);
             this.oyMatrix = new Matrix4(
                 new double[] {
                     Math.Cos(oyAngle), 0, -Math.Sin(oyAngle), 0,
@@ -132,6 +130,7 @@ namespace TabbyCat
                     0, 0, 0, 1
                 });
 
+            this.ozAngle = degreeToRadian(ozAngle);
             this.ozMatrix = new Matrix4(
                 new double[] {
                     Math.Cos(ozAngle), Math.Sin(ozAngle), 0, 0,
