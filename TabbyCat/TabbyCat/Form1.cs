@@ -784,10 +784,10 @@ namespace TabbyCat
                 cat.PawsWidth = (double)numericUpDown6.Value;
             }
 
-            if (numericUpDown7.Value < (decimal)cat.Cylinders[0].Radius - 2 || numericUpDown7.Value > (decimal)cat.Cylinders[0].Radius + 2)
+            if (numericUpDown7.Value < (decimal)cat.DefaultIrisSize - 2 || numericUpDown7.Value > (decimal)cat.DefaultIrisSize + 2)
             {
                 str = string.Format("Радиус глаз должен лежать в диапазоне от {0} до {1}",
-                    (decimal)cat.Cylinders[0].Radius - 2, (decimal)cat.Cylinders[0].Radius + 2);
+                    (decimal)cat.DefaultIrisSize - 2, (decimal)cat.DefaultIrisSize + 2);
                 numericUpDown7.Value = (decimal)cat.IrisSize;
                 MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 isUpdated1 = true;
@@ -798,10 +798,10 @@ namespace TabbyCat
                 cat.IrisSize = (double)numericUpDown7.Value;
             }
 
-            if (numericUpDown8.Value < (decimal)cat.Cylinders[4].Radius - 2 || numericUpDown8.Value > (decimal)cat.Cylinders[4].Radius + 2)
+            if (numericUpDown8.Value < (decimal)cat.DefaultPupilSize - 2 || numericUpDown8.Value > (decimal)cat.DefaultPupilSize + 2)
             {
                 str = string.Format("Радиус зрачков должен лежать в диапазоне от {0} до {1}",
-                    (decimal)cat.Cylinders[4].Radius - 2, (decimal)cat.Cylinders[4].Radius + 2);
+                    (decimal)cat.DefaultPupilSize - 2, (decimal)cat.DefaultPupilSize + 2);
                 numericUpDown8.Value = (decimal)cat.PupilSize;
                 MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 isUpdated1 = true;
@@ -819,10 +819,10 @@ namespace TabbyCat
         {
             string str;
 
-            if (numericUpDown9.Value < Math.Round((decimal)cat.HalfCylinders[0].Height / 2) || numericUpDown9.Value > (decimal)cat.HalfCylinders[0].Height * 2)
+            if (numericUpDown9.Value < Math.Round((decimal)cat.DefaultEarsWidth / 2) || numericUpDown9.Value > (decimal)cat.DefaultEarsWidth * 2)
             {
                 str = string.Format("Ширина ушей должна лежать в диапазоне от {0} до {1}",
-                    Math.Round((decimal)cat.HalfCylinders[0].Height / 2), (decimal)cat.HalfCylinders[0].Height * 2);
+                    Math.Round((decimal)cat.DefaultEarsWidth / 2), (decimal)cat.DefaultEarsWidth * 2);
                 numericUpDown9.Value = (decimal)cat.EarsWidth;
                 MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 isUpdated2 = true;
@@ -833,10 +833,10 @@ namespace TabbyCat
                 cat.EarsWidth = (double)numericUpDown9.Value;
             }
 
-            if (numericUpDown10.Value < (decimal)cat.Boxes[14].getLength() || numericUpDown10.Value > (decimal)cat.Boxes[14].getLength() + 5)
+            if (numericUpDown10.Value < (decimal)cat.DefaultTongueLength || numericUpDown10.Value > (decimal)cat.DefaultTongueLength + 5)
             {
                 str = string.Format("Длина языка должна лежать в диапазоне от {0} до {1}",
-                    (decimal)cat.Boxes[14].getLength(), (decimal)cat.Boxes[14].getLength() + 5);
+                    (decimal)cat.DefaultTongueLength, (decimal)cat.DefaultTongueLength + 5);
                 numericUpDown10.Value = (decimal)cat.TongueLength;
                 MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 isUpdated2 = true;
@@ -847,10 +847,10 @@ namespace TabbyCat
                 cat.TongueLength = (double)numericUpDown10.Value;
             }
 
-            if (numericUpDown11.Value < (decimal)cat.Boxes[14].getWidth() / 2 || numericUpDown11.Value > (decimal)cat.Boxes[14].getWidth() + 5)
+            if (numericUpDown11.Value < (decimal)cat.DefaultTongueWidth / 2 || numericUpDown11.Value > (decimal)cat.DefaultTongueWidth + 5)
             {
                 str = string.Format("Ширина языка должна лежать в диапазоне от {0} до {1}",
-                    (decimal)cat.Boxes[14].getWidth() / 2, (decimal)cat.Boxes[14].getWidth() + 5);
+                    (decimal)cat.DefaultTongueWidth / 2, (decimal)cat.DefaultTongueWidth + 5);
                 numericUpDown11.Value = (decimal)cat.TongueWidth;
                 MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 isUpdated2 = true;
@@ -861,10 +861,10 @@ namespace TabbyCat
                 cat.TongueWidth = (double)numericUpDown11.Value;
             }
 
-            if (numericUpDown12.Value < (decimal)cat.Teeth[0].getWidth() - 1 || numericUpDown12.Value > (decimal)cat.Teeth[0].getWidth() + 1)
+            if (numericUpDown12.Value < (decimal)cat.DefaultTeethWidth - 1 || numericUpDown12.Value > (decimal)cat.DefaultTeethWidth + 1)
             {
                 str = string.Format("Ширина зубов должна лежать в диапазоне от {0} до {1}",
-                    (decimal)cat.Teeth[0].getWidth() - 1, (decimal)cat.Teeth[0].getWidth() + 1);
+                    (decimal)cat.DefaultTeethWidth - 1, (decimal)cat.DefaultTeethWidth + 1);
                 numericUpDown12.Value = (decimal)cat.TeethWidth;
                 MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 isUpdated2 = true;
@@ -875,10 +875,10 @@ namespace TabbyCat
                 cat.TeethWidth = (double)numericUpDown12.Value;
             }
 
-            if (numericUpDown13.Value < Math.Round((decimal)cat.Bands[0].getLength() / 2) || numericUpDown13.Value > (decimal)cat.Bands[0].getLength() * 2)
+            if (numericUpDown13.Value < Math.Round((decimal)cat.DefaultBandsWidth / 2) || numericUpDown13.Value > (decimal)cat.DefaultBandsWidth * 2)
             {
                 str = string.Format("Толщина полос должна лежать в диапазоне от {0} до {1}",
-                    Math.Round((decimal)cat.Bands[0].getLength() / 2), (decimal)cat.Bands[0].getLength() * 2);
+                    Math.Round((decimal)cat.DefaultBandsWidth / 2), (decimal)cat.DefaultBandsWidth * 2);
                 numericUpDown13.Value = (decimal)cat.BandsWidth;
                 MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 isUpdated2 = true;
