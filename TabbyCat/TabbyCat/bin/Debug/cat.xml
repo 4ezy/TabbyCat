@@ -2,81 +2,28 @@
 <ArrayOfCat xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Cat>
     <Name>Cat0</Name>
-    <XOffset>21</XOffset>
-    <YOffset>19</YOffset>
-    <ZOffset>17</ZOffset>
-    <ScaleOffset>1.85</ScaleOffset>
-    <XAngle>31</XAngle>
-    <YAngle>24</YAngle>
-    <ZAngle>21</ZAngle>
-    <TorsoLength>90</TorsoLength>
-    <TorsoWidth>61</TorsoWidth>
-    <PawsHeight>56</PawsHeight>
-    <PawsWidth>20</PawsWidth>
-    <TailLength>71</TailLength>
-    <TailWidth>9</TailWidth>
-    <IrisSize>10</IrisSize>
-    <PupilSize>5</PupilSize>
-    <EarsWidth>13</EarsWidth>
-    <TongueLength>4</TongueLength>
-    <TongueWidth>25</TongueWidth>
-    <BandsWidth>6</BandsWidth>
-    <TeethWidth>5</TeethWidth>
-    <TorsoXMin>-15</TorsoXMin>
-    <BandsNumber>5</BandsNumber>
-    <TeethNumber>4</TeethNumber>
-    <LastBandXMin>4.5</LastBandXMin>
-    <FirstBandXStart>64.5</FirstBandXStart>
-    <TeethFirstYMax>-16.5</TeethFirstYMax>
-    <TeethFirstYMin>-11.5</TeethFirstYMin>
-    <DefaultPawsHeight>30</DefaultPawsHeight>
-    <DefaultPawsWidth>10</DefaultPawsWidth>
-    <DefaultTailLength>60</DefaultTailLength>
-    <DefaultTailWidth>6</DefaultTailWidth>
-    <DefaultHeadLength>25</DefaultHeadLength>
-    <DefaultHeadWidth>50</DefaultHeadWidth>
-    <DefaultTorsoLength>80</DefaultTorsoLength>
-    <DefaultTorsoWidth>50</DefaultTorsoWidth>
-    <DefaultIrisSize>8</DefaultIrisSize>
-    <DefaultPupilSize>3</DefaultPupilSize>
-    <DefaultPupilSize1>3</DefaultPupilSize1>
-    <DefaultEarsWidth>10</DefaultEarsWidth>
-    <DefaultTongueLength>1</DefaultTongueLength>
-    <DefaultTongueWidth>22</DefaultTongueWidth>
-    <DefaultBandsWidth>5</DefaultBandsWidth>
-    <DefaultTeethWidth>4</DefaultTeethWidth>
-    <TorsoXOffset>5</TorsoXOffset>
-    <TorsoYOffset>5.5</TorsoYOffset>
-  </Cat>
-  <Cat>
-    <Name>Cat1</Name>
-    <XOffset>6</XOffset>
+    <XOffset>50</XOffset>
     <YOffset>100</YOffset>
     <ZOffset>0</ZOffset>
     <ScaleOffset>1</ScaleOffset>
-    <XAngle>0</XAngle>
-    <YAngle>0</YAngle>
+    <XAngle>20</XAngle>
+    <YAngle>-41</YAngle>
     <ZAngle>0</ZAngle>
-    <TorsoLength>80</TorsoLength>
-    <TorsoWidth>50</TorsoWidth>
-    <PawsHeight>30</PawsHeight>
-    <PawsWidth>10</PawsWidth>
-    <TailLength>60</TailLength>
-    <TailWidth>6</TailWidth>
-    <IrisSize>8</IrisSize>
-    <PupilSize>3</PupilSize>
+    <TorsoLength>150</TorsoLength>
+    <TorsoWidth>61</TorsoWidth>
+    <PawsHeight>47</PawsHeight>
+    <PawsWidth>17</PawsWidth>
+    <TailLength>76</TailLength>
+    <TailWidth>12</TailWidth>
+    <IrisSize>9</IrisSize>
+    <PupilSize>4</PupilSize>
     <EarsWidth>10</EarsWidth>
-    <TongueLength>1</TongueLength>
+    <TongueLength>5</TongueLength>
     <TongueWidth>22</TongueWidth>
     <BandsWidth>5</BandsWidth>
-    <TeethWidth>4</TeethWidth>
-    <TorsoXMin>-10</TorsoXMin>
+    <TeethWidth>5</TeethWidth>
     <BandsNumber>2</BandsNumber>
     <TeethNumber>2</TeethNumber>
-    <LastBandXMin>45</LastBandXMin>
-    <FirstBandXStart>60</FirstBandXStart>
-    <TeethFirstYMax>-10</TeethFirstYMax>
-    <TeethFirstYMin>-6</TeethFirstYMin>
     <DefaultPawsHeight>30</DefaultPawsHeight>
     <DefaultPawsWidth>10</DefaultPawsWidth>
     <DefaultTailLength>60</DefaultTailLength>
@@ -87,13 +34,10 @@
     <DefaultTorsoWidth>50</DefaultTorsoWidth>
     <DefaultIrisSize>8</DefaultIrisSize>
     <DefaultPupilSize>3</DefaultPupilSize>
-    <DefaultPupilSize1>3</DefaultPupilSize1>
     <DefaultEarsWidth>10</DefaultEarsWidth>
     <DefaultTongueLength>1</DefaultTongueLength>
     <DefaultTongueWidth>22</DefaultTongueWidth>
     <DefaultBandsWidth>5</DefaultBandsWidth>
     <DefaultTeethWidth>4</DefaultTeethWidth>
-    <TorsoXOffset>0</TorsoXOffset>
-    <TorsoYOffset>0</TorsoYOffset>
   </Cat>
 </ArrayOfCat>

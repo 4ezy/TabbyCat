@@ -192,8 +192,6 @@ namespace TabbyCat
 
         private void drawTriangles(List<Triangle> tris, Matrix4 transform, double[] zBuffer)
         {
-            double near = 0;
-
             foreach (Triangle t in tris)
             {
                 Vertex v1 = transform.transform(t.V1);
@@ -1207,9 +1205,6 @@ namespace TabbyCat
             catsListBox.Items.Clear();
             cats = (List<Cat>)serializer.Deserialize(reader);
             fs.Close();
-            
-            // по-хорошему тут нужно пропарсить имена, чтобы узнать, какой номер последний
-            catNameNumber = cats.Count;
             
             foreach (Cat cat in cats)
             {

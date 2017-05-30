@@ -52,6 +52,9 @@ namespace TabbyCat
         double defaultBandsWidth;
         double defaultTeethWidth;
 
+        double bandsNumber;
+        double teethNumber;
+
         double torsoLength;
         double torsoWidth;
         double pawsHeight;
@@ -71,9 +74,6 @@ namespace TabbyCat
         double firstBandXStart;
         double teethFirstYMax;
         double teethFirstYMin;
-
-        double bandsNumber;
-        double teethNumber;
 
         public Cat()
         {
@@ -474,6 +474,7 @@ namespace TabbyCat
             }
         }
 
+        [XmlIgnore]
         public double TorsoXMin
         {
             get
@@ -510,74 +511,6 @@ namespace TabbyCat
             set
             {
                 teethNumber = value;
-            }
-        }
-
-        public double LastBandXMin
-        {
-            get
-            {
-                return lastBandXMin;
-            }
-
-            set
-            {
-                lastBandXMin = value;
-            }
-        }
-
-        public double FirstBandXStart
-        {
-            get
-            {
-                return firstBandXStart;
-            }
-
-            set
-            {
-                firstBandXStart = value;
-            }
-        }
-
-        public static int BandsXOffset
-        {
-            get
-            {
-                return bandsXOffset;
-            }
-        }
-
-        public static int TeethYOffset
-        {
-            get
-            {
-                return teethYOffset;
-            }
-        }
-
-        public double TeethFirstYMax
-        {
-            get
-            {
-                return teethFirstYMax;
-            }
-
-            set
-            {
-                teethFirstYMax = value;
-            }
-        }
-
-        public double TeethFirstYMin
-        {
-            get
-            {
-                return teethFirstYMin;
-            }
-
-            set
-            {
-                teethFirstYMin = value;
             }
         }
 
@@ -702,19 +635,6 @@ namespace TabbyCat
         {
             get
             {
-                return DefaultPupilSize1;
-            }
-
-            set
-            {
-                DefaultPupilSize1 = value;
-            }
-        }
-
-        public double DefaultPupilSize1
-        {
-            get
-            {
                 return defaultPupilSize;
             }
 
@@ -789,6 +709,80 @@ namespace TabbyCat
             }
         }
 
+        [XmlIgnore]
+        public double LastBandXMin
+        {
+            get
+            {
+                return lastBandXMin;
+            }
+
+            set
+            {
+                lastBandXMin = value;
+            }
+        }
+
+        [XmlIgnore]
+        public double FirstBandXStart
+        {
+            get
+            {
+                return firstBandXStart;
+            }
+
+            set
+            {
+                firstBandXStart = value;
+            }
+        }
+
+        [XmlIgnore]
+        public static int BandsXOffset
+        {
+            get
+            {
+                return bandsXOffset;
+            }
+        }
+
+        public static int TeethYOffset
+        {
+            get
+            {
+                return teethYOffset;
+            }
+        }
+
+        [XmlIgnore]
+        public double TeethFirstYMax
+        {
+            get
+            {
+                return teethFirstYMax;
+            }
+
+            set
+            {
+                teethFirstYMax = value;
+            }
+        }
+
+        [XmlIgnore]
+        public double TeethFirstYMin
+        {
+            get
+            {
+                return teethFirstYMin;
+            }
+
+            set
+            {
+                teethFirstYMin = value;
+            }
+        }
+
+        [XmlIgnore]
         public double TorsoXOffset
         {
             get
@@ -802,6 +796,7 @@ namespace TabbyCat
             }
         }
 
+        [XmlIgnore]
         public double TorsoYOffset
         {
             get
