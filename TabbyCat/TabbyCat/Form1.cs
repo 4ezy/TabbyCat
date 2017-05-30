@@ -623,7 +623,7 @@ namespace TabbyCat
                     }
                     else
                     {
-                        for (int i = (teeth.Count - 1); i < (int)teethNumberControl.Value - 1; i++)
+                        for (int i = (teeth.Count - 1); i < cats[catCounter].TeethNumber - 1; i++)
                         {
                             if (i == 0)
                             {
@@ -653,7 +653,7 @@ namespace TabbyCat
 
             foreach (Box b in teeth)
             {
-                double yOffset = ((double)teethWidthControl.Value - b.getWidth()) / 2;
+                double yOffset = (cats[catCounter].TeethWidth - b.getWidth()) / 2;
 
                 double x0 = 0;
                 double y0 = 0;
@@ -715,9 +715,9 @@ namespace TabbyCat
                 cat.TorsoLength = (double)numericUpDown1.Value;
             }
 
-            if (numericUpDown2.Value < (decimal)cat.DefaultHeadWidth || numericUpDown2.Value > (decimal)cat.DefaultHeadWidth * 5)
+            if (numericUpDown2.Value < (decimal)cat.DefaultHeadWidth || numericUpDown2.Value > (decimal)cat.DefaultHeadWidth * 3)
             {
-                str = string.Format("Ширина тела должна лежать в диапазоне от {0} до {1}", cat.DefaultHeadWidth, cat.DefaultHeadWidth * 5);
+                str = string.Format("Ширина тела должна лежать в диапазоне от {0} до {1}", cat.DefaultHeadWidth, cat.DefaultHeadWidth * 3);
                 numericUpDown2.Value = (decimal)cat.TorsoWidth;
                 MessageBox.Show(str, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 isUpdated1 = true;
@@ -1217,12 +1217,11 @@ namespace TabbyCat
             }
             if (catsListBox.SelectedIndex == 0)
             {
-                if (catsListBox.Items.Count > 0)
+                if (catsListBox.Items.Count > 1)
                 {
                     catsListBox.SelectedIndex = 1;
                     catsListBox.Items.RemoveAt(0);
                     cats.RemoveAt(0);
-                    setControls(cats[catsListBox.SelectedIndex]);
                 }
                 else
                 {
