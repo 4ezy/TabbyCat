@@ -1203,6 +1203,8 @@ namespace TabbyCat
             XmlSerializer serializer = new XmlSerializer(typeof(List<Cat>));
             FileStream fs = new FileStream("cat.xml", FileMode.Open);
             XmlReader reader = XmlReader.Create(fs);
+            cats.Clear();
+            catsListBox.Items.Clear();
             cats = (List<Cat>)serializer.Deserialize(reader);
             fs.Close();
             
@@ -1228,11 +1230,6 @@ namespace TabbyCat
         private void button2_Click(object sender, EventArgs e)
         {
             deserialzeObjects();
-        }
-
-        private void numericUpDown3_ValueChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

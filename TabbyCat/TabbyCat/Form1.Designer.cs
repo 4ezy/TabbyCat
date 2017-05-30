@@ -716,7 +716,6 @@
             this.tailLengthControl.Name = "tailLengthControl";
             this.tailLengthControl.Size = new System.Drawing.Size(177, 20);
             this.tailLengthControl.TabIndex = 4;
-            this.tailLengthControl.ValueChanged += new System.EventHandler(this.numericUpDown3_ValueChanged);
             // 
             // label11
             // 
