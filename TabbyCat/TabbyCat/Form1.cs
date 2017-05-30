@@ -33,6 +33,7 @@ namespace TabbyCat
         bool isUpdated1 = false;
         bool isUpdated2 = false;
         bool isUpdated3 = false;
+        bool firstTimeAfterDeserialization = false;
 
         public tabbyCatRenderForm()
         {
@@ -1040,27 +1041,34 @@ namespace TabbyCat
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
-            for (int i = 0; i < cats.Count; i++)
+            if (firstTimeAfterDeserialization == false)
             {
-                if (catsListBox.SelectedIndex == lastSelectedListBoxIndex)
+                for (int i = 0; i < cats.Count; i++)
                 {
-                    if (isUpdated1 == false)
-                        checkControlValues1(cats[catsListBox.SelectedIndex]);
+                    if (catsListBox.SelectedIndex == lastSelectedListBoxIndex)
+                    {
+                        if (isUpdated1 == false)
+                            checkControlValues1(cats[catsListBox.SelectedIndex]);
 
-                    if (isUpdated2 == false)
-                        checkControlValues2(cats[catsListBox.SelectedIndex]);
+                        if (isUpdated2 == false)
+                            checkControlValues2(cats[catsListBox.SelectedIndex]);
 
-                    if (isUpdated3 == false)
-                        checkControlValues3(cats[catsListBox.SelectedIndex]);
+                        if (isUpdated3 == false)
+                            checkControlValues3(cats[catsListBox.SelectedIndex]);
 
-                    cats[catsListBox.SelectedIndex].XOffset = xOffsetControl.Value;
-                    cats[catsListBox.SelectedIndex].YOffset = yOffsetControl.Value;
-                    cats[catsListBox.SelectedIndex].ZOffset = zOffsetControl.Value;
-                    cats[catsListBox.SelectedIndex].XAngle = xAngleControl.Value;
-                    cats[catsListBox.SelectedIndex].YAngle = yAngleControl.Value;
-                    cats[catsListBox.SelectedIndex].ZAngle = zAngleControl.Value;
-                    cats[catsListBox.SelectedIndex].ScaleOffset = scaleControl.Value;
+                        cats[catsListBox.SelectedIndex].XOffset = xOffsetControl.Value;
+                        cats[catsListBox.SelectedIndex].YOffset = yOffsetControl.Value;
+                        cats[catsListBox.SelectedIndex].ZOffset = zOffsetControl.Value;
+                        cats[catsListBox.SelectedIndex].XAngle = xAngleControl.Value;
+                        cats[catsListBox.SelectedIndex].YAngle = yAngleControl.Value;
+                        cats[catsListBox.SelectedIndex].ZAngle = zAngleControl.Value;
+                        cats[catsListBox.SelectedIndex].ScaleOffset = scaleControl.Value;
+                    }
                 }
+            }
+            else
+            {
+                firstTimeAfterDeserialization = false;
             }
 
             renderArea = new Bitmap(renderPictureBox.Size.Width, renderPictureBox.Size.Height);
@@ -1225,6 +1233,7 @@ namespace TabbyCat
         private void button2_Click(object sender, EventArgs e)
         {
             deserialzeObjects();
+            firstTimeAfterDeserialization = true;
         }
     }
 }

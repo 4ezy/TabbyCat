@@ -22,22 +22,7 @@
     <TongueWidth>22</TongueWidth>
     <BandsWidth>5</BandsWidth>
     <TeethWidth>5</TeethWidth>
-    <BandsNumber>2</BandsNumber>
-    <TeethNumber>2</TeethNumber>
-    <DefaultPawsHeight>30</DefaultPawsHeight>
-    <DefaultPawsWidth>10</DefaultPawsWidth>
-    <DefaultTailLength>60</DefaultTailLength>
-    <DefaultTailWidth>6</DefaultTailWidth>
-    <DefaultHeadLength>25</DefaultHeadLength>
-    <DefaultHeadWidth>50</DefaultHeadWidth>
-    <DefaultTorsoLength>80</DefaultTorsoLength>
-    <DefaultTorsoWidth>50</DefaultTorsoWidth>
-    <DefaultIrisSize>8</DefaultIrisSize>
-    <DefaultPupilSize>3</DefaultPupilSize>
-    <DefaultEarsWidth>10</DefaultEarsWidth>
-    <DefaultTongueLength>1</DefaultTongueLength>
-    <DefaultTongueWidth>22</DefaultTongueWidth>
-    <DefaultBandsWidth>5</DefaultBandsWidth>
-    <DefaultTeethWidth>4</DefaultTeethWidth>
+    <BandsNumber>9</BandsNumber>
+    <TeethNumber>4</TeethNumber>
   </Cat>
 </ArrayOfCat>

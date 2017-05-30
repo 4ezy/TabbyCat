@@ -514,6 +514,7 @@ namespace TabbyCat
             }
         }
 
+        [XmlIgnore]
         public double DefaultPawsHeight
         {
             get
@@ -527,6 +528,7 @@ namespace TabbyCat
             }
         }
 
+        [XmlIgnore]
         public double DefaultPawsWidth
         {
             get
@@ -540,6 +542,7 @@ namespace TabbyCat
             }
         }
 
+        [XmlIgnore]
         public double DefaultTailLength
         {
             get
@@ -553,6 +556,7 @@ namespace TabbyCat
             }
         }
 
+        [XmlIgnore]
         public double DefaultTailWidth
         {
             get
@@ -566,6 +570,7 @@ namespace TabbyCat
             }
         }
 
+        [XmlIgnore]
         public double DefaultHeadLength
         {
             get
@@ -579,6 +584,7 @@ namespace TabbyCat
             }
         }
 
+        [XmlIgnore]
         public double DefaultHeadWidth
         {
             get
@@ -592,6 +598,7 @@ namespace TabbyCat
             }
         }
 
+        [XmlIgnore]
         public double DefaultTorsoLength
         {
             get
@@ -605,6 +612,7 @@ namespace TabbyCat
             }
         }
 
+        [XmlIgnore]
         public double DefaultTorsoWidth
         {
             get
@@ -618,6 +626,7 @@ namespace TabbyCat
             }
         }
 
+        [XmlIgnore]
         public double DefaultIrisSize
         {
             get
@@ -631,6 +640,7 @@ namespace TabbyCat
             }
         }
 
+        [XmlIgnore]
         public double DefaultPupilSize
         {
             get
@@ -644,6 +654,7 @@ namespace TabbyCat
             }
         }
 
+        [XmlIgnore]
         public double DefaultEarsWidth
         {
             get
@@ -657,6 +668,7 @@ namespace TabbyCat
             }
         }
 
+        [XmlIgnore]
         public double DefaultTongueLength
         {
             get
@@ -670,6 +682,7 @@ namespace TabbyCat
             }
         }
 
+        [XmlIgnore]
         public double DefaultTongueWidth
         {
             get
@@ -683,6 +696,7 @@ namespace TabbyCat
             }
         }
 
+        [XmlIgnore]
         public double DefaultBandsWidth
         {
             get
@@ -696,6 +710,7 @@ namespace TabbyCat
             }
         }
 
+        [XmlIgnore]
         public double DefaultTeethWidth
         {
             get
@@ -746,6 +761,7 @@ namespace TabbyCat
             }
         }
 
+        [XmlIgnore]
         public static int TeethYOffset
         {
             get
@@ -898,23 +914,6 @@ namespace TabbyCat
             boxes.Add(new Box(new Vertex(96, -6, 50), new Vertex(97, -10, 47), color));
 
             return boxes;
-        }
-
-        public void serialize(string fileName, TextWriter writer)
-        {
-            
-        }
-
-        public static Cat deserialize(string filename)
-        {
-            XmlSerializer serializer = new XmlSerializer(typeof(Cat));
-            FileStream fs = new FileStream(filename, FileMode.Open);
-            XmlReader reader = XmlReader.Create(fs);
-            Cat cat;
-            cat = (Cat)serializer.Deserialize(reader);
-            fs.Close();
-
-            return cat;
         }
     }
 }
