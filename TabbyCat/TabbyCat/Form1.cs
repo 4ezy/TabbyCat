@@ -215,34 +215,44 @@ namespace TabbyCat
                 Vertex v2 = transform.transform(t.V2);
                 Vertex v3 = transform.transform(t.V3);
 
-                //if (radioButton2.Checked)
-                //{
-                //    double f = 10;
-                //    double n = 2;
-                //    double d = 8;
+                if (radioButton2.Checked)
+                {
+                    double d = 1;
+                    double a = (1000 + d) / (1000 - d);
+                    double b = -2 * 1000 * d / (1000 - d);
+                    d = -renderArea.Width / 2 * Math.Tan(RotationTransformation.degreeToRadian(45));
+                    double z = v1.Z == 0 ? -0.1 : v1.Z;
+                    v1.X = d * v1.X / z;
+                    v1.Y = d * v1.Y / z;
+                    v1.Z = (a * (v1.Z) + b) / z;
 
-                //    double a = (f + n) / (f - n);
-                //    double b = (-2 * f * n) / (f - n);
+                    z = v2.Z == 0 ? -0.1 : v2.Z;
+                    v2.X = d * v2.X / z;
+                    v2.Y = d * v2.Y / z;
+                    v2.Z = (a * (v2.Z) + b) / z;
 
-                //    v1.X = v1.X * (d / v1.Z);
-                //    v1.Y = v1.Y * (d / v1.Z);
-                //    v1.Z = (a * v1.Z + b) / v1.Z;
+                    z = v3.Z == 0 ? -0.1 : v3.Z;
+                    v3.X = d * v3.X / z;
+                    v3.Y = d * v3.Y / z;
+                    v3.Z = (a * (v3.Z) + b) / z;
 
-                //    v2.X = v2.X * (d / v2.Z);
-                //    v2.Y = v2.Y * (d / v2.Z);
-                //    v2.Z = (a * v2.Z + b) / v2.Z;
-
-                //    v3.X = v3.X * (d / v3.Z);
-                //    v3.Y = v3.Y * (d / v3.Z);
-                //    v3.Z = (a * v3.Z + b) / v3.Z;
-                //}
-
-                v1.X += renderArea.Width / 2;
-                v1.Y += renderArea.Height / 2;
-                v2.X += renderArea.Width / 2;
-                v2.Y += renderArea.Height / 2;
-                v3.X += renderArea.Width / 2;
-                v3.Y += renderArea.Height / 2;
+                    d = 1;
+                    v1.X += renderArea.Width / 2 + v1.X * d / (v1.Z + d);
+                    v1.Y += renderArea.Height / 2 + v1.Y * d / (v1.Z + d);
+                    v2.X += renderArea.Width / 2 + v2.X * d / (v2.Z + d);
+                    v2.Y += renderArea.Height / 2 + v2.Y * d / (v2.Z + d);
+                    v3.X += renderArea.Width / 2 + v3.X * d / (v3.Z + d);
+                    v3.Y += renderArea.Height / 2 + v3.Y * d / (v3.Z + d);
+                }
+                else
+                {
+                    v1.X += renderArea.Width / 2;
+                    v1.Y += renderArea.Height / 2;
+                    v2.X += renderArea.Width / 2;
+                    v2.Y += renderArea.Height / 2;
+                    v3.X += renderArea.Width / 2;
+                    v3.Y += renderArea.Height / 2;
+                }
 
                 if (wireFrameRadioButton.Checked)
                 {
@@ -1049,29 +1059,24 @@ namespace TabbyCat
         {
             for (int i = 0; i < cats.Count; i++)
             {
-                if (catsListBox.SelectedItem.ToString() == cats[i].Name)
+                if (catsListBox.SelectedIndex == lastSelectedListBoxIndex)
                 {
-                    // устанавливаем количественные и качественные параметры
                     if (isUpdated1 == false)
-                        checkControlValues1(cats[i]);
+                        checkControlValues1(cats[catsListBox.SelectedIndex]);
 
                     if (isUpdated2 == false)
-                        checkControlValues2(cats[i]);
+                        checkControlValues2(cats[catsListBox.SelectedIndex]);
 
                     if (isUpdated3 == false)
-                        checkControlValues3(cats[i]);
+                        checkControlValues3(cats[catsListBox.SelectedIndex]);
 
-                    // устанавливаем сдвиги
-                    if (lastSelectedListBoxIndex == i)
-                    {
-                        cats[i].XOffset = xOffsetControl.Value;
-                        cats[i].YOffset = yOffsetControl.Value;
-                        cats[i].ZOffset = zOffsetControl.Value;
-                        cats[i].XAngle = xAngleControl.Value;
-                        cats[i].YAngle = yAngleControl.Value;
-                        cats[i].ZAngle = zAngleControl.Value;
-                        cats[i].ScaleOffset = scaleControl.Value;
-                    }
+                    cats[catsListBox.SelectedIndex].XOffset = xOffsetControl.Value;
+                    cats[catsListBox.SelectedIndex].YOffset = yOffsetControl.Value;
+                    cats[catsListBox.SelectedIndex].ZOffset = zOffsetControl.Value;
+                    cats[catsListBox.SelectedIndex].XAngle = xAngleControl.Value;
+                    cats[catsListBox.SelectedIndex].YAngle = yAngleControl.Value;
+                    cats[catsListBox.SelectedIndex].ZAngle = zAngleControl.Value;
+                    cats[catsListBox.SelectedIndex].ScaleOffset = scaleControl.Value;
                 }
             }
 
@@ -1091,8 +1096,16 @@ namespace TabbyCat
                 trTransform.setOffsets(cat.XOffset, cat.YOffset, cat.ZOffset);
                 scTransform.ScaleOffset = (double)cat.ScaleOffset;
                 rtTransform.setAngles(cat.XAngle, cat.YAngle, cat.ZAngle);
-                viewTrTransform.setOffsets(cameraXPositionControl.Value, cameraYPositionControl.Value, cameraZPositionControl.Value);
                 viewRtTransform.setAngles(cameraXAngleControl.Value, cameraYAngleControl.Value, cameraZAngleControl.Value);
+
+                if (radioButton2.Checked)
+                {
+                    viewTrTransform.setOffsets(cameraXPositionControl.Value, cameraYPositionControl.Value, cameraZPositionControl.Value + 200);
+                }
+                else
+                {
+                    viewTrTransform.setOffsets(cameraXPositionControl.Value, cameraYPositionControl.Value, cameraZPositionControl.Value);
+                }
 
                 Matrix4 transformMatrix = rtTransform.OxMatrix.multiply(rtTransform.OyMatrix);
                 transformMatrix = transformMatrix.multiply(rtTransform.OzMatrix);
@@ -1213,9 +1226,9 @@ namespace TabbyCat
                 catsListBox.SelectedIndex = catsListBox.SelectedIndex - 1;
                 catsListBox.Items.RemoveAt(catsListBox.SelectedIndex + 1);
                 cats.RemoveAt(catsListBox.SelectedIndex + 1);
-                setControls(cats[catsListBox.SelectedIndex]);
+                //setControls(cats[catsListBox.SelectedIndex]);
             }
-            if (catsListBox.SelectedIndex == 0)
+            else
             {
                 if (catsListBox.Items.Count > 1)
                 {
