@@ -5,10 +5,13 @@ using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace TabbyCat
 {
@@ -209,6 +212,8 @@ namespace TabbyCat
 
         private void drawTriangles(List<Triangle> tris, Matrix4 transform, double[] zBuffer)
         {
+            double near = 0;
+
             foreach (Triangle t in tris)
             {
                 Vertex v1 = transform.transform(t.V1);
@@ -1100,7 +1105,7 @@ namespace TabbyCat
 
                 if (radioButton2.Checked)
                 {
-                    viewTrTransform.setOffsets(cameraXPositionControl.Value, cameraYPositionControl.Value, cameraZPositionControl.Value + 200);
+                    viewTrTransform.setOffsets(cameraXPositionControl.Value, cameraYPositionControl.Value, cameraZPositionControl.Value + 300);
                 }
                 else
                 {
@@ -1121,48 +1126,6 @@ namespace TabbyCat
 
                 matrices.Add(transformMatrix);
             }
-
-            //if (radioButton2.Checked)
-            //{
-            //    double d = -10;
-
-            //    double[] matrix =
-            //    {
-            //        1, 0, 0, 0,
-            //        0, 1, 0, 0,
-            //        0, 0, 1, 1 / d,
-            //        0, 0, 0, 0
-            //    };
-
-            //    double f = 100;
-            //    double n = 1;
-
-            //    double[] matrix =
-            //    {
-            //        1, 0, 0, 0,
-            //        0, 1, 0, 0,
-            //        0, 0, (f + n) / (f - n), 1,
-            //        0, 0, (-2 * f * n) / (f - n), 0
-            //    };
-
-            //    double ar = renderArea.Width / renderArea.Height;
-            //    double zNear = 2;
-            //    double zFar = 10;
-            //    double zRange = zNear - zFar;
-            //    double tanHalfFOV = Math.Tan(RotationTransformation.degreeToRadian(90 / 2.0));
-
-            //    double[] matrix =
-            //    {
-            //            1.0 / (tanHalfFOV * ar), 0.0, 0.0, 0.0,
-            //            0.0, 1.0 / tanHalfFOV, 0.0, 0.0,
-            //            0.0, 0.0, (-zNear - zFar) / zRange, 2.0 * zFar * zNear / zRange,
-            //            0.0, 0.0, 1.0, 0.0
-            //        };
-
-            //    Matrix4 perspective = new Matrix4(matrix);
-
-            //    transformMatrix = transformMatrix.multiply(perspective);
-            //}
 
             // инициализация заполнение z-буфера
             double[] zBuffer = new double[renderArea.Width * renderArea.Height];
@@ -1226,7 +1189,6 @@ namespace TabbyCat
                 catsListBox.SelectedIndex = catsListBox.SelectedIndex - 1;
                 catsListBox.Items.RemoveAt(catsListBox.SelectedIndex + 1);
                 cats.RemoveAt(catsListBox.SelectedIndex + 1);
-                //setControls(cats[catsListBox.SelectedIndex]);
             }
             else
             {
@@ -1243,6 +1205,49 @@ namespace TabbyCat
                     cats.RemoveAt(0);
                 }
             }
+        }
+
+        private void serializeObjects()
+        {
+            TextWriter writer = new StreamWriter(("cat.xml"));
+
+            XmlSerializer ser = new XmlSerializer(typeof(List<Cat>));
+
+            ser.Serialize(writer, cats);
+
+            writer.Close();
+        }
+
+        private void deserialzeObjects()
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(List<Cat>));
+            FileStream fs = new FileStream("cat.xml", FileMode.Open);
+            XmlReader reader = XmlReader.Create(fs);
+            cats = (List<Cat>)serializer.Deserialize(reader);
+            fs.Close();
+            
+            // по-хорошему тут нужно пропарсить имена, чтобы узнать, какой номер последний
+            catNameNumber = cats.Count;
+            
+            foreach (Cat cat in cats)
+            {
+                catsListBox.Items.Add(cat.Name);
+            }
+
+            if (cats.Count != 0)
+            {
+                catsListBox.SelectedItem = catsListBox.Items[0];
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            serializeObjects();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            deserialzeObjects();
         }
     }
 }

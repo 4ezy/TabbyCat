@@ -15,7 +15,7 @@ namespace TabbyCat
 
         Color color;
 
-        public Vertex V1
+        internal Vertex V1
         {
             get
             {
@@ -28,7 +28,7 @@ namespace TabbyCat
             }
         }
 
-        public Vertex V2
+        internal Vertex V2
         {
             get
             {
@@ -41,7 +41,7 @@ namespace TabbyCat
             }
         }
 
-        public Vertex V3
+        internal Vertex V3
         {
             get
             {

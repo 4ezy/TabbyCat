@@ -57,8 +57,12 @@
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.catsListBox = new System.Windows.Forms.ListBox();
             this.deleteCatButton = new System.Windows.Forms.Button();
             this.addCatButton = new System.Windows.Forms.Button();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.tailGroupBox = new System.Windows.Forms.GroupBox();
@@ -143,7 +147,6 @@
             this.label22 = new System.Windows.Forms.Label();
             this.quantityAcceptButton = new System.Windows.Forms.Button();
             this.renderPictureBox = new System.Windows.Forms.PictureBox();
-            this.catsListBox = new System.Windows.Forms.ListBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage5.SuspendLayout();
@@ -163,6 +166,7 @@
             this.tabPage6.SuspendLayout();
             this.tableLayoutPanel8.SuspendLayout();
             this.groupBox5.SuspendLayout();
+            this.groupBox6.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.tailGroupBox.SuspendLayout();
@@ -328,13 +332,13 @@
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(92, 17);
             this.radioButton2.TabIndex = 1;
-            this.radioButton2.TabStop = true;
             this.radioButton2.Text = "Центральное";
             this.radioButton2.UseVisualStyleBackColor = true;
             // 
             // radioButton1
             // 
             this.radioButton1.AutoSize = true;
+            this.radioButton1.Checked = true;
             this.radioButton1.Location = new System.Drawing.Point(6, 19);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(99, 17);
@@ -581,6 +585,7 @@
             this.tableLayoutPanel8.ColumnCount = 1;
             this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel8.Controls.Add(this.groupBox5, 0, 0);
+            this.tableLayoutPanel8.Controls.Add(this.groupBox6, 0, 1);
             this.tableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel8.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel8.Name = "tableLayoutPanel8";
@@ -602,6 +607,15 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Объект";
             // 
+            // catsListBox
+            // 
+            this.catsListBox.FormattingEnabled = true;
+            this.catsListBox.Location = new System.Drawing.Point(6, 19);
+            this.catsListBox.Name = "catsListBox";
+            this.catsListBox.Size = new System.Drawing.Size(180, 160);
+            this.catsListBox.TabIndex = 3;
+            this.catsListBox.SelectedIndexChanged += new System.EventHandler(this.catsListBox_SelectedIndexChanged);
+            // 
             // deleteCatButton
             // 
             this.deleteCatButton.Location = new System.Drawing.Point(106, 189);
@@ -621,6 +635,37 @@
             this.addCatButton.Text = "Добавить";
             this.addCatButton.UseVisualStyleBackColor = true;
             this.addCatButton.Click += new System.EventHandler(this.addCatButton_Click);
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.button2);
+            this.groupBox6.Controls.Add(this.button1);
+            this.groupBox6.Location = new System.Drawing.Point(3, 234);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(192, 58);
+            this.groupBox6.TabIndex = 1;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Сцена";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(106, 19);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(80, 23);
+            this.button2.TabIndex = 1;
+            this.button2.Text = "Загрузить";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(6, 19);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(80, 23);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "Сохранить";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // tabPage2
             // 
@@ -1838,15 +1883,6 @@
             this.renderPictureBox.TabStop = false;
             this.renderPictureBox.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
             // 
-            // catsListBox
-            // 
-            this.catsListBox.FormattingEnabled = true;
-            this.catsListBox.Location = new System.Drawing.Point(6, 19);
-            this.catsListBox.Name = "catsListBox";
-            this.catsListBox.Size = new System.Drawing.Size(180, 160);
-            this.catsListBox.TabIndex = 3;
-            this.catsListBox.SelectedIndexChanged += new System.EventHandler(this.catsListBox_SelectedIndexChanged);
-            // 
             // tabbyCatRenderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1880,6 +1916,7 @@
             this.tabPage6.ResumeLayout(false);
             this.tableLayoutPanel8.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
+            this.groupBox6.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tailGroupBox.ResumeLayout(false);
@@ -2073,6 +2110,9 @@
         private System.Windows.Forms.Button deleteCatButton;
         private System.Windows.Forms.Button addCatButton;
         private System.Windows.Forms.ListBox catsListBox;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button1;
     }
 }
 

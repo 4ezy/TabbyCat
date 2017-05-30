@@ -1,14 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace TabbyCat
 {
-    class Cat
+    [Serializable]
+    public class Cat
     {
+        string name;
+
         List<Box> boxes = new List<Box>();
         List<Cylinder> cylinders = new List<Cylinder>();
         List<HalfCylinder> halfCylinders = new List<HalfCylinder>();
@@ -69,9 +75,6 @@ namespace TabbyCat
         double bandsNumber;
         double teethNumber;
 
-        bool isChecked;
-        string name;
-
         public Cat()
         {
             boxes = boxesDrafting(Color.Orange);
@@ -131,6 +134,19 @@ namespace TabbyCat
 
             TorsoXOffset = 0;
             TorsoYOffset = 0;
+        }
+
+        public string Name
+        {
+            get
+            {
+                return name;
+            }
+
+            set
+            {
+                name = value;
+            }
         }
 
         internal List<Box> Boxes
@@ -195,32 +211,6 @@ namespace TabbyCat
             set
             {
                 teeth = value;
-            }
-        }
-
-        public string Name
-        {
-            get
-            {
-                return name;
-            }
-
-            set
-            {
-                name = value;
-            }
-        }
-
-        public bool IsChecked
-        {
-            get
-            {
-                return isChecked;
-            }
-
-            set
-            {
-                isChecked = value;
             }
         }
 
@@ -913,6 +903,23 @@ namespace TabbyCat
             boxes.Add(new Box(new Vertex(96, -6, 50), new Vertex(97, -10, 47), color));
 
             return boxes;
+        }
+
+        public void serialize(string fileName, TextWriter writer)
+        {
+            
+        }
+
+        public static Cat deserialize(string filename)
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(Cat));
+            FileStream fs = new FileStream(filename, FileMode.Open);
+            XmlReader reader = XmlReader.Create(fs);
+            Cat cat;
+            cat = (Cat)serializer.Deserialize(reader);
+            fs.Close();
+
+            return cat;
         }
     }
 }

@@ -67,17 +67,5 @@ namespace TabbyCat
                 return one;
             }
         }
-
-        public static Vertex operator -(Vertex left, Vertex right)
-        {
-            return new Vertex(left.X - right.X, left.Y - right.Y, left.Z - right.Z);
-        }
-
-        public double Length()
-        {
-            double ls = X * X + Y * Y + Z * Z + One * One;
-            return Math.Sqrt(ls);
-
-        }
     }
 }

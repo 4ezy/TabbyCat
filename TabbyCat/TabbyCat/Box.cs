@@ -122,6 +122,11 @@ namespace TabbyCat
             {
                 return xStart;
             }
+
+            set
+            {
+                xStart = value;
+            }
         }
 
         public double YStart
@@ -129,6 +134,11 @@ namespace TabbyCat
             get
             {
                 return yStart;
+            }
+
+            set
+            {
+                yStart = value;
             }
         }
 
@@ -138,6 +148,11 @@ namespace TabbyCat
             {
                 return zStart;
             }
+
+            set
+            {
+                zStart = value;
+            }
         }
 
         public double XEnd
@@ -145,6 +160,11 @@ namespace TabbyCat
             get
             {
                 return xEnd;
+            }
+
+            set
+            {
+                xEnd = value;
             }
         }
 
@@ -154,6 +174,11 @@ namespace TabbyCat
             {
                 return yEnd;
             }
+
+            set
+            {
+                yEnd = value;
+            }
         }
 
         public double ZEnd
@@ -161,6 +186,11 @@ namespace TabbyCat
             get
             {
                 return zEnd;
+            }
+
+            set
+            {
+                zEnd = value;
             }
         }
 
